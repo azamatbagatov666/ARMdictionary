@@ -1,0 +1,14 @@
+login ekranı
+modify word
+feçleri ayrı sayfada yap
+clientside şeyini yap her sayfada tek div olsun
+menü
+
+try exception ve kontroller ve uyarılar ekle
+
+
+
+sorgu avedikyan com ile aynı mı
+soru işaretli kelimeler
+
+BRAIN BRAİN

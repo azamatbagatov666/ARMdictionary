@@ -1,0 +1,1 @@
+export const useLanguageState = () => useState('language', () => 'tr');
