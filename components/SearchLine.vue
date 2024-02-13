@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import { gettingSuggestions } from "services/gettingSuggestions.ts";
 const currentHoverIndex = ref<number>(-1);
 const languageState = useLanguageState();
 const desword = ref("");
@@ -71,9 +72,7 @@ const inputChanged = async () => {
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 3) {
-    const { data, error } = await useFetch<string[]>(
-      `https://localhost:7109/gettingSuggestions/${lcandtrimmed.value}`
-    );
+    const { data, error } = await gettingSuggestions(lcandtrimmed.value);
     if (error.value) {
       return;
     }
