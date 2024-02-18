@@ -72,7 +72,7 @@ const inputChanged = async () => {
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 3) {
-    const { data, error } = await gettingSuggestions(lcandtrimmed.value); 
+    const { data, error } = await gettingSuggestions(lcandtrimmed.value);
     if (error.value) {
       return;
     }
