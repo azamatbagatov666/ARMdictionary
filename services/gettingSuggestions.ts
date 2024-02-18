@@ -3,5 +3,3 @@ export async function gettingSuggestions(query: string) {
         `https://localhost:7109/gettingSuggestions/${query}`
       ); 
 } 
-
-

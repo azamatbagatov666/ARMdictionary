@@ -8,7 +8,7 @@ const changeLanguage = (lang: string) => {
 </script>
 
 <template>
-  <div class="inline-block gap-2 mr-2 mt-2">
+  <div class="inline-block mr-2">
     <img
       src="/flags/tr-flag.png"
       @click="changeLanguage('tr')"
@@ -30,14 +30,11 @@ const changeLanguage = (lang: string) => {
 <style scoped>
 
 .image {
-  @apply cursor-pointer rounded-[50%] w-9 h-9 inline;
+  @apply mr-1 cursor-pointer rounded-[50%] w-9 h-9 inline;
 }
 
-.dark .image:hover {
+.image:hover {
   box-shadow: 0 0 10px white;
 }
 
-.light .image:hover {
-  box-shadow: 0 0 10px black;
-}
 </style>

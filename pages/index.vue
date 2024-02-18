@@ -1,9 +1,25 @@
 <script setup lang="ts">
-import { type TDATA } from "~/models/TDATA";
+import { searching } from "../services/searching";
 
 useHead({
   title:'Ermenice Sözlük'
 })
+
+/*
+const cleaningState = useCleaningState();
+watch(
+  () => cleaningState.value,
+  (newValue, oldValue) => {
+    if (newValue === true) {
+      thereIsNoResult.value = false;
+      thereIsNoConnection.value = false;
+      responseData.value = null;
+      cleaningState.value = false;
+    }
+  }
+);*/
+
+
 
 const desword = ref("");
 const previousDesword = ref("");
@@ -48,9 +64,7 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
-  const { data, error } = await useFetch<TDATA[]>(
-    `https://localhost:7109/searching/${desword.value}`
-  );
+  const { data, error } = await searching(desword.value);
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -72,6 +86,7 @@ const submit = async () => {
 </script>
 
 <template>
+
 
 
 <div class="containers">

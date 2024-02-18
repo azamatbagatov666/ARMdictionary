@@ -10,6 +10,18 @@ const search = ref<HTMLInputElement | null>(null);
 const cursorStart = ref<number>(0);
 const cursorEnd = ref<number>(0);
 
+/*
+const cleaningState = useCleaningState();
+watch(
+  () => cleaningState.value,
+  (newValue, oldValue) => {
+    if (newValue === true) {
+      desword.value=""
+      cleaningState.value = false;
+    }
+  }
+);*/
+
 var listOfAvailableWords: string[];
 listOfAvailableWords = [];
 
@@ -55,11 +67,9 @@ const handleDocumentClick = (event: MouseEvent) => {
   const keyboard = document.querySelector(".aKeyboard");
 
   if (keyboard) {
-    if (!keyboard.contains(event.target as Node)) 
-    isResultBoxVisible.value = false;
-  }
-  else
-    isResultBoxVisible.value = false;
+    if (!keyboard.contains(event.target as Node))
+      isResultBoxVisible.value = false;
+  } else isResultBoxVisible.value = false;
 };
 
 const emit = defineEmits<{
@@ -72,7 +82,7 @@ const inputChanged = async () => {
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 3) {
-    const { data, error } = await gettingSuggestions(lcandtrimmed.value); 
+    const { data, error } = await gettingSuggestions(lcandtrimmed.value);
     if (error.value) {
       return;
     }
@@ -98,10 +108,9 @@ const selectTheInput = async (item: string) => {
   emit("input-changed", lcandtrimmed.value);
   emit("submit-request");
   isResultBoxVisible.value = false;
-  await nextTick();
-  search.value?.select();
-
-
+  nextTick(() => {
+    search.value?.select();
+  });
 };
 
 const keyBase = (event: any) => {
@@ -126,6 +135,7 @@ const keyUp = () => {
 const keyEnter = () => {
   if (currentHoverIndex.value == -1) {
     emit("submit-request");
+    search.value?.select();
     isResultBoxVisible.value = false;
   } else {
     desword.value = resultBoxContent.value[currentHoverIndex.value];
@@ -133,13 +143,22 @@ const keyEnter = () => {
     emit("submit-request");
     resultBoxContent.value = [];
     currentHoverIndex.value = -1;
+    isResultBoxVisible.value = false;
+    nextTick(() => {
+      search.value?.select();
+    });
   }
 };
 
 let keyboardOn = ref(false);
 
-const toggleKeyboard = () => {
+const toggleKeyboard = (event: Event) => {
+  event.preventDefault();
+
   keyboardOn.value = !keyboardOn.value;
+
+
+
 };
 
 const pushing = async (letter: string) => {
@@ -147,14 +166,13 @@ const pushing = async (letter: string) => {
     search.value?.focus();
   }
 
-
   if (search.value && search.value.selectionStart !== undefined) {
     //if (search.value.selectionStart)
-      //@ts-ignore
-      cursorStart.value = search.value.selectionStart;
+    //@ts-ignore
+    cursorStart.value = search.value.selectionStart;
     //if (search.value.selectionEnd)
-      //@ts-ignore
-      cursorEnd.value = search.value.selectionEnd;
+    //@ts-ignore
+    cursorEnd.value = search.value.selectionEnd;
     desword.value =
       desword.value.slice(0, cursorStart.value) +
       letter +
@@ -175,51 +193,54 @@ const backSpace = async () => {
   if (document.activeElement !== search.value) {
     search.value?.focus();
   }
-  
+
   //@ts-ignore
   cursorStart.value = search.value.selectionStart;
   //@ts-ignore
   cursorEnd.value = search.value.selectionEnd;
 
-  if (search.value)
-  {
+  if (search.value) {
     if (cursorStart.value != cursorEnd.value) {
       desword.value =
-      desword.value.slice(0, cursorStart.value) +
-      desword.value.slice(cursorEnd.value);
+        desword.value.slice(0, cursorStart.value) +
+        desword.value.slice(cursorEnd.value);
 
       inputChanged();
 
       await nextTick();
 
-      search.value.setSelectionRange(
-      cursorStart.value,
-      cursorStart.value);
-    }
-    else if (cursorStart.value != 0){
+      search.value.setSelectionRange(cursorStart.value, cursorStart.value);
+    } else if (cursorStart.value != 0) {
       desword.value =
-      desword.value.slice(0, cursorStart.value - 1) +
-      desword.value.slice(cursorStart.value);
+        desword.value.slice(0, cursorStart.value - 1) +
+        desword.value.slice(cursorStart.value);
 
       inputChanged();
 
       await nextTick();
 
       search.value.setSelectionRange(
-      cursorStart.value -1,
-      cursorStart.value -1);
+        cursorStart.value - 1,
+        cursorStart.value - 1
+      );
     }
   }
 };
 
 const submit = () => {
   emit("submit-request");
+  search.value?.select();
+};
+
+const buttonClick = (event: Event) => {
+  event.preventDefault();
 };
 </script>
 
 <template>
 
-  <div>
+  <div @click="buttonClick"
+        @mousedown="buttonClick">
     <ArmenianKeyboard
       class="aKeyboard"
       v-if="keyboardOn"
@@ -228,92 +249,106 @@ const submit = () => {
     ></ArmenianKeyboard>
     <div class="h-[269px]" v-else></div>
   </div>
-  
-  
-  
-  <div class="flex justify-center">
-<div class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white">
-  <ElementComponentsCustomButton class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 active:!bg-white active:!scale-100" :text="keyboardButton" @click="toggleKeyboard"/>
-  <div class="searchbox">
-    <div class="row">
-      <input
-        type="text"
-        ref="search"
-        v-model="desword"
-        id="motherinput"
-        :placeholder="searching"
-        autocomplete="off"
-        autofocus
-        @input="inputChanged"
-        @keydown="keyBase($event)"
-      />
 
-      <button @click="submit" class="motherbutton">
-        <img src="/glass.png" width="35" height="35" />
-      </button>
+
+  <div class="flex justify-center">
+    <div
+      class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
+    >
+      <ElementComponentsCustomButton
+        class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
+        :text="keyboardButton"
+        @click="toggleKeyboard($event)"
+        @mousedown="buttonClick"/>
+      <div class="sm:w-[300px] md:w-[450px] lg:w-[600px] flex">
+          <input
+            type="text"
+            ref="search"
+            v-model="desword"
+            class="motherinput"
+            :placeholder="searching"
+            autocomplete="off"
+            autofocus
+            @input="inputChanged"
+            @keydown="keyBase($event)"
+          />
+
+          <button @click="submit" class="motherbutton border-l border-black">
+            <img src="/glass.png" width="35" height="35" />
+          </button>
+      </div>
+      <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
+        <ul>
+          <li
+            @click="selectTheInput(item)"
+            v-for="(item, index) in resultBoxContent"
+            v-text="item"
+            :class="{
+              'bg-[#e9f3ff]': index == currentHoverIndex,
+              'rounded-t-[20px]': index == 0,
+              'rounded-b-[20px]': index == resultBoxContent.length - 1,
+              'rounded-[20px]': index == 0 && resultBoxContent.length == 1,
+            }"
+            @mouseover="currentHoverIndex = index"
+          ></li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
-      <ul>
-        <li
-          @click="selectTheInput(item)"
-          v-for="(item, index) in resultBoxContent"
-          v-text="item"
-          :class="{ 'bg-[#e9f3ff]': index == currentHoverIndex }"
-          @mouseover="currentHoverIndex = index"
-        ></li>
-      </ul>
-    </div>
-</div>
-
-</div>
-
-
-
-
 </template>
 
 <style scoped>
-#motherinput {
+.motherinput {
   flex: 1;
-  height: 50px;
+  height: 72px;
   background: transparent;
-  border: 0;
   outline: 0;
   font-size: 18px;
   color: #333;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  padding-left: 20px;
+  padding-right: 11px;
+  border-left-width: 1px;
+  border-bottom-width: 1px;
+  border-top-width: 1px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border-color: black;
+  background-color: white;
+
+
 }
 
 .motherbutton {
   cursor: pointer;
-  width: 45px;
-  size: 50px px;
-  padding: 0;
-  border: 0;
+  width: 60px;
+  height: 72px;
+  background-color: limegreen;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-left: 10px;
+  margin-right: -2px;
+  border-width: 1px;
+  border-color: black;
+  transition: background-color 0.3s;
 }
 
 .motherbutton:hover {
-  background-color: grey;
+  background-color: chartreuse;
 }
+.motherbutton:active {
+  transform: scale(0.95);
+}
+
 
 .row {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
-  border-width: 1px;
 }
 
-.searchbox {
-  @apply sm:w-[300px] md:w-[450px] lg:w-[600px];
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 0px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-}
 
 .resultBox {
   position: absolute;
@@ -321,10 +356,8 @@ const submit = () => {
   @apply w-full sm:w-[300px] md:w-[450px] lg:w-[600px];
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
   border-width: 1px;
-}
-
-.resultBox ul {
-  padding: 0px 10px;
+  border-radius: 20px;
+  margin-top: 4px;
 }
 
 .resultBox ul li {
@@ -336,4 +369,6 @@ const submit = () => {
 .resultBox ul li.highlighted {
   background: #e9f3ff;
 }
+
+
 </style>

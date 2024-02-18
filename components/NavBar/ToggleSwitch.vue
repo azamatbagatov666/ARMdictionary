@@ -33,7 +33,6 @@ const setColorTheme = (newTheme: Theme) => {
   top: 0;
   left: 0;
   margin: 10px;
-  /* Adjust the margin as needed */
 }
 
 .switch {

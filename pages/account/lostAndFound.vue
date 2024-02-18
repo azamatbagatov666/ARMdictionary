@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { gettingSearchedOnes } from "~/services/gettingSearchedOnes";
+import { deletingFromLostAndFound } from "~/services/deletingFromLostAndFound";
 import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
 const responseData = ref<LOSTANDFOUND[]>([]);
 
@@ -18,16 +20,7 @@ const deleteTheWords = async () => {
   ) {
     if (idData.arananlar.length > 0) {
       try {
-        const response = await fetch(
-          "https://localhost:7109/DeletingFromLostAndFound",
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(idData),
-          }
-        );
+        const response = await deletingFromLostAndFound(idData);
 
         if (response.ok) {
           selectAll.value = false;
@@ -54,9 +47,7 @@ onBeforeMount(async () => {
 
 const refresh = async () => {
   try {
-    const data = await $fetch<LOSTANDFOUND[]>(
-      "https://localhost:7109/gettingSearchedOnes"
-    );
+    const data = await gettingSearchedOnes();
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
     }

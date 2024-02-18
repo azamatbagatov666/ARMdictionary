@@ -1,6 +1,5 @@
 login ekranı
 modify word
-feçleri ayrı sayfada yap
 clientside şeyini yap her sayfada tek div olsun
 menü
 

@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { type TDATA } from "~/models/TDATA";
+import { searchingnocheck } from "~/services/searchingNoCheck";
+import { searchingById } from "~/services/searchingById";
+import { addToId } from "~/services/addToId";
+
 
 const desword = ref("");
 const noresult = ref("");
@@ -44,9 +47,7 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await useFetch<TDATA[]>(
-    `https://localhost:7109/searchingnocheck/${desword.value}`
-  );
+  const { data, error } = await searchingnocheck(desword.value);
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -76,9 +77,7 @@ const getAranan = async () => {
   wordToBeAdded.value = "";
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
-  const { data } = await useFetch(
-    `https://localhost:7109/searchingbyid/${selectedItemId.value}`
-  );
+  const { data } = await searchingById(selectedItemId.value!);
 
   arananData.value = data.value;
 };
@@ -94,13 +93,7 @@ const idData = reactive({
 const storeValues = () => {
   if (confirm('Seçtiğiniz sözcükler bu sonuca eklenecktir, emin misiniz?')) {
     if (idData.DesiredID != null && idData.arananlar.length > 0) {
-      fetch("https://localhost:7109/AddToID", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(idData),
-      })
+      addToId(idData)
       .then(response => {
         if (response.ok) {
           idData.arananlar = [];
@@ -125,21 +118,19 @@ const storeValues = () => {
   <div class="mb-12">
     <title>Ermenice Sözlük</title>
 
-    <form @submit="submit" onsubmit="return false">
       <SearchLine @input-changed="wordInput" @submit-request="submit"></SearchLine>
-    </form>
 
-    <table class="border border-solid border-gray-300 text-lg p-8 m-10 mx-auto w-1/2" v-for="item in responseData"
+    <table class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white" v-for="item in responseData"
       :key="item.worD_ID">
       <tr class="h-10">
         <td>
           <label class="ml-2">
             <input type="radio" name="wordSelection" @change="getAranan()" v-model="selectedRadio" :value="item.id" />
-            <span class="text-yellow-500 font-bold">Sözcüğü seçmek için tıklayın.</span>
+            <span class="text-purple-500 font-bold">Sözcüğü seçmek için tıklayın.</span>
           </label>
         </td>
       </tr>
-      <tr class="h-10 text-yellow-500 font-bold ml-2" v-text="`Sonuç numarası: ${item.id}`"></tr>
+      <tr class="h-10 text-purple-500 font-bold ml-2" v-text="`Sonuç numarası: ${item.id}`"></tr>
       <tr class="mb-3 flex flex-wrap py-1 pl-1">
         <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
         <td class="font-bold text-red-500 pr-3">
