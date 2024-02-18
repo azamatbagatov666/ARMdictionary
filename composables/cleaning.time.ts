@@ -1,1 +1,0 @@
-export const useCleaningState = () => useState('cleaningState', () => false);

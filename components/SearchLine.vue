@@ -10,17 +10,11 @@ const search = ref<HTMLInputElement | null>(null);
 const cursorStart = ref<number>(0);
 const cursorEnd = ref<number>(0);
 
-/*
-const cleaningState = useCleaningState();
-watch(
-  () => cleaningState.value,
-  (newValue, oldValue) => {
-    if (newValue === true) {
-      desword.value=""
-      cleaningState.value = false;
-    }
-  }
-);*/
+const { $bus } = useNuxtApp();
+
+$bus.on("clear-main-page", () => {
+  desword.value = "";
+});
 
 var listOfAvailableWords: string[];
 listOfAvailableWords = [];
@@ -156,9 +150,6 @@ const toggleKeyboard = (event: Event) => {
   event.preventDefault();
 
   keyboardOn.value = !keyboardOn.value;
-
-
-
 };
 
 const pushing = async (letter: string) => {
@@ -238,9 +229,7 @@ const buttonClick = (event: Event) => {
 </script>
 
 <template>
-
-  <div @click="buttonClick"
-        @mousedown="buttonClick">
+  <div @click="buttonClick" @mousedown="buttonClick">
     <ArmenianKeyboard
       class="aKeyboard"
       v-if="keyboardOn"
@@ -250,7 +239,6 @@ const buttonClick = (event: Event) => {
     <div class="h-[269px]" v-else></div>
   </div>
 
-
   <div class="flex justify-center">
     <div
       class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
@@ -259,23 +247,24 @@ const buttonClick = (event: Event) => {
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
         :text="keyboardButton"
         @click="toggleKeyboard($event)"
-        @mousedown="buttonClick"/>
+        @mousedown="buttonClick"
+      />
       <div class="sm:w-[300px] md:w-[450px] lg:w-[600px] flex">
-          <input
-            type="text"
-            ref="search"
-            v-model="desword"
-            class="motherinput"
-            :placeholder="searching"
-            autocomplete="off"
-            autofocus
-            @input="inputChanged"
-            @keydown="keyBase($event)"
-          />
+        <input
+          type="text"
+          ref="search"
+          v-model="desword"
+          class="motherinput"
+          :placeholder="searching"
+          autocomplete="off"
+          autofocus
+          @input="inputChanged"
+          @keydown="keyBase($event)"
+        />
 
-          <button @click="submit" class="motherbutton border-l border-black">
-            <img src="/glass.png" width="35" height="35" />
-          </button>
+        <button @click="submit" class="motherbutton border-l border-black">
+          <img src="/glass.png" width="35" height="35" />
+        </button>
       </div>
       <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
         <ul>
@@ -316,8 +305,6 @@ const buttonClick = (event: Event) => {
   border-bottom-left-radius: 20px;
   border-color: black;
   background-color: white;
-
-
 }
 
 .motherbutton {
@@ -341,14 +328,12 @@ const buttonClick = (event: Event) => {
   transform: scale(0.95);
 }
 
-
 .row {
   display: flex;
   align-items: center;
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
-
 
 .resultBox {
   position: absolute;
@@ -369,6 +354,4 @@ const buttonClick = (event: Event) => {
 .resultBox ul li.highlighted {
   background: #e9f3ff;
 }
-
-
 </style>

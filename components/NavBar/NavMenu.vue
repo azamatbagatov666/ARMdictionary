@@ -30,19 +30,13 @@ const navBarItems = computed(() => {
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
 
-
-const emit = defineEmits<{
-  (e: "cleaning-time"): void;
-}>();
+const { $bus } = useNuxtApp();
 
 const homePageClean = () => {
 if (currentRoute.value == "/") {
-    emit("cleaning-time");
+    $bus.emit('clear-main-page')
 }
 };
-
-
-
 
 
 const toggleDropdown = (event: Event, id: string) => {

@@ -2,30 +2,22 @@
 import { searching } from "../services/searching";
 
 useHead({
-  title:'Ermenice Sözlük'
-})
-
-/*
-const cleaningState = useCleaningState();
-watch(
-  () => cleaningState.value,
-  (newValue, oldValue) => {
-    if (newValue === true) {
-      thereIsNoResult.value = false;
-      thereIsNoConnection.value = false;
-      responseData.value = null;
-      cleaningState.value = false;
-    }
-  }
-);*/
-
-
+  title: "Ermenice Sözlük",
+});
 
 const desword = ref("");
 const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const languageState = useLanguageState();
+
+const { $bus } = useNuxtApp();
+
+$bus.on("clear-main-page", () => {
+  thereIsNoResult.value = false;
+  thereIsNoConnection.value = false;
+  responseData.value = null;
+});
 
 const noResult = computed(() => {
   switch (languageState.value) {
@@ -53,8 +45,6 @@ const noConnection = computed(() => {
   }
 });
 
-
-
 const wordInput = (data: string) => {
   desword.value = data;
 };
@@ -69,13 +59,17 @@ const submit = async () => {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
 
-
     return;
   }
   responseData.value = null;
   previousDesword.value = desword.value;
 
-  if (data && Array.isArray(data.value) && data.value.length > 0 && data.value[0].aranan !== "NotFound") {
+  if (
+    data &&
+    Array.isArray(data.value) &&
+    data.value.length > 0 &&
+    data.value[0].aranan !== "NotFound"
+  ) {
     responseData.value = data.value;
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
@@ -86,26 +80,25 @@ const submit = async () => {
 </script>
 
 <template>
-
-
-
-<div class="containers">
-
-
+  <div class="containers">
     <SearchLine
       @input-changed="wordInput"
       @submit-request="submit"
     ></SearchLine>
 
+    <wordTable :responseData="responseData"></wordTable>
 
-  <wordTable :responseData="responseData"></wordTable>
-
-  <div v-if="thereIsNoResult" class="text-lg text-center mt-4" v-text="noResult"></div>
-  <div v-if="thereIsNoConnection" class="text-lg text-center mt-4" v-text="noConnection"></div>
-
-</div>
-
-
+    <div
+      v-if="thereIsNoResult"
+      class="text-lg text-center mt-4"
+      v-text="noResult"
+    ></div>
+    <div
+      v-if="thereIsNoConnection"
+      class="text-lg text-center mt-4"
+      v-text="noConnection"
+    ></div>
+  </div>
 </template>
 
 <style>
