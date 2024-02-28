@@ -27,11 +27,9 @@ const deleteTheWords = async () => {
           selectedListWord.value = [];
           responseData.value = [];
           refresh();
-        } else {
-          console.error(`Error: ${response.status} - ${response.statusText}`);
-        }
+        } 
       } catch (error) {
-        console.error("Fetch error:", error);
+
       }
     } else {
       window.alert(
@@ -80,12 +78,12 @@ watch(selectedListWord, (newValue) => {
 
 <template>
   <ClientOnly>
-  <div class="mb-12">
+  <div class="mt-2 mb-12">
     
       <div v-if="shouldRenderTable">
-        <table class="mx-auto table-auto" style="width: 50%">
+        <table class="lostTable mx-auto table-auto w-[50%]">
           <tr>
-            <th class="text-start">
+            <th class="text-center">
               <input
                 type="checkbox"
                 @change="toggleSelectAll"
@@ -103,7 +101,7 @@ watch(selectedListWord, (newValue) => {
             v-for="(item, index) in responseData"
             :key="item.aranan"
           >
-            <td class="border w-6">
+            <td class="border w-6 text-center">
               <input
                 type="checkbox"
                 v-model="selectedListWord"
@@ -137,7 +135,9 @@ tr:nth-child(even) {
 
 }
 
-
+.lostTable td, tr, th {
+ @apply border border-black dark:border-white
+}
 
 .selected {
     @apply dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)];

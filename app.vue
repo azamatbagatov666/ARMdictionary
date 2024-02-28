@@ -9,9 +9,10 @@ onMounted(() => {
 
 <template>
   <div
-    class="bg-gray-200 h-12 flex justify-between dark:bg-black transition-color duration-300"
+    class="bg-gray-200 h-12 flex justify-between dark:bg-black transition-colors duration-300"
   >
     <NavBarNavMenu/>
+    
     <div class="justify-end items-center flex gap-2">
       <NavBarToggleSwitch />
       <NavBarLanguageOption />

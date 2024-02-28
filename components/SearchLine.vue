@@ -12,8 +12,21 @@ const cursorEnd = ref<number>(0);
 
 const { $bus } = useNuxtApp();
 
+
+const props = defineProps(["desword"]);
+watch(() => props.desword, (newVal) => {
+  desword.value = newVal;
+  nextTick(() => {
+    search.value?.select();
+  });
+  
+});
+
+
 $bus.on("clear-main-page", () => {
   desword.value = "";
+  keyboardOn.value = false;
+  historyOn.value = false;
 });
 
 var listOfAvailableWords: string[];
@@ -23,29 +36,33 @@ const lcandtrimmed = computed(() => {
   return desword.value.toLocaleLowerCase("tr-TR").trim();
 });
 
-const searching = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return "Search a word.";
-    case "am":
-      return "Փնտռցէք բառ մը:";
-    case "tr":
-      return "Bir sözcük ara.";
-    default:
-      return "Bir sözcük ara.";
-  }
-});
 
-const keyboardButton = computed(() => {
+const sLineLang = computed(() => {
   switch (languageState.value) {
     case "eng":
-      return "Armenian Keyboard";
+      return {
+        searching: "Search a word.",
+        keyboardButton: "Armenian Keyboard",
+        historyButton: "Search History",
+      };
     case "am":
-      return "Հայերէն Ստեղնաշար";
+      return {
+        searching: "Փնտռցէք բառ մը:",
+        keyboardButton: "Հայերէն Ստեղնաշար",
+        historyButton: "Armenian",
+      };
     case "tr":
-      return "Ermenice Klavye";
+      return {
+        searching: "Bir sözcük ara.",
+        keyboardButton: "Ermenice Klavye",
+        historyButton: "Arama Geçmişi",
+      };
     default:
-      return "Ermenice Klavye";
+      return {
+        searching: "Bir sözcük ara.",
+        keyboardButton: "Ermenice Klavye",
+        historyButton: "Arama Geçmişi",
+      };
   }
 });
 
@@ -69,6 +86,7 @@ const handleDocumentClick = (event: MouseEvent) => {
 const emit = defineEmits<{
   (e: "input-changed", data: string): void;
   (e: "submit-request"): void;
+  (e: "random-request"): void;
 }>();
 
 const inputChanged = async () => {
@@ -118,12 +136,12 @@ const keyBase = (event: any) => {
 };
 
 const keyDown = () => {
-  if (currentHoverIndex.value < resultBoxContent.value.length - 1)
+  if (isResultBoxVisible.value && currentHoverIndex.value < resultBoxContent.value.length - 1)
     currentHoverIndex.value++;
 };
 
 const keyUp = () => {
-  if (currentHoverIndex.value >= 0) currentHoverIndex.value--;
+  if (isResultBoxVisible.value && currentHoverIndex.value >= 0) currentHoverIndex.value--;
 };
 
 const keyEnter = () => {
@@ -144,6 +162,15 @@ const keyEnter = () => {
   }
 };
 
+
+let historyOn = ref(false);
+
+const toggleHistory = (event: Event) => {
+  event.preventDefault();
+
+  historyOn.value = !historyOn.value;
+};
+
 let keyboardOn = ref(false);
 
 const toggleKeyboard = (event: Event) => {
@@ -157,7 +184,7 @@ const pushing = async (letter: string) => {
     search.value?.focus();
   }
 
-  if (search.value && search.value.selectionStart !== undefined) {
+  if (search.value && search.value.selectionStart !== undefined && desword.value.length < 125) {
     //if (search.value.selectionStart)
     //@ts-ignore
     cursorStart.value = search.value.selectionStart;
@@ -226,10 +253,32 @@ const submit = () => {
 const buttonClick = (event: Event) => {
   event.preventDefault();
 };
+
+const cleanTheInput = (event: Event) => {
+desword.value = "";
+event.preventDefault();
+
+};
+
+
+const randomWordTimeout = ref(false);
+
+const randomWord = () => {
+  if (!randomWordTimeout.value) {
+    emit("random-request");
+    randomWordTimeout.value = true;
+
+    setTimeout(() => {
+      randomWordTimeout.value = false;
+    }, 2000);
+  }
+};
+
 </script>
 
 <template>
   <div @click="buttonClick" @mousedown="buttonClick">
+    
     <ArmenianKeyboard
       class="aKeyboard"
       v-if="keyboardOn"
@@ -240,12 +289,11 @@ const buttonClick = (event: Event) => {
   </div>
 
   <div class="flex justify-center">
-    <div
-      class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
+    <div class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
-        :text="keyboardButton"
+        :text="sLineLang.keyboardButton"
         @click="toggleKeyboard($event)"
         @mousedown="buttonClick"
       />
@@ -255,15 +303,26 @@ const buttonClick = (event: Event) => {
           ref="search"
           v-model="desword"
           class="motherinput"
-          :placeholder="searching"
+          :placeholder="sLineLang.searching"
           autocomplete="off"
           autofocus
+          maxlength="125"
           @input="inputChanged"
           @keydown="keyBase($event)"
         />
+        
 
-        <button @click="submit" class="motherbutton border-l border-black">
-          <img src="/glass.png" width="35" height="35" />
+        <div class="bg-white border-t border-b border-black flex items-center h-[53px]">
+          <Transition name="fade">
+        <button @click="cleanTheInput($event)" @mousedown="buttonClick" class="mr-[10px] h-5" v-if="desword != ''">
+          <img src="/cancel.png" width="20" height="20" />
+        </button>
+      </Transition>
+
+      </div>
+
+        <button @click="submit" @mousedown="buttonClick" class="motherbutton border-l border-black">
+          <img src="/glass.png" width="30" height="30" />
         </button>
       </div>
       <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
@@ -282,22 +341,48 @@ const buttonClick = (event: Event) => {
           ></li>
         </ul>
       </div>
+      <searchHistory v-if="historyOn" @history-selected="selectTheInput"/>
+
     </div>
+
   </div>
+  <ElementComponentsCustomButton class="border-b-0 rounded-b-lg rounded-t-none w-36 hover:bg-[#ccc] outline-none transition-colors duration-300"
+        :text="sLineLang.historyButton"
+        @click="toggleHistory($event)"
+        @mousedown="buttonClick"
+      />
+
+      <ElementComponentsCustomButton class="border-b-0 rounded-b-lg rounded-t-none w-36 hover:bg-[#ccc] outline-none transition-colors duration-300"
+        :text="'Random Word'"
+        @click="randomWord()"
+        @mousedown="buttonClick"
+      />
+
+
 </template>
 
 <style scoped>
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .motherinput {
   flex: 1;
-  height: 72px;
+  height: 53px;
   background: transparent;
   outline: 0;
   font-size: 18px;
   color: #333;
-  padding-top: 35px;
-  padding-bottom: 35px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-left: 20px;
-  padding-right: 11px;
+  padding-right: 7px;
   border-left-width: 1px;
   border-bottom-width: 1px;
   border-top-width: 1px;
@@ -310,7 +395,7 @@ const buttonClick = (event: Event) => {
 .motherbutton {
   cursor: pointer;
   width: 60px;
-  height: 72px;
+  height: 53px;
   background-color: limegreen;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
@@ -328,12 +413,6 @@ const buttonClick = (event: Event) => {
   transform: scale(0.95);
 }
 
-.row {
-  display: flex;
-  align-items: center;
-  --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-}
 
 .resultBox {
   position: absolute;
@@ -347,11 +426,12 @@ const buttonClick = (event: Event) => {
 
 .resultBox ul li {
   list-style: none;
-  padding: 10px 12px;
+  padding: 5px 19px;
   cursor: pointer;
 }
 
 .resultBox ul li.highlighted {
   background: #e9f3ff;
 }
+
 </style>

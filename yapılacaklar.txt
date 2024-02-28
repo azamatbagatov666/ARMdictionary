@@ -10,4 +10,8 @@ try exception ve kontroller ve uyarılar ekle
 sorgu avedikyan com ile aynı mı
 soru işaretli kelimeler
 
+rastgele kelime
+
 BRAIN BRAİN
+
+karakter sınırı mantıklı mı?

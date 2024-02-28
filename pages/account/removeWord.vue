@@ -7,6 +7,8 @@ import { deleteAndMoveToTrash } from "~/services/deleteAndMoveToTrash";
 
 const desword = ref("");
 const noresult = ref("");
+const { $bus } = useNuxtApp();
+
 
 const selectedItemId = ref(null);
 const selectedRadio = ref(null);
@@ -42,8 +44,7 @@ const submit = async () => {
   if (
     data &&
     Array.isArray(data.value) &&
-    data.value.length > 0 &&
-    data.value[0].aranan !== "NotFound"
+    data.value.length > 0
   ) {
     responseData.value = data.value;
     noresult.value = "";
@@ -57,8 +58,12 @@ const getAranan = async () => {
   arananData.value = null;
   const { data } = await searchingById(selectedItemId.value!);
 
+  if (data &&
+    Array.isArray(data.value) &&
+    data.value.length > 0){
+  arananData.value = data.value.map(item => item.aranan);
 
-  arananData.value = data.value;
+}
 };
 
 const idData = reactive({
@@ -91,11 +96,33 @@ const deleteTheWords = async () => {
     }
   }
 };
+const resetData = () => {
+  arananData.value = null;
+  responseData.value = null;
+  selectedItemId.value = null;
+  selectedRadio.value = null;
+  selectedListWord.value = [];
+  previousDesword.value = "";
+  noresult.value = "";
+  $bus.emit('clear-main-page')
+  desword.value = "";
+
+
+
+
+
+};
+
 </script>
 
 <template>
-  <div class="mb-12">
-    <title>Ermenice Sözlük</title>
+<div>
+  <div class="flex items-center mb-1 mt-2">
+  <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
+  <div v-text="'Sözcük/Sonuç Sil'" class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
+</div> 
+
+<div class="mb-12">
 
       <SearchLine
         @input-changed="wordInput"
@@ -155,9 +182,9 @@ const deleteTheWords = async () => {
       </tr>
     </table>
 
-    <div style="font-size: larger" v-text="noresult"></div>
+    <div style="font-size: larger" v-if="noresult != ''" v-text="noresult"></div>
 
-    <div class="text-center mb-4">
+    <div class="text-center mb-4" v-if="arananData">
       <ul class="list-none text-lg text-left inline-block">
         <div class="text-3xl mb-2">Bu sonucu veren sözcükler:</div>
         <li v-for="(arananlar, index) in arananData" :key="index">
@@ -175,14 +202,18 @@ const deleteTheWords = async () => {
           </label>
         </li>
       </ul>
-    </div>
 
-    <ElementComponentsCustomButton
+      <ElementComponentsCustomButton
       @click="deleteTheWords"
       text="Seçilenleri Sil"
-      class="block mx-auto"
+      class="block mx-auto mt-5"
     />
+    </div>
+
+
   </div>
+
+</div>
 </template>
 
 <style scoped>

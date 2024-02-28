@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import { searching } from "../services/searching";
+import { getARandomWord } from "../services/getARandomWord";
+
 
 useHead({
   title: "Ermenice Sözlük",
 });
 
 const desword = ref("");
+const propdesword = ref("");
 const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const languageState = useLanguageState();
+
+const { theHistory, addHistory, removeHistory } = searchHistory();
+const historyS = ref(theHistory);
+
 
 const { $bus } = useNuxtApp();
 
@@ -17,37 +24,40 @@ $bus.on("clear-main-page", () => {
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
   responseData.value = null;
+  previousDesword.value = "";
 });
 
-const noResult = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return "The word you searched for was not found.";
-    case "am":
-      return "Չկրցաւ գտնուիլ ձեր փնտրած բառը։";
-    case "tr":
-      return "Aradığınız kelime bulunamadı.";
-    default:
-      return "Aradığınız kelime bulunamadı.";
-  }
-});
 
-const noConnection = computed(() => {
+const indexLanguage = computed(() => {
   switch (languageState.value) {
     case "eng":
-      return "Connection problem.";
+      return {
+        noConnection: 'Connection problem.',
+        noResult: 'The word you searched for was not found.',
+      };
     case "am":
-      return "Կապակցութեան հարց։";
+      return {
+        noConnection: "Կապակցութեան հարց։",
+        noResult: 'Չկրցաւ գտնուիլ ձեր փնտրած բառը։',
+      };
     case "tr":
-      return "Bağlantı sorunu.";
+      return {
+        noConnection: 'Bağlantı sorunu.',
+        noResult: 'Aradığınız kelime bulunamadı.',
+      };
     default:
-      return "Bağlantı sorunu.";
+      return {
+        noConnection: 'Bağlantı sorunu.',
+        noResult: 'Aradığınız kelime bulunamadı.',
+      };
   }
 });
 
 const wordInput = (data: string) => {
   desword.value = data;
 };
+
+
 
 const responseData = ref();
 const submit = async () => {
@@ -64,6 +74,7 @@ const submit = async () => {
   responseData.value = null;
   previousDesword.value = desword.value;
 
+
   if (
     data &&
     Array.isArray(data.value) &&
@@ -73,6 +84,35 @@ const submit = async () => {
     responseData.value = data.value;
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
+    addHistory(desword.value)
+
+  } else {
+    thereIsNoResult.value = true;
+  }
+};
+
+const random = async () => {
+
+  const { data, error } = await getARandomWord();
+  if (error.value) {
+    thereIsNoConnection.value = true;
+    thereIsNoResult.value = false;
+
+    return;
+  }
+  responseData.value = null;
+
+  if (
+    data
+  ) {
+    responseData.value = data.value;
+    desword.value = responseData.value[0].aranan
+    thereIsNoResult.value = false;
+    thereIsNoConnection.value = false;
+    previousDesword.value = desword.value;
+    propdesword.value = desword.value
+    addHistory(desword.value)
+
   } else {
     thereIsNoResult.value = true;
   }
@@ -84,21 +124,26 @@ const submit = async () => {
     <SearchLine
       @input-changed="wordInput"
       @submit-request="submit"
+      @random-request="random"
+      :desword="propdesword"
     ></SearchLine>
+
+
 
     <wordTable :responseData="responseData"></wordTable>
 
     <div
       v-if="thereIsNoResult"
       class="text-lg text-center mt-4"
-      v-text="noResult"
+      v-text="indexLanguage.noResult"
     ></div>
     <div
       v-if="thereIsNoConnection"
       class="text-lg text-center mt-4"
-      v-text="noConnection"
+      v-text="indexLanguage.noConnection"
     ></div>
   </div>
+
 </template>
 
 <style>

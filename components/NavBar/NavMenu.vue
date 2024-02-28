@@ -67,7 +67,7 @@ const toggleDropdown = (event: Event, id: string) => {
         <div class="menubar max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
-                    class="bg-gray-200 h-12 w-16 grid place-items-center transition-color duration-300 dark:bg-black hover:!bg-red-500">
+                    class="bg-gray-200 h-12 w-16 grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
                     <img v-if="useColorMode().preference == 'dark'" src="/home-white.png" class="size-9" />
                     <img v-else="useColorMode().preference == 'light'" src="/home.png" class="size-9" />
                 </button>
@@ -75,7 +75,7 @@ const toggleDropdown = (event: Event, id: string) => {
             <div @mouseover="toggleDropdown($event, 'regular')" @mouseleave="toggleDropdown($event, 'regular')"
                 class="dropDownMenu">
                 <button
-                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-color duration-300 dark:bg-black dark:text-white"
+                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
                     v-text="navBarItems.menu + ' &#9660'"></button>
                 <div class="dropDownOn relative" v-if="dropDownOn">
                     <nav>
@@ -103,7 +103,7 @@ const toggleDropdown = (event: Event, id: string) => {
             <div @mouseover="toggleDropdown($event, 'admin')" @mouseleave="toggleDropdown($event, 'admin')"
                 class="dropDownMenu">
                 <button
-                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-color duration-300 dark:bg-black dark:text-white"
+                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
                     v-text="'Yönetici ' + '&#9660'"></button>
                 <div class="dropDownOn relative" v-if="adminDropDownOn">
                     <nav>
@@ -111,6 +111,12 @@ const toggleDropdown = (event: Event, id: string) => {
                             <NuxtLink to="/account/addNewWord">
                                 <li>
                                     Yeni Sonuç Ekle
+                                </li>
+                            </NuxtLink>
+
+                            <NuxtLink to="/account/editWord">
+                                <li>
+                                    Sonuç Düzenle
                                 </li>
                             </NuxtLink>
 
@@ -129,6 +135,7 @@ const toggleDropdown = (event: Event, id: string) => {
                                     Bulunamayan Sözcükler
                                 </li>
                             </NuxtLink>
+
                         </ul>
                     </nav>
                 </div>

@@ -23,13 +23,31 @@ const data = reactive<TDATA>({
   okunus: "",
 });
 
+
+const trimStrings = (obj: Record<string, any>) => {
+  for (const key in obj) {
+    if (typeof obj[key] === 'string' && obj[key] != null) {
+      obj[key] = obj[key].trim();
+    }   }
+};
+
+
 const insertData = () => {
   if (confirm('Belirlediğiniz sonuç sözlüğe eklenecektir, emin misiniz?')) {
 
     if ((data.aranan && data.am && data.okunus && data.tr1 && data.tr4) !== "") {
+      trimStrings(data)
       for (var key in data) {
-        //@ts-ignore
-        data[key] = data[key].trim();
+         //@ts-ignore
+        if (data[key] === "") {
+          //@ts-ignore
+          data[key] = null;
+
+        }
+
+
+
+
       }
       insertIt(data)
         .then((response) => {
@@ -56,7 +74,13 @@ const resetData = () => {
 </script>
 
 <template>
-  <div class="mb-7">
+
+<div class="flex items-center mb-8 mt-2">
+  <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
+  <div v-text="'Yeni Sonuç Ekle'" class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
+</div>
+
+  <div class="mt-4 ml-2 mb-7">
     <div class="grid grid-cols-4 text-lg gap-y-2">
       <div class="flex items-center col-span-4">
         <label class="w-64">Aranan:<span style="color: red">*</span></label>
