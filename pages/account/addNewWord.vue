@@ -81,8 +81,8 @@ const resetData = () => {
 </div>
 
   <div class="mt-4 ml-2 mb-7">
-    <div class="grid grid-cols-4 text-lg gap-y-2">
-      <div class="flex items-center col-span-4">
+    <div class="grid grid-cols-3 text-lg gap-y-2 w-3/4">
+      <div class="flex items-center col-span-3">
         <label class="w-64">Aranan:<span style="color: red">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.aranan" type="text" />
       </div>
@@ -90,7 +90,7 @@ const resetData = () => {
         <label class="w-64">Aranan sözcüğün Ermenicesi:<span style="color: red">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.am" type="text" />
       </div>
-      <div class="flex items-center col-span-3">
+      <div class="flex items-center col-span-2">
         <label class="w-52 ml-3">Kelimenin Okunuşu:<span style="color: red">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.okunus" type="text" />
       </div>
@@ -102,7 +102,7 @@ const resetData = () => {
         <label class="w-52 ml-3">Ermenice ikinci anlam:</label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.alan2" type="text" />
       </div>
-      <div class="flex items-center col-span-2">
+      <div class="flex items-center">
         <label class="w-52">Ermenice üçüncü anlam:</label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.alan1" type="text" />
       </div>
@@ -114,7 +114,7 @@ const resetData = () => {
         <label class="w-52 ml-3">Türkçe birinci anlam:</label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.tr2" type="text" />
       </div>
-      <div class="flex items-center col-span-2">
+      <div class="flex items-center">
         <label class="w-52">Türkçe ikinci anlam:</label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="data.tr3" type="text" />
       </div>

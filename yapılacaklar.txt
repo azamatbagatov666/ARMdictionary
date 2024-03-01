@@ -15,3 +15,5 @@ rastgele kelime
 BRAIN BRAİN
 
 karakter sınırı mantıklı mı?
+
+sayfadan sayfaya geçerken focus

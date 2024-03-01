@@ -14,14 +14,16 @@
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/tailwindcss": "^5.3.5",
     "daisyui": "^4.6.1",
+    "mitt": "^3.0.0",
     "nuxt": "^3.9.3",
     "vue": "^3.3.10",
-    "vue-router": "^4.2.5",
-    "mitt": "^3.0.0"
+    "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "@vueuse/core": "^10.7.2",
     "normalize.css": "^8.0.1",
+    "pinia": "^2.1.7",
     "tailwindcss": "^3.4.1",
     "vuex": "^4.1.0"
   }

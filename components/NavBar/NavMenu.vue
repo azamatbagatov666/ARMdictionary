@@ -67,7 +67,7 @@ const toggleDropdown = (event: Event, id: string) => {
         <div class="menubar max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
-                    class="bg-gray-200 h-12 w-16 grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
+                    class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
                     <img v-if="useColorMode().preference == 'dark'" src="/home-white.png" class="size-9" />
                     <img v-else="useColorMode().preference == 'light'" src="/home.png" class="size-9" />
                 </button>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { searching } from "../services/searching";
 import { getARandomWord } from "../services/getARandomWord";
+import { useSearchHistoryStore } from "~/store/search-history.store";
 
 
 useHead({
@@ -14,9 +15,8 @@ const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const languageState = useLanguageState();
 
-const { theHistory, addHistory, removeHistory } = searchHistory();
-const historyS = ref(theHistory);
 
+const searchHistoryStore = useSearchHistoryStore()
 
 const { $bus } = useNuxtApp();
 
@@ -84,7 +84,7 @@ const submit = async () => {
     responseData.value = data.value;
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
-    addHistory(desword.value)
+    searchHistoryStore.addHistory(desword.value);
 
   } else {
     thereIsNoResult.value = true;
@@ -111,7 +111,7 @@ const random = async () => {
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
     propdesword.value = desword.value
-    addHistory(desword.value)
+    searchHistoryStore.addHistory(desword.value);
 
   } else {
     thereIsNoResult.value = true;

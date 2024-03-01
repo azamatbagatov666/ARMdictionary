@@ -27,6 +27,10 @@ export const searchHistory = () => {
     };
 
     const saveToLocalStorage = (): void => {
+        if (theHistory.length == 0) {
+            localStorage.setItem("searchHistory", "");
+            return;
+        }
         localStorage.setItem("searchHistory", JSON.stringify(theHistory));
     };
 

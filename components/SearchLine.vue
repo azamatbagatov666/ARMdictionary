@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 import { gettingSuggestions } from "../services/gettingSuggestions";
+
 const currentHoverIndex = ref<number>(-1);
 const languageState = useLanguageState();
 const desword = ref("");
@@ -12,21 +13,22 @@ const cursorEnd = ref<number>(0);
 
 const { $bus } = useNuxtApp();
 
-
 const props = defineProps(["desword"]);
-watch(() => props.desword, (newVal) => {
-  desword.value = newVal;
-  nextTick(() => {
-    search.value?.select();
-  });
-  
-});
-
+watch(
+  () => props.desword,
+  (newVal) => {
+    desword.value = newVal;
+    nextTick(() => {
+      search.value?.select();
+    });
+  }
+);
 
 $bus.on("clear-main-page", () => {
   desword.value = "";
   keyboardOn.value = false;
   historyOn.value = false;
+  search.value?.focus();  
 });
 
 var listOfAvailableWords: string[];
@@ -36,32 +38,34 @@ const lcandtrimmed = computed(() => {
   return desword.value.toLocaleLowerCase("tr-TR").trim();
 });
 
-
 const sLineLang = computed(() => {
   switch (languageState.value) {
     case "eng":
       return {
         searching: "Search a word.",
         keyboardButton: "Armenian Keyboard",
-        historyButton: "Search History",
+        randomButton: "Random Word",
       };
     case "am":
       return {
         searching: "Փնտռցէք բառ մը:",
         keyboardButton: "Հայերէն Ստեղնաշար",
-        historyButton: "Armenian",
+        randomButton: "Պատահական Բառ",
+
       };
     case "tr":
       return {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
-        historyButton: "Arama Geçmişi",
+        randomButton: "Rastgele Kelime",
+
       };
     default:
       return {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
-        historyButton: "Arama Geçmişi",
+        randomButton: "Rastgele Kelime",
+
       };
   }
 });
@@ -136,12 +140,16 @@ const keyBase = (event: any) => {
 };
 
 const keyDown = () => {
-  if (isResultBoxVisible.value && currentHoverIndex.value < resultBoxContent.value.length - 1)
+  if (
+    isResultBoxVisible.value &&
+    currentHoverIndex.value < resultBoxContent.value.length - 1
+  )
     currentHoverIndex.value++;
 };
 
 const keyUp = () => {
-  if (isResultBoxVisible.value && currentHoverIndex.value >= 0) currentHoverIndex.value--;
+  if (isResultBoxVisible.value && currentHoverIndex.value >= 0)
+    currentHoverIndex.value--;
 };
 
 const keyEnter = () => {
@@ -161,7 +169,6 @@ const keyEnter = () => {
     });
   }
 };
-
 
 let historyOn = ref(false);
 
@@ -184,7 +191,11 @@ const pushing = async (letter: string) => {
     search.value?.focus();
   }
 
-  if (search.value && search.value.selectionStart !== undefined && desword.value.length < 125) {
+  if (
+    search.value &&
+    search.value.selectionStart !== undefined &&
+    desword.value.length < 125
+  ) {
     //if (search.value.selectionStart)
     //@ts-ignore
     cursorStart.value = search.value.selectionStart;
@@ -255,11 +266,9 @@ const buttonClick = (event: Event) => {
 };
 
 const cleanTheInput = (event: Event) => {
-desword.value = "";
-event.preventDefault();
-
+  desword.value = "";
+  event.preventDefault();
 };
-
 
 const randomWordTimeout = ref(false);
 
@@ -273,23 +282,24 @@ const randomWord = () => {
     }, 2000);
   }
 };
-
 </script>
 
 <template>
-  <div @click="buttonClick" @mousedown="buttonClick">
-    
+  <div >
     <ArmenianKeyboard
+    @click="buttonClick" @mousedown="buttonClick"
       class="aKeyboard"
       v-if="keyboardOn"
       @letter-pushed="pushing"
       @backspace-clicked="backSpace"
-    ></ArmenianKeyboard>
+    >
+    </ArmenianKeyboard>
     <div class="h-[269px]" v-else></div>
   </div>
 
   <div class="flex justify-center">
-    <div class="bg-gray-200 p-6 border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
+    <div
+      class="bg-gray-200 p-6 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
@@ -310,18 +320,27 @@ const randomWord = () => {
           @input="inputChanged"
           @keydown="keyBase($event)"
         />
-        
 
-        <div class="bg-white border-t border-b border-black flex items-center h-[53px]">
+        <div
+          class="bg-white border-t border-b border-black flex items-center h-[53px]"
+        >
           <Transition name="fade">
-        <button @click="cleanTheInput($event)" @mousedown="buttonClick" class="mr-[10px] h-5" v-if="desword != ''">
-          <img src="/cancel.png" width="20" height="20" />
-        </button>
-      </Transition>
+            <button
+              @click="cleanTheInput($event)"
+              @mousedown="buttonClick"
+              class="mr-[10px] h-5"
+              v-if="desword != ''"
+            >
+              <img src="/cancel.png" width="20" height="20" />
+            </button>
+          </Transition>
+        </div>
 
-      </div>
-
-        <button @click="submit" @mousedown="buttonClick" class="motherbutton border-l border-black">
+        <button
+          @click="submit"
+          @mousedown="buttonClick"
+          class="motherbutton border-l border-black"
+        >
           <img src="/glass.png" width="30" height="30" />
         </button>
       </div>
@@ -341,28 +360,49 @@ const randomWord = () => {
           ></li>
         </ul>
       </div>
-      <searchHistory v-if="historyOn" @history-selected="selectTheInput"/>
-
+      <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
     </div>
-
-  </div>
-  <ElementComponentsCustomButton class="border-b-0 rounded-b-lg rounded-t-none w-36 hover:bg-[#ccc] outline-none transition-colors duration-300"
-        :text="sLineLang.historyButton"
-        @click="toggleHistory($event)"
-        @mousedown="buttonClick"
-      />
-
-      <ElementComponentsCustomButton class="border-b-0 rounded-b-lg rounded-t-none w-36 hover:bg-[#ccc] outline-none transition-colors duration-300"
-        :text="'Random Word'"
+    <div class="w-0 flex flex-col gap-4 justify-start">
+      
+      <button
+        class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
         @click="randomWord()"
         @mousedown="buttonClick"
-      />
+      >
+      <div class="flex items-center ml-[5px]">
+        <div class="rounded-full size-9 bg-purple-600">
+          <img src="/random.png" class="size-9" />
+        </div>
+        <div class="w-0">
+        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300" v-text="sLineLang.randomButton"></span>
+      </div>
+      </div>
+      </button>
 
 
+
+      <button
+      class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+        @click="toggleHistory($event)"
+        @mousedown="buttonClick"
+      >
+      <div class="flex items-center ml-[5px]">
+        <div class="rounded-full flex items-center size-9 bg-blue-600">
+          <img src="/history.png" class="ml-[3px] size-7" />
+        </div>
+        <div class="w-0">
+
+        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300" v-text="'Search History'"></span>
+
+      </div>
+      </div>
+
+      </button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -371,6 +411,13 @@ const randomWord = () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.group{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, width;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+
 }
 .motherinput {
   flex: 1;
@@ -409,10 +456,10 @@ const randomWord = () => {
 .motherbutton:hover {
   background-color: chartreuse;
 }
+
 .motherbutton:active {
   transform: scale(0.95);
 }
-
 
 .resultBox {
   position: absolute;
@@ -433,5 +480,4 @@ const randomWord = () => {
 .resultBox ul li.highlighted {
   background: #e9f3ff;
 }
-
 </style>
