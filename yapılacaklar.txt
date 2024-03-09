@@ -1,19 +1,22 @@
-login ekranı
-modify word
 clientside şeyini yap her sayfada tek div olsun
-menü
-
-try exception ve kontroller ve uyarılar ekle
-
-
 
 sorgu avedikyan com ile aynı mı
-soru işaretli kelimeler
 
-rastgele kelime
+soru işaretli kelimeler
 
 BRAIN BRAİN
 
 karakter sınırı mantıklı mı?
 
 sayfadan sayfaya geçerken focus
+
+
+günün kelimesi özelliği eklenecek
+
+
+
+önemli şahıslar
+
+iletişim formu
+
+adam asacı

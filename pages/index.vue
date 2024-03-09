@@ -25,6 +25,7 @@ $bus.on("clear-main-page", () => {
   thereIsNoConnection.value = false;
   responseData.value = null;
   previousDesword.value = "";
+  desword.value = "";
 });
 
 
@@ -64,6 +65,8 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
+console.log(desword.value)
+
   const { data, error } = await searching(desword.value);
   if (error.value) {
     thereIsNoConnection.value = true;

@@ -94,9 +94,9 @@ watch(selectedListWord, (newValue) => {
             <th class="border">Bulunamayan Sözcük</th>
             <th class="border">Aranma Tarihi</th>
           </tr>
-          <tr
+          <tr class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2]"
             :class="{
-              'selected': selectedListWord.includes(item.aranan ?? ''),
+              'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]': selectedListWord.includes(item.aranan ?? ''),
             }"
             v-for="(item, index) in responseData"
             :key="item.aranan"
@@ -130,17 +130,8 @@ watch(selectedListWord, (newValue) => {
 
 <style scoped>
 
-tr:nth-child(even) {
-  @apply dark:bg-[rgb(128,128,128)] bg-[#f2f2f2];
-
-}
-
 .lostTable td, tr, th {
  @apply border border-black dark:border-white
 }
-
-.selected {
-    @apply dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)];
-  }
 
 </style>

@@ -197,7 +197,7 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div class="grid grid-cols-3 mt-9" v-if="arananData">
+      <div class="flex justify-between mt-9" v-if="arananData">
         <div class="col-span-1 mx-auto">
           <div class="text-3xl">Bu sonucu veren sözcükler:</div>
           <ul class="list-disc" style="font-size: large">
@@ -221,7 +221,7 @@ const resetData = () => {
         <div class="mx-auto">
           <select
             multiple
-            class="text-black border border-black w-96 overflow-auto"
+            class="text-black border border-black sm:w-[150px] md:w-[250px] lg:w-[380px] overflow-auto"
             v-model="selectedListWord"
             size="9"
           >
@@ -238,12 +238,14 @@ const resetData = () => {
           />
         </div>
 
-        <ElementComponentsCustomButton
+   
+      </div>
+
+      <ElementComponentsCustomButton
         class="block mx-auto"
         text="Değerleri Sakla"
         @click="storeValues"
       />
-      </div>
 
 
     </div>

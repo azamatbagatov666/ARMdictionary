@@ -64,7 +64,7 @@ const toggleDropdown = (event: Event, id: string) => {
 
 <template>
     <div class="inline-block">
-        <div class="menubar max-h-12 flex">
+        <div class="max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
                     class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
@@ -133,6 +133,11 @@ const toggleDropdown = (event: Event, id: string) => {
                             <NuxtLink to="/account/lostAndFound">
                                 <li>
                                     Bulunamayan Sözcükler
+                                </li>
+                            </NuxtLink>
+                            <NuxtLink to="/account/lostAndFound">
+                                <li>
+                                    Oturumu Kapat
                                 </li>
                             </NuxtLink>
 

@@ -247,112 +247,73 @@ const resetData = () => {
     </div>
 
     <div v-if="selectedIndex" class="flex">
+      <div>
 
 
-      <div class="grid grid-cols-3 text-lg gap-y-2">
-        <div class="flex items-center">
-          <label class="w-64"
-            >Aranan sözcüğün Ermenicesi:<span style="color: red">*</span></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.am"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center col-span-2">
-          <label class="w-52 ml-3"
-            >Kelimenin Okunuşu:<span style="color: red">*</span></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.okunus"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-64">Ermenice birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.aM1"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52 ml-3">Ermenice ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.alaN2"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52">Ermenice üçüncü anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.alaN1"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-64"
-            >Aranan sözcüğün Türkçesi:<span style="color: red">*</span></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR1"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52 ml-3">Türkçe birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR2"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52">Türkçe ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR3"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-64"
-            >Aranan sözcüğün İngilizcesi:<span style="color: red"
-              >*</span
-            ></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR4"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52 ml-3">İngilizce birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR5"
-            type="text"
-          />
-        </div>
-        <div class="flex items-center">
-          <label class="w-52">İngilizce ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="selectedIndex.tR6"
-            type="text"
-          />
-        </div>
+      <div class="flex mt-2">
+      <div>
+        <label class="w-56 inline-block">Aranan sözcüğün Ermenicesi:<span style="color: red">*</span></label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.am" type="text" />
+      </div>
+      <div>
+        <label class="w-40 ml-2 inline-block">Kelimenin Okunuşu:<span style="color: red">*</span></label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.okunus" type="text" />
+      </div>
+    </div>
+    <div class="flex mt-2">
+
+      <div>
+        <label class="w-56 inline-block">Ermenice birinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.aM1" type="text" />
+      </div>
+      <div>
+        <label class="w-40 ml-2 inline-block">Ermenice ikinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.alaN2" type="text" />
+      </div>
+      <div>
+        <label class="w-44 ml-2 inline-block">Ermenice üçüncü anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.alaN1" type="text" />
+      </div>
+    </div>
+    <div class="flex mt-2">
+
+      <div>
+        <label class="w-56 inline-block">Aranan sözcüğün Türkçesi:<span style="color: red">*</span></label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR1" type="text" />
+      </div>
+      <div>
+        <label class="w-40 ml-2 inline-block">Türkçe birinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR2" type="text" />
+      </div>
+      <div>
+        <label class="w-44 ml-2 inline-block">Türkçe ikinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR3" type="text" />
+      </div>
+    </div>
+    <div class="flex mt-2">
+
+      <div>
+        <label class="w-56 inline-block">Aranan sözcüğün İngilizcesi:<span style="color: red">*</span></label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR4" type="text" />
+      </div>
+      <div>
+        <label class="w-40 ml-2 inline-block">İngilizce birinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR5" type="text" />
+      </div>
+      <div>
+        <label class="w-44 ml-2 inline-block">İngilizce ikinci anlam:</label>
+        <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR6" type="text" />
+      </div> 
+    </div>
+
       </div>
 
+
+  
+
       <div class="mx-auto h-0">
-    <div class="text-3xl">Bu sonucu veren sözcükler:</div>
-    <ul class="list-disc text-lg pl-10">
+    <div class="text-2xl w-52">Bu sonucu veren sözcükler:</div>
+    <ul class="list-disc text-lg w-52 pl-5">
       <li
         v-for="(arananlar, index) in arananData"
         :key="index"

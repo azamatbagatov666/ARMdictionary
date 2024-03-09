@@ -45,12 +45,14 @@ const sLineLang = computed(() => {
         searching: "Search a word.",
         keyboardButton: "Armenian Keyboard",
         randomButton: "Random Word",
+        searchTip: "Use *  for multiple selections and ? for single character.",
       };
     case "am":
       return {
         searching: "Փնտռցէք բառ մը:",
         keyboardButton: "Հայերէն Ստեղնաշար",
         randomButton: "Պատահական Բառ",
+        searchTip: "Կարելի է օգտագործել * բազմաթիւ տառերու խուզարկումի, իսկ ? տառի մը համար:",
 
       };
     case "tr":
@@ -58,6 +60,7 @@ const sLineLang = computed(() => {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
         randomButton: "Rastgele Kelime",
+        searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
 
       };
     default:
@@ -65,6 +68,7 @@ const sLineLang = computed(() => {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
         randomButton: "Rastgele Kelime",
+        searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
 
       };
   }
@@ -285,21 +289,25 @@ const randomWord = () => {
 </script>
 
 <template>
-  <div >
+
+  <div class="h-[269px]">
+    <Transition name="fade">
+
+    
     <ArmenianKeyboard
     @click="buttonClick" @mousedown="buttonClick"
       class="aKeyboard"
-      v-if="keyboardOn"
+      v-show="keyboardOn"
       @letter-pushed="pushing"
       @backspace-clicked="backSpace"
     >
     </ArmenianKeyboard>
-    <div class="h-[269px]" v-else></div>
+  </Transition>
   </div>
 
   <div class="flex justify-center">
     <div
-      class="bg-gray-200 p-6 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      class="bg-gray-200 p-6 pb-0 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
@@ -344,6 +352,7 @@ const randomWord = () => {
           <img src="/glass.png" width="30" height="30" />
         </button>
       </div>
+      <div class="text-center text-sm my-1" v-text="sLineLang.searchTip"></div>
       <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
         <ul>
           <li
@@ -374,7 +383,7 @@ const randomWord = () => {
           <img src="/random.png" class="size-9" />
         </div>
         <div class="w-0">
-        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300" v-text="sLineLang.randomButton"></span>
+        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="sLineLang.randomButton"></span>
       </div>
       </div>
       </button>
@@ -392,7 +401,7 @@ const randomWord = () => {
         </div>
         <div class="w-0">
 
-        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300" v-text="'Search History'"></span>
+        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white" v-text="'Search History'"></span>
 
       </div>
       </div>

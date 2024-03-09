@@ -51,7 +51,7 @@ const historyList = computed(() => searchHistoryStore.state.history)
 </script>
 
 <template>
-<div class=" border-black w-[600px] pb-1 bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300">
+<div class=" border-black sm:w-[300px] md:w-[450px] lg:w-[600px] bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300">
   <ul class="p-2">
 <li v-for="(item, index) in historyList" v-text="item" @click="historySelected(item)" class="inline-block mr-3 hover:underline hover:cursor-pointer hover:bg-white dark:hover:bg-gray-500"></li>
   </ul>
