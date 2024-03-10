@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { useSearchHistoryStore } from './store/search-history.store';
+import { useUserStore } from './store/user.store';
 
 const languageState = useLanguageState();
 const searchHistoryStore = useSearchHistoryStore()
+const userStore = useUserStore();
 
-onMounted(() => {
+onMounted(async () => {
   const language = localStorage.getItem("language");
   if (language) languageState.value = language;
   searchHistoryStore.readInitial();
+  userStore.reLoginFromLocalStorage();
 });
 </script>
 
