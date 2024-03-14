@@ -80,9 +80,9 @@ const toggleDropdown = (event: Event, id: string) => {
                 <div class="dropDownOn relative" v-if="dropDownOn">
                     <nav>
                         <ul @click="toggleDropdown($event, 'regular')" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
-                            <NuxtLink to="/">
+                            <NuxtLink to="/adamasmaca">
                                 <li>
-                                    About
+                                    Adam Asmaca
                                 </li>
                             </NuxtLink>
 
