@@ -12,6 +12,18 @@ const selectedRadio = ref(null);
 const previousDesword = ref("");
 const selectedListWord = ref<string[]>([]);
 
+import { useUserStore } from "~/store/user.store";
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
+
+onBeforeMount(() => {
+  setTimeout(() => {
+    if (!isLogged.value) {
+      navigateTo("/");
+    }
+  }, 500);
+});
+
 const wordInput = (data: string) => {
   desword.value = data;
 };
@@ -49,7 +61,7 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await searchingnocheck(desword.value);
+  const { data, error } = await searchingnocheck(userStore.state.user!.token, desword.value);
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -78,7 +90,7 @@ const getAranan = async () => {
   wordToBeAdded.value = "";
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
-  const { data } = await searchingById(selectedItemId.value!);
+  const { data } = await searchingById(userStore.state.user!.token, selectedItemId.value!);
 
   if (data && Array.isArray(data.value) && data.value.length > 0) {
     arananData.value = data.value.map((item) => item.aranan);
@@ -93,7 +105,7 @@ const idData = reactive({
 const storeValues = () => {
   if (confirm("Seçtiğiniz sözcükler bu sonuca eklenecktir, emin misiniz?")) {
     if (idData.DesiredID != null && idData.arananlar.length > 0) {
-      addToId(idData).then((response) => {
+      addToId(userStore.state.user!.token, idData).then((response) => {
         if (response.ok) {
           idData.arananlar = [];
           getAranan();
@@ -126,7 +138,7 @@ const resetData = () => {
 </script>
 
 <template>
-  <div>
+  <div v-if="isLogged">
     <div class="flex items-center mb-1 mt-2">
   <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
   <div v-text="'Yeni Sözcük Ekle'" class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
@@ -197,7 +209,9 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div class="flex justify-between mt-9" v-if="arananData">
+      <div  v-if="arananData">
+
+      <div class="flex justify-between mt-9">
         <div class="col-span-1 mx-auto">
           <div class="text-3xl">Bu sonucu veren sözcükler:</div>
           <ul class="list-disc" style="font-size: large">
@@ -240,7 +254,6 @@ const resetData = () => {
 
    
       </div>
-
       <ElementComponentsCustomButton
         class="block mx-auto"
         text="Değerleri Sakla"
@@ -248,7 +261,9 @@ const resetData = () => {
       />
 
 
+
     </div>
+  </div>
   </div>
 </template>
 

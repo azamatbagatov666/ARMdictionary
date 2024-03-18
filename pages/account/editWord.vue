@@ -4,6 +4,7 @@ import { searchingById } from "~/services/searchingById";
 import { saveChanges } from "~/services/saveChanges";
 
 import { type TDATA } from "~/models/TDATA";
+import { useUserStore } from "~/store/user.store";
 
 const desword = ref("");
 const noresult = ref("");
@@ -13,6 +14,8 @@ const selectedRadio = ref(null);
 const selectedIndex = ref<TDATA | null>(null);
 const selectedBackup = ref<TDATA | null>(null);
 const previousDesword = ref("");
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
 
 const wordInput = (data: string) => {
   desword.value = data;
@@ -25,8 +28,8 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
-
-  const { data, error } = await searchingnocheck(desword.value);
+console.log(userStore.state.user!.token)
+  const { data, error } = await searchingnocheck(userStore.state.user!.token, desword.value);
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -49,7 +52,7 @@ const submit = async () => {
 
 const getAranan = async (index: number) => {
   selectedItemId.value = selectedRadio.value;
-  const { data } = await searchingById(selectedItemId.value!);
+  const { data } = await searchingById(userStore.state.user!.token, selectedItemId.value!);
 
   if (data && Array.isArray(data.value) && data.value.length > 0) {
     arananData.value = data.value.map((item) => item.aranan);
@@ -100,7 +103,7 @@ const updateTheWord = () => {
         }
       }
 
-      saveChanges(selectedIndex.value).then((response) => {
+      saveChanges(userStore.state.user!.token, selectedIndex.value).then((response) => {
         if (response.ok) {
           alert("Sonuç başarıyla eklendi.");
         }
@@ -127,9 +130,18 @@ const resetData = () => {
   desword.value = "";
   $bus.emit("clear-main-page");
 };
+
+onBeforeMount(() => {
+  setTimeout(() => {
+    if (!isLogged.value) {
+      navigateTo("/");
+    }
+  }, 500);
+});
 </script>
 
 <template>
+  <div v-if="isLogged">
   <div class="flex items-center mb-1 mt-2">
     <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute" />
     <div
@@ -336,7 +348,7 @@ const resetData = () => {
     class="block mx-auto"
     text="Sonucu Güncelle"
   />
-
+</div>
 
 </template>
 

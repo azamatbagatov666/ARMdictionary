@@ -4,6 +4,44 @@ const hangmanVis = ref(0);
 const answer = ref();
 const answerArray = ref<string[]>([]);
 const guesses = ref<string[]>([]);
+const connectionError = ref(false);
+const won = ref();
+const languageState = useLanguageState();
+
+
+const hangLang = computed(() => {
+  switch (languageState.value) {
+    case "eng":
+      return {
+        noConnection: 'Connection Problem',
+        rightsLeft: ' right(s) left.',
+        win: 'Congratulations',
+        lose: 'You lost',
+      };
+    case "am":
+      return {
+        noConnection: "Կապակցութեան Հարց",
+        rightsLeft: ' իրաւունք ունիք։',
+        win: 'Ապրիս',
+        lose: 'Կորսնցուցիք',
+      };
+    case "tr":
+      return {
+        noConnection: 'Bağlantı Sorunu',
+        rightsLeft: ' hakkınız kaldı.',
+        win: 'Tebrikler',
+        lose: 'Kaybettiniz',
+      };
+    default:
+      return {
+        noConnection: 'Bağlantı Sorunu',
+        rightsLeft: ' hakkınız kaldı.',
+        win: 'Tebrikler',
+        lose: 'Kaybettiniz',
+      };
+  }
+});
+
 
 const letters = ["է", "թ", "փ", "ձ", "ջ", "ր", "չ", "ճ", "ժ", "ծ",
   "ք", "ո", "ե", "ռ", "տ", "ը", "ւ", "ի", "օ", "պ", "ա", "ս", "դ", "ֆ",
@@ -14,7 +52,7 @@ const push = (letter: string) => {
   if (!guesses.value.includes(letter) && hangmanVis.value < 8 && !(answerArray.value.every(value => guesses.value.includes(value)))) {
     guesses.value.push(letter)
     if (answerArray.value.every(value => guesses.value.includes(value))) {
-      console.log("kazandınız")
+      won.value = true;
     }
     if (!answer.value.includes(letter)) {
       hangmanVis.value += 1;
@@ -22,10 +60,7 @@ const push = (letter: string) => {
   }
   if (hangmanVis.value == 8 && !(answerArray.value.every(value => guesses.value.includes(value)))) {
     guesses.value = guesses.value.concat(answerArray.value);
-  console.log('dfdf')
-
-
-
+    won.value = false;
   }
 
 
@@ -56,56 +91,98 @@ const newGame = async () => {
     }
   } catch (error) {
     console.error("Error fetching data:", error);
+    connectionError.value = true
+    answer.value = null
   }
   console.log(answer.value)
+  console.log(answer.value.length)
 
 };
 
+
+const newGameTimeout = ref(false);
+
+const clear = () => {
+  if (!newGameTimeout.value) {
+    hangmanVis.value = 0;
+    answer.value = null;
+    guesses.value = [];
+    won.value = null;
+
+    newGame();
+    newGameTimeout.value = true;
+
+    setTimeout(() => {
+      newGameTimeout.value = false;
+    }, 2000);
+  }
+};
 
 
 </script>
 
 <template>
-  <div class="hangman relative ml-2 border-2 border-white h-[375px] w-[270px] inline-block">
-    <div class="absolute">
-      <div class="gallows relative inline-block">
-        <div class="gallowsbody" v-if="hangmanVis > 0"></div>
-        <div class="gallowsstand" v-if="hangmanVis > 0"></div>
-        <div class="gallowstop" v-if="hangmanVis > 0"></div>
-        <div class="gallowscorner" v-if="hangmanVis > 0"></div>
-        <div class="gallowsrope" v-if="hangmanVis > 1"></div>
+  <div class="h-[90vh] flex items-center justify-center"  v-if="!answer && !connectionError">
+<ElementComponentsLoadingAnimation/>
 
-
-      </div>
-    </div>
-    <div class="absolute left-[70px] top-[40px]">
-
-      <div class="stickman relative inline-block">
-        <div class="head" v-if="hangmanVis > 2"></div>
-        <div class="torso" v-if="hangmanVis > 3"></div>
-        <div class="leftarm" v-if="hangmanVis > 4"></div>
-        <div class="rightarm" v-if="hangmanVis > 5"></div>
-        <div class="leftleg" v-if="hangmanVis > 6"></div>
-        <div class="leftfoot" v-if="hangmanVis > 6"></div>
-        <div class="rightleg" v-if="hangmanVis > 7"></div>
-        <div class="rightfoot" v-if="hangmanVis > 7"></div>
-      </div>
-    </div>
   </div>
-
-
-
   <div v-if="answer">
-    <div class="inline-block" v-for="(character, index) in answerArray" :key="index">
-      <div class="w-8" v-text="character" v-if="guesses.includes(character)"></div>
-      <div class="w-8">_</div>
+  <div class="px-2 h-[380px] w-[254px] mx-auto mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
+    <div class="hangman relative top-[10px]">
+      <div class="absolute">
+        <div class="gallows relative">
+          <div class="gallowsbody" v-if="hangmanVis > 0"></div>
+          <div class="gallowsstand" v-if="hangmanVis > 0"></div>
+          <div class="gallowstop" v-if="hangmanVis > 0"></div>
+          <div class="gallowscorner" v-if="hangmanVis > 0"></div>
+          <div class="gallowsrope" v-if="hangmanVis > 1"></div>
+
+
+        </div>
+      </div>
+      <div class="absolute left-[70px] top-[40px]">
+
+        <div class="stickman relative ">
+          <div class="head" v-if="hangmanVis > 2"></div>
+          <div class="torso" v-if="hangmanVis > 3"></div>
+          <div class="leftarm" v-if="hangmanVis > 4"></div>
+          <div class="rightarm" v-if="hangmanVis > 5"></div>
+          <div class="leftleg" v-if="hangmanVis > 6"></div>
+          <div class="leftfoot" v-if="hangmanVis > 6"></div>
+          <div class="rightleg" v-if="hangmanVis > 7"></div>
+          <div class="rightfoot" v-if="hangmanVis > 7"></div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <div class="text-center text-lg mt-1">
+    <span v-text="8-hangmanVis"></span><span v-text="hangLang.rightsLeft"></span>
+  </div>
+  <div class="text-center text-red-500 font-bold h-7 text-lg ">
+    <div v-show="won" v-text="hangLang.win"></div>
+    <div v-show="won == false" v-text="hangLang.lose"></div>
+  </div>
+
+
+<div class="h-16 flex justify-center">
+  <div class="text-center px-3 pt-2 inline-block border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300" v-if="answer">
+    <div class="inline-block" v-for="(character, index) in answerArray" :key="index">
+      <div class="flex h-8">
+        <div class="w-8 ml-1 text-center text-3xl"  :class="{ 'ml-0': index === 0}" v-text="character" v-if="guesses.includes(character)"></div>
+      </div>
+      <div class="flex mt-3">
+
+        <div class="w-8 h-1 ml-1 bg-purple-500" :class="{ 'ml-0': index === 0}"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
   <div class="keyboard" v-if="answer">
     <div
-      class="inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-3 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
+      class="inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-2 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
 
       <div v-for="(letter, index) in letters" :key="index" class="text-center">
         <button v-if="index % 10 === 0" v-for="(letter) in letters.slice(index, index + 10)" class="armenian-button"
@@ -118,10 +195,11 @@ const newGame = async () => {
 
   </div>
 
-  <div>
-Kalan hakkınız {{ 8 - hangmanVis }}
+  <ElementComponentsCustomButton class="mx-auto block" @click="clear" text="Yeni Oyun"/>
 
-  </div>
+</div>
+
+<div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[90vh]" v-text="hangLang.noConnection"></div>
 
 </template>
 
@@ -159,6 +237,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   transform: rotate(-40deg);
   transform-origin: 100%;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .gallowsbody {
@@ -169,6 +248,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   position: absolute;
   left: 47px;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .gallowsrope {
@@ -178,6 +258,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   position: absolute;
   left: 170px;
   background-color: black;
+  @apply dark:bg-white transition-colors duration-300
 }
 
 .gallowstop {
@@ -186,8 +267,9 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   border: 3px solid black;
   display: block;
   position: absolute;
-  left: 47px;
+  left: 56px;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .gallowsstand {
@@ -198,6 +280,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   position: absolute;
   top: 330px;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 
@@ -212,6 +295,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   display: block;
   position: absolute;
   left: 76px;
+  @apply dark:border-white transition-colors duration-300
 }
 
 .torso {
@@ -223,6 +307,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   top: 59px;
   left: 99px;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .leftleg {
@@ -236,6 +321,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   transform: rotate(12deg);
   transform-origin: top;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .rightleg {
@@ -249,6 +335,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   transform: rotate(-12deg);
   transform-origin: top;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .leftarm {
@@ -262,6 +349,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   transform: rotate(-50deg);
   transform-origin: 100%;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .rightarm {
@@ -275,6 +363,7 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   transform: rotate(50deg);
   transform-origin: 0%;
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 
 .leftfoot {
@@ -287,6 +376,8 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   left: 53px;
   transform: rotate(8deg);
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
+
 }
 
 .rightfoot {
@@ -299,5 +390,6 @@ Kalan hakkınız {{ 8 - hangmanVis }}
   left: 121px;
   transform: rotate(-8deg);
   background-color: black;
+  @apply dark:border-white dark:bg-white transition-colors duration-300
 }
 </style>

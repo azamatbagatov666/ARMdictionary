@@ -8,7 +8,7 @@ const changeLanguage = (lang: string) => {
 </script>
 
 <template>
-  <div class="inline-block mr-2">
+  <div class="inline-block mr-2 shrink-0">
     <img
       src="/flags/tr-flag.png"
       @click="changeLanguage('tr')"

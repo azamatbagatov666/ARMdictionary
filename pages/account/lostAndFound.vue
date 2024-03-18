@@ -3,16 +3,26 @@ import { gettingSearchedOnes } from "~/services/gettingSearchedOnes";
 import { deletingFromLostAndFound } from "~/services/deletingFromLostAndFound";
 import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
 const responseData = ref<LOSTANDFOUND[]>([]);
-
 const selectedListWord = ref<string[]>([]);
+
+import { useUserStore } from "~/store/user.store";
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
 
 const idData = reactive({
   arananlar: selectedListWord,
   DesiredID: 0,
 });
 
-const deleteTheWords = async () => {
+onBeforeMount(() => {
+  setTimeout(() => {
+    if (!isLogged.value) {
+      navigateTo("/");
+    }
+  }, 500);
+});
 
+const deleteTheWords = async () => {
   if (
     confirm(
       "Seçtiğiniz sözcükler aranıp bulunamayan sözcükler listesinden silinecektir, emin misiniz?"
@@ -20,17 +30,15 @@ const deleteTheWords = async () => {
   ) {
     if (idData.arananlar.length > 0) {
       try {
-        const response = await deletingFromLostAndFound(idData);
+        const response = await deletingFromLostAndFound(userStore.state.user!.token, idData);
 
         if (response.ok) {
           selectAll.value = false;
           selectedListWord.value = [];
           responseData.value = [];
           refresh();
-        } 
-      } catch (error) {
-
-      }
+        }
+      } catch (error) {}
     } else {
       window.alert(
         "Herhangi bir seçim yapmadınız. Önce silinmesini istediğiniz sözükleri işaretleyin."
@@ -39,13 +47,10 @@ const deleteTheWords = async () => {
   }
 };
 
-onBeforeMount(async () => {
-  refresh();
-});
-
 const refresh = async () => {
+  if (!isLogged) return;
   try {
-    const data = await gettingSearchedOnes();
+    const data = await gettingSearchedOnes(userStore.state.user!.token);
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
     }
@@ -54,10 +59,17 @@ const refresh = async () => {
   }
 };
 
-
+watch(
+  () => isLogged.value,
+  () => {
+    refresh();
+  },
+  {
+    immediate: true,
+  }
+);
 
 const shouldRenderTable = computed(() => responseData.value.length > 0);
-
 
 const selectAll = ref(false);
 
@@ -77,9 +89,8 @@ watch(selectedListWord, (newValue) => {
 </script>
 
 <template>
-  <ClientOnly>
-  <div class="mt-2 mb-12">
-    
+  <ClientOnly v-if="isLogged">
+    <div class="mt-2 mb-12">
       <div v-if="shouldRenderTable">
         <table class="lostTable mx-auto table-auto w-[50%]">
           <tr>
@@ -94,9 +105,11 @@ watch(selectedListWord, (newValue) => {
             <th class="border">Bulunamayan Sözcük</th>
             <th class="border">Aranma Tarihi</th>
           </tr>
-          <tr class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2]"
+          <tr
+            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2]"
             :class="{
-              'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]': selectedListWord.includes(item.aranan ?? ''),
+              'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
+                selectedListWord.includes(item.aranan ?? ''),
             }"
             v-for="(item, index) in responseData"
             :key="item.aranan"
@@ -114,24 +127,25 @@ watch(selectedListWord, (newValue) => {
           </tr>
         </table>
 
-
-        <ElementComponentsCustomButton class="block mx-auto mt-5" text="Seçilenleri Listeden Sil" @click="deleteTheWords()"/>
-
+        <ElementComponentsCustomButton
+          class="block mx-auto mt-5"
+          text="Seçilenleri Listeden Sil"
+          @click="deleteTheWords()"
+        />
       </div>
 
       <div v-if="!shouldRenderTable" class="text-center text-3xl">
-        Şu anda, aranıp bulunamayan sözcükler listesinde herhangi bir sözcük yok.
+        Şu anda, aranıp bulunamayan sözcükler listesinde herhangi bir sözcük
+        yok.
       </div>
-
-  </div>
-
-      </ClientOnly>
+    </div>
+  </ClientOnly>
 </template>
 
 <style scoped>
-
-.lostTable td, tr, th {
- @apply border border-black dark:border-white
+.lostTable td,
+tr,
+th {
+  @apply border border-black dark:border-white;
 }
-
 </style>

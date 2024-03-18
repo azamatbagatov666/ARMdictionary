@@ -16,7 +16,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="sticky top-0 z-[55] bg-gray-200 h-12 flex justify-between dark:bg-black transition-colors duration-300"
+    class="sticky top-0 z-[55] bg-gray-200 h-12 flex justify-between dark:bg-black transition-colors duration-300 w-full"
   >
     <NavBarNavMenu/>
     

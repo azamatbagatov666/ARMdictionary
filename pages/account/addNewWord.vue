@@ -2,6 +2,19 @@
 import { type TDATA } from "~/models/TDATA";
 import { insertIt } from "~/services/insertIt";
 
+import { useUserStore } from "~/store/user.store";
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
+
+onBeforeMount(() => {
+  setTimeout(() => {
+    if (!isLogged.value) {
+      navigateTo("/");
+    }
+  }, 500);
+});
+
+
 
 useHead({
   title: 'Yeni Sözcük Ekle',
@@ -49,7 +62,7 @@ const insertData = () => {
 
 
       }
-      insertIt(data)
+      insertIt(userStore.state.user!.token, data)
         .then((response) => {
           if (response.ok) {
             alert("Sonuç başarıyla eklendi.");
@@ -74,6 +87,7 @@ const resetData = () => {
 </script>
 
 <template>
+  <div v-if="isLogged">
 
 <div class="flex items-center mb-8 mt-2">
   <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
@@ -209,6 +223,7 @@ const resetData = () => {
 
     </div>
 
+  </div>
   </div>
 </template>
 

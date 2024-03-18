@@ -28,6 +28,10 @@ $bus.on("clear-main-page", () => {
   desword.value = "";
 });
 
+onMounted(() => {
+  
+})
+
 
 const indexLanguage = computed(() => {
   switch (languageState.value) {

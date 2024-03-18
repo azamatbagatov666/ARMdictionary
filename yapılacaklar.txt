@@ -6,9 +6,7 @@ soru işaretli kelimeler
 
 BRAIN BRAİN
 
-karakter sınırı mantıklı mı?
 
-sayfadan sayfaya geçerken focus
 
 
 günün kelimesi özelliği eklenecek
@@ -18,5 +16,3 @@ günün kelimesi özelliği eklenecek
 önemli şahıslar
 
 iletişim formu
-
-adam asacı

@@ -76,6 +76,7 @@ const sLineLang = computed(() => {
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
+  search.value?.focus();  
 });
 
 onBeforeUnmount(() => {
@@ -307,7 +308,7 @@ const randomWord = () => {
 
   <div class="flex justify-center">
     <div
-      class="bg-gray-200 p-6 pb-0 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
@@ -323,7 +324,6 @@ const randomWord = () => {
           class="motherinput"
           :placeholder="sLineLang.searching"
           autocomplete="off"
-          autofocus
           maxlength="125"
           @input="inputChanged"
           @keydown="keyBase($event)"

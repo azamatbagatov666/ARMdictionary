@@ -15,6 +15,7 @@ export const useUserStore = defineStore("user", () => {
     const response = await loginRequest(username, password);
     state.user = response;
     saveToLocalStorage();
+    return isLogged();
   };
 
   const saveToLocalStorage = () => {
@@ -37,12 +38,20 @@ export const useUserStore = defineStore("user", () => {
     return false;
   }
 
+  const logout = () => {
+
+    localStorage.removeItem('user');
+    state.user = undefined;
+    
+  }
+
   return {
     state,
     login,
     saveToLocalStorage,
     reLoginFromLocalStorage,
     isLogged,
-    testLogin
+    testLogin,
+    logout
   };
 });

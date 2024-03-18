@@ -3,6 +3,18 @@ import { searchingnocheck } from "~/services/searchingNoCheck";
 import { searchingById } from "~/services/searchingById";
 import { deleteAndMoveToTrash } from "~/services/deleteAndMoveToTrash";
 
+import { useUserStore } from "~/store/user.store";
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
+
+onBeforeMount(() => {
+  setTimeout(() => {
+    if (!isLogged.value) {
+      navigateTo("/");
+    }
+  }, 500);
+});
+
 
 
 const desword = ref("");
@@ -22,12 +34,14 @@ const wordInput = (data: string) => {
 const responseData = ref();
 const arananData = ref();
 
+
+
 const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
 
-  const { data, error } = await searchingnocheck(desword.value);
+  const { data, error } = await searchingnocheck(userStore.state.user!.token, desword.value);
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -56,7 +70,7 @@ const submit = async () => {
 const getAranan = async () => {
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
-  const { data } = await searchingById(selectedItemId.value!);
+  const { data } = await searchingById(userStore.state.user!.token, selectedItemId.value!);
 
   if (data &&
     Array.isArray(data.value) &&
@@ -75,7 +89,7 @@ const deleteTheWords = async () => {
   if (confirm("Seçtiğiniz sözcükler bu sonuçtan silinecektir, emin misiniz?")) {
     if (idData.DesiredID && idData.arananlar.length > 0) {
       try {
-        const response = await deleteAndMoveToTrash(idData);
+        const response = await deleteAndMoveToTrash(userStore.state.user!.token, idData);
         if (response.ok) {
           selectedListWord.value = [];
           await getAranan();
@@ -116,7 +130,7 @@ const resetData = () => {
 </script>
 
 <template>
-<div>
+<div v-if="isLogged">
   <div class="flex items-center mb-1 mt-2">
   <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
   <div v-text="'Sözcük/Sonuç Sil'" class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>

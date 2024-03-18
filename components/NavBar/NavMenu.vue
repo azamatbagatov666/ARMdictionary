@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useUserStore } from '~/store/user.store';
+
 
 const dropDownOn = ref(false);
 const adminDropDownOn = ref(false);
@@ -29,6 +31,8 @@ const navBarItems = computed(() => {
 
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
 
 const { $bus } = useNuxtApp();
 
@@ -60,6 +64,11 @@ const toggleDropdown = (event: Event, id: string) => {
     }
 };
 
+const logoutClicked = () => {
+    userStore.logout();
+    navigateTo('/');
+}
+
 </script>
 
 <template>
@@ -68,8 +77,8 @@ const toggleDropdown = (event: Event, id: string) => {
             <NuxtLink to="/">
                 <button @click="homePageClean"
                     class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
-                    <img v-if="useColorMode().preference == 'dark'" src="/home-white.png" class="size-9" />
-                    <img v-else="useColorMode().preference == 'light'" src="/home.png" class="size-9" />
+                    <img src="/home-white.png" class="size-9 hidden dark:flex" />
+                    <img src="/home.png" class="size-9 dark:hidden" />
                 </button>
             </NuxtLink>
             <div @mouseover="toggleDropdown($event, 'regular')" @mouseleave="toggleDropdown($event, 'regular')"
@@ -100,7 +109,7 @@ const toggleDropdown = (event: Event, id: string) => {
                     </nav>
                 </div>
             </div>
-            <div @mouseover="toggleDropdown($event, 'admin')" @mouseleave="toggleDropdown($event, 'admin')"
+            <div @mouseover="toggleDropdown($event, 'admin')" @mouseleave="toggleDropdown($event, 'admin')" v-if="isLogged"
                 class="dropDownMenu">
                 <button
                     class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
@@ -135,11 +144,9 @@ const toggleDropdown = (event: Event, id: string) => {
                                     Bulunamayan Sözcükler
                                 </li>
                             </NuxtLink>
-                            <NuxtLink to="/account/lostAndFound">
-                                <li>
+                                <li class="cursor-pointer" @click="logoutClicked()">
                                     Oturumu Kapat
                                 </li>
-                            </NuxtLink>
 
                         </ul>
                     </nav>
