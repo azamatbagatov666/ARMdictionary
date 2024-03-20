@@ -95,9 +95,9 @@ const logoutClicked = () => {
                                 </li>
                             </NuxtLink>
 
-                            <NuxtLink to="/">
+                            <NuxtLink to="/iletisim">
                                 <li>
-                                    Post 1
+                                    İletişim
                                 </li>
                             </NuxtLink>
                             <NuxtLink to="/">

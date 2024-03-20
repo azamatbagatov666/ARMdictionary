@@ -53,7 +53,7 @@ const backspace = () => {
     </div>
 
     <div class="flex justify-center text-center">
-      <button class="armenian-button !w-[210px]" @click="push(' ', $event)"></button>
+      <button class="armenian-button !w-[210px] !h-[33px]" @click="push(' ', $event)"></button>
       <button class="armenian-button" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
         v-text="'&#8592'"></button>
     </div>
@@ -63,10 +63,7 @@ const backspace = () => {
 
 <style scoped>
 .armenian-button {
-  margin: 5px;
-  padding: 10px;
-  width: 35px;
-  height: 35px;
+  @apply size-1/12 p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
   font-size: 16px;
   background-color: #3490dc;
   color: #ffffff;
@@ -74,7 +71,7 @@ const backspace = () => {
   border-radius: 5px;
   cursor: pointer;
   padding-top: 5px;
-  
+  outline: 0;
 }
 
 </style>

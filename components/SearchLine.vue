@@ -59,7 +59,7 @@ const sLineLang = computed(() => {
       return {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
-        randomButton: "Rastgele Kelime",
+        randomButton: "Rastgele Sözcük",
         searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
 
       };
@@ -67,7 +67,7 @@ const sLineLang = computed(() => {
       return {
         searching: "Bir sözcük ara.",
         keyboardButton: "Ermenice Klavye",
-        randomButton: "Rastgele Kelime",
+        randomButton: "Rastgele Sözcük",
         searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
 
       };
@@ -352,7 +352,6 @@ const randomWord = () => {
           <img src="/glass.png" width="30" height="30" />
         </button>
       </div>
-      <div class="text-center text-sm my-1" v-text="sLineLang.searchTip"></div>
       <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
         <ul>
           <li
@@ -369,6 +368,8 @@ const randomWord = () => {
           ></li>
         </ul>
       </div>
+      <div class="text-center text-sm my-1" v-text="sLineLang.searchTip"></div>
+
       <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
     </div>
     <div class="w-0 flex flex-col gap-4 justify-start">

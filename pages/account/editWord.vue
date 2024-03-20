@@ -268,7 +268,7 @@ onBeforeMount(() => {
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.am" type="text" />
       </div>
       <div>
-        <label class="w-40 ml-2 inline-block">Kelimenin Okunuşu:<span style="color: red">*</span></label>
+        <label class="w-40 ml-2 inline-block">Sözcüğün Okunuşu:<span style="color: red">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.okunus" type="text" />
       </div>
     </div>

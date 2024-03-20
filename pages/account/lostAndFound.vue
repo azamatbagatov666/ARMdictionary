@@ -4,6 +4,9 @@ import { deletingFromLostAndFound } from "~/services/deletingFromLostAndFound";
 import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
 const responseData = ref<LOSTANDFOUND[]>([]);
 const selectedListWord = ref<string[]>([]);
+const connectionError = ref(false);
+const dataFetched = ref(false);
+
 
 import { useUserStore } from "~/store/user.store";
 const userStore = useUserStore();
@@ -50,12 +53,20 @@ const deleteTheWords = async () => {
 const refresh = async () => {
   if (!isLogged) return;
   try {
+
     const data = await gettingSearchedOnes(userStore.state.user!.token);
+    if (data) {
+    dataFetched.value = true;
+  }
+
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
+      console.log("no error")
     }
   } catch (error) {
-    console.error("Error fetching data:", error);
+    connectionError.value = true
+    console.log("error", error)
+
   }
 };
 
@@ -68,8 +79,6 @@ watch(
     immediate: true,
   }
 );
-
-const shouldRenderTable = computed(() => responseData.value.length > 0);
 
 const selectAll = ref(false);
 
@@ -91,7 +100,12 @@ watch(selectedListWord, (newValue) => {
 <template>
   <ClientOnly v-if="isLogged">
     <div class="mt-2 mb-12">
-      <div v-if="shouldRenderTable">
+
+      <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
+<ElementComponentsLoadingAnimation/>
+  </div>
+
+      <div v-if="responseData.length > 0">
         <table class="lostTable mx-auto table-auto w-[50%]">
           <tr>
             <th class="text-center">
@@ -134,10 +148,16 @@ watch(selectedListWord, (newValue) => {
         />
       </div>
 
-      <div v-if="!shouldRenderTable" class="text-center text-3xl">
+      <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[85vh]">
+        Bağlantı Sorunu
+      </div>
+
+      <div v-else-if="responseData.length == 0 && dataFetched" class="text-3xl flex items-center justify-center h-[85vh]">
         Şu anda, aranıp bulunamayan sözcükler listesinde herhangi bir sözcük
         yok.
       </div>
+
+
     </div>
   </ClientOnly>
 </template>

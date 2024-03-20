@@ -39,7 +39,7 @@ const appendToList = () => {
       idData.arananlar.push(wordToBeAdded.value);
       wordToBeAdded.value = "";
     } else {
-      window.alert("Bu kelime zaten listede bulunuyor.");
+      window.alert("Bu sözcük zaten listede bulunuyor.");
     }
   }
 };

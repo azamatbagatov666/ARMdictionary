@@ -48,12 +48,12 @@ const indexLanguage = computed(() => {
     case "tr":
       return {
         noConnection: 'Bağlantı sorunu.',
-        noResult: 'Aradığınız kelime bulunamadı.',
+        noResult: 'Aradığınız sözcük bulunamadı.',
       };
     default:
       return {
         noConnection: 'Bağlantı sorunu.',
-        noResult: 'Aradığınız kelime bulunamadı.',
+        noResult: 'Aradığınız sözcük bulunamadı.',
       };
   }
 });
