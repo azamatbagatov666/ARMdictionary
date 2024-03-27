@@ -11,7 +11,7 @@ const letters = ["է", "թ", "փ", "ձ", "ջ", "ր", "չ", "ճ", "ժ", "ծ",
   "ք", "ո", "ե", "ռ", "տ", "ը", "ւ", "ի", "օ", "պ", "ա", "ս", "դ", "ֆ",
   "գ", "հ", "յ", "կ", "լ", "խ", "զ", "ղ", "ց", "վ", "բ", "ն", "մ", "շ"];
 
-const push = (letter:string , event: Event) => {
+const push = (letter:string) => {
   if (backspaceHoldTimer !== null) {
     clearTimeout(backspaceHoldTimer);
     backspaceHoldTimer = null;
@@ -22,7 +22,7 @@ const push = (letter:string , event: Event) => {
 
 let backspaceHoldTimer: NodeJS.Timeout | null = null;
 
-const startBackspaceHold = (event: Event) => {
+const startBackspaceHold = () => {
   emit("backspace-clicked");
 
   backspaceHoldTimer = setTimeout(() => {
@@ -49,11 +49,11 @@ const backspace = () => {
 
     <div v-for="(letter, index) in letters" :key="index" class="text-center">
       <button v-if="index % 10 === 0" v-for="(letter) in letters.slice(index, index + 10)" class="armenian-button"
-        v-text="letter" @click="push(letter, $event)"></button>
+        v-text="letter" @click="push(letter)"></button>
     </div>
 
     <div class="flex justify-center text-center">
-      <button class="armenian-button !w-[210px] !h-[33px]" @click="push(' ', $event)"></button>
+      <button class="armenian-button !w-[210px] !h-[33px]" @click="push(' ')"></button>
       <button class="armenian-button" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
         v-text="'&#8592'"></button>
     </div>
