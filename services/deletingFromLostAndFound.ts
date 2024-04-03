@@ -1,4 +1,4 @@
-export async function deletingFromLostAndFound(token: string, query: object) {
+export const deletingFromLostAndFound = async (token: string, query: object) => {
     return fetch(
         "https://localhost:7109/DeletingFromLostAndFound",
         {

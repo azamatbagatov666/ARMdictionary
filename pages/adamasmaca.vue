@@ -271,9 +271,7 @@ const responseData = ref();
 </template>
 
 <style scoped>
-.containers {
-  padding-left: calc(100vw - 100%);
-}
+
 .used-button {
   background-color: #ff0000 !important;
 }

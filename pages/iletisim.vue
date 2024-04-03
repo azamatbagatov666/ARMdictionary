@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+
 const name = ref("");
 const nameError = ref();
 const email = ref("");

@@ -1,4 +1,5 @@
-export async function saveChanges(token: string, query: object) {
+export const saveChanges = async (token: string, query: object) => {
+
     return fetch("https://localhost:7109/updateResult", {
      method: "POST",
      headers: {

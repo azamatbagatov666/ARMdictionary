@@ -25,6 +25,12 @@ onBeforeMount(() => {
   }, 500);
 });
 
+onMounted(() => {
+  if (isLogged.value) {
+    refresh();
+  }
+})
+
 const deleteTheWords = async () => {
   if (
     confirm(
@@ -75,9 +81,6 @@ watch(
   () => {
     refresh();
   },
-  {
-    immediate: true,
-  }
 );
 
 const selectAll = ref(false);

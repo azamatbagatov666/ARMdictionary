@@ -264,11 +264,11 @@ onBeforeMount(() => {
 
       <div class="flex mt-2">
       <div>
-        <label class="w-56 inline-block">Aranan sözcüğün Ermenicesi:<span style="color: red">*</span></label>
+        <label class="w-56 inline-block">Aranan sözcüğün Ermenicesi:<span class="text-[red] font-bold text-lg">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.am" type="text" />
       </div>
       <div>
-        <label class="w-40 ml-2 inline-block">Sözcüğün Okunuşu:<span style="color: red">*</span></label>
+        <label class="w-40 ml-2 inline-block">Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.okunus" type="text" />
       </div>
     </div>
@@ -290,7 +290,7 @@ onBeforeMount(() => {
     <div class="flex mt-2">
 
       <div>
-        <label class="w-56 inline-block">Aranan sözcüğün Türkçesi:<span style="color: red">*</span></label>
+        <label class="w-56 inline-block">Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR1" type="text" />
       </div>
       <div>
@@ -305,7 +305,7 @@ onBeforeMount(() => {
     <div class="flex mt-2">
 
       <div>
-        <label class="w-56 inline-block">Aranan sözcüğün İngilizcesi:<span style="color: red">*</span></label>
+        <label class="w-56 inline-block">Aranan sözcüğün İngilizcesi:<span class="text-[red] font-bold text-lg">*</span></label>
         <ElementComponentsCustomInput class="w-52 border border-black" v-model="selectedIndex.tR4" type="text" />
       </div>
       <div>
@@ -336,7 +336,7 @@ onBeforeMount(() => {
     </div>
 
     <div
-      style="font-size: larger"
+    class="text-center text-lg"
       v-if="noresult != ''"
       v-text="noresult"
     ></div>

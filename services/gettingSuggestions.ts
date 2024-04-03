@@ -1,4 +1,4 @@
-export async function gettingSuggestions(query: string) {
+export const gettingSuggestions = async (query: string) => {
   query = encodeURIComponent(query)
 
     return useFetch<string[]>(

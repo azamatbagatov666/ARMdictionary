@@ -95,7 +95,7 @@ const resetData = () => {
     <div class="mt-4 ml-2 mb-7">
       <div>
         <label class="w-56 inline-block"
-          >Aranan:<span style="color: red">*</span></label
+          >Aranan:<span class="text-[red] font-bold text-lg">*</span></label
         >
         <ElementComponentsCustomInput
           class="w-52 border border-black"
@@ -107,7 +107,7 @@ const resetData = () => {
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün Ermenicesi:<span style="color: red">*</span></label
+            >Aranan sözcüğün Ermenicesi:<span class="text-[red] font-bold text-lg">*</span></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -117,7 +117,7 @@ const resetData = () => {
         </div>
         <div>
           <label class="w-40 ml-2 inline-block"
-            >Sözcüğün Okunuşu:<span style="color: red">*</span></label
+            >Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg">*</span></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -155,7 +155,7 @@ const resetData = () => {
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün Türkçesi:<span style="color: red">*</span></label
+            >Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg">*</span></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -183,7 +183,7 @@ const resetData = () => {
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün İngilizcesi:<span style="color: red"
+            >Aranan sözcüğün İngilizcesi:<span class="text-[red] font-bold text-lg"
               >*</span
             ></label
           >
@@ -212,7 +212,7 @@ const resetData = () => {
       </div>
 
       <div class="preview">
-        <div style="font-size: 40px">Önizleme</div>
+        <div class="text-[40px]">Önizleme</div>
 
         <div class="flex justify-center">
           <div class="flex justify-center">
@@ -286,8 +286,7 @@ const resetData = () => {
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="data.am"></span>
               <span
-                class="ml-1 text"
-                style="font-weight: normal"
+                class="ml-1 font-normal"
                 v-text="`(${data.okunus})`"
               ></span>
             </td>

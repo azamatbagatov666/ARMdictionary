@@ -144,6 +144,11 @@ const logoutClicked = () => {
                                     Bulunamayan Sözcükler
                                 </li>
                             </NuxtLink>
+                            <NuxtLink to="/account/wordOfTheDay">
+                                <li>
+                                    Günün Sözcüğü
+                                </li>
+                            </NuxtLink>
                                 <li class="cursor-pointer" @click="logoutClicked()">
                                     Oturumu Kapat
                                 </li>

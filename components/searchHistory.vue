@@ -53,9 +53,11 @@ const historyList = computed(() => searchHistoryStore.state.history)
 <template>
 <div class=" border-black sm:w-[300px] md:w-[450px] lg:w-[600px] bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300">
   <ul class="p-2">
-<li v-for="(item, index) in historyList" v-text="item" @click="historySelected(item)" class="inline-block mr-3 hover:underline hover:cursor-pointer hover:bg-white dark:hover:bg-gray-500"></li>
+<li v-if="historyList.length > 0" v-for="(item, index) in historyList" v-text="item" @click="historySelected(item)"
+class="inline-block mr-3 hover:underline hover:cursor-pointer hover:bg-white dark:hover:bg-gray-500"></li>
+<span class="text-center w-full inline-block" v-else>Arama geçmişinde hiç sözcük yok</span>
   </ul>
-  <Button @click="remove" @mousedown="buttonClick" class="bg-white border border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500">
+  <button v-if="historyList.length > 0" @click="remove" @mousedown="buttonClick" class="bg-white border border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500">
     <img src="/trash.png" class="size-9" /><span v-text="removeButton"></span>
   </button>
 

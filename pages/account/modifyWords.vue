@@ -3,6 +3,7 @@ import { searchingnocheck } from "~/services/searchingNoCheck";
 import { searchingById } from "~/services/searchingById";
 import { addToId } from "~/services/addToId";
 
+
 const desword = ref("");
 const noresult = ref("");
 const wordToBeAdded = ref("");
@@ -204,17 +205,17 @@ const resetData = () => {
       </table>
 
       <div
-        style="font-size: larger"
+      class="text-center text-lg"
         v-if="noresult != ''"
         v-text="noresult"
       ></div>
 
-      <div  v-if="arananData">
+      <div v-if="arananData">
 
       <div class="flex justify-between mt-9">
         <div class="col-span-1 mx-auto">
           <div class="text-3xl">Bu sonucu veren sözcükler:</div>
-          <ul class="list-disc" style="font-size: large">
+          <ul class="list-disc text-lg">
             <li
               v-for="(arananlar, index) in arananData"
               :key="index"

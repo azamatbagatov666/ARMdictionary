@@ -196,7 +196,7 @@ const resetData = () => {
       </tr>
     </table>
 
-    <div style="font-size: larger" v-if="noresult != ''" v-text="noresult"></div>
+    <div class="text-center text-lg" v-if="noresult != ''" v-text="noresult"></div>
 
     <div class="text-center mb-4" v-if="arananData">
       <ul class="list-none text-lg text-left inline-block">

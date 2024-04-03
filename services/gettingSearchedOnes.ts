@@ -1,6 +1,6 @@
 import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
 
-export async function gettingSearchedOnes(token: string) {
+export const gettingSearchedOnes = async (token: string) => {
     return $fetch<LOSTANDFOUND[]>
     (
         `https://localhost:7109/gettingSearchedOnes`, {

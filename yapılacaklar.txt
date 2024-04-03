@@ -1,18 +1,9 @@
 clientside şeyini yap her sayfada tek div olsun
 
-sorgu avedikyan com ile aynı mı
-
-soru işaretli kelimeler
-
-BRAIN BRAİN
-
-
-
-
-günün kelimesi özelliği eklenecek
-
-
-
 önemli şahıslar
 
-iletişim formu
+password nereye saklanmalı
+
+lang list ayrı sayfada tut
+
+login failed

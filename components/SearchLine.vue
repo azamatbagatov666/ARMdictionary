@@ -2,6 +2,8 @@
 import { ref, onMounted } from "vue";
 import { gettingSuggestions } from "../services/gettingSuggestions";
 
+
+
 const currentHoverIndex = ref<number>(-1);
 const languageState = useLanguageState();
 const desword = ref("");
@@ -17,11 +19,13 @@ const props = defineProps(["desword"]);
 watch(
   () => props.desword,
   (newVal) => {
+    console.log("trigger")
     desword.value = newVal;
     nextTick(() => {
       search.value?.select();
     });
-  }
+  },
+
 );
 
 $bus.on("clear-main-page", () => {
@@ -29,6 +33,12 @@ $bus.on("clear-main-page", () => {
   keyboardOn.value = false;
   historyOn.value = false;
   search.value?.focus();  
+});
+
+
+$bus.on("desword-updated", (newDesword: string) => {
+  desword.value = newDesword;
+
 });
 
 var listOfAvailableWords: string[];
@@ -132,6 +142,11 @@ const selectTheInput = async (item: string) => {
   nextTick(() => {
     search.value?.select();
   });
+};
+
+const refer = (newDesword: string) => {
+  console.log('here')
+  desword.value = newDesword;
 };
 
 const keyBase = (event: any) => {
@@ -287,10 +302,13 @@ const randomWord = () => {
     }, 2000);
   }
 };
+
+defineExpose({ refer })
+
 </script>
 
 <template>
-
+<div>
   <div class="h-[269px]">
     <Transition name="fade">
 
@@ -307,8 +325,9 @@ const randomWord = () => {
   </div>
 
   <div class="flex justify-center">
+    <div>
     <div
-      class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-tl-lg rounded-br-lg rounded-blh-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
@@ -372,6 +391,9 @@ const randomWord = () => {
 
       <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
     </div>
+
+
+  </div>
     <div class="w-0 flex flex-col gap-4 justify-start">
       
       <button
@@ -384,7 +406,7 @@ const randomWord = () => {
           <img src="/random.png" class="size-9" />
         </div>
         <div class="w-0">
-        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="sLineLang.randomButton"></span>
+        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="sLineLang.randomButton"></span>
       </div>
       </div>
       </button>
@@ -402,7 +424,7 @@ const randomWord = () => {
         </div>
         <div class="w-0">
 
-        <span class="w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white" v-text="'Search History'"></span>
+        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white" v-text="'Search History'"></span>
 
       </div>
       </div>
@@ -410,6 +432,8 @@ const randomWord = () => {
       </button>
     </div>
   </div>
+</div>
+
 </template>
 
 <style scoped>

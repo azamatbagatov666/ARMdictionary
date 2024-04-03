@@ -1,6 +1,8 @@
 import { type TDATA } from "~/models/TDATA";
 
-export async function getARandomWord() {
+
+export const getARandomWord = async () => {
+
     return useFetch<TDATA[]>(
         `https://localhost:7109/getRandom`
       );

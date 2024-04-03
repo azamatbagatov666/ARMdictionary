@@ -1,6 +1,8 @@
 import { type TDATA } from "~/models/TDATA";
 
-export async function searchingnocheck(token: string, query: string) {
+
+export const searchingnocheck = async (token: string, query: string) => {
+
   query = encodeURIComponent(query)
 
     return useFetch<TDATA[]>(

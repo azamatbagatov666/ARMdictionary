@@ -1,5 +1,6 @@
-export const addToId = async (token: string, query: object) => {
-    return fetch("https://localhost:7109/AddToID", {
+export const AddToDay = async (token: string, query: object) => {
+  console.log(JSON.stringify(query))
+    return fetch("https://localhost:7109/AddToDay", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-export async function deleteAndMoveToTrash(token: string, query: object) {
+export const deleteAndMoveToTrash = async (token: string, query: object) => {
     return fetch(
         "https://localhost:7109/deleteAndMoveToTrash",
         {

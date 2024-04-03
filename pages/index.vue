@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { searching } from "../services/searching";
-import { getARandomWord } from "../services/getARandomWord";
+import { getTodaysWord } from "../services/getTodaysWord";
+import { getARandomWord } from "~/services/getARandomWord";
 import { useSearchHistoryStore } from "~/store/search-history.store";
+
+
 
 
 useHead({
@@ -14,7 +17,7 @@ const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const languageState = useLanguageState();
-
+const searchline = ref();
 
 const searchHistoryStore = useSearchHistoryStore()
 
@@ -28,10 +31,43 @@ $bus.on("clear-main-page", () => {
   desword.value = "";
 });
 
-onMounted(() => {
-  
-})
 
+const todayData = ref();
+
+onBeforeMount(async () => {
+  getToday();
+
+});
+
+const getToday = async () => {
+  try {
+    const data = await getTodaysWord();
+
+    if (
+    data &&
+    Array.isArray(data) &&
+    data[0].aranan !== "NotFound"
+  ) {
+      todayData.value = data;
+    }
+  } catch (error) {
+  }
+};
+
+const setToday = async () => {
+  responseData.value = todayData.value;
+  desword.value = todayData.value[0].aranan;
+  previousDesword.value = desword.value
+  searchHistoryStore.addHistory(desword.value);
+  thereIsNoResult.value = false;
+  thereIsNoConnection.value = false;
+  //$bus.emit('desword-updated', desword.value);
+  console.log(searchline);
+  searchline.value.refer(desword.value)
+
+
+
+};
 
 const indexLanguage = computed(() => {
   switch (languageState.value) {
@@ -72,6 +108,7 @@ const submit = async () => {
 console.log(desword.value)
 
   const { data, error } = await searching(desword.value);
+
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -124,16 +161,42 @@ const random = async () => {
     thereIsNoResult.value = true;
   }
 };
+
+const buttonClick = (event: Event) => {
+  event.preventDefault();
+};
 </script>
 
 <template>
   <div class="containers">
-    <SearchLine
+    <div class="flex justify-center">
+    <div>
+        <SearchLine
       @input-changed="wordInput"
       @submit-request="submit"
       @random-request="random"
       :desword="propdesword"
+      ref="searchline"
     ></SearchLine>
+
+      <button v-if="todayData"
+        class="group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+        @click="setToday"
+        @mousedown="buttonClick"
+      >
+      <div class="flex items-center ml-[5px]">
+        <div class="rounded-full size-9 bg-red-600">
+          <img src="/day.png" class="size-9" />
+        </div>
+        <div class="w-0">
+        <span class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="'Günün Sözcüğü'"></span>
+      </div>
+      </div>
+      </button> 
+    </div>
+</div>
+
+
 
 
 
