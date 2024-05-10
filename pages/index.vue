@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { searching } from "../services/searching";
-import { getTodaysWord } from "../services/getTodaysWord";
-import { getARandomWord } from "~/services/getARandomWord";
 import { useSearchHistoryStore } from "~/store/search-history.store";
 
 
@@ -12,13 +9,10 @@ useHead({
 });
 
 const desword = ref("");
-const propdesword = ref("");
 const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
-const languageState = useLanguageState();
 const searchline = ref();
-
 const searchHistoryStore = useSearchHistoryStore()
 
 const { $bus } = useNuxtApp();
@@ -41,14 +35,18 @@ onBeforeMount(async () => {
 
 const getToday = async () => {
   try {
-    const data = await getTodaysWord();
 
+    const  data = await $fetch(`/api/get/getTodaysWord`, {
+    method: 'GET'
+  })
     if (
     data &&
     Array.isArray(data) &&
     data[0].aranan !== "NotFound"
   ) {
       todayData.value = data;
+    }
+    else{
     }
   } catch (error) {
   }
@@ -61,38 +59,12 @@ const setToday = async () => {
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
-  //$bus.emit('desword-updated', desword.value);
-  console.log(searchline);
-  searchline.value.refer(desword.value)
+  searchline.value.wordFromAbove(desword.value)
 
 
 
 };
 
-const indexLanguage = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return {
-        noConnection: 'Connection problem.',
-        noResult: 'The word you searched for was not found.',
-      };
-    case "am":
-      return {
-        noConnection: "Կապակցութեան հարց։",
-        noResult: 'Չկրցաւ գտնուիլ ձեր փնտրած բառը։',
-      };
-    case "tr":
-      return {
-        noConnection: 'Bağlantı sorunu.',
-        noResult: 'Aradığınız sözcük bulunamadı.',
-      };
-    default:
-      return {
-        noConnection: 'Bağlantı sorunu.',
-        noResult: 'Aradığınız sözcük bulunamadı.',
-      };
-  }
-});
 
 const wordInput = (data: string) => {
   desword.value = data;
@@ -105,10 +77,11 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
-console.log(desword.value)
 
-  const { data, error } = await searching(desword.value);
-
+  const { data, error } = await useFetch(`/api/search/${(encodeURI(desword.value))}`,
+  {
+    method: 'GET'  
+  })
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -137,7 +110,12 @@ console.log(desword.value)
 
 const random = async () => {
 
-  const { data, error } = await getARandomWord();
+
+  const { data, error } = await useFetch(`/api/get/getARandomWord`, {
+    method: 'GET'
+  })
+
+  
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -154,7 +132,7 @@ const random = async () => {
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
-    propdesword.value = desword.value
+    searchline.value.wordFromAbove(desword.value)
     searchHistoryStore.addHistory(desword.value);
 
   } else {
@@ -175,8 +153,8 @@ const buttonClick = (event: Event) => {
       @input-changed="wordInput"
       @submit-request="submit"
       @random-request="random"
-      :desword="propdesword"
       ref="searchline"
+      :cornered="!todayData"
     ></SearchLine>
 
       <button v-if="todayData"
@@ -205,12 +183,12 @@ const buttonClick = (event: Event) => {
     <div
       v-if="thereIsNoResult"
       class="text-lg text-center mt-4"
-      v-text="indexLanguage.noResult"
+      v-text="$t('index.noResult')"
     ></div>
     <div
       v-if="thereIsNoConnection"
       class="text-lg text-center mt-4"
-      v-text="indexLanguage.noConnection"
+      v-text="$t('index.noConnection')"
     ></div>
   </div>
 

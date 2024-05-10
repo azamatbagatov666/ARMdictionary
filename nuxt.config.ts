@@ -1,24 +1,33 @@
-import { defineNuxtConfig } from 'nuxt/config'
-
+import { defineNuxtConfig } from "nuxt/config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxtjs/color-mode', '@pinia/nuxt',
-  ['nuxt-mail', {
-    message: {
-      to: 'saraerkan@hotmail.com',
-    },
-    smtp: {
-      service: 'gmail',
-      secure: true,
-      auth: {
-        user: 'saraerkan@gmail.com',
-        pass: 'urhq rjhy isol dcus',
+  modules: [
+    "@nuxtjs/color-mode",
+    "@pinia/nuxt",
+    "@nuxtjs/i18n",
+    [
+      "nuxt-mail",
+      {
+        message: {
+          to: process.env.NUXT_RECEIVER_EMAIL,
+        },
+        smtp: {
+          service: "gmail",
+          secure: true,
+          auth: {
+            user: process.env.NUXT_SENDER_EMAIL,
+            pass: process.env.NUXT_APP_PASSWORD,
+          },
+        },
       },
-    },
-  }],
-],colorMode: {
-    classSuffix: ''
+    ],
+  ],
+  i18n: {
+    
+  },
+  colorMode: {
+    classSuffix: "",
   },
   postcss: {
     plugins: {
@@ -26,12 +35,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  css: ['~/assets/css/tailwind.css'],
+  css: ["~/assets/css/tailwind.css"],
   imports: {
     dirs: [
-      'composables',
-      'composables/*/index.{ts,js,mjs,mts}',
-      'composables/**',
-    ]
+      "composables",
+      "composables/*/index.{ts,js,mjs,mts}",
+      "composables/**",
+    ],
   },
-})
+});

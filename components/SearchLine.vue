@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
-import { gettingSuggestions } from "../services/gettingSuggestions";
 
 
 
 const currentHoverIndex = ref<number>(-1);
-const languageState = useLanguageState();
 const desword = ref("");
 const resultBoxContent = ref<string[]>([]);
 const isResultBoxVisible = ref(false);
@@ -15,73 +13,26 @@ const cursorEnd = ref<number>(0);
 
 const { $bus } = useNuxtApp();
 
-const props = defineProps(["desword"]);
-watch(
-  () => props.desword,
-  (newVal) => {
-    console.log("trigger")
-    desword.value = newVal;
-    nextTick(() => {
-      search.value?.select();
-    });
-  },
-
-);
+const props = defineProps(["cornered"]);
 
 $bus.on("clear-main-page", () => {
+  clearThePage();
+});
+
+
+const clearThePage = () => {
   desword.value = "";
   keyboardOn.value = false;
   historyOn.value = false;
   search.value?.focus();  
-});
+};
 
-
-$bus.on("desword-updated", (newDesword: string) => {
-  desword.value = newDesword;
-
-});
 
 var listOfAvailableWords: string[];
 listOfAvailableWords = [];
 
 const lcandtrimmed = computed(() => {
   return desword.value.toLocaleLowerCase("tr-TR").trim();
-});
-
-const sLineLang = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return {
-        searching: "Search a word.",
-        keyboardButton: "Armenian Keyboard",
-        randomButton: "Random Word",
-        searchTip: "Use *  for multiple selections and ? for single character.",
-      };
-    case "am":
-      return {
-        searching: "Փնտռցէք բառ մը:",
-        keyboardButton: "Հայերէն Ստեղնաշար",
-        randomButton: "Պատահական Բառ",
-        searchTip: "Կարելի է օգտագործել * բազմաթիւ տառերու խուզարկումի, իսկ ? տառի մը համար:",
-
-      };
-    case "tr":
-      return {
-        searching: "Bir sözcük ara.",
-        keyboardButton: "Ermenice Klavye",
-        randomButton: "Rastgele Sözcük",
-        searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
-
-      };
-    default:
-      return {
-        searching: "Bir sözcük ara.",
-        keyboardButton: "Ermenice Klavye",
-        randomButton: "Rastgele Sözcük",
-        searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
-
-      };
-  }
 });
 
 onMounted(() => {
@@ -113,7 +64,10 @@ const inputChanged = async () => {
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 3) {
-    const { data, error } = await gettingSuggestions(lcandtrimmed.value);
+    const { data, error } = await useFetch(`/api/search/${(encodeURI(lcandtrimmed.value))}/suggestions`,
+  {
+    method: 'GET'  
+  })
     if (error.value) {
       return;
     }
@@ -144,9 +98,12 @@ const selectTheInput = async (item: string) => {
   });
 };
 
-const refer = (newDesword: string) => {
-  console.log('here')
+const wordFromAbove = (newDesword: string) => {
   desword.value = newDesword;
+  nextTick(() => {
+    search.value?.select();
+  });
+
 };
 
 const keyBase = (event: any) => {
@@ -303,8 +260,7 @@ const randomWord = () => {
   }
 };
 
-defineExpose({ refer })
-
+defineExpose({ wordFromAbove, clearThePage })
 </script>
 
 <template>
@@ -328,10 +284,11 @@ defineExpose({ refer })
     <div>
     <div
       class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-tl-lg rounded-br-lg rounded-blh-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      :class="{'rounded-bl-lg': props.cornered == true}"
     >
       <ElementComponentsCustomButton
         class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
-        :text="sLineLang.keyboardButton"
+        :text="$t('searchLine.keyboardButton')"
         @click="toggleKeyboard($event)"
         @mousedown="buttonClick"
       />
@@ -341,7 +298,7 @@ defineExpose({ refer })
           ref="search"
           v-model="desword"
           class="motherinput"
-          :placeholder="sLineLang.searching"
+          :placeholder="$t('searchLine.searching')"
           autocomplete="off"
           maxlength="125"
           @input="inputChanged"
@@ -387,7 +344,7 @@ defineExpose({ refer })
           ></li>
         </ul>
       </div>
-      <div class="text-center text-sm my-1" v-text="sLineLang.searchTip"></div>
+      <div class="text-center text-sm my-1" v-text="$t('searchLine.searchTip')"></div>
 
       <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
     </div>
@@ -406,7 +363,7 @@ defineExpose({ refer })
           <img src="/random.png" class="size-9" />
         </div>
         <div class="w-0">
-        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="sLineLang.randomButton"></span>
+        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="$t('searchLine.randomButton')"></span>
       </div>
       </div>
       </button>

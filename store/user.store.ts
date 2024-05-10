@@ -1,5 +1,4 @@
 import type { AuthenticateResponse } from "~/models/AuthenticateResponse";
-import { loginRequest } from "~/services/login";
 import { testLoginRequest } from "~/services/testLogin";
 
 interface UserState {
@@ -12,7 +11,15 @@ export const useUserStore = defineStore("user", () => {
   });
 
   const login = async (username: string, password: string) => {
-    const response = await loginRequest(username, password);
+    //const response = await loginRequest(username, password);
+    
+    const response = await $fetch('/api/account/user/login', {
+      method: "POST",
+      body: {
+        username: username,
+        password: password
+      }
+    })
     state.user = response;
     saveToLocalStorage();
     return isLogged();
@@ -33,7 +40,9 @@ export const useUserStore = defineStore("user", () => {
 
   const testLogin = async (): Promise<boolean> => {
     if (isLogged()) {
-        return await testLoginRequest(state.user!.token)
+      return await testLoginRequest(state.user!.token)
+
+        
     }
     return false;
   }

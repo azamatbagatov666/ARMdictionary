@@ -1,9 +1,7 @@
 import { type TDATA } from "~/models/TDATA";
 
-
-export const getARandomWord = async () => {
-
-    return useFetch<TDATA[]>(
+export default defineEventHandler(async event => {
+    return await $fetch<TDATA[]>(
         `https://localhost:7109/getRandom`
       );
-}
+});

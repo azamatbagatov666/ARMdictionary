@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { searchingnocheck } from "~/services/searchingNoCheck";
-import { searchingById } from "~/services/searchingById";
 import { saveChanges } from "~/services/saveChanges";
-
 import { type TDATA } from "~/models/TDATA";
 import { useUserStore } from "~/store/user.store";
 
@@ -29,7 +26,12 @@ const submit = async () => {
     return;
   }
 console.log(userStore.state.user!.token)
-  const { data, error } = await searchingnocheck(userStore.state.user!.token, desword.value);
+const { data, error } = await useFetch(`/api/search/${encodeURI(desword.value)}/searchingNoCheck`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -52,7 +54,12 @@ console.log(userStore.state.user!.token)
 
 const getAranan = async (index: number) => {
   selectedItemId.value = selectedRadio.value;
-  const { data } = await searchingById(userStore.state.user!.token, selectedItemId.value!);
+  const { data } = await useFetch(`/api/search/${encodeURI(selectedItemId.value!)}/searchById`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
 
   if (data && Array.isArray(data.value) && data.value.length > 0) {
     arananData.value = data.value.map((item) => item.aranan);
@@ -74,6 +81,7 @@ const trimStrings = (obj: Record<string, any>) => {
 const updateTheWord = () => {
   if (confirm("Sonuç belirlediğiniz şekilde düzenlenecektir, emin misiniz?")) {
     if (
+      selectedIndex.value &&
       (selectedIndex.value["aranan"] &&
         selectedIndex.value["am"] &&
         selectedIndex.value["okunus"] &&
@@ -88,10 +96,11 @@ const updateTheWord = () => {
 
       for (const key in selectedIndex.value) {
         if (
-          selectedIndex.value[key] === "" &&
-          selectedBackup.value[key] === (null || "")
+      selectedIndex.value && selectedBackup.value &&
+          selectedIndex.value[key as keyof TDATA] === "" &&
+          selectedBackup.value[key as keyof TDATA] === (null || "")
         ) {
-          selectedIndex.value[key] = selectedBackup.value[key];
+          selectedIndex.value[key as keyof TDATA] = selectedBackup.value[key as keyof TDATA];
         }
       }
 

@@ -7,26 +7,7 @@ const adminDropDownOn = ref(false);
 const languageState = useLanguageState();
 
 
-const navBarItems = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return {
-        menu: 'Menu',
-      };
-    case "am":
-      return {
-        menu: "Փնտռցէք",
-      };
-    case "tr":
-      return {
-        menu: 'Menü',
-      };
-    default:
-      return {
-        menu: 'Menü',
-      };
-  }
-});
+
 
 
 const router = useRouter();
@@ -85,7 +66,7 @@ const logoutClicked = () => {
                 class="dropDownMenu">
                 <button
                     class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
-                    v-text="navBarItems.menu + ' &#9660'"></button>
+                    v-text="$t('navBar.menu') + ' &#9660'"></button>
                 <div class="dropDownOn relative" v-if="dropDownOn">
                     <nav>
                         <ul @click="toggleDropdown($event, 'regular')" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">

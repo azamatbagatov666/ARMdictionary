@@ -45,7 +45,7 @@ const backspace = () => {
 </script>
 
 <template>
-  <div class="inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-3 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
+  <div class="w-full sm:w-max inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-3 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
 
     <div v-for="(letter, index) in letters" :key="index" class="text-center">
       <button v-if="index % 10 === 0" v-for="(letter) in letters.slice(index, index + 10)" class="armenian-button"

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const languageState = useLanguageState();
+const { locale, setLocale } = useI18n()
 
-const changeLanguage = (lang: string) => {
+const changeLanguage = async (lang: string) => {
+  await setLocale(lang)
   languageState.value = lang;
   localStorage.setItem('language', lang)
 };
@@ -21,7 +23,7 @@ const changeLanguage = (lang: string) => {
     />
     <img
       src="/flags/eng-flag.png"
-      @click="changeLanguage('eng')"
+      @click="changeLanguage('en')"
       class="image"
     />
   </div>

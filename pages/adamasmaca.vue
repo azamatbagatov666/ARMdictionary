@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { getHangman } from "~/services/getHangman";
 
 const hangmanVis = ref(0);
 const answer = ref();
@@ -9,38 +8,7 @@ const connectionError = ref(false);
 const won = ref();
 const languageState = useLanguageState();
 
-const hangLang = computed(() => {
-  switch (languageState.value) {
-    case "eng":
-      return {
-        noConnection: "Connection Problem",
-        rightsLeft: " right(s) left.",
-        win: "Congratulations",
-        lose: "You lost",
-      };
-    case "am":
-      return {
-        noConnection: "Կապակցութեան Հարց",
-        rightsLeft: " իրաւունք ունիք։",
-        win: "Ապրիս",
-        lose: "Կորսնցուցիք",
-      };
-    case "tr":
-      return {
-        noConnection: "Bağlantı Sorunu",
-        rightsLeft: " hakkınız kaldı.",
-        win: "Tebrikler",
-        lose: "Kaybettiniz",
-      };
-    default:
-      return {
-        noConnection: "Bağlantı Sorunu",
-        rightsLeft: " hakkınız kaldı.",
-        win: "Tebrikler",
-        lose: "Kaybettiniz",
-      };
-  }
-});
+
 
 const letters = ["է", "թ", "փ", "ձ", "ջ", "ր", "չ", "ճ", "ժ", "ծ",
   "ք", "ո", "ե", "ռ", "տ", "ը", "ւ", "ի", "օ", "պ", "ա", "ս", "դ", "ֆ",
@@ -83,7 +51,9 @@ const isCorrectButton = (letter: string) => {
 
 const newGame = async () => {
   try {
-    const data = await getHangman();
+    const  data = await $fetch(`/api/get/getHangman`, {
+    method: 'GET'
+  })
     if (data) {
       responseData.value = data;
       answer.value = responseData.value[0].aranan;
@@ -121,7 +91,7 @@ const responseData = ref();
 </script>
 
 <template>
-  <div class="">
+  <div>
     <div
       class="h-[90vh] flex items-center justify-center"
       v-if="!answer && !connectionError"
@@ -166,11 +136,11 @@ const responseData = ref();
 
         <div class="text-center text-lg mt-1">
           <span v-text="8 - hangmanVis"></span
-          ><span v-text="hangLang.rightsLeft"></span>
+          ><span v-text="$t('adamAsmaca.rightsLeft')"></span>
         </div>
         <div class="text-center text-red-500 font-bold h-7 text-lg">
-          <div v-show="won" v-text="hangLang.win"></div>
-          <div v-show="won == false" v-text="hangLang.lose"></div>
+          <div v-show="won" v-text="$t('adamAsmaca.win')"></div>
+          <div v-show="won == false" v-text="$t('adamAsmaca.lose')"></div>
         </div>
 
         <div class="h-16 flex justify-center">
@@ -203,7 +173,7 @@ const responseData = ref();
 
         <div class="keyboard" v-if="answer">
           <div
-            class="inline-block left-1/2 w-full -translate-x-1/2 relative border-2 border-black my-2 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+            class="w-full inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-2 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
           >
             <div
               v-for="(letter, index) in letters"
@@ -228,13 +198,13 @@ const responseData = ref();
         <ElementComponentsCustomButton
           class="mx-auto block"
           @click="clear"
-          text="Yeni Oyun"
+          :text="'Yeni Oyun'"
         />
       </div>
       <div
         v-else-if="connectionError"
         class="text-3xl flex items-center justify-center h-[90vh]"
-        v-text="hangLang.noConnection"
+        v-text="$t('adamAsmaca.connection')"
       ></div>
 
       <div v-if="won != null" class="mx-auto sm:w-0 sm:mx-0">

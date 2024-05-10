@@ -6,4 +6,13 @@ body {
   @apply dark:bg-[#262a2f] bg-white;
   @apply dark:text-white;
   transition: background-color 0.3s;
+
+
+  /*background-image: url('/background-12.jpg');
+  background-size: cover; 
+  background-attachment: fixed; */
+
+
+  
+
 }

@@ -1,7 +1,7 @@
 import { type TDATA } from "~/models/TDATA";
-export const getHangman = async () => {
 
-    return $fetch<TDATA[]>(
+export default defineEventHandler(async event => {
+    return await $fetch<TDATA[]>(
         `https://localhost:7109/getHangman`
       );
-}
+});

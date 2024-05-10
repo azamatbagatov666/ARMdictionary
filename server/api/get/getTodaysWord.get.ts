@@ -1,8 +1,7 @@
 import { type TDATA } from "~/models/TDATA";
 
-export const getTodaysWord = async () => {
-
-    return $fetch<TDATA[]>(
+export default defineEventHandler(async event => {
+    return await $fetch<TDATA[]>(
         `https://localhost:7109/GetTodaysWord`
       );
-}
+});

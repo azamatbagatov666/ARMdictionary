@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { useUserStore } from "~/store/user.store";
 import { gettingWordOfTheDay } from "~/services/getWordOfTheDay";
-import { searchingnocheck } from "~/services/searchingNoCheck";
-import { getARandomWord } from "~/services/getARandomWord";
 import { AddToDay } from "~/services/AddToDay";
 import { deleteFromWordOfTheDay } from "~/services/deleteFromWordOfTheDay";
 
@@ -12,7 +10,8 @@ const noresult = ref("");
 const selectedRadio = ref(null);
 const selectedDate = ref<string | null>(null);
 const desword = ref("");
-const propdesword = ref("");
+const searchline = ref();
+
 
 const formattedSelectedDate = computed(() => {
   if (selectedDate.value != null) {
@@ -116,7 +115,6 @@ const endDateQ = computed(() => {
 const { $bus } = useNuxtApp();
 
 const list = async () => {
-  propdesword.value = desword.value;
   currentMonth.value = monthSelection.value;
   currentYear.value = yearSelection.value;
   selectedDate.value = null;
@@ -124,8 +122,7 @@ const list = async () => {
   searchResponse.value = undefined;
   desword.value = "";
 
-  await nextTick();
-  $bus.emit("clear-main-page");
+  searchline.value.clearThePage()
 
   await getWords();
 };
@@ -158,7 +155,6 @@ const getIndex = (date: string) => {
 };
 
 const reset = async () => {
-  propdesword.value = desword.value;
   currentMonth.value = monthSelection.value;
   currentYear.value = yearSelection.value;
   selectedDate.value = null;
@@ -169,8 +165,8 @@ const reset = async () => {
   monthSelection.value = months[new Date().getMonth()];
   yearSelection.value = new Date().getFullYear();
 
-  await nextTick();
-  $bus.emit("clear-main-page");
+  searchline.value.clearThePage()
+
 };
 
 const submit = async () => {
@@ -178,10 +174,12 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await searchingnocheck(
-    userStore.state.user!.token,
-    desword.value
-  );
+  const { data, error } = await useFetch(`/api/search/${encodeURI(desword.value)}/searchingNoCheck`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -203,7 +201,9 @@ const wordInput = (data: string) => {
 };
 
 const random = async () => {
-  const { data, error } = await getARandomWord();
+  const { data, error } = await useFetch(`/api/get/getARandomWord`, {
+    method: 'GET'
+  })
   if (error.value) {
     return;
   }
@@ -212,7 +212,7 @@ const random = async () => {
   if (data) {
     searchResponse.value = data.value;
     desword.value = searchResponse.value[0].aranan;
-    propdesword.value = desword.value;
+    searchline.value.wordFromAbove(desword.value)
   } else {
   }
 };
@@ -237,13 +237,11 @@ const save = async () => {
       const response = await AddToDay(userStore.state.user!.token, dayData);
       if (response.ok) {
         alert("Sonuç başarıyla eklendi.");
-        propdesword.value = desword.value;
         selectedDate.value = null;
         selectedRadio.value = null;
         searchResponse.value = undefined;
         desword.value = "";
 
-        await nextTick();
         $bus.emit("clear-main-page");
         await getWords();
       }
@@ -346,7 +344,8 @@ onBeforeMount(() => {
         @input-changed="wordInput"
         @submit-request="submit"
         @random-request="random"
-        :desword="propdesword"
+        ref="searchline"
+
       ></SearchLine>
 
       <table

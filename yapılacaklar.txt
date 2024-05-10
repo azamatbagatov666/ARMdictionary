@@ -1,9 +1,9 @@
-clientside şeyini yap her sayfada tek div olsun
-
 önemli şahıslar
 
-password nereye saklanmalı
+editword sayfası
 
-lang list ayrı sayfada tut
+mobil
 
-login failed
+api kısmına yap
+
+f5 yapınca lang gidiyor

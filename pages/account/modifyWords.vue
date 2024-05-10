@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { searchingnocheck } from "~/services/searchingNoCheck";
-import { searchingById } from "~/services/searchingById";
 import { addToId } from "~/services/addToId";
 
 
@@ -62,7 +60,13 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await searchingnocheck(userStore.state.user!.token, desword.value);
+
+  const { data, error } = await useFetch(`/api/search/${encodeURI(desword.value)}/searchingNoCheck`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -91,10 +95,15 @@ const getAranan = async () => {
   wordToBeAdded.value = "";
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
-  const { data } = await searchingById(userStore.state.user!.token, selectedItemId.value!);
+  const data = await $fetch(`/api/search/${encodeURI(selectedItemId.value!)}/searchById`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
 
-  if (data && Array.isArray(data.value) && data.value.length > 0) {
-    arananData.value = data.value.map((item) => item.aranan);
+  if (data && Array.isArray(data) && data.length > 0) {
+    arananData.value = data.map((item) => item.aranan);
   }
 };
 

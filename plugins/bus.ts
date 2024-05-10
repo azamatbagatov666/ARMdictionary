@@ -13,6 +13,4 @@ export interface Bus extends Emitter<EmitTypes>{
 
 export type EmitTypes = {
     'clear-main-page': void;
-    'desword-updated': string;
-
 }
