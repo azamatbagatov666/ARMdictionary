@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import { useUserStore } from "~/store/user.store";
-import { gettingWordOfTheDay } from "~/services/getWordOfTheDay";
-import { AddToDay } from "~/services/AddToDay";
-import { deleteFromWordOfTheDay } from "~/services/deleteFromWordOfTheDay";
 
 const userStore = useUserStore();
 const isLogged = computed(() => userStore.state.user != undefined);
@@ -61,11 +58,17 @@ const length = currentYear.value - 2024 + 2;
 const years: number[] = Array.from({ length: length }, (_, i) => 2024 + i);
 
 const getWords = async () => {
-  const { data, error } = await gettingWordOfTheDay(
-    userStore.state.user!.token,
-    startDateQ.value,
-    endDateQ.value
-  );
+  const { data, error } = await useFetch(`/api/get/getWordOfTheDay`, {
+    method: 'POST',
+    headers: {
+      token: userStore.state.user!.token
+    },
+    body: {
+        start: startDateQ.value,
+        end: endDateQ.value
+      }
+  });
+
   responseData.value = data.value;
 };
 const daysInMonth = computed(() => {
@@ -217,11 +220,21 @@ const random = async () => {
   }
 };
 
+
+
 const deleteTheWord = async (date: string) => {
- 
       try {
-        const response = await deleteFromWordOfTheDay(userStore.state.user!.token, date);
-        if (response.ok) {
+        const response = await $fetch<boolean>(`/api/account/update/deleteFromWordOfTheDay/${(encodeURIComponent(date))}`,
+  {
+    method: 'POST',
+    headers: {
+        token: userStore.state.user!.token
+    },
+    })
+
+  
+
+        if (response) {
           responseData.value[getIndex(date)].aranan = ""
           responseData.value[getIndex(date)].date = ""
 
@@ -234,8 +247,19 @@ const save = async () => {
 
   if (dayData.date !== undefined && dayData.worD_ID !== null) {
     try {
-      const response = await AddToDay(userStore.state.user!.token, dayData);
-      if (response.ok) {
+
+      const response = await $fetch<boolean>(
+          `/api/account/update/addToDay`,
+          {
+            method: "POST",
+            headers: {
+              token: userStore.state.user!.token,
+            },
+            body: dayData,
+          }
+        );
+
+      if (response) {
         alert("Sonuç başarıyla eklendi.");
         selectedDate.value = null;
         selectedRadio.value = null;

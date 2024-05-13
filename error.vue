@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useSearchHistoryStore } from './store/search-history.store';
-import { useUserStore } from './store/user.store';
 
 
 

@@ -40,7 +40,6 @@ const login = async () => {
 const sendMail = async () => {
   sending.value = true;
   try {
-  console.log("nazem")
 
     await mail.send({
       from: `${name.value} <${email.value}>`,

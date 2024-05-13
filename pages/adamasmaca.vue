@@ -60,12 +60,9 @@ const newGame = async () => {
       answerArray.value = answer.value.split("");
     }
   } catch (error) {
-    console.error("Error fetching data:", error);
     connectionError.value = true;
     answer.value = null;
   }
-  console.log(answer.value);
-  console.log(answer.value.length);
 };
 
 const newGameTimeout = ref(false);

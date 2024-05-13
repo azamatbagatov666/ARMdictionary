@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { gettingSearchedOnes } from "~/services/gettingSearchedOnes";
-import { deletingFromLostAndFound } from "~/services/deletingFromLostAndFound";
 import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
 const responseData = ref<LOSTANDFOUND[]>([]);
 const selectedListWord = ref<string[]>([]);
@@ -39,9 +37,18 @@ const deleteTheWords = async () => {
   ) {
     if (idData.arananlar.length > 0) {
       try {
-        const response = await deletingFromLostAndFound(userStore.state.user!.token, idData);
 
-        if (response.ok) {
+        const response = await $fetch<boolean>(`/api/account/update/deletingFromLostAndFound`, {
+    method: 'POST',
+    headers: {
+        token: userStore.state.user!.token
+    },
+    body: ({
+        arananlar: idData.arananlar,
+        desiredID: idData.DesiredID
+    })
+});
+        if (response) {
           selectAll.value = false;
           selectedListWord.value = [];
           responseData.value = [];
@@ -60,18 +67,23 @@ const refresh = async () => {
   if (!isLogged) return;
   try {
 
-    const data = await gettingSearchedOnes(userStore.state.user!.token);
+
+    const data = await $fetch(`/api/get/gettingSearchedOnes`, {
+    method: 'GET',
+    headers: {
+      token: userStore.state.user!.token
+    }
+  });
+
     if (data) {
     dataFetched.value = true;
   }
 
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
-      console.log("no error")
     }
   } catch (error) {
     connectionError.value = true
-    console.log("error", error)
 
   }
 };

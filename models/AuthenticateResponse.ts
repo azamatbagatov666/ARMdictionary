@@ -3,8 +3,3 @@ export interface AuthenticateResponse {
     username: string;
     token: string;
 }
-
-export interface AuthenticateRequest {
-    username: string;
-    password: string;
-}

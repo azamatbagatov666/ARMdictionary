@@ -4,6 +4,3 @@ editword sayfası
 
 mobil
 
-api kısmına yap
-
-f5 yapınca lang gidiyor

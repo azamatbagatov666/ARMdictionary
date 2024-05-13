@@ -1,26 +1,16 @@
-<script lang="ts" setup>
-import { type TDATA } from '~/models/TDATA';
+<script setup lang="ts">
+import { useUserStore } from "~/store/user.store";
+const userStore = useUserStore();
 
 
-const z = ref();
-
-
-
-onMounted(async () => {
-
-});
 
 const qwe = async () => {
-  const q = useFetch(`/api/get/getARandomWord`, {
-    method: 'GET'
-  })
-}
+  userStore.testLogin();
+};
 </script>
 
 <template>
   <button @click="qwe()">sadasdasd</button>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

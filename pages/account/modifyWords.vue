@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { addToId } from "~/services/addToId";
 
 
 const desword = ref("");
@@ -112,15 +111,25 @@ const idData = reactive({
   DesiredID: selectedRadio,
 });
 
-const storeValues = () => {
+const storeValues = async () => {
   if (confirm("Seçtiğiniz sözcükler bu sonuca eklenecktir, emin misiniz?")) {
     if (idData.DesiredID != null && idData.arananlar.length > 0) {
-      addToId(userStore.state.user!.token, idData).then((response) => {
-        if (response.ok) {
+
+       const response = await $fetch<boolean>(
+          `/api/account/update/addToId`,
+          {
+            method: "POST",
+            headers: {
+              token: userStore.state.user!.token,
+            },
+            body: idData,
+          }
+        );
+
+        if (response) {
           idData.arananlar = [];
           getAranan();
         }
-      });
     } else {
       window.alert(
         "Önce sonuç numarasını seçtiğinizden ve istediğiniz sözcükleri listeye eklediğinizden emin olun."

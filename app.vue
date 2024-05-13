@@ -6,9 +6,11 @@ const languageState = useLanguageState();
 const searchHistoryStore = useSearchHistoryStore()
 const userStore = useUserStore();
 
+const { setLocale } = useI18n();
+
 onMounted(async () => {
   const language = localStorage.getItem("language");
-  if (language) languageState.value = language;
+  if (language) setLocale(language);
   searchHistoryStore.readInitial();
   userStore.reLoginFromLocalStorage();
 });

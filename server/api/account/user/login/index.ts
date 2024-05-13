@@ -1,9 +1,9 @@
-import { AuthenticateRequest, type AuthenticateResponse } from "~/models/AuthenticateResponse";
+import { type AuthenticateResponse } from "~/models/AuthenticateResponse";
 
 
 export default defineEventHandler(async event => {
 
-    const req = await readBody<AuthenticateRequest>(event);
+    const req = await readBody(event);
 
   try {
     return await $fetch<AuthenticateResponse>("https://localhost:7109/Authentication/Login", {

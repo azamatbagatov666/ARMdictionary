@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type TDATA } from "~/models/TDATA";
-import { insertIt } from "~/services/insertIt";
 
 import { useUserStore } from "~/store/user.store";
 const userStore = useUserStore();
@@ -42,7 +41,7 @@ const trimStrings = (obj: Record<string, any>) => {
   }
 };
 
-const insertData = () => {
+const insertData = async () => {
   if (confirm("Belirlediğiniz sonuç sözlüğe eklenecektir, emin misiniz?")) {
     if (
       (data.aranan && data.am && data.okunus && data.tr1 && data.tr4) !== ""
@@ -55,6 +54,27 @@ const insertData = () => {
           data[key] = null;
         }
       }
+
+          try {
+        const response = await $fetch<boolean>(
+          `/api/account/update/insertIt`,
+          {
+            method: "POST",
+            headers: {
+              token: userStore.state.user!.token,
+            },
+            body: data,
+          }
+        );
+        if (response) {
+            alert("Sonuç başarıyla eklendi.");
+            resetData();
+        }
+      } catch (error) {
+          alert("Bağlantı Sorunu");
+
+      }
+/*
       insertIt(userStore.state.user!.token, data)
         .then((response) => {
           if (response.ok) {
@@ -64,7 +84,7 @@ const insertData = () => {
         })
         .catch((error) => {
           alert("Bağlantı Sorunu");
-        });
+        });*/
     } else {
       alert("* ile işaretli alanların doldurulması zorunludur.");
     }

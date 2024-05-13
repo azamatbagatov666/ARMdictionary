@@ -1,5 +1,4 @@
 import type { AuthenticateResponse } from "~/models/AuthenticateResponse";
-import { testLoginRequest } from "~/services/testLogin";
 
 interface UserState {
   user: AuthenticateResponse | undefined;
@@ -11,7 +10,6 @@ export const useUserStore = defineStore("user", () => {
   });
 
   const login = async (username: string, password: string) => {
-    //const response = await loginRequest(username, password);
     
     const response = await $fetch('/api/account/user/login', {
       method: "POST",
@@ -40,7 +38,13 @@ export const useUserStore = defineStore("user", () => {
 
   const testLogin = async (): Promise<boolean> => {
     if (isLogged()) {
-      return await testLoginRequest(state.user!.token)
+
+      return await $fetch(`/api/account/user/testLogin`, {
+        method: 'GET',
+        headers: {
+          token: state.user!.token
+        }
+      });
 
         
     }
