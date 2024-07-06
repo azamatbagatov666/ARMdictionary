@@ -231,7 +231,7 @@ onBeforeMount(() => {
                 v-text="`Sonuç numarası: ${item.id}`"
               ></tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
+                <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
                 <td class="font-bold text-red-500 pr-3">
                   <span v-text="item.am"></span>
                   <span
@@ -244,13 +244,13 @@ onBeforeMount(() => {
                 <td class="pr-3" v-text="item.alaN1"></td>
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" />
+                <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
                 <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
                 <td class="pr-3" v-text="item.tR2"></td>
                 <td class="pr-3" v-text="item.tR3"></td>
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" />
+                <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
                 <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
                 <td class="pr-3" v-text="item.tR5"></td>
                 <td class="pr-3" v-text="item.tR6"></td>
@@ -264,7 +264,7 @@ onBeforeMount(() => {
             class="border-2 border-black rounded-lg text-lg p-2 pt-[88px] mx-auto block w-full h-full bg-gray-200 dark:bg-[#101010] dark:border-white"
           >
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
+              <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
               <td class="font-bold text-red-500 pr-3">
                 <span v-text="selectedIndex.am"></span>
                 <span
@@ -277,7 +277,7 @@ onBeforeMount(() => {
               <td class="pr-3" v-text="selectedIndex.alaN1"></td>
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" />
+              <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
               <td
                 class="pr-3 font-bold text-red-500"
                 v-text="selectedIndex.tR1"
@@ -286,7 +286,7 @@ onBeforeMount(() => {
               <td class="pr-3" v-text="selectedIndex.tR3"></td>
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" />
+              <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
               <td
                 class="pr-3 font-bold text-red-500"
                 v-text="selectedIndex.tR4"

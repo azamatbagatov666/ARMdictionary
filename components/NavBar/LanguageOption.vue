@@ -14,17 +14,17 @@ const changeLanguage = async (lang: string) => {
     <img
       src="/flags/tr-flag.png"
       @click="changeLanguage('tr')"
-      class="image"
+      class="image" draggable="false"
     />
     <img
       src="/flags/am-flag.png"
       @click="changeLanguage('am')"
-      class="image"
+      class="image" draggable="false"
     />
     <img
       src="/flags/eng-flag.png"
       @click="changeLanguage('en')"
-      class="image"
+      class="image" draggable="false"
     />
   </div>
 </template>
@@ -36,7 +36,9 @@ const changeLanguage = async (lang: string) => {
 }
 
 .image:hover {
-  box-shadow: 0 0 10px white;
+  @apply shadow-[0_0_10px_gray] dark:!shadow-[0_0_10px_white];
 }
+
+
 
 </style>

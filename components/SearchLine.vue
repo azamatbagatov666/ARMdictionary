@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
 
-
+import type { TDATA } from "~/models/TDATA";
 
 const currentHoverIndex = ref<number>(-1);
 const desword = ref("");
@@ -11,22 +11,41 @@ const search = ref<HTMLInputElement | null>(null);
 const cursorStart = ref<number>(0);
 const cursorEnd = ref<number>(0);
 
-const { $bus } = useNuxtApp();
+const todayData = ref();
 
-const props = defineProps(["cornered"]);
+const router = useRouter();
+const currentRoute = computed(() => router.currentRoute.value.path);
+
+onBeforeMount(async () => {
+  if (currentRoute.value == "/") {
+    getToday();
+  }
+});
+
+const getToday = async () => {
+  try {
+    const data = await $fetch(`/api/get/getTodaysWord`, {
+      method: "GET",
+    });
+    if (data && Array.isArray(data) && data[0].aranan !== "NotFound") {
+      todayData.value = data;
+    } else {
+    }
+  } catch (error) {}
+};
+
+const { $bus } = useNuxtApp();
 
 $bus.on("clear-main-page", () => {
   clearThePage();
 });
 
-
 const clearThePage = () => {
   desword.value = "";
   keyboardOn.value = false;
   historyOn.value = false;
-  search.value?.focus();  
+  search.value?.focus();
 };
-
 
 var listOfAvailableWords: string[];
 listOfAvailableWords = [];
@@ -37,7 +56,7 @@ const lcandtrimmed = computed(() => {
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
-  search.value?.focus();  
+  search.value?.focus();
 });
 
 onBeforeUnmount(() => {
@@ -57,6 +76,7 @@ const emit = defineEmits<{
   (e: "input-changed", data: string): void;
   (e: "submit-request"): void;
   (e: "random-request"): void;
+  (e: "set-today", data: TDATA[]): void;
 }>();
 
 const inputChanged = async () => {
@@ -64,10 +84,12 @@ const inputChanged = async () => {
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 3) {
-    const { data, error } = await useFetch(`/api/search/${(encodeURI(lcandtrimmed.value))}/suggestions`,
-  {
-    method: 'GET'  
-  })
+    const { data, error } = await useFetch(
+      `/api/search/${encodeURI(lcandtrimmed.value)}/suggestions`,
+      {
+        method: "GET",
+      }
+    );
     if (error.value) {
       return;
     }
@@ -103,7 +125,6 @@ const wordFromAbove = (newDesword: string) => {
   nextTick(() => {
     search.value?.select();
   });
-
 };
 
 const keyBase = (event: any) => {
@@ -260,137 +281,227 @@ const randomWord = () => {
   }
 };
 
-defineExpose({ wordFromAbove, clearThePage })
+const setToday = async () => {
+  emit("set-today", todayData.value);
+};
+
+defineExpose({ wordFromAbove, clearThePage });
 </script>
 
 <template>
-<div>
-  <div class="h-[269px]">
-    <Transition name="fade">
-
-    
-    <ArmenianKeyboard
-    @click="buttonClick" @mousedown="buttonClick"
-      class="aKeyboard"
-      v-show="keyboardOn"
-      @letter-pushed="pushing"
-      @backspace-clicked="backSpace"
-    >
-    </ArmenianKeyboard>
-  </Transition>
-  </div>
-
-  <div class="flex justify-center">
-    <div>
-    <div
-      class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-tl-lg rounded-br-lg rounded-blh-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
-      :class="{'rounded-bl-lg': props.cornered == true}"
-    >
-      <ElementComponentsCustomButton
-        class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
-        :text="$t('searchLine.keyboardButton')"
-        @click="toggleKeyboard($event)"
-        @mousedown="buttonClick"
-      />
-      <div class="sm:w-[300px] md:w-[450px] lg:w-[600px] flex">
-        <input
-          type="text"
-          ref="search"
-          v-model="desword"
-          class="motherinput"
-          :placeholder="$t('searchLine.searching')"
-          autocomplete="off"
-          maxlength="125"
-          @input="inputChanged"
-          @keydown="keyBase($event)"
-        />
-
-        <div
-          class="bg-white border-t border-b border-black flex items-center h-[53px]"
-        >
-          <Transition name="fade">
-            <button
-              @click="cleanTheInput($event)"
-              @mousedown="buttonClick"
-              class="mr-[10px] h-5"
-              v-if="desword != ''"
-            >
-              <img src="/cancel.png" width="20" height="20" />
-            </button>
-          </Transition>
-        </div>
-
-        <button
-          @click="submit"
+  <div>
+    <div class="h-[269px]">
+      <Transition name="fade">
+        <ArmenianKeyboard
+          @click="buttonClick"
           @mousedown="buttonClick"
-          class="motherbutton border-l border-black"
+          class="aKeyboard"
+          v-show="keyboardOn"
+          @letter-pushed="pushing"
+          @backspace-clicked="backSpace"
         >
-          <img src="/glass.png" width="30" height="30" />
-        </button>
-      </div>
-      <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
-        <ul>
-          <li
-            @click="selectTheInput(item)"
-            v-for="(item, index) in resultBoxContent"
-            v-text="item"
-            :class="{
-              'bg-[#e9f3ff]': index == currentHoverIndex,
-              'rounded-t-[20px]': index == 0,
-              'rounded-b-[20px]': index == resultBoxContent.length - 1,
-              'rounded-[20px]': index == 0 && resultBoxContent.length == 1,
-            }"
-            @mouseover="currentHoverIndex = index"
-          ></li>
-        </ul>
-      </div>
-      <div class="text-center text-sm my-1" v-text="$t('searchLine.searchTip')"></div>
-
-      <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
+        </ArmenianKeyboard>
+      </Transition>
     </div>
 
+    <div class="flex justify-center w-full ">
+      <div>
+        <div
+          class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none
+          dark:bg-[#101010] dark:border-white transition-colors duration-300 sm:w-[520px] md:w-[652px]"
+          :class="{ 'lg:!rounded-bl-none': todayData }"
+        >
+          <ElementComponentsCustomButton
+            class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
+            :text="$t('searchLine.keyboardButton')"
+            @click="toggleKeyboard($event)"
+            @mousedown="buttonClick"
+          />
+          <div class="sm:w-[480px] md:w-[600px] flex">
+            <input
+              type="text"
+              ref="search"
+              v-model="desword"
+              class="motherinput"
+              :placeholder="$t('searchLine.searching')"
+              autocomplete="off"
+              maxlength="125"
+              @input="inputChanged"
+              @keydown="keyBase($event)"
+            />
 
+            <div
+              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px]"
+            >
+              <Transition name="fade">
+                <button
+                  @click="cleanTheInput($event)"
+                  @mousedown="buttonClick"
+                  class="mr-[10px] h-5"
+                  v-if="desword != ''"
+                >
+                  <img
+                    src="/cancel.png"
+
+                    draggable="false"
+                    class="max-w-5 size-5"
+                  />
+                </button>
+              </Transition>
+            </div>
+
+            <button
+              @click="submit"
+              @mousedown="buttonClick"
+              class="motherbutton border-l border-black"
+            >
+              <img src="/glass.png" width="30" height="30" draggable="false" />
+            </button>
+          </div>
+          <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
+            <ul>
+              <li
+                @click="selectTheInput(item)"
+                v-for="(item, index) in resultBoxContent"
+                v-text="item"
+                :class="{
+                  'bg-[#e9f3ff]': index == currentHoverIndex,
+                  'rounded-t-[20px]': index == 0,
+                  'rounded-b-[20px]': index == resultBoxContent.length - 1,
+                  'rounded-[20px]': index == 0 && resultBoxContent.length == 1,
+                }"
+                @mouseover="currentHoverIndex = index"
+              ></li>
+            </ul>
+          </div>
+          <div
+            class="text-center text-sm my-1"
+            v-text="$t('searchLine.searchTip')"
+          ></div>
+
+          <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
+        </div>
+      </div>
+      <div class="w-0 flex-col gap-4 justify-start hidden lg:flex">
+        <button
+          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
+          @click="randomWord()"
+          @mousedown="buttonClick"
+        >
+          <div class="flex items-center ml-[5px]">
+            <div class="rounded-full size-9 bg-purple-600">
+              <img src="/random.png" class="size-9" draggable="false" />
+            </div>
+            <div class="w-0">
+              <span
+                class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
+                v-text="$t('searchLine.randomButton')"
+              ></span>
+            </div>
+          </div>
+        </button>
+
+        <button
+          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+          @click="toggleHistory($event)"
+          @mousedown="buttonClick"
+        >
+          <div class="flex items-center ml-[5px]">
+            <div class="rounded-full flex items-center size-9 bg-blue-600">
+              <img
+                src="/history.png"
+                class="ml-[3px] size-7"
+                draggable="false"
+              />
+            </div>
+            <div class="w-0">
+              <span
+                class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white"
+                v-text="$t('searchLine.historyButton')"
+              ></span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <button
+      v-if="todayData"
+      class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+      @click="setToday"
+      @mousedown="buttonClick"
+    >
+      <div class="flex items-center ml-[5px]">
+        <div class="rounded-full size-9 bg-red-600">
+          <img src="/day.png" class="size-9" draggable="false" />
+        </div>
+        <div class="w-0">
+          <span
+            class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
+            v-text="$t('index.todaysword')"
+          ></span>
+        </div>
+      </div>
+    </button>
   </div>
-    <div class="w-0 flex flex-col gap-4 justify-start">
-      
+  <div class="flex justify-start my-1 lg:hidden">
+    <div class="grid gap-1">
       <button
-        class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
+        class="group rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
         @click="randomWord()"
         @mousedown="buttonClick"
       >
-      <div class="flex items-center ml-[5px]">
-        <div class="rounded-full size-9 bg-purple-600">
-          <img src="/random.png" class="size-9" />
+        <div class="flex items-center ml-[5px]">
+          <div class="rounded-full size-9 bg-purple-600">
+            <img src="/random.png" class="size-9" draggable="false" />
+          </div>
+          <div class="w-0">
+            <span
+              class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+              v-text="$t('searchLine.randomButton')"
+            ></span>
+          </div>
         </div>
-        <div class="w-0">
-        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="$t('searchLine.randomButton')"></span>
-      </div>
-      </div>
       </button>
 
-
-
       <button
-      class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+        class="group bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
         @click="toggleHistory($event)"
         @mousedown="buttonClick"
       >
-      <div class="flex items-center ml-[5px]">
-        <div class="rounded-full flex items-center size-9 bg-blue-600">
-          <img src="/history.png" class="ml-[3px] size-7" />
+        <div class="flex items-center ml-[5px]">
+          <div class="rounded-full flex items-center size-9 bg-blue-600">
+            <img src="/history.png" class="ml-[3px] size-7" draggable="false" />
+          </div>
+          <div class="w-0">
+            <span
+              class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+              v-text="$t('searchLine.historyButton')"
+            ></span>
+          </div>
         </div>
-        <div class="w-0">
+      </button>
 
-        <span class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white" v-text="'Search History'"></span>
-
-      </div>
-      </div>
-
+      <button
+        v-if="todayData"
+        class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+        @click="setToday"
+        @mousedown="buttonClick"
+      >
+        <div class="flex items-center ml-[5px]">
+          <div class="rounded-full size-9 bg-red-600">
+            <img src="/day.png" class="size-9" draggable="false" />
+          </div>
+          <div class="w-0">
+            <span
+              class="w-[112px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
+              v-text="$t('index.todaysword')"
+            ></span>
+          </div>
+        </div>
       </button>
     </div>
   </div>
-</div>
-
 </template>
 
 <style scoped>
@@ -404,11 +515,11 @@ defineExpose({ wordFromAbove, clearThePage })
   opacity: 0;
 }
 
-.group{
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, width;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-
+.group {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 .motherinput {
   flex: 1;
@@ -455,7 +566,7 @@ defineExpose({ wordFromAbove, clearThePage })
 .resultBox {
   position: absolute;
   background-color: white;
-  @apply w-full sm:w-[300px] md:w-[450px] lg:w-[600px];
+  @apply w-[] sm:w-[482px] md:w-[602px];
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
   border-width: 1px;
   border-radius: 20px;

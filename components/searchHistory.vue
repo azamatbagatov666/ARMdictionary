@@ -44,7 +44,7 @@ class="inline-block mr-3 hover:underline hover:cursor-pointer hover:bg-white dar
 <span class="text-center w-full inline-block" v-else>Arama geçmişinde hiç sözcük yok</span>
   </ul>
   <button v-if="historyList.length > 0" @click="remove" @mousedown="buttonClick" class="bg-white border border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500">
-    <img src="/trash.png" class="size-9" /><span v-text="$t('searchHistory.removeButton')"></span>
+    <img src="/trash.png" class="size-9" draggable="false"/><span v-text="$t('searchHistory.removeButton')"></span>
   </button>
 
 </div>

@@ -6,7 +6,6 @@ const answerArray = ref<string[]>([]);
 const guesses = ref<string[]>([]);
 const connectionError = ref(false);
 const won = ref();
-const languageState = useLanguageState();
 
 
 
@@ -89,6 +88,8 @@ const responseData = ref();
 
 <template>
   <div>
+    <ElementComponentsLogoBanner/>
+
     <div
       class="h-[90vh] flex items-center justify-center"
       v-if="!answer && !connectionError"
@@ -193,15 +194,15 @@ const responseData = ref();
         </div>
 
         <ElementComponentsCustomButton
-          class="mx-auto block"
+          class="mx-auto block w-28"
           @click="clear"
-          :text="'Yeni Oyun'"
+          v-text="$t('adamAsmaca.reset')"
         />
       </div>
       <div
         v-else-if="connectionError"
-        class="text-3xl flex items-center justify-center h-[90vh]"
-        v-text="$t('adamAsmaca.connection')"
+        class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
+        v-text="$t('adamAsmaca.noConnection')"
       ></div>
 
       <div v-if="won != null" class="mx-auto sm:w-0 sm:mx-0">
@@ -210,7 +211,7 @@ const responseData = ref();
           v-for="item in responseData"
         >
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false" />
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="item.am"></span>
               <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
@@ -220,13 +221,13 @@ const responseData = ref();
             <td class="pr-3" v-text="item.alaN1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
             <td class="pr-3" v-text="item.tR2"></td>
             <td class="pr-3" v-text="item.tR3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
             <td class="pr-3" v-text="item.tR5"></td>
             <td class="pr-3" v-text="item.tR6"></td>

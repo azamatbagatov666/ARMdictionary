@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TDATA } from "~/models/TDATA";
 import { useSearchHistoryStore } from "~/store/search-history.store";
 
 
@@ -13,6 +14,7 @@ const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const searchline = ref();
+const alpTable = ref();
 const searchHistoryStore = useSearchHistoryStore()
 
 const { $bus } = useNuxtApp();
@@ -23,38 +25,15 @@ $bus.on("clear-main-page", () => {
   responseData.value = null;
   previousDesword.value = "";
   desword.value = "";
+  alpTable.value.closePanel();
 });
 
 
-const todayData = ref();
 
-onBeforeMount(async () => {
-  getToday();
 
-});
-
-const getToday = async () => {
-  try {
-
-    const  data = await $fetch(`/api/get/getTodaysWord`, {
-    method: 'GET'
-  })
-    if (
-    data &&
-    Array.isArray(data) &&
-    data[0].aranan !== "NotFound"
-  ) {
-      todayData.value = data;
-    }
-    else{
-    }
-  } catch (error) {
-  }
-};
-
-const setToday = async () => {
-  responseData.value = todayData.value;
-  desword.value = todayData.value[0].aranan;
+const setToday = async (todayData: TDATA[]) => {
+  responseData.value = todayData;
+  desword.value = todayData[0].aranan!;
   previousDesword.value = desword.value
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
@@ -147,34 +126,24 @@ const buttonClick = (event: Event) => {
 
 <template>
   <div class="containers">
+
+    <ElementComponentsLogoBanner/>
+
     <div class="flex justify-center">
     <div>
         <SearchLine
       @input-changed="wordInput"
       @submit-request="submit"
       @random-request="random"
+      @set-today="setToday"
       ref="searchline"
-      :cornered="!todayData"
     ></SearchLine>
 
-      <button v-if="todayData"
-        class="group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12  place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
-        @click="setToday"
-        @mousedown="buttonClick"
-      >
-      <div class="flex items-center ml-[5px]">
-        <div class="rounded-full size-9 bg-red-600">
-          <img src="/day.png" class="size-9" />
-        </div>
-        <div class="w-0">
-        <span class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300" v-text="'Günün Sözcüğü'"></span>
-      </div>
-      </div>
-      </button> 
     </div>
 </div>
 
 
+<AlpTable ref="alpTable"/>
 
 
 
@@ -182,12 +151,12 @@ const buttonClick = (event: Event) => {
 
     <div
       v-if="thereIsNoResult"
-      class="text-lg text-center mt-4"
+      class="text-lg text-center mt-4 text-white font-bold"
       v-text="$t('index.noResult')"
     ></div>
     <div
       v-if="thereIsNoConnection"
-      class="text-lg text-center mt-4"
+      class="text-lg text-center mt-4 text-white font-bold"
       v-text="$t('index.noConnection')"
     ></div>
   </div>
@@ -196,6 +165,9 @@ const buttonClick = (event: Event) => {
 
 <style>
 .containers {
-  padding-left: calc(100vw - 100%);
-}
+  /*
+  width: 99vw;
+  align-items: center;
+  justify-content: center;
+  */}
 </style>

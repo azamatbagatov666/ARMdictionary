@@ -4,7 +4,6 @@ import { useUserStore } from '~/store/user.store';
 
 const dropDownOn = ref(false);
 const adminDropDownOn = ref(false);
-const languageState = useLanguageState();
 
 
 
@@ -53,13 +52,16 @@ const logoutClicked = () => {
 </script>
 
 <template>
-    <div class="inline-block">
+      <div
+    class="sticky top-0 z-[55] bg-gray-200 h-12 hidden md:!flex justify-between dark:bg-black transition-colors duration-300 w-full select-none"
+  >
+  <div class="inline-block">
         <div class="max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
                     class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
-                    <img src="/home-white.png" class="size-9 hidden dark:flex" />
-                    <img src="/home.png" class="size-9 dark:hidden" />
+                    <img src="/home-white.png" class="size-9 hidden dark:flex" draggable="false"/>
+                    <img src="/home.png" class="size-9 dark:hidden" draggable="false"/>
                 </button>
             </NuxtLink>
             <div @mouseover="toggleDropdown($event, 'regular')" @mouseleave="toggleDropdown($event, 'regular')"
@@ -71,19 +73,12 @@ const logoutClicked = () => {
                     <nav>
                         <ul @click="toggleDropdown($event, 'regular')" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
                             <NuxtLink to="/adamasmaca">
-                                <li>
-                                    Adam Asmaca
+                                <li v-text="$t('navBar.hangman')">
                                 </li>
                             </NuxtLink>
 
                             <NuxtLink to="/iletisim">
-                                <li>
-                                    İletişim
-                                </li>
-                            </NuxtLink>
-                            <NuxtLink to="/">
-                                <li class="rounded-b-sm">
-                                    Post 2
+                                <li v-text="$t('navBar.contact')">
                                 </li>
                             </NuxtLink>
                         </ul>
@@ -140,10 +135,16 @@ const logoutClicked = () => {
             </div>
         </div>
     </div>
+    <div class="justify-end items-center flex gap-2">
+      <NavBarToggleSwitch />
+      <NavBarLanguageOption />
+    </div>
+  </div>
+
+
 </template>
 
 <style scoped>
-/*aaa*/
 .dropDownMenu:hover .dropDownOnButton {
     background-color: rgb(239 68 68);
 }

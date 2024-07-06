@@ -257,7 +257,7 @@ const resetData = () => {
                 />
 
                 <button disabled class="motherbutton border-l border-black">
-                  <img src="/glass.png" width="30" height="30" />
+                  <img src="/glass.png" width="30" height="30" draggable="false"/>
                 </button>
               </div>
 
@@ -275,7 +275,7 @@ const resetData = () => {
               >
                 <div class="flex items-center ml-[5px]">
                   <div class="rounded-full size-9 bg-purple-600">
-                    <img src="/random.png" class="size-9" />
+                    <img src="/random.png" class="size-9" draggable="false"/>
                   </div>
                   <div class="w-0"></div>
                 </div>
@@ -289,7 +289,7 @@ const resetData = () => {
                   <div
                     class="rounded-full flex items-center size-9 bg-blue-600"
                   >
-                    <img src="/history.png" class="ml-[3px] size-7" />
+                    <img src="/history.png" class="ml-[3px] size-7" draggable="false"/>
                   </div>
                   <div class="w-0"></div>
                 </div>
@@ -302,7 +302,7 @@ const resetData = () => {
           class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
         >
           <tr class="mb-3 flex flex-wrap">
-            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="data.am"></span>
               <span
@@ -315,13 +315,13 @@ const resetData = () => {
             <td class="pr-3" v-text="data.alan1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap">
-            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
             <td class="pr-3" v-text="data.tr2"></td>
             <td class="pr-3" v-text="data.tr3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap">
-            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" />
+            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
             <td class="pr-3" v-text="data.tr5"></td>
             <td class="pr-3" v-text="data.tr6"></td>

@@ -17,16 +17,14 @@ onMounted(async () => {
 </script>
 
 <template>
+<!--- 
+-->
 
-  <div
-    class="sticky top-0 z-[55] bg-gray-200 h-12 flex justify-between dark:bg-black transition-colors duration-300 w-full"
-  >
-    <NavBarNavMenu/>
-    <div class="justify-end items-center flex gap-2">
-      <NavBarToggleSwitch />
-      <NavBarLanguageOption />
-    </div>
-  </div>
+<div>
+<NavBarNavMenu class="hidden md:flex"/>
+
+<NavBarMobileNavMenu/>
+</div>
 
 
   <NuxtPage></NuxtPage>

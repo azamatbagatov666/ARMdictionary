@@ -8,6 +8,8 @@ const selectedRadio = ref(null);
 const selectedDate = ref<string | null>(null);
 const desword = ref("");
 const searchline = ref();
+const connectionError = ref(false);
+
 
 
 const formattedSelectedDate = computed(() => {
@@ -68,8 +70,13 @@ const getWords = async () => {
         end: endDateQ.value
       }
   });
-
+  if (error.value) {
+    connectionError.value = true;
+  }
+  connectionError.value = false;
   responseData.value = data.value;
+
+
 };
 const daysInMonth = computed(() => {
   const monthIndex = months.indexOf(currentMonth.value);
@@ -167,7 +174,7 @@ const reset = async () => {
   responseData.value = null;
   monthSelection.value = months[new Date().getMonth()];
   yearSelection.value = new Date().getFullYear();
-
+  connectionError.value = false;
   searchline.value.clearThePage()
 
 };
@@ -282,10 +289,53 @@ onBeforeMount(() => {
     }
   }, 500);
 });
+
+
+const setSDate = (date: string) => {
+     selectedDate.value = date;
+
+     console.log(responseData.value[getIndex(selectedDate.value)])
+  
+};
+
+
 </script>
 
 <template>
   <div v-if="isLogged" class="containers">
+
+    <div v-if="selectedDate != null && responseData[getIndex(selectedDate)]" class="absolute top-36">
+      <div class="flex justify-center xl:text-lg font-bold">Seçilen Güne Kaydedilmiş Sözcük</div>
+        <table
+          class="border-2 border-black rounded-lg text-lg p-2 my-2 mx-auto block w-[256px] xl:w-[350px] min-[1750px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
+          
+        >
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
+            <td class="font-bold pr-3">
+              <span class="text-red-500" v-text="responseData[getIndex(selectedDate)].aM"></span>
+              <span class="ml-1 font-normal" v-text="`(${responseData[getIndex(selectedDate)].okunus})`"></span>
+            </td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].aM1"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].alaN2"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].alaN1"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
+            <td class="pr-3 font-bold text-red-500" v-text="responseData[getIndex(selectedDate)].tR1"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR2"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR3"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false" />
+            <td class="pr-3 font-bold text-red-500" v-text="responseData[getIndex(selectedDate)].tR4"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR5"></td>
+            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR6"></td>
+          </tr>
+        </table>
+      </div>
+
+
     <div class="flex items-center mb-1 mt-2">
       <ElementComponentsReturnButton @click="reset()" class="ml-2 absolute" />
 
@@ -317,23 +367,25 @@ onBeforeMount(() => {
     </div>
 
     <table
-      class="lostTable mx-auto table-auto transition-colors duration-300 my-4"
+      class="lostTable mx-auto table-auto transition-colors duration-300 my-4 text-black dark:text-white"
       v-if="responseData"
     >
-      <tr>
+      <tr
+      class="bg-gray-300 dark:bg-[#262a2f] "
+      >
         <th class="w-36">Tarih</th>
         <th class="w-36">Gün</th>
-        <th class="w-96">Sözcük</th>
+        <th class="w-36 md:w-48 min-[1440px]:w-96">Sözcük</th>
         <th class="w-12">Sil</th>
       </tr>
       <tr
         v-for="dateObject in dates"
-        class="cursor-pointer h-[30px] even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2]"
+        class="cursor-pointer h-[30px] even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
         :class="{
           'dark:!bg-green-500 !bg-[rgb(255,165,100)]':
             selectedDate == dateObject.date,
         }"
-        @click="selectedDate = dateObject.date"
+        @click="setSDate(dateObject.date)"
       >
         <td v-text="dateObject.date"></td>
         <td v-text="dateObject.dayOfWeek"></td>
@@ -353,11 +405,17 @@ onBeforeMount(() => {
           <img @click.stop="deleteTheWord(dateObject.date)"
             src="/trash.png"
             v-if="getIndex(dateObject.date) !== -1"
-            class="size-[27px] bg-white  rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
-          />
+            class="size-[27px] bg-white rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
+            draggable="false"/>
         </td>
+
+
+
       </tr>
     </table>
+
+
+
 
     <div
       v-show="selectedDate"
@@ -397,7 +455,7 @@ onBeforeMount(() => {
           v-text="`Sözcük numarası: ${item.worD_ID}`"
         ></tr>
         <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" />
+          <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
           <td class="font-bold text-red-500 pr-3">
             <span v-text="item.am"></span>
             <span
@@ -410,13 +468,13 @@ onBeforeMount(() => {
           <td class="pr-3" v-text="item.alaN1"></td>
         </tr>
         <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" />
+          <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
           <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
           <td class="pr-3" v-text="item.tR2"></td>
           <td class="pr-3" v-text="item.tR3"></td>
         </tr>
         <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" />
+          <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
           <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
           <td class="pr-3" v-text="item.tR5"></td>
           <td class="pr-3" v-text="item.tR6"></td>
@@ -436,6 +494,10 @@ onBeforeMount(() => {
       />
     </div>
   </div>
+
+  <div v-if="connectionError && !responseData" class="text-3xl flex items-center justify-center h-[85vh]">
+        Bağlantı Sorunu
+      </div>
 </template>
 
 <style scoped>

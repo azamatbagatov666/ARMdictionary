@@ -121,8 +121,11 @@ watch(selectedListWord, (newValue) => {
   </div>
 
       <div v-if="responseData.length > 0">
-        <table class="lostTable mx-auto table-auto w-[50%]">
-          <tr>
+        <table class="lostTable mx-auto table-auto w-[50%] text-black dark:text-white">
+          <tr
+          class="bg-gray-300 dark:bg-[#262a2f] "
+          
+          >
             <th class="text-center">
               <input
                 type="checkbox"
@@ -135,7 +138,7 @@ watch(selectedListWord, (newValue) => {
             <th class="border">Aranma Tarihi</th>
           </tr>
           <tr
-            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2]"
+            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
             :class="{
               'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
                 selectedListWord.includes(item.aranan ?? ''),

@@ -113,13 +113,16 @@ const validateMessage = () => {
 </script>
 
 <template>
+  <div>
+<ElementComponentsLogoBanner/>
   <div class="sm:h-[90vh] h-full w-full flex items-center justify-center">
+    
     <div
       class="p-2 sm:p-8 w-full sm:w-max bg-gray-200 sm:border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
     >
       <div class="grid gap-8 sm:gap-4">
         <div class="h-14">
-          <span class="w-40 inline-block">Adınız Soyadınız</span>
+          <span class="w-40 inline-block" v-text="$t('contact.name')"></span>
           <ElementComponentsCustomInput
             @blur="validateInput('name', name)"
             maxlength="50"
@@ -129,13 +132,13 @@ const validateMessage = () => {
           />
           <div
             v-if="nameError"
-            class="sm:ml-40 text-red-600 font-bold text-sm pt-1"
+            class="sm:ml-40 text-red-600 font-bold text-sm pt-1" v-text="$t('contact.nameError')"
           >
-            Lütfen geçerli bir isim giriniz
+
           </div>
         </div>
         <div class="h-14">
-          <span class="w-40 inline-block">e-posta</span>
+          <span class="w-40 inline-block" v-text="$t('contact.email')"></span>
           <ElementComponentsCustomInput
             @blur="validateEmail"
             maxlength="320"
@@ -145,13 +148,12 @@ const validateMessage = () => {
           />
           <div
             v-if="emailError"
-            class="sm:ml-40 text-red-600 font-bold text-sm pt-1"
+            class="sm:ml-40 text-red-600 font-bold text-sm pt-1" v-text="$t('contact.emailError')"
           >
-            Lütfen geçerli bir e-posta adresi giriniz
           </div>
         </div>
         <div class="h-14">
-          <span class="w-40 inline-block">Konu</span>
+          <span class="w-40 inline-block" v-text="$t('contact.subject')"></span>
           <ElementComponentsCustomInput
             @blur="validateInput('subject', subject)"
             v-model="subject"
@@ -161,15 +163,15 @@ const validateMessage = () => {
           />
           <div
             v-if="subjectError"
-            class="sm:ml-40 text-red-600 font-bold text-sm pt-1"
+            class="sm:ml-40 text-red-600 font-bold text-sm pt-1" v-text="$t('contact.subjectError')"
           >
-            Lütfen geçerli konu başlığı giriniz
+    
           </div>
         </div>
         <div>
           <div class="sm:flex">
             <div class="w-40">
-            <span class="w-40 inline-block">Mesaj</span>
+            <span class="w-40 inline-block" v-text="$t('contact.message')"></span>
           </div>
             <textarea
               v-model="message"
@@ -185,9 +187,8 @@ const validateMessage = () => {
             <div class="h-0">
               <div
                 v-if="messageError && messageLength < 30"
-                class="md:ml-40 w-[82%] text-red-600 font-bold text-sm pt-1"
+                class="md:ml-40 w-[82%] text-red-600 font-bold text-sm pt-1" v-text="$t('contact.messageError')"
               >
-                Lütfen en az 30 karakter uzunluğunda bir mesaj yazınız
               </div>
             </div>
             <div
@@ -196,7 +197,7 @@ const validateMessage = () => {
               :class="{ 'text-green-500': messageLength >= 30 }"
             ></div>
           </div>
-          <div class="h-6"><span v-if="mailError" class="text-red-600">Bağlantı Sorunu</span><span v-if="mailError == false" class="text-green-600">Mesajınız tarafımıza başarıyla ulaşmıştır.</span></div>
+          <div class="h-6"><span v-if="mailError" class="text-red-600">Bağlantı Sorunu</span><span v-if="mailError == false" class="text-green-600" v-text="$t('contact.success')"></span></div>
         </div>
         <ElementComponentsCustomButton
           class="hover:bg-red-500 w-36 mx-auto block disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:bg-white"
@@ -208,7 +209,7 @@ const validateMessage = () => {
         <div
           class="bg-white text-black inline-block w-64 px-3 rounded-md font-bold border-4 border-[rgb(128,128,128)] dark:border-white transition-colors duration-300"
         >
-          e-posta:
+          <span v-text="$t('contact.email') + ': '"></span>
           <a class="text-[#0000EE] underline" href="mailto:info@avedikyan.com"
             >info@avedikyan.com</a
           >
@@ -216,6 +217,7 @@ const validateMessage = () => {
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
