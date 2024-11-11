@@ -10,8 +10,7 @@ export const searchLineTr = {
   searching: "Bir sözcük ara.",
   keyboardButton: "Ermenice Klavye",
   randomButton: "Rastgele Sözcük",
-  searchTip:
-    "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
+  searchTip: "Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.",
   historyButton: "Arama Geçmişi",
 
 };
@@ -20,9 +19,8 @@ export const searchLineAm = {
   searching: "Փնտռցէք բառ մը:",
   keyboardButton: "Հայերէն Ստեղնաշար",
   randomButton: "Պատահական Բառ",
-  searchTip:
-    "Կարելի է օգտագործել * բազմաթիւ տառերու խուզարկումի, իսկ ? տառի մը համար:",
-  historyButton: "",
+  searchTip: "Կարելի է օգտագործել * բազմաթիւ տառերու խուզարկումի, իսկ ? տառի մը համար:",
+  historyButton: "Որոնման Պատմութիւն",
 
 };
 
@@ -35,7 +33,7 @@ export const searchHistoryTr = {
 };
 
 export const searchHistoryAm = {
-  removeButton: "",
+  removeButton: "Ջնջել Պատմութիւնը",
 };
 
 export const navBarEn = {
@@ -52,7 +50,7 @@ export const navBarTr = {
 };
 
 export const navBarAm = {
-  menu: "",
+  menu: "Ցուցակ",
   hangman: "Կախաղան",
   contact: "Մեր Հասցէն",
 
@@ -79,7 +77,7 @@ export const adamAsmacaEn = {
     rightsLeft: " իրաւունք ունիք։",
     win: "Ապրիս",
     lose: "Կորսնցուցիք",
-    reset: "",
+    reset: "Նոր Խաղ",
   };
 
   export const indexEn = {
@@ -97,7 +95,7 @@ export const adamAsmacaEn = {
   export const indexAm = {
     noConnection: "Կապակցութեան հարց։",
     noResult: 'Չկրցաւ գտնուիլ ձեր փնտրած բառը։',
-    todaysword: "",
+    todaysword: "Օրուան Բառը",
   };
 
   export const alpTableEn = {
@@ -142,15 +140,15 @@ export const adamAsmacaEn = {
 
   export const contactAm = {
     name: "Անուն Մականուն",
-    email: "Է-Մայլ",
+    email: "Ել-հասցէ",
     subject: "Նիւթ",
     message: "Ձեր Խօսքը",
     send: "Ուղարկէ",
-    nameError: "",
-    emailError: "",
-    subjectError: "",
-    messageError: "",
-    success: "",
+    nameError: "Կը խնդրենք, որ վաւեր անուն մը գրէք։",
+    emailError: "Կը խնդրենք, որ վաւեր ել-հասցէ մը գրէք։",
+    subjectError: "Կը խնդրենք, որ վաւեր վերնագիր մը գրէք։",
+    messageError: "Կը խնդրենք, որ առնուազն 30 նշան ունեցող հաղորդագրութիւն մը գրէք։",
+    success: "Ձեր հաղորդագրութիւնը յաջողութեամբ հասած է մեզի։",
 
   };
 

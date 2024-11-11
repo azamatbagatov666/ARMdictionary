@@ -37,8 +37,8 @@ const historyList = computed(() => searchHistoryStore.state.history)
 </script>
 
 <template>
-<div class=" border-black sm:w-[300px] md:w-[450px] lg:w-[600px] bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300">
-  <ul class="p-2">
+<div class=" border-black lg:w-[600px] bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300 w-full">
+  <ul class="p-2 w-full">
 <li v-if="historyList.length > 0" v-for="(item, index) in historyList" v-text="item" @click="historySelected(item)"
 class="inline-block mr-3 hover:underline hover:cursor-pointer hover:bg-white dark:hover:bg-gray-500"></li>
 <span class="text-center w-full inline-block" v-else>Arama geçmişinde hiç sözcük yok</span>

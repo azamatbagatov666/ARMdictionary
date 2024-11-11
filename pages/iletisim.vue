@@ -42,7 +42,7 @@ const sendMail = async () => {
   try {
 
     await mail.send({
-      from: `${name.value} <${email.value}>`,
+      from: `${name.value} <info@avedikyan.com>`,
       subject: "Avedikyan Sözlük: " + subject.value,
       text: "Gönderen kişinin adı: " + name.value + "\n" + "Gönderen kişinin e-posta adresi: " + email.value + "\n\n\n" + message.value});
     return true;

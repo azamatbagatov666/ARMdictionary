@@ -289,7 +289,7 @@ defineExpose({ wordFromAbove, clearThePage });
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <div class="h-[269px]">
       <Transition name="fade">
         <ArmenianKeyboard
@@ -304,11 +304,12 @@ defineExpose({ wordFromAbove, clearThePage });
       </Transition>
     </div>
 
-    <div class="flex justify-center w-full ">
-      <div>
+    <div class="flex justify-center w-full">
+      <div
+        class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
+      >
         <div
-          class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none
-          dark:bg-[#101010] dark:border-white transition-colors duration-300 sm:w-[520px] md:w-[652px]"
+          class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
@@ -317,7 +318,7 @@ defineExpose({ wordFromAbove, clearThePage });
             @click="toggleKeyboard($event)"
             @mousedown="buttonClick"
           />
-          <div class="sm:w-[480px] md:w-[600px] flex">
+          <div class="sm:w-[480px] md:w-[600px] flex justify-between">
             <input
               type="text"
               ref="search"
@@ -331,7 +332,7 @@ defineExpose({ wordFromAbove, clearThePage });
             />
 
             <div
-              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px]"
+              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px] shrink-0"
             >
               <Transition name="fade">
                 <button
@@ -342,7 +343,6 @@ defineExpose({ wordFromAbove, clearThePage });
                 >
                   <img
                     src="/cancel.png"
-
                     draggable="false"
                     class="max-w-5 size-5"
                   />
@@ -353,7 +353,7 @@ defineExpose({ wordFromAbove, clearThePage });
             <button
               @click="submit"
               @mousedown="buttonClick"
-              class="motherbutton border-l border-black"
+              class="motherbutton border-l border-black shrink-0"
             >
               <img src="/glass.png" width="30" height="30" draggable="false" />
             </button>
@@ -381,10 +381,90 @@ defineExpose({ wordFromAbove, clearThePage });
 
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
+        <div class="flex justify-start my-1 lg:hidden">
+          <div class="grid gap-1">
+            <button
+              class="group rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
+              @click="randomWord()"
+              @mousedown="buttonClick"
+            >
+              <div class="flex items-center ml-[5px]">
+                <div class="rounded-full size-9 bg-purple-600">
+                  <img src="/random.png" class="size-9" draggable="false" />
+                </div>
+                <div class="w-0">
+                  <span
+                    class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+                    v-text="$t('searchLine.randomButton')"
+                  ></span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              class="group bg-gray-200 rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              @click="toggleHistory($event)"
+              @mousedown="buttonClick"
+            >
+              <div class="flex items-center ml-[5px]">
+                <div class="rounded-full flex items-center size-9 bg-blue-600">
+                  <img
+                    src="/history.png"
+                    class="ml-[3px] size-7"
+                    draggable="false"
+                  />
+                </div>
+                <div class="w-0">
+                  <span
+                    class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+                    v-text="$t('searchLine.historyButton')"
+                  ></span>
+                </div>
+              </div>
+            </button>
+
+            <button
+              v-if="todayData"
+              class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              @click="setToday"
+              @mousedown="buttonClick"
+            >
+              <div class="flex items-center ml-[5px]">
+                <div class="rounded-full size-9 bg-red-600">
+                  <img src="/day.png" class="size-9" draggable="false" />
+                </div>
+                <div class="w-0">
+                  <span
+                    class="w-[112px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
+                    v-text="$t('index.todaysword')"
+                  ></span>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        <button
+          v-if="todayData"
+          class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+          @click="setToday"
+          @mousedown="buttonClick"
+        >
+          <div class="flex items-center ml-[5px]">
+            <div class="rounded-full size-9 bg-red-600">
+              <img src="/day.png" class="size-9" draggable="false" />
+            </div>
+            <div class="w-0">
+              <span
+                class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
+                v-text="$t('index.todaysword')"
+              ></span>
+            </div>
+          </div>
+        </button>
       </div>
       <div class="w-0 flex-col gap-4 justify-start hidden lg:flex">
         <button
-          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
+          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
           @click="randomWord()"
           @mousedown="buttonClick"
         >
@@ -402,7 +482,7 @@ defineExpose({ wordFromAbove, clearThePage });
         </button>
 
         <button
-          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
           @click="toggleHistory($event)"
           @mousedown="buttonClick"
         >
@@ -423,83 +503,6 @@ defineExpose({ wordFromAbove, clearThePage });
           </div>
         </button>
       </div>
-    </div>
-
-    <button
-      v-if="todayData"
-      class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
-      @click="setToday"
-      @mousedown="buttonClick"
-    >
-      <div class="flex items-center ml-[5px]">
-        <div class="rounded-full size-9 bg-red-600">
-          <img src="/day.png" class="size-9" draggable="false" />
-        </div>
-        <div class="w-0">
-          <span
-            class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
-            v-text="$t('index.todaysword')"
-          ></span>
-        </div>
-      </div>
-    </button>
-  </div>
-  <div class="flex justify-start my-1 lg:hidden">
-    <div class="grid gap-1">
-      <button
-        class="group rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
-        @click="randomWord()"
-        @mousedown="buttonClick"
-      >
-        <div class="flex items-center ml-[5px]">
-          <div class="rounded-full size-9 bg-purple-600">
-            <img src="/random.png" class="size-9" draggable="false" />
-          </div>
-          <div class="w-0">
-            <span
-              class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
-              v-text="$t('searchLine.randomButton')"
-            ></span>
-          </div>
-        </div>
-      </button>
-
-      <button
-        class="group bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
-        @click="toggleHistory($event)"
-        @mousedown="buttonClick"
-      >
-        <div class="flex items-center ml-[5px]">
-          <div class="rounded-full flex items-center size-9 bg-blue-600">
-            <img src="/history.png" class="ml-[3px] size-7" draggable="false" />
-          </div>
-          <div class="w-0">
-            <span
-              class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
-              v-text="$t('searchLine.historyButton')"
-            ></span>
-          </div>
-        </div>
-      </button>
-
-      <button
-        v-if="todayData"
-        class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
-        @click="setToday"
-        @mousedown="buttonClick"
-      >
-        <div class="flex items-center ml-[5px]">
-          <div class="rounded-full size-9 bg-red-600">
-            <img src="/day.png" class="size-9" draggable="false" />
-          </div>
-          <div class="w-0">
-            <span
-              class="w-[112px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
-              v-text="$t('index.todaysword')"
-            ></span>
-          </div>
-        </div>
-      </button>
     </div>
   </div>
 </template>
@@ -566,7 +569,7 @@ defineExpose({ wordFromAbove, clearThePage });
 .resultBox {
   position: absolute;
   background-color: white;
-  @apply w-[] sm:w-[482px] md:w-[602px];
+  @apply w-[calc(100%_-_50px)] sm:w-[482px] md:w-[602px];
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
   border-width: 1px;
   border-radius: 20px;

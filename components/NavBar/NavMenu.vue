@@ -9,6 +9,7 @@ const adminDropDownOn = ref(false);
 
 
 
+
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
 const userStore = useUserStore();
@@ -60,8 +61,7 @@ const logoutClicked = () => {
             <NuxtLink to="/">
                 <button @click="homePageClean"
                     class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
-                    <img src="/home-white.png" class="size-9 hidden dark:flex" draggable="false"/>
-                    <img src="/home.png" class="size-9 dark:hidden" draggable="false"/>
+                    <PhosphorIconHouseLine class="dark:text-white duration-0" :size="36" draggable="false"/>
                 </button>
             </NuxtLink>
             <div @mouseover="toggleDropdown($event, 'regular')" @mouseleave="toggleDropdown($event, 'regular')"

@@ -2,10 +2,5 @@
 
 editword sayfası
 
-hydration harf tablosu
-
 mail
 
-sticky sorunu
-
-mobile üzerine mi çıksın?

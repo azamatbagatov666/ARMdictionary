@@ -129,8 +129,8 @@ const buttonClick = (event: Event) => {
 
     <ElementComponentsLogoBanner/>
 
-    <div class="flex justify-center">
-    <div>
+    <div class="flex justify-center w-full">
+    <div class="w-full">
         <SearchLine
       @input-changed="wordInput"
       @submit-request="submit"
