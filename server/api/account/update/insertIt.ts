@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     if (!token) return;
   
     return await $fetch(
-      "https://localhost:7109/InsertIt",
+      "http://localhost:5000/InsertIt",
       {
         method: "POST",
         headers: {

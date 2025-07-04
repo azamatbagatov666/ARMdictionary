@@ -3,7 +3,7 @@ export default defineEventHandler(async event => {
   
   
   return $fetch<string[]>(
-    `https://localhost:7109/gettingSuggestions/${id}`
+    `http://localhost:5000/gettingSuggestions/${id}`
   ); 
 } 
 
