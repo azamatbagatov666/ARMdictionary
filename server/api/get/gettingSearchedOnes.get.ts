@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   
     return $fetch<LOSTANDFOUND[]>
     (
-        `https://localhost:7109/gettingSearchedOnes`, {
+        `http://localhost:5000/gettingSearchedOnes`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

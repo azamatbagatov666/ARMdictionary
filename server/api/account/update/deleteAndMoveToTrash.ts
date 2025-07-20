@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     if (!token) return;
   
     return await $fetch(
-      "https://localhost:7109/deleteAndMoveToTrash",
+      "http://localhost:5000/deleteAndMoveToTrash",
       {
         method: "POST",
         headers: {

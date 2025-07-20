@@ -2,6 +2,6 @@ import { type TDATA } from "~/models/TDATA";
 
 export default defineEventHandler(async event => {
     return await $fetch<TDATA[]>(
-        `https://localhost:7109/getRandom`
+        `http://localhost:5000/getRandom`
       );
 });

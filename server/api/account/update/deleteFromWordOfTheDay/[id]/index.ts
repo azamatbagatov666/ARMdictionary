@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   
 
   return await $fetch(
-    "https://localhost:7109/DeleteFromWordOfTheDay",
+    "http://localhost:5000/DeleteFromWordOfTheDay",
     {
       method: "DELETE",
       headers: {

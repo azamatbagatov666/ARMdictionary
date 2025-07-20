@@ -45,4 +45,7 @@ export default defineNuxtConfig({
       "composables/**",
     ],
   },
+   nitro: {
+   compatibilityDate: '2025-07-11'
+  }
 });

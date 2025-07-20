@@ -1,0 +1,2435 @@
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-04' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 670.39ms
+ℹ Compiled plugins/client.mjs in 719.75ms
+ℹ Compiled types/plugins.d.ts in 737.18ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19142ms
+ℹ Vite server warmed up in 20711ms
+[nitro] ✔ Nuxt Nitro server built in 9876ms
+(node:3057) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 783.25ms
+ℹ Compiled plugins/client.mjs in 856.4ms
+ℹ Compiled types/plugins.d.ts in 873.15ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 20678ms
+ℹ Vite server warmed up in 20823ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/fdir/dist/api/async.js'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/fdir/dist/api/async.js'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 636.53ms
+ℹ Compiled plugins/client.mjs in 779.52ms
+ℹ Compiled types/plugins.d.ts in 800.78ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+
+ ERROR  [uncaughtException] callback is not a function
+
+    at handleIncomingPacket (node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+    at Socket.readFromStdout (node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:545:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:495:3)
+    at Readable.push (node:internal/streams/readable:375:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+
+
+ ERROR  [uncaughtException] callback is not a function
+
+    at handleIncomingPacket (node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+    at Socket.readFromStdout (node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:545:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:495:3)
+    at Readable.push (node:internal/streams/readable:375:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+
+
+ ERROR  [uncaughtException] callback is not a function
+
+    at handleIncomingPacket (node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+    at Socket.readFromStdout (node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:545:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:495:3)
+    at Readable.push (node:internal/streams/readable:375:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 856.04ms
+ℹ Compiled plugins/client.mjs in 908.86ms
+ℹ Compiled types/plugins.d.ts in 960.27ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ Vite client warmed up in 19470ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/fast-glob/out/types'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleDir (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:567:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:617:16)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/fast-glob/out/types'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 645.58ms
+ℹ Compiled plugins/client.mjs in 777.02ms
+ℹ Compiled types/plugins.d.ts in 811.61ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 18529ms
+ℹ Vite server warmed up in 20174ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/postcss-ordered-values/src/rules/listStyleTypes.json'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/postcss-ordered-values/src/rules/listStyleTypes.json'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 991.47ms
+ℹ Compiled plugins/client.mjs in 1107.53ms
+ℹ Compiled types/plugins.d.ts in 1128.46ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 16838ms
+ℹ Vite server warmed up in 18813ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/tailwindcss/node_modules/glob-parent'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleDir (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:567:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:617:16)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/tailwindcss/node_modules/glob-parent'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 875.49ms
+ℹ Compiled plugins/client.mjs in 980.9ms
+ℹ Compiled types/plugins.d.ts in 1039.72ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19568ms
+ℹ Vite server warmed up in 19368ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/stylehacks/types/plugins/index.d.ts.map'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/stylehacks/types/plugins/index.d.ts.map'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 714.9ms
+ℹ Compiled plugins/client.mjs in 833.68ms
+ℹ Compiled types/plugins.d.ts in 881.93ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19103ms
+ℹ Vite server warmed up in 18853ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/vscode-languageserver-protocol/lib/common/protocol.declaration.js'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/vscode-languageserver-protocol/lib/common/protocol.declaration.js'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-05' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 724.48ms
+ℹ Compiled types/plugins.d.ts in 772.83ms
+ℹ Compiled plugins/client.mjs in 799.61ms
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-06' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 712.96ms
+ℹ Compiled plugins/client.mjs in 815.82ms
+ℹ Compiled types/plugins.d.ts in 850.22ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 18737ms
+ℹ Vite server warmed up in 22199ms
+[nitro] ✔ Nuxt Nitro server built in 11454ms
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[Vue Router warn]: No match found for location with path "/user/login"
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-06' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 1032.09ms
+ℹ Compiled plugins/client.mjs in 1095.36ms
+ℹ Compiled types/plugins.d.ts in 1092.55ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19998ms
+ℹ Vite server warmed up in 21274ms
+[nitro] ✔ Nuxt Nitro server built in 10978ms
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[Vue Router warn]: No match found for location with path "/api/get/getWordOfTheDay"
+[Vue Router warn]: No match found for location with path "/api/get/getWordOfTheDay"
+[Vue Router warn]: No match found for location with path "/api/get/getWordOfTheDay"
+[Vue Router warn]: No match found for location with path "/api/get/getWordOfTheDay"
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/vnc/dist/images/3e59b876df5d900e0b2b4a945a71f20d.svg"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+[Vue Router warn]: No match found for location with path "/security.txt"
+
+ ERROR  [unhandledRejection] read ECONNRESET
+
+    at TCP.onStreamRead (node:internal/stream_base_commons:217:20)
+
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/api/v1/users/search"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+[Vue Router warn]: No match found for location with path "/.well-known/security.txt"
+✔ Vite server hmr 118 files in 314.376ms
+npm ERR! Missing script: "start"
+npm ERR! 
+npm ERR! Did you mean one of these?
+npm ERR!     npm star # Mark your favorite packages
+npm ERR!     npm stars # View packages marked as favorites
+npm ERR! 
+npm ERR! To see a list of scripts, run:
+npm ERR!   npm run
+
+npm ERR! A complete log of this run can be found in: /root/.npm/_logs/2025-07-11T18_55_12_980Z-debug-0.log
+npm ERR! code EJSONPARSE
+npm ERR! JSON.parse Invalid package.json: JSONParseError: Expected ',' or '}' after property value in JSON at position 158 while parsing '{
+npm ERR! JSON.parse   "name": "nuxt-app",
+npm ERR! JSON.parse   "private": tru'
+npm ERR! JSON.parse Failed to parse JSON data.
+npm ERR! JSON.parse Note: package.json must be actual JSON, not just JavaScript.
+
+npm ERR! A complete log of this run can be found in: /root/.npm/_logs/2025-07-11T18_58_22_180Z-debug-0.log
+
+> start
+> nuxt start --host
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://[::]:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> start
+> nuxt start --host 0.0.0.0
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://[::]:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Killed
+
+> start
+> nuxt start --host 0.0.0.0
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://[::]:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Killed
+Listening on http://0.0.0.0:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Listening on http://0.0.0.0:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 1876.31ms
+ℹ Compiled plugins/client.mjs in 2030.53ms
+ℹ Compiled types/plugins.d.ts in 2129.92ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17235ms
+ℹ Vite server warmed up in 20129ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/caniuse-lite/data/features/filereader.js'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/caniuse-lite/data/features/filereader.js'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 1709.17ms
+ℹ Compiled plugins/client.mjs in 1898.64ms
+ℹ Compiled types/plugins.d.ts in 1967.77ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19211ms
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/server/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ Vite server warmed up in 21131ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/@npmcli/run-script/node_modules'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleDir (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:567:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:617:16)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/@npmcli/run-script/node_modules'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 1585.04ms
+ℹ Compiled plugins/client.mjs in 1779.16ms
+ℹ Compiled types/plugins.d.ts in 1773.18ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19135ms
+ℹ Vite server warmed up in 20260ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/nuxt/node_modules/tar/index.js'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/nuxt/node_modules/tar/index.js'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 1676.76ms
+ℹ Compiled plugins/client.mjs in 2222.96ms
+ℹ Compiled types/plugins.d.ts in 2281.51ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17073ms
+ℹ Vite server warmed up in 20308ms
+[nitro] ✔ Nuxt Nitro server built in 26151ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+
+> dev
+> nuxt dev --host
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[get-port] Unable to find an available port (tried 3000 on any host). Using alternative port 3001.
+
+ 
+              █▀▀▀▀▀▀▀██▀██▀▀█▀▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █ ▀▀  ▄█  █ █▀▀▀█ █
+              █ █   █ █▀▄▄▄█▀█ ▄█ █   █ █
+              █ ▀▀▀▀▀ █ ▄▀▄▀█ ▄▀█ ▀▀▀▀▀ █
+              █▀▀█▀██▀▀▄▄▀█▄▀▄▀▀█▀▀▀█▀▀██
+              █▀█ ███▀▄█▀ ▄█  ██ ▄ ▀██▀ █
+              ██ ▀  ▀▀▄████▀  ▄██  ▄▀█▀▀█
+              █▀██▄▄▀▀  █ ▄ █▄█ ▀ ▀█▄ █ █
+              █▀ ▄▄▀▄▀▀▀  ▀▄▄▀▀ ▀▀ ▀ ▀▄██
+              █▀▀▀▀▀▀▀█ ▄███▄▀  █▀█ ▄▄▀ █
+              █ █▀▀▀█ ██ █ ▀▀▄▄ ▀▀▀ ▄▄█ █
+              █ █   █ █▄▄▀  ██ █ █▀ ▀ █▀█
+              █ ▀▀▀▀▀ █  ▄  ▄▀█ ▀▀▀█▄█▀▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3001/
+  ➜ Network:  http://10.114.0.2:3001/ [QR code]
+  ➜ Network:  http://10.19.0.5:3001/
+  ➜ Network:  http://167.71.60.182:3001/
+  ➜ Network:  http://172.17.0.1:3001/
+
+ℹ Compiled plugins/server.mjs in 3001.46ms
+ℹ Compiled plugins/client.mjs in 3366.78ms
+ℹ Compiled types/plugins.d.ts in 3389.11ms
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+ℹ Compiled plugins/server.mjs in 3612.43ms
+ℹ Compiled plugins/client.mjs in 4041.94ms
+ℹ Compiled types/plugins.d.ts in 4030.56ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 50764ms
+ℹ Vite server warmed up in 82072ms
+
+> start
+> nuxt start
+
+
+[nitro]  WARN  Please add compatibilityDate: '2025-07-11' to the config file. Using 2024-04-03 as fallback.
+       More info: https://nitro.build/deploy#compatibility-date
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://0.0.0.0:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Listening on http://0.0.0.0:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> start
+> nuxt start
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://0.0.0.0:3001
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Killed
+
+> start
+> nuxt start
+
+[nuxi] 
+ ╭───────────────────────────────────Preview Mode─────────────────────────────────────╮
+ │                                                                                    │
+ │  You are running Nuxt production build in preview mode.                            │
+ │  For production deployments, please directly use node ./server/index.mjs command.  │
+ │                                                                                    │
+ │  Node.js:           v20.10.0                                                       │
+ │  Nitro Preset:      node-server                                                    │
+ │  Working directory: .output                                                        │
+ │                                                                                    │
+ ╰────────────────────────────────────────────────────────────────────────────────────╯
+
+[nuxi] ℹ Loading .env. This will not be loaded when running the server in production.
+[nuxi] ℹ Starting preview command: node ./server/index.mjs
+[nuxi] 
+Listening on http://0.0.0.0:3001
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Killed
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1625.76ms
+ℹ Compiled plugins/client.mjs in 1774.7ms
+ℹ Compiled types/plugins.d.ts in 1847.68ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 16912ms
+ℹ Vite server warmed up in 19591ms
+[nitro] ✔ Nuxt Nitro server built in 25186ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1763.34ms
+ℹ Compiled plugins/client.mjs in 1913.07ms
+ℹ Compiled types/plugins.d.ts in 1977.46ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17541ms
+ℹ Vite server warmed up in 20711ms
+[nitro] ✔ Nuxt Nitro server built in 24968ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1669.16ms
+ℹ Compiled plugins/client.mjs in 1830.11ms
+ℹ Compiled types/plugins.d.ts in 1911.55ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 18901ms
+ℹ Vite server warmed up in 20101ms
+[nitro] ✔ Nuxt Nitro server built in 25826ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1816.84ms
+ℹ Compiled plugins/client.mjs in 2014.46ms
+ℹ Compiled types/plugins.d.ts in 2122.91ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE (x2)
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE (x3)
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE (x4)
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE (x5)
+
+
+ ERROR  Pre-transform error: The service was stopped: write EPIPE (x6)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x2)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x3)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x4)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x5)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x6)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x7)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x8)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x9)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x10)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x11)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x12)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x13)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x14)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x15)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x16)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x17)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x18)
+
+
+ ERROR  Pre-transform error: The service is no longer running: write EPIPE (x19)
+
+
+ ERROR  [uncaughtException] callback is not a function
+
+    at handleIncomingPacket (node_modules/vite/node_modules/esbuild/lib/main.js:677:12)
+    at Socket.readFromStdout (node_modules/vite/node_modules/esbuild/lib/main.js:600:7)
+    at Socket.emit (node:events:514:28)
+    at addChunk (node:internal/streams/readable:545:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:495:3)
+    at Readable.push (node:internal/streams/readable:375:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:190:23)
+    at Pipe.callbackTrampoline (node:internal/async_hooks:130:17)
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1830.24ms
+ℹ Compiled plugins/client.mjs in 1935.35ms
+ℹ Compiled types/plugins.d.ts in 1936.45ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17914ms
+ℹ Vite server warmed up in 19765ms
+[nitro] ✔ Nuxt Nitro server built in 24960ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core/node_modules/@vue/shared'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core/node_modules/@vue/shared'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1728.87ms
+ℹ Compiled plugins/client.mjs in 1849.25ms
+ℹ Compiled types/plugins.d.ts in 1895.28ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17011ms
+ℹ Vite server warmed up in 21031ms
+[nitro] ✔ Nuxt Nitro server built in 25923ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1657.65ms
+ℹ Compiled plugins/client.mjs in 1802.42ms
+ℹ Compiled types/plugins.d.ts in 1840.54ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17799ms
+ℹ Vite server warmed up in 19239ms
+[nitro] ✔ Nuxt Nitro server built in 27294ms
+
+ ERROR  [uncaughtException] Channel closed
+
+    at target.send (node:internal/child_process:754:16)
+    at sendIPCMessage (node_modules/nuxi/dist/chunks/dev-child.mjs:71:17)
+    at NuxtDevServer.<anonymous> (node_modules/nuxi/dist/chunks/dev-child.mjs:116:7)
+    at NuxtDevServer.emit (node:events:526:35)
+    at NuxtDevServer._load (node_modules/nuxi/dist/chunks/dev2.mjs:6350:10)
+    at async NuxtDevServer.load (node_modules/nuxi/dist/chunks/dev2.mjs:6230:7)
+    at async NuxtDevServer.init (node_modules/nuxi/dist/chunks/dev2.mjs:6225:5)
+    at async Object.run (node_modules/nuxi/dist/chunks/dev-child.mjs:118:5)
+    at async runCommand$1 (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:1767:16)
+    at async runCommand$1 (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:1758:11)
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1750.22ms
+ℹ Compiled plugins/client.mjs in 1976.92ms
+ℹ Compiled types/plugins.d.ts in 1981.58ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 18695ms
+ℹ Vite server warmed up in 20116ms
+[nitro] ✔ Nuxt Nitro server built in 30270ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1939.67ms
+ℹ Compiled plugins/client.mjs in 2156.68ms
+ℹ Compiled types/plugins.d.ts in 2238.63ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 21008ms
+ℹ Vite server warmed up in 22297ms
+[nitro] ✔ Nuxt Nitro server built in 27015ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1732.47ms
+ℹ Compiled plugins/client.mjs in 1806.92ms
+ℹ Compiled types/plugins.d.ts in 1944.67ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19637ms
+ℹ Vite server warmed up in 21050ms
+[nitro] ✔ Nuxt Nitro server built in 26379ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 2260.9ms
+ℹ Compiled plugins/client.mjs in 2422.92ms
+ℹ Compiled types/plugins.d.ts in 2557.2ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19086ms
+ℹ Vite server warmed up in 20262ms
+[nitro] ✔ Nuxt Nitro server built in 28583ms
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1525.42ms
+ℹ Compiled plugins/client.mjs in 1741ms
+ℹ Compiled types/plugins.d.ts in 1839.76ms
+ℹ Vite client warmed up in 19861ms
+ℹ Vite server warmed up in 18461ms
+[nitro] ✔ Nuxt Nitro server built in 24765ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1822.4ms
+ℹ Compiled plugins/client.mjs in 2000.98ms
+ℹ Compiled types/plugins.d.ts in 2029.26ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ ✨ new dependencies optimized: @unhead/vue
+ℹ ✨ optimized dependencies changed. reloading
+ℹ Vite server warmed up in 22139ms
+ℹ Vite client warmed up in 26208ms
+[nitro] ✔ Nuxt Nitro server built in 26231ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1981.45ms
+ℹ Compiled plugins/client.mjs in 2151.52ms
+ℹ Compiled types/plugins.d.ts in 2168.26ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 20310ms
+ℹ Vite server warmed up in 21691ms
+[nitro] ✔ Nuxt Nitro server built in 26444ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 2027.82ms
+ℹ Compiled plugins/client.mjs in 2279.31ms
+ℹ Compiled types/plugins.d.ts in 2436.2ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 20280ms
+ℹ Vite server warmed up in 21143ms
+[nitro] ✔ Nuxt Nitro server built in 29214ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1791.63ms
+ℹ Compiled plugins/client.mjs in 2001.4ms
+ℹ Compiled types/plugins.d.ts in 1993.54ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 18107ms
+ℹ Vite server warmed up in 20603ms
+[nitro] ✔ Nuxt Nitro server built in 31077ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1670.14ms
+ℹ Compiled plugins/client.mjs in 1858.74ms
+ℹ Compiled types/plugins.d.ts in 1870.07ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19895ms
+ℹ Vite server warmed up in 20958ms
+[nitro] ✔ Nuxt Nitro server built in 28549ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1636.95ms
+ℹ Compiled plugins/client.mjs in 1814.4ms
+ℹ Compiled types/plugins.d.ts in 1841.29ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17462ms
+Killed
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 762.72ms
+ℹ Compiled plugins/client.mjs in 926.23ms
+ℹ Compiled types/plugins.d.ts in 970.97ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite server warmed up in 20364ms
+ℹ Vite client warmed up in 23825ms
+[nitro] ✔ Nuxt Nitro server built in 12189ms
+node:internal/modules/cjs/loader:1147
+  throw err;
+  ^
+
+Error: Cannot find module '/root/vapish/vapish-frontend/.output/server/index.mjs'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1144:15)
+    at Module._load (node:internal/modules/cjs/loader:985:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v20.10.0
+node:internal/modules/cjs/loader:1147
+  throw err;
+  ^
+
+Error: Cannot find module '/root/vapish/vapish-frontend/.output/server/index.mjs'
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1144:15)
+    at Module._load (node:internal/modules/cjs/loader:985:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:135:12)
+    at node:internal/main/run_main_module:28:49 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v20.10.0
+Listening on http://[::]:3000
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+Listening on http://0.0.0.0:3005
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1834.31ms
+ℹ Compiled plugins/client.mjs in 2015.96ms
+ℹ Compiled types/plugins.d.ts in 2060.76ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 19613ms
+ℹ Vite server warmed up in 21400ms
+[nitro] ✔ Nuxt Nitro server built in 28716ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core/node_modules/@vue/shared'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core/node_modules/@vue/shared'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1829.76ms
+ℹ Compiled plugins/client.mjs in 2012.89ms
+ℹ Compiled types/plugins.d.ts in 2110.29ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17438ms
+ℹ Vite server warmed up in 20191ms
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1725.99ms
+ℹ Compiled plugins/client.mjs in 1823.96ms
+ℹ Compiled types/plugins.d.ts in 1996.38ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite server warmed up in 20492ms
+ℹ Vite client warmed up in 22559ms
+[nitro] ✔ Nuxt Nitro server built in 30350ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1611.24ms
+ℹ Compiled plugins/client.mjs in 1743.69ms
+ℹ Compiled types/plugins.d.ts in 1832.66ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1561.42ms
+ℹ Compiled plugins/client.mjs in 1777.36ms
+ℹ Compiled types/plugins.d.ts in 1879.22ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite server warmed up in 20489ms
+ℹ Vite client warmed up in 22213ms
+
+ ERROR  [unhandledRejection] ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/@babel/generator/lib/index.js'
+
+    at __node_internal_captureLargerStackTrace (node:internal/errors:563:5)
+    at __node_internal_uvException (node:internal/errors:619:10)
+    at FSWatcher.<computed> (node:internal/fs/watchers:247:19)
+    at Object.watch (node:fs:2450:36)
+    at createFsWatchInstance (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:119:15)
+    at setFsWatchListener (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:166:15)
+    at NodeFsHandler._watchWithNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:331:14)
+    at NodeFsHandler._handleFile (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:395:23)
+    at NodeFsHandler._addToNodeFs (node_modules/nuxt/node_modules/chokidar/lib/nodefs-handler.js:637:21)
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ENOSPC: System limit for number of file watchers reached, watch '/root/vapish/vapish-frontend/ARMdictionary/node_modules/@babel/generator/lib/index.js'
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1629.02ms
+ℹ Compiled plugins/client.mjs in 1821.85ms
+ℹ Compiled types/plugins.d.ts in 1817.25ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/server/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ page reload store/search-history.store.ts
+ℹ page reload store/user.store.ts
+ℹ Vite client warmed up in 16036ms
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 1913.13ms
+ℹ Compiled plugins/client.mjs in 2108.99ms
+ℹ Compiled types/plugins.d.ts in 2129.51ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17153ms
+ℹ Vite server warmed up in 20090ms
+[nitro] ✔ Nuxt Nitro server built in 33130ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/.nitro/@vue/server-renderer@3.3.10/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/.nitro/@vue/server-renderer@3.3.10/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/compiler-dom/node_modules/@vue/compiler-core'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 2281.23ms
+ℹ Compiled plugins/client.mjs in 2298.33ms
+ℹ Compiled types/plugins.d.ts in 2402.54ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17428ms
+ℹ Vite server warmed up in 20027ms
+[nitro] ✔ Nuxt Nitro server built in 27029ms
+
+ ERROR  [unhandledRejection] ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+  
+
+[nuxi] ℹ Restarting Nuxt due to error: Error: ELOOP: too many symbolic links encountered, stat '/root/vapish/vapish-frontend/.output/server/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue/node_modules/@vue/server-renderer/node_modules/vue'
+
+ ERROR  [unhandledRejection] socket hang up
+
+    at connResetException (node:internal/errors:787:14)
+    at Socket.socketOnEnd (node:_http_client:519:23)
+    at Socket.emit (node:events:526:35)
+    at endReadableNT (node:internal/streams/readable:1589:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 614.95ms
+ℹ Compiled plugins/client.mjs in 714.84ms
+ℹ Compiled types/plugins.d.ts in 801.47ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 17128ms
+ℹ Vite server warmed up in 19478ms
+[nitro] ✔ Nuxt Nitro server built in 13044ms
+[nuxt] [request error] [unhandled] [500] internal server error
+
+[nuxt] [request error] [unhandled] [500] internal server error
+
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled plugins/server.mjs in 752.95ms
+ℹ Compiled plugins/client.mjs in 873.91ms
+ℹ Compiled types/plugins.d.ts in 879.14ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 20200ms
+ℹ Vite server warmed up in 21062ms
+[nitro] ✔ Nuxt Nitro server built in 9689ms
+
+> dev
+> nuxt dev --host
+
+[nuxi] Nuxt 3.9.3 with Nitro 2.11.13
+
+ 
+              █▀▀▀▀▀▀▀█▀██▀▀███▀█▀▀▀▀▀▀▀█
+              █ █▀▀▀█ █▄▄ ▀  ▀█▀█ █▀▀▀█ █
+              █ █   █ █▀▀ ▀█ ██ █ █   █ █
+              █ ▀▀▀▀▀ █ █▀▄▀▄▀█▀█ ▀▀▀▀▀ █
+              █▀▀▀██▀▀█ ▀ ▄▄█ ▄ ▀▀▀▀██▀▀█
+              ██ █▀▀ ▀▀█▄▄▀█▀  ▀█▄▀▀ ▀▄ █
+              █▀█ ▀ █▀ █ █▀▀█▀▀█▀ ██▄██▀█
+              █▀ ██▄▀▀▀▀▀██ ▀  ▀  █▀▀▀▄ █
+              █▀▀▄█▀▀▀ ▀▀▀▄▄█▀▄  ▀▀▀██▀██
+              █▀▀▀▀▀▀▀█▄▀▄▀█▀ █ █▀█ ▀▄█ █
+              █ █▀▀▀█ █▄▀▀▀▀█▀▀ ▀▀▀ ▀█▄ █
+              █ █   █ █▀▀ █ ▄██▀██  ▄▄ ▀█
+              █ ▀▀▀▀▀ █ ██▄ ▀   █▀▄▄▀██▀█
+              ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+ 
+  ➜ Local:    http://localhost:3000/
+  ➜ Network:  http://10.114.0.2:3000/ [QR code]
+  ➜ Network:  http://10.19.0.5:3000/
+  ➜ Network:  http://167.71.60.182:3000/
+  ➜ Network:  http://172.17.0.1:3000/
+
+  ➜ DevTools: press Shift + Alt + D in the browser (v1.0.8)
+
+ℹ Compiled types/plugins.d.ts in 784.52ms
+ℹ Compiled plugins/server.mjs in 781.49ms
+ℹ Compiled plugins/client.mjs in 848.11ms
+
+ WARN  [1m[33m[@vue/compiler-sfc][0m[33m defineModel() is an experimental feature and disabled by default.
+To enable it, follow the RFC at https://github.com/vuejs/rfcs/discussions/503.[0m
+
+
+ℹ Vite client warmed up in 20577ms
+ℹ Vite server warmed up in 21145ms
+[nitro] ✔ Nuxt Nitro server built in 10374ms
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents?type=directory"
+[Vue Router warn]: No match found for location with path "/api/contents"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/wiki"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+[Vue Router warn]: No match found for location with path "/websockify"
+
+ ERROR  [unhandledRejection] read ECONNRESET
+
+    at TCP.onStreamRead (node:internal/stream_base_commons:217:20)
+
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/robots.txt"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/login"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with path "/public/css/kclient.css"
+[Vue Router warn]: No match found for location with p
+ ERROR  [uncaughtException] ENOSPC: no space left on device, write
+
+    at writeSync (node:fs:933:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:556:12)
+    at _write (node:internal/streams/writable:490:10)
+    at Writable.write (node:internal/streams/writable:494:10)
+    at writeStream (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:518:16)
+    at FancyReporter.log (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:571:12)
+    at Object.log (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:2002:23)
+    at Consola._log (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:481:16)
+    at resolveLog (node_modules/nuxi/dist/shared/nuxi.BlFGnQYG.mjs:449:14)
+
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/server/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ ARMdictionary/.env changed, restarting server...
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ changed tsconfig file detected: /root/vapish/vapish-frontend/ARMdictionary/server/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+ℹ server restarted.

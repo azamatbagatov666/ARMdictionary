@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
 
   return $fetch<WORDOFTHEDAY[]>
   (
-      `https://localhost:7109/GetWordOfTheDay?START=${req.start}&END=${req.end}`, {
+      `http://localhost:5000/GetWordOfTheDay?START=${req.start}&END=${req.end}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
