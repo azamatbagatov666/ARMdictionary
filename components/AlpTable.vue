@@ -44,7 +44,7 @@ defineExpose({ closePanel })
 
 <template>
   <div class="flex justify-center mt-2">
-    <ClientOnly>
+   
 
     <div @click="showAlpTable = !showAlpTable" class="maindiv hidden min-[722px]:block bg-gray-200 h-[38px] w-[360.94px] dark:bg-[#101010]  p-1 cursor-pointer rounded-lg border-2 border-black dark:border-white duration-300 select-none"
     :class="{'!h-[115px] lg:!h-[131px] !w-[942.75px] lg:w-[992.78px] !shadow-none no-translate' : showAlpTable}">
@@ -104,7 +104,7 @@ defineExpose({ closePanel })
     </Transition>
 
     </div>
-  </ClientOnly>
+
   </div>
 </template>
 
