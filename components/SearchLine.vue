@@ -16,6 +16,7 @@ const todayData = ref();
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
 
+
 onBeforeMount(async () => {
   if (currentRoute.value == "/") {
     getToday();
@@ -289,8 +290,8 @@ defineExpose({ wordFromAbove, clearThePage });
 </script>
 
 <template>
-  <div class="w-full">
-    <div class="h-[269px]">
+  <div class="mt-4 w-full">
+    <div class="lg:h-[269px]">
       <Transition name="fade">
         <ArmenianKeyboard
           @click="buttonClick"
