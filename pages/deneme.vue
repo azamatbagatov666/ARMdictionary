@@ -1,17 +1,28 @@
 <script setup lang="ts">
 
 
-var isPerfect = function(num: int) {
-const a= num + 5
-	
+import { useWindowSize } from '@vueuse/core';
+const { width } = useWindowSize();
+const deneme = ref();
+
+
+
+
+const getToday =  () => {
+ console.log(width.value)
+ console.log(width.value >= 1024)
+ if (width.value <= 1024)
+ deneme.value = true;
+
 };
+
 
 </script>
 
 <template>
 <div>
-    <PhosphorIconPhone :size="32" color="#fafafa" weight="fill" />
-    <PhosphorIconHouse :size="96" class="text-white" weight="thin"></PhosphorIconHouse>
+    <PhosphorIconPhone :size="32" color="#fafafa" weight="fill" @click="getToday" />
+    <div v-if="deneme">denemelerce</div>
 </div>
 </template>
 

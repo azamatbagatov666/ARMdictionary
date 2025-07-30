@@ -13,9 +13,11 @@ const cursorEnd = ref<number>(0);
 
 const todayData = ref();
 
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
+
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
-
 
 onBeforeMount(async () => {
   if (currentRoute.value == "/") {
@@ -45,7 +47,9 @@ const clearThePage = () => {
   desword.value = "";
   keyboardOn.value = false;
   historyOn.value = false;
-  search.value?.focus();
+  if (document.activeElement !== search.value && width.value >= 1024) {
+    search.value?.focus();
+  }
 };
 
 var listOfAvailableWords: string[];
@@ -117,14 +121,18 @@ const selectTheInput = async (item: string) => {
   emit("submit-request");
   isResultBoxVisible.value = false;
   nextTick(() => {
-    search.value?.select();
+    if (width.value >= 1024) {
+      search.value?.select();
+    }
   });
 };
 
 const wordFromAbove = (newDesword: string) => {
   desword.value = newDesword;
   nextTick(() => {
-    search.value?.select();
+    if (width.value >= 1024) {
+      search.value?.select();
+    }
   });
 };
 
@@ -154,7 +162,9 @@ const keyUp = () => {
 const keyEnter = () => {
   if (currentHoverIndex.value == -1) {
     emit("submit-request");
-    search.value?.select();
+    if (width.value >= 1024) {
+      search.value?.select();
+    }
     isResultBoxVisible.value = false;
   } else {
     desword.value = resultBoxContent.value[currentHoverIndex.value];
@@ -164,7 +174,9 @@ const keyEnter = () => {
     currentHoverIndex.value = -1;
     isResultBoxVisible.value = false;
     nextTick(() => {
-      search.value?.select();
+      if (width.value >= 1024) {
+        search.value?.select();
+      }
     });
   }
 };
@@ -180,13 +192,15 @@ const toggleHistory = (event: Event) => {
 let keyboardOn = ref(false);
 
 const toggleKeyboard = (event: Event) => {
+  
+  
   event.preventDefault();
 
   keyboardOn.value = !keyboardOn.value;
 };
 
 const pushing = async (letter: string) => {
-  if (document.activeElement !== search.value) {
+  if (document.activeElement !== search.value && width.value >= 1024) {
     search.value?.focus();
   }
 
@@ -195,7 +209,9 @@ const pushing = async (letter: string) => {
     search.value.selectionStart !== undefined &&
     desword.value.length < 125
   ) {
-    //if (search.value.selectionStart)
+
+    if (width.value >= 1024) {
+      //if (search.value.selectionStart)
     //@ts-ignore
     cursorStart.value = search.value.selectionStart;
     //if (search.value.selectionEnd)
@@ -214,15 +230,25 @@ const pushing = async (letter: string) => {
       cursorStart.value + 1,
       cursorStart.value + 1
     );
+    } else {
+    search.value?.blur();
+
+    desword.value += letter
+     await nextTick();
+
+    inputChanged();
+    }
+    
   }
 };
 
 const backSpace = async () => {
-  if (document.activeElement !== search.value) {
+  if (document.activeElement !== search.value && width.value >= 1024) {
     search.value?.focus();
   }
 
-  //@ts-ignore
+  if (width.value >= 1024) {
+      //@ts-ignore
   cursorStart.value = search.value.selectionStart;
   //@ts-ignore
   cursorEnd.value = search.value.selectionEnd;
@@ -252,16 +278,35 @@ const backSpace = async () => {
         cursorStart.value - 1
       );
     }
+    
+  }
+
+  }
+    else {
+    search.value?.blur();
+
+    desword.value = desword.value.slice(0, -1);
+          inputChanged();
+
+      await nextTick();
+
   }
 };
 
 const submit = () => {
   emit("submit-request");
-  search.value?.select();
+  if (width.value >= 1024) {
+    search.value?.select();
+  } else {
+    search.value?.blur();
+  }
 };
 
 const buttonClick = (event: Event) => {
+  if (width.value >= 1024) {
   event.preventDefault();
+    
+  }
 };
 
 const cleanTheInput = (event: Event) => {
@@ -310,7 +355,7 @@ defineExpose({ wordFromAbove, clearThePage });
         class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
       >
         <div
-          class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
+          class="bg-gray-200 p-2 lg:p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton

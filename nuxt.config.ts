@@ -47,5 +47,12 @@ export default defineNuxtConfig({
   },
    nitro: {
    compatibilityDate: '2025-07-11'
-  }
+  },
+  vite: {
+    server: {
+        hmr: {
+            clientPort: 3000
+        }
+    }
+},
 });

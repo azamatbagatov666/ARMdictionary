@@ -9,6 +9,9 @@ useHead({
   title: "Ermenice Sözlük",
 });
 
+
+
+
 const desword = ref("");
 const previousDesword = ref("");
 const thereIsNoResult = ref(false);
@@ -16,6 +19,8 @@ const thereIsNoConnection = ref(false);
 const searchline = ref();
 const alpTable = ref();
 const searchHistoryStore = useSearchHistoryStore()
+
+
 
 const { $bus } = useNuxtApp();
 
@@ -125,6 +130,8 @@ const buttonClick = (event: Event) => {
 </script>
 
 <template>
+
+  
   <div class="containers">
 
     <ElementComponentsLogoBanner/>
