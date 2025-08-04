@@ -16,11 +16,11 @@ const homePageClean = () => {
 <template>
   <div class="md:!hidden">
 
-  <div class="sticky top-0 z-[54] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors duration-300 select-none">
+  <div class="sticky top-0 z-[54] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
     <NuxtLink to="/">
       <button
         @click="homePageClean"
-        class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500"
+        class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors  dark:bg-black hover:!bg-red-500"
       >
         <img
           src="/home-white.png"
@@ -31,7 +31,7 @@ const homePageClean = () => {
       </button>
     </NuxtLink>
     <div
-      class="flex items-center gap-2 cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-300 dark:bg-black hover:!bg-red-500"
+      class="flex items-center gap-2 cursor-pointer bg-gray-200 px-2 transition-[background-color]  dark:bg-black hover:!bg-red-500"
       @click="isMenuOpen = !isMenuOpen"
     >
       <span v-text="$t('navBar.menu')" class="transition-none"></span>

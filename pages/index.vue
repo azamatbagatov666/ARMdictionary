@@ -30,7 +30,11 @@ $bus.on("clear-main-page", () => {
   responseData.value = null;
   previousDesword.value = "";
   desword.value = "";
-  alpTable.value.closePanel();
+  if (alpTable.value) {
+    alpTable.value.closePanel();
+  }
+  
+
 });
 
 

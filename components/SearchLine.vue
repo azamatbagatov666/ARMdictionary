@@ -165,6 +165,10 @@ const keyEnter = () => {
     if (width.value >= 1024) {
       search.value?.select();
     }
+    else {
+    search.value?.blur();
+
+    };
     isResultBoxVisible.value = false;
   } else {
     desword.value = resultBoxContent.value[currentHoverIndex.value];
@@ -368,6 +372,9 @@ defineExpose({ wordFromAbove, clearThePage });
             <input
               type="text"
               ref="search"
+              autocapitalize="off"
+              autocorrect="off"
+              spellcheck="false"
               v-model="desword"
               class="motherinput"
               :placeholder="$t('searchLine.searching')"
@@ -375,6 +382,7 @@ defineExpose({ wordFromAbove, clearThePage });
               maxlength="125"
               @input="inputChanged"
               @keydown="keyBase($event)"
+              @keyup.esc="isResultBoxVisible = false"
             />
 
             <div
@@ -427,8 +435,8 @@ defineExpose({ wordFromAbove, clearThePage });
 
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
-        <div class="flex justify-start my-1 lg:hidden">
-          <div class="grid gap-1">
+        <div class="flex justify-center mt-2 lg:hidden">
+          <div class="grid grid-flow-col grid-rows-2 gap-1">
             <button
               class="group rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"
@@ -471,7 +479,7 @@ defineExpose({ wordFromAbove, clearThePage });
 
             <button
               v-if="todayData"
-              class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 place-items-center duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="setToday"
               @mousedown="buttonClick"
             >
@@ -491,7 +499,7 @@ defineExpose({ wordFromAbove, clearThePage });
         </div>
         <button
           v-if="todayData"
-          class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+          class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
           @click="setToday"
           @mousedown="buttonClick"
         >
