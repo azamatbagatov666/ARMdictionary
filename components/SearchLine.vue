@@ -61,7 +61,10 @@ const lcandtrimmed = computed(() => {
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
+
+      if (width.value >= 1024) {
   search.value?.focus();
+    }
 });
 
 onBeforeUnmount(() => {
@@ -313,6 +316,11 @@ const buttonClick = (event: Event) => {
   }
 };
 
+const cleanButtonClick = (event: Event) => {
+  event.preventDefault();
+
+};
+
 const cleanTheInput = (event: Event) => {
   desword.value = "";
   event.preventDefault();
@@ -391,7 +399,7 @@ defineExpose({ wordFromAbove, clearThePage });
               <Transition name="fade">
                 <button
                   @click="cleanTheInput($event)"
-                  @mousedown="buttonClick"
+                  @mousedown="cleanButtonClick"
                   class="mr-[10px] h-5"
                   v-if="desword != ''"
                 >

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useScroll } from "@vueuse/core";
+
+const target = ref<HTMLElement | null>(null);
 
 const hangmanVis = ref(0);
 const answer = ref();
@@ -7,11 +10,22 @@ const guesses = ref<string[]>([]);
 const connectionError = ref(false);
 const won = ref();
 
+import { useWindowSize } from "@vueuse/core";
+const { width } = useWindowSize();
 
 
 const letters = ["է", "թ", "փ", "ձ", "ջ", "ր", "չ", "ճ", "ժ", "ծ",
   "ք", "ո", "ե", "ռ", "տ", "ը", "ւ", "ի", "օ", "պ", "ա", "ս", "դ", "ֆ",
   "գ", "հ", "յ", "կ", "լ", "խ", "զ", "ղ", "ց", "վ", "բ", "ն", "մ", "շ"];
+
+
+const scrollToTarget = () => {
+  nextTick(() => {
+    if (target.value) {
+      target.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  })
+}
 
 const push = (letter: string) => {
   if (
@@ -22,6 +36,10 @@ const push = (letter: string) => {
     guesses.value.push(letter);
     if (answerArray.value.every((value) => guesses.value.includes(value))) {
       won.value = true;
+      if (width.value < 1430) {
+      scrollToTarget();
+    }
+
     }
     if (!answer.value.includes(letter)) {
       hangmanVis.value += 1;
@@ -33,6 +51,9 @@ const push = (letter: string) => {
   ) {
     guesses.value = guesses.value.concat(answerArray.value);
     won.value = false;
+      if (width.value < 1430) {
+      scrollToTarget();
+    }
   }
 };
 
@@ -50,13 +71,17 @@ const isCorrectButton = (letter: string) => {
 
 const newGame = async () => {
   try {
-    const  data = await $fetch(`/api/get/getHangman`, {
-    method: 'GET'
-  })
+    const data = await $fetch(`/api/get/getHangman`, {
+      method: "GET",
+    });
     if (data) {
       responseData.value = data;
       answer.value = responseData.value[0].aranan;
       answerArray.value = answer.value.split("");
+
+      if (width.value < 1430) {
+      window.scrollTo(0,0);
+    }
     }
   } catch (error) {
     connectionError.value = true;
@@ -88,7 +113,7 @@ const responseData = ref();
 
 <template>
   <div>
-    <ElementComponentsLogoBanner/>
+    <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute"/>
 
     <div
       class="h-[90vh] flex items-center justify-center"
@@ -96,12 +121,12 @@ const responseData = ref();
     >
       <ElementComponentsLoadingAnimation />
     </div>
-    <div class="sm:flex sm:justify-center">
+    <div class="min-[1430px]:flex min-[1430px]:justify-center">
       <div v-if="answer">
         <div
-          class="flex justify-center px-2 h-[380px] w-full sm:w-[254px] mx-auto mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
         >
-          <div class="hangman relative w-[250px] top-[10px]">
+          <div class="hangman relative w-[250px] min-[730px]:top-[10px]">
             <div class="absolute">
               <div class="gallows relative">
                 <div v-if="hangmanVis > 0">
@@ -171,7 +196,7 @@ const responseData = ref();
 
         <div class="keyboard" v-if="answer">
           <div
-            class="w-full inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-2 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+            class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[470px] relative border-2 border-black my-2 min-[730px]:p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
           >
             <div
               v-for="(letter, index) in letters"
@@ -205,13 +230,17 @@ const responseData = ref();
         v-text="$t('adamAsmaca.noConnection')"
       ></div>
 
-      <div v-if="won != null" class="mx-auto sm:w-0 sm:mx-0">
+      <div ref="target" v-if="won != null" class="mx-auto min-[1430px]:w-0 min-[1430px]:mx-0">
         <table
-          class="border-2 border-black rounded-lg text-lg p-2 my-2 mx-auto block w-full sm:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
+          class="border-2 border-black min-[1430px]:h-max w-full sm:w-max rounded-lg text-lg p-2 my-2 mx-auto block min-[1430px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
           v-for="item in responseData"
         >
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false" />
+            <img
+              class="w-9 h-9 mr-2"
+              src="/flags/am-flag.png"
+              draggable="false"
+            />
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="item.am"></span>
               <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
@@ -221,13 +250,21 @@ const responseData = ref();
             <td class="pr-3" v-text="item.alaN1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
+            <img
+              class="w-9 h-9 mr-2"
+              src="/flags/tr-flag.png"
+              draggable="false"
+            />
             <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
             <td class="pr-3" v-text="item.tR2"></td>
             <td class="pr-3" v-text="item.tR3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
+            <img
+              class="w-9 h-9 mr-2"
+              src="/flags/eng-flag.png"
+              draggable="false"
+            />
             <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
             <td class="pr-3" v-text="item.tR5"></td>
             <td class="pr-3" v-text="item.tR6"></td>
@@ -239,7 +276,6 @@ const responseData = ref();
 </template>
 
 <style scoped>
-
 .used-button {
   background-color: #ff0000 !important;
 }
@@ -275,13 +311,12 @@ const responseData = ref();
 
 .gallowsbody {
   width: 10px;
-  height: 330px;
   border: 3px solid black;
   display: block;
   position: absolute;
   left: 47px;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 h-[166px] min-[730px]:h-[314px];
 }
 
 .gallowsrope {
@@ -291,7 +326,7 @@ const responseData = ref();
   position: absolute;
   left: 170px;
   background-color: black;
-  @apply dark:bg-white transition-colors duration-300;
+  @apply dark:bg-white transition-colors duration-300 h-[25px] min-[730px]:h-10 left-[171px] min-[730px]:left-[170px];
 }
 
 .gallowstop {
@@ -311,74 +346,61 @@ const responseData = ref();
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 330px;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 top-[166px] min-[730px]:top-[314px] h-[10px] min-[730px]:h-[22px];
 }
 
 .head {
-  width: 50px;
-  height: 60px;
   border: 5px solid black;
   border-radius: 50%;
   display: block;
   position: absolute;
-  left: 76px;
-  @apply dark:border-white transition-colors duration-300;
+  @apply dark:border-white transition-colors duration-300 w-[26px] h-[30px] min-[730px]:w-[50px] min-[730px]:h-[60px] left-[89px] min-[730px]:left-[76px] top-[-15px] min-[730px]:top-0;
 }
 
 .torso {
   width: 6px;
-  height: 100px;
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 59px;
   left: 99px;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 h-[55px] min-[730px]:h-[100px] top-[12px] min-[730px]:top-[59px];
 }
 
 .leftleg {
   width: 6px;
-  height: 100px;
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 154px;
   left: 99px;
   transform: rotate(12deg);
   transform-origin: top;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 h-[55px] min-[730px]:h-[100px] top-[64px] min-[730px]:top-[154px];
 }
 
 .rightleg {
   width: 6px;
-  height: 100px;
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 154px;
   left: 99px;
   transform: rotate(-12deg);
   transform-origin: top;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 h-[55px] min-[730px]:h-[100px] top-[64px] min-[730px]:top-[154px];
 }
 
 .leftarm {
-  width: 100px;
   height: 6px;
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 65px;
-  left: 2px;
   transform: rotate(-50deg);
   transform-origin: 100%;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 w-[55px] min-[730px]:w-[100px] top-[20px] min-[730px]:top-[65px] left-[47px] min-[730px]:left-[2px];
 }
 
 .rightarm {
@@ -387,12 +409,11 @@ const responseData = ref();
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 65px;
   left: 102px;
   transform: rotate(50deg);
   transform-origin: 0%;
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 w-[55px] min-[730px]:w-[100px] top-[20px] min-[730px]:top-[65px];
 }
 
 .leftfoot {
@@ -401,11 +422,9 @@ const responseData = ref();
   border: 3px solid black;
   display: block;
   position: absolute;
-  top: 249px;
-  left: 53px;
   transform: rotate(8deg);
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 w-[17px] min-[730px]:w-[30px] top-[116px] min-[730px]:top-[249px] left-[76px] min-[730px]:left-[53px];
 }
 
 .rightfoot {
@@ -418,6 +437,6 @@ const responseData = ref();
   left: 121px;
   transform: rotate(-8deg);
   background-color: black;
-  @apply dark:border-white dark:bg-white transition-colors duration-300;
+  @apply dark:border-white dark:bg-white transition-colors duration-300 w-[17px] min-[730px]:w-[30px] top-[116px] min-[730px]:top-[249px] left-[111px] min-[730px]:left-[121px];
 }
 </style>

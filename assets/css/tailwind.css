@@ -9,7 +9,7 @@ body {
 
 
 
-  @apply bg-[url('/background-12.jpg')] transition-none bg-[#136570] dark:bg-[#282B30] dark:bg-[url('/background-12d.jpg')] min-h-[110vh] pb-20;
+  @apply bg-[url('/background-12.jpg')] transition-none bg-[#136570] dark:bg-[#282B30] dark:bg-[url('/background-12d.jpg')];
   background-size: auto; 
   background-attachment: fixed; 
   background-repeat: no-repeat;

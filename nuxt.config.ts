@@ -46,7 +46,8 @@ export default defineNuxtConfig({
     ],
   },
    nitro: {
-   compatibilityDate: '2025-07-11'
+   preset: 'node-server', // ✅ Ensures `server/index.mjs` is generated
+   compatibilityDate: '2025-07-11',
   },
   vite: {
     server: {

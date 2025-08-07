@@ -2,15 +2,15 @@
 import type { TDATA } from "~/models/TDATA";
 import { useSearchHistoryStore } from "~/store/search-history.store";
 
+const loading = ref(true);
 
-
+onMounted(() => {
+    loading.value = false;
+});
 
 useHead({
   title: "Ermenice Sözlük",
 });
-
-
-
 
 const desword = ref("");
 const previousDesword = ref("");
@@ -18,9 +18,7 @@ const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const searchline = ref();
 const alpTable = ref();
-const searchHistoryStore = useSearchHistoryStore()
-
-
+const searchHistoryStore = useSearchHistoryStore();
 
 const { $bus } = useNuxtApp();
 
@@ -33,32 +31,21 @@ $bus.on("clear-main-page", () => {
   if (alpTable.value) {
     alpTable.value.closePanel();
   }
-  
-
 });
-
-
-
 
 const setToday = async (todayData: TDATA[]) => {
   responseData.value = todayData;
   desword.value = todayData[0].aranan!;
-  previousDesword.value = desword.value
+  previousDesword.value = desword.value;
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
-  searchline.value.wordFromAbove(desword.value)
-
-
-
+  searchline.value.wordFromAbove(desword.value);
 };
-
 
 const wordInput = (data: string) => {
   desword.value = data;
 };
-
-
 
 const responseData = ref();
 const submit = async () => {
@@ -66,10 +53,12 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await useFetch(`/api/search/${(encodeURI(desword.value))}`,
-  {
-    method: 'GET'  
-  })
+  const { data, error } = await useFetch(
+    `/api/search/${encodeURI(desword.value)}`,
+    {
+      method: "GET",
+    }
+  );
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -78,7 +67,6 @@ const submit = async () => {
   }
   responseData.value = null;
   previousDesword.value = desword.value;
-
 
   if (
     data &&
@@ -90,20 +78,16 @@ const submit = async () => {
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     searchHistoryStore.addHistory(desword.value);
-
   } else {
     thereIsNoResult.value = true;
   }
 };
 
 const random = async () => {
-
-
   const { data, error } = await useFetch(`/api/get/getARandomWord`, {
-    method: 'GET'
-  })
+    method: "GET",
+  });
 
-  
   if (error.value) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
@@ -112,17 +96,14 @@ const random = async () => {
   }
   responseData.value = null;
 
-  if (
-    data
-  ) {
+  if (data) {
     responseData.value = data.value;
-    desword.value = responseData.value[0].aranan
+    desword.value = responseData.value[0].aranan;
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
-    searchline.value.wordFromAbove(desword.value)
+    searchline.value.wordFromAbove(desword.value);
     searchHistoryStore.addHistory(desword.value);
-
   } else {
     thereIsNoResult.value = true;
   }
@@ -134,44 +115,42 @@ const buttonClick = (event: Event) => {
 </script>
 
 <template>
-
-  
-  <div class="containers">
-
-    <ElementComponentsLogoBanner/>
-
-    <div class="flex justify-center w-full">
-    <div class="w-full">
-        <SearchLine
-      @input-changed="wordInput"
-      @submit-request="submit"
-      @random-request="random"
-      @set-today="setToday"
-      ref="searchline"
-    ></SearchLine>
-
+  <div>
+    <div class="h-[90vh] flex items-center justify-center" v-if="loading">
+      <ElementComponentsLoadingAnimation />
     </div>
-</div>
 
+    <div v-else class="containers">
+      <ElementComponentsLogoBanner />
 
-<AlpTable ref="alpTable"/>
+      <div class="flex justify-center w-full">
+        <div class="w-full">
+          <SearchLine
+            @input-changed="wordInput"
+            @submit-request="submit"
+            @random-request="random"
+            @set-today="setToday"
+            ref="searchline"
+          ></SearchLine>
+        </div>
+      </div>
 
+      <AlpTable ref="alpTable" />
 
+      <wordTable :responseData="responseData"></wordTable>
 
-    <wordTable :responseData="responseData"></wordTable>
-
-    <div
-      v-if="thereIsNoResult"
-      class="text-lg text-center mt-4 text-white font-bold"
-      v-text="$t('index.noResult')"
-    ></div>
-    <div
-      v-if="thereIsNoConnection"
-      class="text-lg text-center mt-4 text-white font-bold"
-      v-text="$t('index.noConnection')"
-    ></div>
+      <div
+        v-if="thereIsNoResult"
+        class="text-lg text-center mt-4 text-white font-bold"
+        v-text="$t('index.noResult')"
+      ></div>
+      <div
+        v-if="thereIsNoConnection"
+        class="text-lg text-center mt-4 text-white font-bold"
+        v-text="$t('index.noConnection')"
+      ></div>
+    </div>
   </div>
-
 </template>
 
 <style>
@@ -180,5 +159,6 @@ const buttonClick = (event: Event) => {
   width: 99vw;
   align-items: center;
   justify-content: center;
-  */}
+  */
+}
 </style>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 
-const languageState = useLanguageState();
+const languageState = useLanguageState() as unknown as string;
+
 
 </script>
 
