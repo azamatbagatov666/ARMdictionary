@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     "nuxt-phosphor-icons",
-    /*[
+    [
       "nuxt-mail",
       {
         message: {
@@ -23,7 +23,7 @@ export default defineNuxtConfig({
           },
         },
       },
-    ],*/
+    ],
   ],
   i18n: {
     
@@ -48,8 +48,6 @@ export default defineNuxtConfig({
    nitro: {
    preset: 'node-server',
    compatibilityDate: '2025-07-11',
-   logLevel: 3,
-
   },
   vite: {
     server: {
