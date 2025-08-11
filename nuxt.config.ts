@@ -11,15 +11,15 @@ export default defineNuxtConfig({
       "nuxt-mail",
       {
         message: {
-          to: process.env.NUXT_RECEIVER_EMAIL,
+          to: "saraerkan@hotmail.com",
         },
         smtp: {
           host: "smtp.avedikyan.com",
           port: "587",
           secure: false,
           auth: {
-            user: process.env.NUXT_SENDER_EMAIL,
-            pass: process.env.NUXT_APP_PASSWORD,
+            user: "info@avedikyan.com",
+            pass: "Sasunik0426",
           },
         },
       },
