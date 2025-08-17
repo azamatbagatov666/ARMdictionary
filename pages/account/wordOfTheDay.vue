@@ -10,8 +10,6 @@ const desword = ref("");
 const searchline = ref();
 const connectionError = ref(false);
 
-
-
 const formattedSelectedDate = computed(() => {
   if (selectedDate.value != null) {
     const parts = selectedDate.value.split("/");
@@ -61,22 +59,20 @@ const years: number[] = Array.from({ length: length }, (_, i) => 2024 + i);
 
 const getWords = async () => {
   const { data, error } = await useFetch(`/api/get/getWordOfTheDay`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      token: userStore.state.user!.token
+      token: userStore.state.user!.token,
     },
     body: {
-        start: startDateQ.value,
-        end: endDateQ.value
-      }
+      start: startDateQ.value,
+      end: endDateQ.value,
+    },
   });
   if (error.value) {
     connectionError.value = true;
   }
   connectionError.value = false;
   responseData.value = data.value;
-
-
 };
 const daysInMonth = computed(() => {
   const monthIndex = months.indexOf(currentMonth.value);
@@ -132,7 +128,7 @@ const list = async () => {
   searchResponse.value = undefined;
   desword.value = "";
 
-  searchline.value.clearThePage()
+  searchline.value.clearThePage();
 
   await getWords();
 };
@@ -175,8 +171,7 @@ const reset = async () => {
   monthSelection.value = months[new Date().getMonth()];
   yearSelection.value = new Date().getFullYear();
   connectionError.value = false;
-  searchline.value.clearThePage()
-
+  searchline.value.clearThePage();
 };
 
 const submit = async () => {
@@ -184,12 +179,15 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await useFetch(`/api/search/${encodeURI(desword.value)}/searchingNoCheck`, {
-    method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
+  const { data, error } = await useFetch(
+    `/api/search/${encodeURI(desword.value)}/searchingNoCheck`,
+    {
+      method: "GET",
+      headers: {
+        token: userStore.state.user!.token,
+      },
     }
-  });
+  );
   if (error.value) {
     noresult.value = "Bağlantı sorunu.";
 
@@ -212,8 +210,8 @@ const wordInput = (data: string) => {
 
 const random = async () => {
   const { data, error } = await useFetch(`/api/get/getARandomWord`, {
-    method: 'GET'
-  })
+    method: "GET",
+  });
   if (error.value) {
     return;
   }
@@ -222,49 +220,40 @@ const random = async () => {
   if (data) {
     searchResponse.value = data.value;
     desword.value = searchResponse.value[0].aranan;
-    searchline.value.wordFromAbove(desword.value)
+    searchline.value.wordFromAbove(desword.value);
   } else {
   }
 };
 
-
-
 const deleteTheWord = async (date: string) => {
-      try {
-        const response = await $fetch<boolean>(`/api/account/update/deleteFromWordOfTheDay/${(encodeURIComponent(date))}`,
-  {
-    method: 'POST',
-    headers: {
-        token: userStore.state.user!.token
-    },
-    })
+  try {
+    const response = await $fetch<boolean>(
+      `/api/account/update/deleteFromWordOfTheDay/${encodeURIComponent(date)}`,
+      {
+        method: "POST",
+        headers: {
+          token: userStore.state.user!.token,
+        },
+      }
+    );
 
-  
-
-        if (response) {
-          responseData.value[getIndex(date)].aranan = ""
-          responseData.value[getIndex(date)].date = ""
-
-        }
-      } catch (error) {}
-  
+    if (response) {
+      responseData.value[getIndex(date)].aranan = "";
+      responseData.value[getIndex(date)].date = "";
+    }
+  } catch (error) {}
 };
 
 const save = async () => {
-
   if (dayData.date !== undefined && dayData.worD_ID !== null) {
     try {
-
-      const response = await $fetch<boolean>(
-          `/api/account/update/addToDay`,
-          {
-            method: "POST",
-            headers: {
-              token: userStore.state.user!.token,
-            },
-            body: dayData,
-          }
-        );
+      const response = await $fetch<boolean>(`/api/account/update/addToDay`, {
+        method: "POST",
+        headers: {
+          token: userStore.state.user!.token,
+        },
+        body: dayData,
+      });
 
       if (response) {
         alert("Sonuç başarıyla eklendi.");
@@ -290,51 +279,147 @@ onBeforeMount(() => {
   }, 500);
 });
 
-
 const setSDate = (date: string) => {
-     selectedDate.value = date;
+  selectedDate.value = date;
 
-     console.log(responseData.value[getIndex(selectedDate.value)])
-  
 };
 
+const tempPanel = ref(false);
+const tempAranan = ref("");
+const tempTr1 = ref("");
+const tempTr4 = ref("");
+const openTemplatePanel = () => {
+  if (selectedDate.value) {
+    tempAranan.value =
+      responseData.value[getIndex(selectedDate.value)].aranan
+        .slice(0, 1)
+        .toUpperCase() +
+      responseData.value[getIndex(selectedDate.value)].aranan.slice(1);
+    tempTr4.value =
+      responseData.value[getIndex(selectedDate.value)].tR4
+        .slice(0, 1)
+        .toUpperCase() +
+      responseData.value[getIndex(selectedDate.value)].tR4.slice(1);
+    tempTr1.value =
+      responseData.value[getIndex(selectedDate.value)].tR1
+        .slice(0, 1)
+        .toLocaleUpperCase("TR") +
+      responseData.value[getIndex(selectedDate.value)].tR1.slice(1);
+  }
 
+
+  tempPanel.value = true;
+};
+
+import html2canvas from "html2canvas";
+
+const image = ref();
+
+const exportAsJpg = async () => {
+  const canvas = await html2canvas(image.value, { useCORS: true });
+  const link = document.createElement("a");
+  if(selectedDate.value)
+  link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
+  link.href = canvas.toDataURL("image/jpeg", 1.0); // quality 1.0 (max)
+  link.click();
+};
 </script>
 
 <template>
   <div v-if="isLogged" class="containers">
-
-    <div v-if="selectedDate != null && responseData[getIndex(selectedDate)]" class="absolute top-36">
-      <div class="flex justify-center xl:text-lg font-bold">Seçilen Güne Kaydedilmiş Sözcük</div>
-        <table
-          class="border-2 border-black rounded-lg text-lg p-2 my-2 mx-auto block w-[256px] xl:w-[350px] min-[1750px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
-          
-        >
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
-            <td class="font-bold pr-3">
-              <span class="text-red-500" v-text="responseData[getIndex(selectedDate)].aM"></span>
-              <span class="ml-1 font-normal" v-text="`(${responseData[getIndex(selectedDate)].okunus})`"></span>
-            </td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].aM1"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].alaN2"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].alaN1"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
-            <td class="pr-3 font-bold text-red-500" v-text="responseData[getIndex(selectedDate)].tR1"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR2"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR3"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false" />
-            <td class="pr-3 font-bold text-red-500" v-text="responseData[getIndex(selectedDate)].tR4"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR5"></td>
-            <td class="pr-3" v-text="responseData[getIndex(selectedDate)].tR6"></td>
-          </tr>
-        </table>
+    <div
+      v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
+      class="absolute top-36"
+    >
+      <div class="flex justify-center xl:text-lg font-bold">
+        Seçilen Güne Kaydedilmiş Sözcük
       </div>
+      <table
+        class="border-2 border-black rounded-lg text-lg p-2 my-2 mx-auto block w-[256px] xl:w-[350px] min-[1750px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      >
+        <tbody>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/am-flag.png"
+                draggable="false"
+              />
+            </td>
+            <td class="font-bold pr-3">
+              <span
+                class="text-red-500"
+                v-text="responseData[getIndex(selectedDate)].aM"
+              ></span>
+              <span
+                class="ml-1 font-normal"
+                v-text="`(${responseData[getIndex(selectedDate)].okunus})`"
+              ></span>
+            </td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].aM1"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].alaN2"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].alaN1"
+            ></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/tr-flag.png"
+                draggable="false"
+              />
+            </td>
+            <td
+              class="pr-3 font-bold text-red-500"
+              v-text="responseData[getIndex(selectedDate)].tR1"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].tR2"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].tR3"
+            ></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/eng-flag.png"
+                draggable="false"
+              />
+            </td>
+            <td
+              class="pr-3 font-bold text-red-500"
+              v-text="responseData[getIndex(selectedDate)].tR4"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].tR5"
+            ></td>
+            <td
+              class="pr-3"
+              v-text="responseData[getIndex(selectedDate)].tR6"
+            ></td>
+          </tr>
+        </tbody>
+      </table>
 
+      <ElementComponentsCustomButton
+        @click="openTemplatePanel"
+        class="hover:bg-red-500 mx-auto block mt-4"
+        text="Şablonu Görüntüle"
+      />
+    </div>
 
     <div class="flex items-center mb-1 mt-2">
       <ElementComponentsReturnButton @click="reset()" class="ml-2 absolute" />
@@ -370,52 +455,50 @@ const setSDate = (date: string) => {
       class="lostTable mx-auto table-auto transition-colors duration-300 my-4 text-black dark:text-white"
       v-if="responseData"
     >
-      <tr
-      class="bg-gray-300 dark:bg-[#262a2f] "
-      >
-        <th class="w-36">Tarih</th>
-        <th class="w-36">Gün</th>
-        <th class="w-36 md:w-48 min-[1440px]:w-96">Sözcük</th>
-        <th class="w-12">Sil</th>
-      </tr>
-      <tr
-        v-for="dateObject in dates"
-        class="cursor-pointer h-[30px] even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
-        :class="{
-          'dark:!bg-green-500 !bg-[rgb(255,165,100)]':
-            selectedDate == dateObject.date,
-        }"
-        @click="setSDate(dateObject.date)"
-      >
-        <td v-text="dateObject.date"></td>
-        <td v-text="dateObject.dayOfWeek"></td>
-        <td>
-          <span
-            v-if="
-              selectedDate == dateObject.date && searchResponse && selectedRadio
-            "
-            v-text="searchResponse[0].aranan"
-          ></span>
-          <span
-            v-else-if="getIndex(dateObject.date) !== -1"
-            v-text="responseData[getIndex(dateObject.date)].aranan"
-          ></span>
-        </td>
-        <td class="max-h-[30px]">
-          <img @click.stop="deleteTheWord(dateObject.date)"
-            src="/trash.png"
-            v-if="getIndex(dateObject.date) !== -1"
-            class="size-[27px] bg-white rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
-            draggable="false"/>
-        </td>
-
-
-
-      </tr>
+      <tbody>
+        <tr class="bg-gray-300 dark:bg-[#262a2f]">
+          <th class="w-36">Tarih</th>
+          <th class="w-36">Gün</th>
+          <th class="w-36 md:w-48 min-[1440px]:w-96">Sözcük</th>
+          <th class="w-12">Sil</th>
+        </tr>
+        <tr
+          v-for="dateObject in dates"
+          class="cursor-pointer h-[30px] even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
+          :class="{
+            'dark:!bg-green-500 !bg-[rgb(255,165,100)]':
+              selectedDate == dateObject.date,
+          }"
+          @click="setSDate(dateObject.date)"
+        >
+          <td v-text="dateObject.date"></td>
+          <td v-text="dateObject.dayOfWeek"></td>
+          <td>
+            <span
+              v-if="
+                selectedDate == dateObject.date &&
+                searchResponse &&
+                selectedRadio
+              "
+              v-text="searchResponse[0].aranan"
+            ></span>
+            <span
+              v-else-if="getIndex(dateObject.date) !== -1"
+              v-text="responseData[getIndex(dateObject.date)].aranan"
+            ></span>
+          </td>
+          <td class="max-h-[30px]">
+            <img
+              @click.stop="deleteTheWord(dateObject.date)"
+              src="/trash.png"
+              v-if="getIndex(dateObject.date) !== -1"
+              class="size-[27px] bg-white rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
+              draggable="false"
+            />
+          </td>
+        </tr>
+      </tbody>
     </table>
-
-
-
 
     <div
       v-show="selectedDate"
@@ -427,7 +510,6 @@ const setSDate = (date: string) => {
         @submit-request="submit"
         @random-request="random"
         ref="searchline"
-
       ></SearchLine>
 
       <table
@@ -435,50 +517,70 @@ const setSDate = (date: string) => {
         v-for="item in searchResponse"
         :key="item.worD_ID"
       >
-        <tr class="h-10">
-          <td>
-            <label class="ml-2">
-              <input
-                type="radio"
-                name="wordSelection"
-                v-model="selectedRadio"
-                :value="item.worD_ID"
+        <tbody>
+          <tr class="h-10">
+            <td>
+              <label class="ml-2">
+                <input
+                  type="radio"
+                  name="wordSelection"
+                  v-model="selectedRadio"
+                  :value="item.worD_ID"
+                />
+                <span class="text-purple-500 font-bold"
+                  >Sözcüğü seçmek için tıklayın.</span
+                >
+              </label>
+            </td>
+          </tr>
+          <tr
+            class="h-10 text-purple-500 font-bold ml-2"
+            v-text="`Sözcük numarası: ${item.worD_ID}`"
+          ></tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/am-flag.png"
+                draggable="false"
               />
-              <span class="text-purple-500 font-bold"
-                >Sözcüğü seçmek için tıklayın.</span
-              >
-            </label>
-          </td>
-        </tr>
-        <tr
-          class="h-10 text-purple-500 font-bold ml-2"
-          v-text="`Sözcük numarası: ${item.worD_ID}`"
-        ></tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
-          <td class="font-bold text-red-500 pr-3">
-            <span v-text="item.am"></span>
-            <span
-              class="ml-1 font-normal text-black dark:text-white"
-              v-text="`(${item.okunus})`"
-            ></span>
-          </td>
-          <td class="pr-3" v-text="item.aM1"></td>
-          <td class="pr-3" v-text="item.alaN2"></td>
-          <td class="pr-3" v-text="item.alaN1"></td>
-        </tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
-          <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-          <td class="pr-3" v-text="item.tR2"></td>
-          <td class="pr-3" v-text="item.tR3"></td>
-        </tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
-          <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-          <td class="pr-3" v-text="item.tR5"></td>
-          <td class="pr-3" v-text="item.tR6"></td>
-        </tr>
+            </td>
+            <td class="font-bold text-red-500 pr-3">
+              <span v-text="item.am"></span>
+              <span
+                class="ml-1 font-normal text-black dark:text-white"
+                v-text="`(${item.okunus})`"
+              ></span>
+            </td>
+            <td class="pr-3" v-text="item.aM1"></td>
+            <td class="pr-3" v-text="item.alaN2"></td>
+            <td class="pr-3" v-text="item.alaN1"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/tr-flag.png"
+                draggable="false"
+              />
+            </td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
+            <td class="pr-3" v-text="item.tR2"></td>
+            <td class="pr-3" v-text="item.tR3"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <img
+                class="w-9 h-9 mr-2"
+                src="/flags/eng-flag.png"
+                draggable="false"
+              />
+            </td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
+            <td class="pr-3" v-text="item.tR5"></td>
+            <td class="pr-3" v-text="item.tR6"></td>
+          </tr>
+        </tbody>
       </table>
 
       <div
@@ -495,12 +597,60 @@ const setSDate = (date: string) => {
     </div>
   </div>
 
-  <div v-if="connectionError && !responseData" class="text-3xl flex items-center justify-center h-[85vh]">
-        Bağlantı Sorunu
+  <div
+    v-if="connectionError && !responseData"
+    class="text-3xl flex items-center justify-center h-[85vh]"
+  >
+    Bağlantı Sorunu
+  </div>
+
+  <div
+    v-if="tempPanel && responseData && selectedDate"
+    class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 select-none"
+  >
+    <div class="bg-white p-6 rounded-lg w-[900px] h-[792px]">
+
+            <div class="text-black text-5xl font-bold flex justify-end" @click="tempPanel = false">
+              <div class="border-black border px-[5px] pb-[2px] cursor-pointer rounded-lg hover:bg-red-500" v-text="'&#x2715'"></div>
+
       </div>
+
+      <div class="flex justify-center mt-2">
+        <div class="relative font-[Calibri] inline-block" ref="image">
+          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px] pointer-events-none" draggable="false"/>
+          <span
+            class="absolute text-6xl top-20 transform left-8 w-[736px]"
+            v-text="tempAranan"
+          ></span>
+          <span
+            class="absolute text-5xl top-[320px] left-8 w-[736px]"
+            v-text="tempTr1"
+          ></span>
+          <span
+            class="absolute text-5xl top-[426px] left-8 w-[552px]"
+            v-text="tempTr4"
+          ></span>
+          <span
+            class="absolute text-4xl top-56 left-[352px] w-[416px]"
+            v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
+          ></span>
+        </div>
+      </div>
+
+      <ElementComponentsCustomButton
+        @click="exportAsJpg"
+        class="hover:bg-red-500 mx-auto block mt-4"
+        text="İndir"
+      />
+
+
+    </div>
+  </div>
 </template>
 
 <style scoped>
+
+
 .lostTable td,
 .lostTable tr,
 .lostTable th {

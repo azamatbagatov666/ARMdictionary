@@ -301,8 +301,11 @@ const resetData = () => {
         <table
           class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
         >
+        <tbody>
           <tr class="mb-3 flex flex-wrap">
+            <td>
             <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
+            </td>
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="data.am"></span>
               <span
@@ -315,17 +318,22 @@ const resetData = () => {
             <td class="pr-3" v-text="data.alan1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap">
+            <td>
             <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
+            </td>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
             <td class="pr-3" v-text="data.tr2"></td>
             <td class="pr-3" v-text="data.tr3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap">
+            <td>
             <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
+            </td>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
             <td class="pr-3" v-text="data.tr5"></td>
             <td class="pr-3" v-text="data.tr6"></td>
           </tr>
+          </tbody>
         </table>
         <ElementComponentsCustomButton
           text="Sözcüğü Sözlüğe Ekle"

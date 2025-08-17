@@ -122,6 +122,7 @@ watch(selectedListWord, (newValue) => {
 
       <div v-if="responseData.length > 0">
         <table class="lostTable mx-auto table-auto w-[50%] text-black dark:text-white">
+          <tbody>
           <tr
           class="bg-gray-300 dark:bg-[#262a2f] "
           
@@ -157,6 +158,7 @@ watch(selectedListWord, (newValue) => {
             <td class="border" v-text="item.aranan"></td>
             <td class="border" v-text="item.date"></td>
           </tr>
+          </tbody>
         </table>
 
         <ElementComponentsCustomButton

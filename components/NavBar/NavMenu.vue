@@ -128,7 +128,7 @@ const logoutClicked = () => {
                             </NuxtLink>
                             <NuxtLink to="/account/wordOfTheDay">
                                 <li>
-                                    Günün Sözcüğü
+                                    Günün Kelimesi
                                 </li>
                             </NuxtLink>
                                 <li class="cursor-pointer" @click="logoutClicked()">

@@ -53,7 +53,7 @@ defineExpose({ closePanel })
     <Transition>
 
       <table @click.stop v-if="showAlpTable" class="alpTable table-fixed text-xs lg:text-sm text-black dark:text-white transition-all !cursor-default"
-      >
+      ><tbody>
         <tr>
           <td v-for="(letter, index) in letters" class="w-6 text-center   dark:bg-[rgb(128,128,128)] bg-[#f2f2f2]"
             v-text="letter">
@@ -73,6 +73,7 @@ defineExpose({ closePanel })
             v-text="letter">
           </td>
         </tr>
+        </tbody>
       </table>
     </Transition>
 
