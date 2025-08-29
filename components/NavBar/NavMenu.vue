@@ -83,6 +83,11 @@ const logoutClicked = () => {
                                 </li>
                             </NuxtLink>
 
+                                 <NuxtLink to="/faydalibilgiler">
+                                <li v-text="$t('navBar.documents')">
+                                </li>
+                            </NuxtLink>
+
                             <NuxtLink to="/iletisim">
                                 <li v-text="$t('navBar.contact')">
                                 </li>

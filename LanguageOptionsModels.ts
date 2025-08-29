@@ -39,12 +39,14 @@ export const searchHistoryAm = {
 export const navBarEn = {
   menu: "Menu",
   hangman: "Hangman",
+  documents: "Useful Information",
   contact: "Contact",
 };
 
 export const navBarTr = {
   menu: "Menü",
   hangman: "Adam Asmaca",
+  documents: "Faydalı Bilgiler",
   contact: "İletişim",
 
 };
@@ -52,6 +54,7 @@ export const navBarTr = {
 export const navBarAm = {
   menu: "Ցուցակ",
   hangman: "Կախաղան",
+  documents: "Յաւելեալ Գիտելիքներ",
   contact: "Մեր Հասցէն",
 
 };

@@ -44,7 +44,7 @@ const homePageClean = () => {
     </div>
   </div>
   <div class="theMenu h-0 z-[999] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
-  :class="{'h-36':isMenuOpen}">
+  :class="{'h-48':isMenuOpen}">
   <Transition>
 
     <nav v-show="isMenuOpen">
@@ -54,6 +54,11 @@ const homePageClean = () => {
         <NuxtLink to="/adamasmaca">
           <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black"></li>
         </NuxtLink>
+
+            <NuxtLink to="/faydalibilgiler">
+          <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black"></li>
+        </NuxtLink>
+
 
         <NuxtLink to="/iletisim">
           <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black"></li>

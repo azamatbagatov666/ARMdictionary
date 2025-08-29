@@ -420,8 +420,8 @@ defineExpose({ wordFromAbove, clearThePage });
               <img src="/glass.png" width="30" height="30" draggable="false" />
             </button>
           </div>
-          <div class="resultBox dark:text-black" v-show="isResultBoxVisible">
-            <ul>
+          <div class="resultBox max-h-[225px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
+            <ul class="">
               <li
                 @click="selectTheInput(item)"
                 v-for="(item, index) in resultBoxContent"
@@ -631,11 +631,15 @@ defineExpose({ wordFromAbove, clearThePage });
 .resultBox {
   position: absolute;
   background-color: white;
-  @apply w-[calc(100%_-_50px)] sm:w-[482px] md:w-[602px];
+  @apply w-[calc(100%_-_17px)] sm:w-[482px] md:w-[602px];
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
   border-width: 1px;
   border-radius: 20px;
   margin-top: 4px;
+  overflow-y: auto;
+  
+
+  
 }
 
 .resultBox ul li {
@@ -644,7 +648,10 @@ defineExpose({ wordFromAbove, clearThePage });
   cursor: pointer;
 }
 
+
 .resultBox ul li.highlighted {
   background: #e9f3ff;
 }
+
+
 </style>

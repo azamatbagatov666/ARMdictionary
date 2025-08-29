@@ -153,7 +153,7 @@ const buttonClick = (event: Event) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .containers {
   /*
   width: 99vw;
