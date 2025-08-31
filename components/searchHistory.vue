@@ -2,7 +2,6 @@
 import { useSearchHistoryStore } from "~/store/search-history.store";
 
 const searchHistoryStore = useSearchHistoryStore();
-const languageState = useLanguageState();
 
 const emit = defineEmits<{
   (e: "history-selected", data: string): void;

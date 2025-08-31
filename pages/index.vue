@@ -8,9 +8,14 @@ onMounted(() => {
     loading.value = false;
 });
 
+
+const { t } = useI18n();
+
+const title = computed(() => t('title.index'))
 useHead({
-  title: "Ermenice Sözlük",
+  title
 });
+
 
 const desword = ref("");
 const previousDesword = ref("");
@@ -142,12 +147,12 @@ const buttonClick = (event: Event) => {
       <div
         v-if="thereIsNoResult"
         class="text-lg text-center mt-4 text-white font-bold"
-        v-text="$t('index.noResult')"
+        v-text="t('index.noResult')"
       ></div>
       <div
         v-if="thereIsNoConnection"
         class="text-lg text-center mt-4 text-white font-bold"
-        v-text="$t('index.noConnection')"
+        v-text="t('index.noConnection')"
       ></div>
     </div>
   </div>

@@ -17,8 +17,7 @@ onMounted(async () => {
 </script>
 
 <template>
-<!--- 
--->
+
 
 <div>
 <NavBarNavMenu class="hidden md:flex"/>

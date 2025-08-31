@@ -1,3 +1,25 @@
+export const titleEn = {
+  index: "AVEDIKYAN - Turkish Armenian English Dictionary",
+  adamasmaca: "AVEDIKYAN - Hangman",
+  faydalibilgiler: "AVEDIKYAN - Useful Information",
+  iletisim: "AVEDIKYAN - Contact",
+};
+
+export const titleTR = {
+  index: "AVEDİKYAN - Türkçe Ermenice İngilizce Sözlük",
+  adamasmaca: "AVEDİKYAN - Adam Asmaca",
+  faydalibilgiler: "AVEDİKYAN - Faydalı Bilgiler",
+  iletisim: "AVEDİKYAN - İletişim",
+};
+
+export const titleAm = {
+  index: "Աւետիքեան - Թրքերէն Հայերէն Անգլերէն Բառարան",
+  adamasmaca: "Աւետիքեան - Կախաղան",
+  faydalibilgiler: "Աւետիքեան - Յաւելեալ Գիտելիքներ",
+  iletisim: "Աւետիքեան - Մեր Հասցէն",
+};
+
+
 export const searchLineEn = {
   searching: "Search a word.",
   keyboardButton: "Armenian Keyboard",
@@ -138,7 +160,6 @@ export const adamAsmacaEn = {
     subjectError: "Lütfen geçerli konu başlığı giriniz",
     messageError: "Lütfen en az 30 karakter uzunluğunda bir mesaj yazınız",
     success: "Mesajınız tarafımıza başarıyla ulaşmıştır.",
-
   };
 
   export const contactAm = {
@@ -152,7 +173,6 @@ export const adamAsmacaEn = {
     subjectError: "Կը խնդրենք, որ վաւեր վերնագիր մը գրէք։",
     messageError: "Կը խնդրենք, որ առնուազն 30 նշան ունեցող հաղորդագրութիւն մը գրէք։",
     success: "Ձեր հաղորդագրութիւնը յաջողութեամբ հասած է մեզի։",
-
   };
 
 
@@ -164,6 +184,7 @@ export const EnglishLanguageOptions = {
   index: indexEn,
   alpTable: alpTableEn,
   contact: contactEn,
+  title: titleEn,
 };
 
 export const TurkishLanguageOptions = {
@@ -174,6 +195,8 @@ export const TurkishLanguageOptions = {
   index: indexTr,
   alpTable: alpTableTr,
   contact: contactTr,
+  title: titleTR,
+
 
 };
 
@@ -185,5 +208,7 @@ export const ArmenianLanguageOptions = {
   index: indexAm,
   alpTable: alpTableAm,
   contact: contactAm,
+  title: titleAm,
+
 
 };

@@ -5,3 +5,7 @@ mail
 definemodel sorunu custominput
 
 
+f5 armenian logo
+f5 dark mode bug
+
+

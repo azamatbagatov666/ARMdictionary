@@ -23,3 +23,4 @@ logs
 .env.*
 !.env.example
 pages/deneme.vue
+yapılacaklar.txt

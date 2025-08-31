@@ -1,5 +1,13 @@
 <script setup lang="ts">
 
+
+const { t } = useI18n();
+
+const title = computed(() => t('title.adamasmaca'))
+useHead({
+  title
+});
+
 const target = ref<HTMLElement | null>(null);
 
 const hangmanVis = ref(0);
@@ -158,11 +166,11 @@ const responseData = ref();
 
         <div class="text-center text-lg mt-1">
           <span v-text="8 - hangmanVis"></span
-          ><span v-text="$t('adamAsmaca.rightsLeft')"></span>
+          ><span v-text="t('adamAsmaca.rightsLeft')"></span>
         </div>
         <div class="text-center text-red-500 font-bold h-7 text-lg">
-          <div v-show="won" v-text="$t('adamAsmaca.win')"></div>
-          <div v-show="won == false" v-text="$t('adamAsmaca.lose')"></div>
+          <div v-show="won" v-text="t('adamAsmaca.win')"></div>
+          <div v-show="won == false" v-text="t('adamAsmaca.lose')"></div>
         </div>
 
         <div class="h-16 flex justify-center">
@@ -220,13 +228,13 @@ const responseData = ref();
         <ElementComponentsCustomButton
           class="mx-auto block w-28"
           @click="clear"
-          v-text="$t('adamAsmaca.reset')"
+          v-text="t('adamAsmaca.reset')"
         />
       </div>
       <div
         v-else-if="connectionError"
         class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
-        v-text="$t('adamAsmaca.noConnection')"
+        v-text="t('adamAsmaca.noConnection')"
       ></div>
 
       <div ref="target" v-if="won != null" class="mx-auto min-[1430px]:w-0 min-[1430px]:mx-0">

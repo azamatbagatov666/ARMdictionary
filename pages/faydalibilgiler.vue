@@ -1,6 +1,15 @@
 <script setup lang="ts">
 const sideMenu = ref(true);
 
+const { t } = useI18n();
+
+const title = computed(() => t('title.faydalibilgiler'))
+useHead({
+  title
+});
+
+
+
 
 
 const htmlContent = ref<string >();
@@ -16,7 +25,7 @@ const { height: elHeight } = useElementSize(el);
 
 const pageChanged = async (content: ARTICLES) => {
   if (htmlContent.value != content.html) {
-    
+  
 
   htmlContent.value = content.html;
   currentPage.value = content.tag;
@@ -71,7 +80,6 @@ const scrollToTop =  () => {
 <template>
 
 
-
           <div
       class="h-[90vh] flex items-center justify-center"
       v-if="!articleData && !connectionError"
@@ -82,7 +90,7 @@ const scrollToTop =  () => {
             <div
         v-else-if="connectionError"
         class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
-        v-text="$t('adamAsmaca.noConnection')"
+        v-text="t('adamAsmaca.noConnection')"
       ></div>
 
           <Transition name="slide-fade">
@@ -126,28 +134,29 @@ const scrollToTop =  () => {
 </div>
 
       </Transition>
-
 </template>
 
 <style scoped>
-/* Define the slide and fade transition effects */
+
+
+
 .slide-fade-enter-active, .slide-fade-leave-active {
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
-.slide-fade-enter, .slide-fade-leave-to /* .slide-fade-leave-active in <2.1.8 */ {
-  transform: translateX(-100%); /* Start off-screen to the left */
-  opacity: 0; /* Hidden */
+.slide-fade-enter, .slide-fade-leave-to  {
+  transform: translateX(-100%);
+  opacity: 0; 
 }
 
 .slide-fade-enter-to {
-  transform: translateX(0); /* Slide into view */
-  opacity: 1; /* Fully visible */
+  transform: translateX(0); 
+  opacity: 1;
 }
 
 .slide-fade-leave {
-  transform: translateX(0); /* Start from current position */
-  opacity: 1; /* Fully visible */
+  transform: translateX(0); 
+  opacity: 1; 
 }
 
 
