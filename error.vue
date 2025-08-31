@@ -10,10 +10,6 @@
   >
     <NavBarNavMenu/>
     
-    <div class="justify-end items-center flex gap-2">
-      <NavBarToggleSwitch />
-      <NavBarLanguageOption />
-    </div>
   </div>
 
   <div class="text-3xl flex items-center justify-center h-[85vh]">
