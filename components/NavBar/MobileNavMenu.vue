@@ -7,6 +7,7 @@ const currentRoute = computed(() => router.currentRoute.value.path);
 const { $bus } = useNuxtApp();
 
 const homePageClean = () => {
+  isMenuOpen.value = false;
   if (currentRoute.value == "/") {
     $bus.emit("clear-main-page");
   }
