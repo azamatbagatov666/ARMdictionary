@@ -52,16 +52,16 @@ const homePageClean = () => {
         <li class="flex justify-between"><NavBarLanguageOption /><NavBarToggleSwitch/></li>
 
         <NuxtLink to="/adamasmaca">
-          <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black"></li>
+          <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
         </NuxtLink>
 
             <NuxtLink to="/faydalibilgiler">
-          <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black"></li>
+          <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
         </NuxtLink>
 
 
         <NuxtLink to="/iletisim">
-          <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black"></li>
+          <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
         </NuxtLink>
 
 

@@ -6,15 +6,28 @@ const sideMenu = ref(true);
 const htmlContent = ref<string >();
 const currentPage = ref<string >();
 const connectionError = ref(false);
+const { x, y } = useWindowScroll()
+const { width, height } = useWindowSize()
+
+const el = useTemplateRef('el')
+const { height: elHeight } = useElementSize(el);
+
 
 
 const pageChanged = async (content: ARTICLES) => {
+  if (htmlContent.value != content.html) {
+    
+
   htmlContent.value = content.html;
   currentPage.value = content.tag;
   x.value = 0;
   y.value = 0;
+
+  if (width.value < 1024) {
+    sideMenu.value = false;
+  };
   
-};
+  }};
 
 import type { ARTICLES } from "~/models/ARTICLES";
 const articleData = ref<ARTICLES[] | null>(null);
@@ -43,11 +56,6 @@ import { useWindowScroll, useWindowSize, useElementSize } from '@vueuse/core'
 import { useTemplateRef } from 'vue'
 
 
-const { x, y } = useWindowScroll()
-const { height } = useWindowSize()
-
-const el = useTemplateRef('el')
-const { height: elHeight } = useElementSize(el);
 
 
 const scrollToTop =  () => {
@@ -96,7 +104,7 @@ const scrollToTop =  () => {
   </div>
 </div>
 
-    <div ref="el" class="text-white mx-auto px-px min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300  rounded-lg my-4 w-full min-[880px]:w-5/6" v-if="htmlContent">
+    <div ref="el" class="text-white mx-auto px-2 min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300  rounded-lg my-4 w-full min-[880px]:w-5/6" v-if="htmlContent">
       <div class="flex justify-center">
         <Transition name="fade" mode="out-in" appear>
 
@@ -173,7 +181,7 @@ const scrollToTop =  () => {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  z-index: 1000;
+  z-index: 19;
 }
 
 .button:hover {
@@ -188,7 +196,7 @@ const scrollToTop =  () => {
   height: 100%;
   @apply w-full min-[500px]:w-[500px] bg-gray-300 dark:bg-[#111] select-none text-lg;
   position: fixed;
-  z-index: 1;
+  z-index: 20;
   top: 0;
   left: 0;
   overflow: hidden;

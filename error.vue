@@ -2,18 +2,32 @@
 
 
 
+onBeforeMount(() => {
+      navigateTo("/");
+});
+
+
+
+
 </script>
 
 <template>
-  <div
-    class="sticky top-0 z-[55] bg-gray-200 h-12 flex justify-between dark:bg-black transition-colors duration-300 w-full"
-  >
-    <NavBarNavMenu/>
-    
-  </div>
+  <div class="hidden">
 
-  <div class="text-3xl flex items-center justify-center h-[85vh]">
-        Aradığınız sayfa bulunamadı.
+<NavBarNavMenu class="hidden md:flex"/>
+
+<NavBarMobileNavMenu/>
+
+        <ElementComponentsLogoBanner />
+
+
+  <div class="text-3xl grid items-center text-center justify-center h-[85vh]">
+        <div>Aradığınız sayfa bulunamadı.</div>
+        <div>Ձեր պահանջած էջը չգտնուեցաւ։</div>
+        <div>The page you requested was not found.</div>
       </div>
+
+      </div>
+   
       
       </template>
