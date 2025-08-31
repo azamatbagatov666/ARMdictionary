@@ -1,3 +1,3 @@
 export $(grep -v '^#' .env | xargs)
 
-nohup npm run start &
+pm2 start npm --name "vapish" -- run start
