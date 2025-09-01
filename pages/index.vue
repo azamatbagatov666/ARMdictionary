@@ -59,7 +59,7 @@ const submit = async () => {
   }
 
   const { data, error } = await useFetch(
-    `/api/search/${encodeURI(desword.value)}`,
+    `/api/search/${encodeURIComponent(desword.value)}`,
     {
       method: "GET",
     }

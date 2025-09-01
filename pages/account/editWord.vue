@@ -25,7 +25,7 @@ const submit = async () => {
     return;
   }
   const { data, error } = await useFetch(
-    `/api/search/${encodeURI(desword.value)}/searchingNoCheck`,
+    `/api/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
     {
       method: "GET",
       headers: {

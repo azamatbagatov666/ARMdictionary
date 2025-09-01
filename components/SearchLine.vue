@@ -93,7 +93,7 @@ const inputChanged = async () => {
 
   if (lcandtrimmed.value.length >= 3) {
     const { data, error } = await useFetch(
-      `/api/search/${encodeURI(lcandtrimmed.value)}/suggestions`,
+      `/api/search/${encodeURIComponent(lcandtrimmed.value)}/suggestions`,
       {
         method: "GET",
       }
@@ -105,7 +105,7 @@ const inputChanged = async () => {
     if (data) listOfAvailableWords = [...(<[]>data.value)];
 
     result = listOfAvailableWords.filter((keyword) => {
-      return keyword.toLowerCase().startsWith(lcandtrimmed.value);
+      return keyword.toLowerCase();  //.startsWith(lcandtrimmed.value) for no regex
     });
 
     currentHoverIndex.value = -1;
