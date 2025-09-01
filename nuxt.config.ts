@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@pinia/nuxt",
     "@nuxtjs/i18n",
-    "nuxt-phosphor-icons",
     [
       "nuxt-mail",
       {
@@ -14,7 +13,7 @@ export default defineNuxtConfig({
           to: process.env.NUXT_RECEIVER_EMAIL,
         },
         smtp: {
-          host: "smtp.avedikyan.com",
+          host: "smtp.google.com",
           port: "587",
           secure: false,
           auth: {
