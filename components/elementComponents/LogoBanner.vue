@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 
 const languageStore = useLanguageState()
+onMounted(() => {
 
 const savedLanguage = localStorage.getItem('language')
 if (savedLanguage) {
 languageStore.value = savedLanguage
-}
+}});
 
 </script>
 

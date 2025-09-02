@@ -32,7 +32,7 @@ const changeLanguage = async (lang: string) => {
 <style scoped>
 
 .image {
-  @apply mr-1 cursor-pointer rounded-[50%] w-9 h-9 inline;
+  @apply mr-1 cursor-pointer !pointer-events-auto rounded-[50%] w-9 h-9 inline;
 }
 
 .image:hover {

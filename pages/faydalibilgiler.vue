@@ -31,8 +31,10 @@ const pageChanged = async (content: ARTICLES) => {
 };
 
 watch(sideMenu, (open) => {
-  document.body.style.overflow = open ? 'hidden' : ''
-}, { immediate: true })
+  if (width.value < 768) { 
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+}, { immediate: true });
 
 
 import type { ARTICLES } from "~/models/ARTICLES";
