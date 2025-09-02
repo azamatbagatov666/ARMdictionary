@@ -57,42 +57,19 @@ const scrollToTop =  () => {
 </script>
 
 <template>
-  
-<div v-show="sideMenu" class="sidenav">
-    <span class="min-h-16" @click="sideMenu = false;"></span>
-    <ul class="p-y-4 border-t-2 border-white  overflow-y-auto">
-      <li  v-for="(item, index) in articleData":key="item.id" v-text="item.title" class="hover:bg-gray-200 p-2" :class="{'!bg-red-500' : currentPage==item.tag}" @click="pageChanged(item)"></li>
-          
-      </ul>
-</div>
-
-<div class="fixed size-14 mt-1 rounded-lg border-2 border-white bg-red-500  ml-8 z-50" @click="sideMenu = !sideMenu;">
-
-    <div class="grid h-full absolute bottom-[8px] left-4 place-content-center" :class="{'!left-[23px]' : !sideMenu}">
-    <div class="h-8 w-2 top-[27px] absolute bg-white transition-transform duration-300 rotate-45" :class="{'!-rotate-45' : sideMenu}"></div>
-    <div class="h-8 w-2 bg-white -rotate-45 transition-transform duration-300" :class="{'!rotate-45' : sideMenu}"></div>
-  </div>
-</div>
-
-    <div ref="el" class="text-white mx-auto px-px min-[500px]:px-4 pt-8 pb-16 transition-colors duration-300  rounded-lg my-4 w-full sm:w-5/6" v-if="htmlContent">
-
-      <div class="flex justify-center">
-<div class="article min-[500px]:w-[80%] overflow-x-auto  min-[500px]:overflow-x-visible min-[500px]:flex min-[500px]:justify-center" v-html="htmlContent"></div>
-</div>
 
 
-    </div>
-      <Transition name="fade">
-
-<div class="button border-2 border-white" @click="scrollToTop" v-if="y > 300 && elHeight > height">
-  <div class="grid h-full place-content-center">
-    <div class="flex gap-1">
-    <div class="h-6 w-2 bg-white rotate-45"></div>
-    <div class="h-6 w-2 bg-white -rotate-45"></div>
-  </div>
-  </div>
-</div>
-      </Transition>
+<button
+  @touchstart="console.log('touchstart')"
+  @touchend="console.log('touchend')"
+  @pointerdown="console.log('pointerdown')"
+  @pointerup="console.log('pointerup')"
+  @click="console.log('click')"
+  @contextmenu.prevent
+  class="select-none bg-white [touch-action:manipulation] [-webkit-touch-callout:none]"
+>
+  Testhgfhgfhf
+</button>
 
 </template>
 

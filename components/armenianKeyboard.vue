@@ -74,4 +74,9 @@ const backspace = () => {
   outline: 0;
 }
 
+.armenian-button:active {
+  background-color: #99c7ed;
+
+}
+
 </style>

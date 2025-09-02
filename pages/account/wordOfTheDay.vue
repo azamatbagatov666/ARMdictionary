@@ -617,7 +617,7 @@ const exportAsJpg = async () => {
 
       <div class="flex justify-center mt-2">
         <div class="relative font-[Calibri] inline-block" ref="image">
-          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px] pointer-events-none" draggable="false"/>
+          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px]" draggable="false"/>
           <span
             class="absolute text-6xl top-20 transform left-8 w-[736px]"
             v-text="tempAranan"

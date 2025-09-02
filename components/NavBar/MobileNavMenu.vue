@@ -21,7 +21,7 @@ const homePageClean = () => {
     <NuxtLink to="/">
       <button
         @click="homePageClean"
-        class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors  dark:bg-black hover:!bg-red-500"
+        class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500"
       >
         <img
           src="/home-white.png"
@@ -32,7 +32,7 @@ const homePageClean = () => {
       </button>
     </NuxtLink>
     <div
-      class="flex items-center gap-2 cursor-pointer bg-gray-200 px-2 transition-[background-color]  dark:bg-black hover:!bg-red-500"
+      class="flex items-center gap-2 cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
       @click="isMenuOpen = !isMenuOpen"
     >
       <span v-text="$t('navBar.menu')" class="transition-none"></span>

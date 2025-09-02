@@ -61,7 +61,7 @@ const logoutClicked = () => {
         <div class="max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
-                    class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black hover:!bg-red-500">
+                    class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black supports-[hover:hover]:hover:!bg-red-500">
                     <img
           src="/home-white.png"
           class="size-9 hidden dark:flex"
@@ -156,12 +156,16 @@ const logoutClicked = () => {
 </template>
 
 <style scoped>
+
+
+@media (hover: hover) and (pointer: fine) {
 .dropDownMenu:hover .dropDownOnButton {
     background-color: rgb(239 68 68);
 }
 
 .dropDownOn ul li:hover {
     background-color: #ddd;
+}
 }
 
 

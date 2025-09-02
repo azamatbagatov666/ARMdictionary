@@ -56,7 +56,7 @@ const historyList = computed(() => searchHistoryStore.state.history);
       v-if="historyList.length > 0"
       @click="remove"
       @mousedown="buttonClick"
-      class="bg-white border border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
+      class="bg-white border select-none border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 supports-[hover:hover]:hover:bg-red-500 active:hover:bg-red-500"
     >
       <img src="/trash.png" class="size-9" draggable="false" /><span
         v-text="$t('searchHistory.removeButton')"

@@ -30,6 +30,11 @@ const pageChanged = async (content: ARTICLES) => {
   }
 };
 
+watch(sideMenu, (open) => {
+  document.body.style.overflow = open ? 'hidden' : ''
+}, { immediate: true })
+
+
 import type { ARTICLES } from "~/models/ARTICLES";
 const articleData = ref<ARTICLES[] | null>(null);
 
@@ -81,7 +86,7 @@ const scrollToTop = () => {
           v-for="(item, index) in articleData"
           :key="item.id"
           v-text="item.title"
-          class="hover:bg-gray-200 transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
+          class="supports-[hover:hover]:hover:bg-gray-200 transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
           :class="{ '!bg-red-500': currentPage == item.tag }"
           @click="pageChanged(item)"
         ></li>
@@ -91,7 +96,7 @@ const scrollToTop = () => {
 
   <div
     v-show="articleData"
-    class="transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 hover:bg-orange-500 active:bg-red-700"
+    class="transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 supports-[hover:hover]:hover:bg-orange-500 active:bg-red-700"
     @click="sideMenu = !sideMenu"
   >
     <div
@@ -113,7 +118,6 @@ const scrollToTop = () => {
     ref="el"
     class="text-white mx-auto px-2 min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300 rounded-lg my-4 w-full min-[880px]:w-5/6"
     v-if="htmlContent"
-    :class="{ 'fixed': sideMenu && width <= 500 }"
   >
     <div class="flex justify-center">
       <Transition name="fade" mode="out-in" appear>
@@ -192,9 +196,12 @@ const scrollToTop = () => {
   z-index: 19;
 }
 
-.button:hover {
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
   cursor: pointer;
   background-color: black;
+  }
 }
 .button:active {
   background-color: #555;

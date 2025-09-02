@@ -367,11 +367,11 @@ defineExpose({ wordFromAbove, clearThePage });
         class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
       >
         <div
-          class="bg-gray-200 p-2 lg:p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
+          class="bg-gray-200 p-2 sm:px-4 md:p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
-            class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 hover:bg-[#ccc] outline-none transition-colors duration-300"
+            class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 supports-[hover:hover]:hover:bg-[#ccc] outline-none transition-colors duration-300"
             :text="$t('searchLine.keyboardButton')"
             @click="toggleKeyboard($event)"
             @mousedown="buttonClick"
@@ -417,7 +417,7 @@ defineExpose({ wordFromAbove, clearThePage });
               @mousedown="buttonClick"
               class="motherbutton border-l border-black shrink-0"
             >
-              <img src="/glass.png" width="30" height="30" draggable="false" />
+              <img src="/glass.png" class="size-[30px]" draggable="false" />
             </button>
           </div>
           <div class="resultBox max-h-[225px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
@@ -444,9 +444,9 @@ defineExpose({ wordFromAbove, clearThePage });
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
         <div class="flex justify-center mt-2 lg:hidden">
-          <div class="grid grid-flow-col grid-rows-2 gap-1">
+          <div class="grid grid-flow-col grid-rows-2 gap-1 select-none">
             <button
-              class="group rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
+              class="group rounded-md border-2 border-black h-12 w-40 active:!bg-purple-600 duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"
               @mousedown="buttonClick"
             >
@@ -464,7 +464,7 @@ defineExpose({ wordFromAbove, clearThePage });
             </button>
 
             <button
-              class="group bg-gray-200 rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="group bg-gray-200 rounded-md border-2 active:!bg-blue-600 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="toggleHistory($event)"
               @mousedown="buttonClick"
             >
@@ -487,7 +487,7 @@ defineExpose({ wordFromAbove, clearThePage });
 
             <button
               v-if="todayData"
-              class="bg-gray-200 rounded-md border-2 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="bg-gray-200 rounded-md border-2 active:!bg-red-600 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="setToday"
               @mousedown="buttonClick"
             >
@@ -507,7 +507,7 @@ defineExpose({ wordFromAbove, clearThePage });
         </div>
         <button
           v-if="todayData"
-          class="hidden lg:block group bg-gray-200 rounded-b-md border-2 border-t-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+          class="hidden lg:block group bg-gray-200 select-none rounded-b-md border-2 border-t-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
           @click="setToday"
           @mousedown="buttonClick"
         >
@@ -524,7 +524,7 @@ defineExpose({ wordFromAbove, clearThePage });
           </div>
         </button>
       </div>
-      <div class="w-0 flex-col gap-4 justify-start hidden lg:flex">
+      <div class="w-0 flex-col gap-4 justify-start hidden lg:flex select-none">
         <button
           class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
           @click="randomWord()"
@@ -604,6 +604,8 @@ defineExpose({ wordFromAbove, clearThePage });
   border-bottom-left-radius: 20px;
   border-color: black;
   background-color: white;
+  border-top-right-radius: 0px;     
+  border-bottom-right-radius: 0px;     
 }
 
 .motherbutton {
@@ -620,9 +622,12 @@ defineExpose({ wordFromAbove, clearThePage });
   transition: background-color 0.3s;
 }
 
+@media (hover: hover) and (pointer: fine) {
 .motherbutton:hover {
   background-color: chartreuse;
 }
+  }
+
 
 .motherbutton:active {
   transform: scale(0.95);
