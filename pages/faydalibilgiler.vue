@@ -30,12 +30,15 @@ const pageChanged = async (content: ARTICLES) => {
   }
 };
 
-watch(sideMenu, (open) => {
-  if (width.value < 768) { 
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-}, { immediate: true });
-
+watch(
+  sideMenu,
+  (open) => {
+    if (width.value < 768) {
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+  },
+  { immediate: true }
+);
 
 import type { ARTICLES } from "~/models/ARTICLES";
 const articleData = ref<ARTICLES[] | null>(null);
@@ -88,7 +91,7 @@ const scrollToTop = () => {
           v-for="(item, index) in articleData"
           :key="item.id"
           v-text="item.title"
-          class="supports-[hover:hover]:hover:bg-gray-200 transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
+          class="transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
           :class="{ '!bg-red-500': currentPage == item.tag }"
           @click="pageChanged(item)"
         ></li>
@@ -98,7 +101,7 @@ const scrollToTop = () => {
 
   <div
     v-show="articleData"
-    class="transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 supports-[hover:hover]:hover:bg-orange-500 active:bg-red-700"
+    class="sideMenuButton transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 active:bg-red-700"
     @click="sideMenu = !sideMenu"
   >
     <div
@@ -198,11 +201,17 @@ const scrollToTop = () => {
   z-index: 19;
 }
 
-
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
-  cursor: pointer;
-  background-color: black;
+    cursor: pointer;
+    background-color: black;
+  }
+  ul li:hover {
+    @apply bg-gray-200;
+  }
+
+  .sideMenuButton:hover {
+    @apply bg-orange-500;
   }
 }
 .button:active {
@@ -252,5 +261,9 @@ table th {
 
 :deep(.article) .easter td {
   @apply !px-1;
+}
+
+:deep(.article) img {
+  @apply !pointer-events-auto;
 }
 </style>

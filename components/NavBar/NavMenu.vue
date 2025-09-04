@@ -55,13 +55,13 @@ const logoutClicked = () => {
 
 <template>
       <div
-    class="sticky top-0 z-[55] bg-gray-200 h-12 hidden md:!flex justify-between dark:bg-black transition-colors duration-300 w-full select-none"
+    class="sticky top-0 z-[55] bg-gray-200 h-12 hidden lg:!flex justify-between dark:bg-black transition-colors duration-300 w-full select-none"
   >
   <div class="inline-block">
         <div class="max-h-12 flex">
             <NuxtLink to="/">
                 <button @click="homePageClean"
-                    class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-300 dark:bg-black supports-[hover:hover]:hover:!bg-red-500">
+                    class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors homePage duration-300 dark:bg-black ">
                     <img
           src="/home-white.png"
           class="size-9 hidden dark:flex"
@@ -74,7 +74,7 @@ const logoutClicked = () => {
                 class="dropDownMenu">
                 <button
                     class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
-                    v-text="$t('navBar.menu') + ' &#9660'"></button>
+                    v-text="$t('navBar.menu') + ' &#9660'" :class="{'!bg-red-500' : dropDownOn}"></button>
                 <div class="dropDownOn relative" v-if="dropDownOn">
                     <nav>
                         <ul @click="toggleDropdown($event, 'regular')" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
@@ -166,6 +166,18 @@ const logoutClicked = () => {
 .dropDownOn ul li:hover {
     background-color: #ddd;
 }
+
+.homePage:hover {
+    background-color: rgb(239 68 68);
+}
+
+
+}
+
+
+.homePage:active {
+    background-color: rgb(239 68 68);
+    transition-duration: 75ms !important;
 }
 
 

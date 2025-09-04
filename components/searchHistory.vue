@@ -40,13 +40,13 @@ const historyList = computed(() => searchHistoryStore.state.history);
         v-if="historyList.length > 0"
         v-for="(item, index) in historyList"
         @click="historySelected(item)"
-        class="inline mr-2"
+        class="inline-block mr-2"
       >
         <span
           class="hover:underline hover:cursor-pointer  hover:bg-white dark:hover:bg-gray-500"
           v-text="item"
         ></span
-        ><span v-if="index < historyList.length - 1" v-text="' /'"></span>
+        ><span class="ml-2" v-if="index < historyList.length - 1" v-text="'/'"></span>
       </li>
       <span class="text-center w-full inline-block" v-else
         >Arama geçmişinde hiç sözcük yok</span
@@ -56,7 +56,7 @@ const historyList = computed(() => searchHistoryStore.state.history);
       v-if="historyList.length > 0"
       @click="remove"
       @mousedown="buttonClick"
-      class="bg-white border select-none border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 supports-[hover:hover]:hover:bg-red-500 active:hover:bg-red-500"
+      class="bg-white border select-none border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 active:bg-red-500"
     >
       <img src="/trash.png" class="size-9" draggable="false" /><span
         v-text="$t('searchHistory.removeButton')"
@@ -66,5 +66,15 @@ const historyList = computed(() => searchHistoryStore.state.history);
 </template>
 
 <style scoped>
-/* Add your styles here */
+
+@media (hover: hover) and (pointer: fine) {
+  .border:hover {
+@apply bg-red-500;
+
+  }
+
+
+
+}
+
 </style>

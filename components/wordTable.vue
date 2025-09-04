@@ -4,7 +4,7 @@ const props = defineProps(["responseData"]);
 
 <template>
   <table
-    class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
+    class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-2/3 lg:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
     v-for="item in props.responseData"
   >
   <tbody>
@@ -12,7 +12,7 @@ const props = defineProps(["responseData"]);
       <td>
       <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
       </td>
-      <td class="font-bold pr-3">
+      <td class="font-bold flex flex-wrap pr-3">
         <span class="text-red-500" v-text="item.am"></span>
         <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
       </td>

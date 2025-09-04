@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const isMenuOpen = ref(false);
 
+import { useUserStore } from '~/store/user.store';
+
+const userStore = useUserStore();
+const isLogged = computed(() => userStore.state.user != undefined);
+
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
 
@@ -12,16 +17,36 @@ const homePageClean = () => {
     $bus.emit("clear-main-page");
   }
 };
+
+const logoutClicked = () => {
+    userStore.logout();
+    navigateTo('/');
+}
+
+
+
+const adminDropDownOn = ref(false);
+
+const toggleDropdown = (event: Event) => {
+
+        if (event.type == 'mouseover') {
+            adminDropDownOn.value = true;
+        }
+        else if (event.type == 'mouseleave' || event.type == 'click') {
+            adminDropDownOn.value = false;
+        }
+    
+};
 </script>
 
 <template>
-  <div class="md:!hidden">
+  <div class="lg:!hidden">
 
-  <div class="sticky top-0 z-[54] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
+  <div class="sticky top-0 z-[60] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
     <NuxtLink to="/">
       <button
         @click="homePageClean"
-        class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500"
+        class="bg-gray-200 h-12 w-16 homePage outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500"
       >
         <img
           src="/home-white.png"
@@ -31,9 +56,57 @@ const homePageClean = () => {
         <img src="/home.png" class="size-9 dark:hidden" draggable="false" />
       </button>
     </NuxtLink>
+                <div @mouseover="toggleDropdown($event)" @mouseleave="toggleDropdown($event)" v-if="isLogged"
+                class="dropDownMenu">
+                <button
+                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
+                    v-text="'Yönetici ' + '&#9660'"></button>
+                <div class="dropDownOn relative" v-if="adminDropDownOn">
+                    <nav>
+                        <ul @click="toggleDropdown($event)" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
+                            <NuxtLink to="/account/addNewWord">
+                                <li>
+                                    Yeni Sonuç Ekle
+                                </li>
+                            </NuxtLink>
+
+                            <NuxtLink to="/account/editWord">
+                                <li>
+                                    Sonuç Düzenle
+                                </li>
+                            </NuxtLink>
+
+                            <NuxtLink to="/account/modifyWords">
+                                <li>
+                                    Yeni Sözcük Ekle
+                                </li>
+                            </NuxtLink>
+                            <NuxtLink to="/account/removeWord">
+                                <li>
+                                    Sözcük/Sonuç Sil
+                                </li>
+                            </NuxtLink>
+                            <NuxtLink to="/account/lostAndFound">
+                                <li>
+                                    Bulunamayan Sözcükler
+                                </li>
+                            </NuxtLink>
+                            <NuxtLink to="/account/wordOfTheDay">
+                                <li>
+                                    Günün Kelimesi
+                                </li>
+                            </NuxtLink>
+                                <li class="cursor-pointer" @click="logoutClicked()">
+                                    Oturumu Kapat
+                                </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
     <div
-      class="flex items-center gap-2 cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
-      @click="isMenuOpen = !isMenuOpen"
+      class="flex items-center gap-2 homePage cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
+      @click="isMenuOpen = !isMenuOpen" 
     >
       <span v-text="$t('navBar.menu')" class="transition-none"></span>
 
@@ -44,7 +117,7 @@ const homePageClean = () => {
       </div>
     </div>
   </div>
-  <div class="theMenu h-0 z-[999] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
+  <div class="theMenu h-0 z-[59] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
   :class="{'h-48':isMenuOpen}">
   <Transition>
 
@@ -75,6 +148,23 @@ const homePageClean = () => {
 </template>
 
 <style scoped>
+
+@media (hover: hover) and (pointer: fine) {
+.homePage:hover {
+    background-color: rgb(239 68 68) !important;
+} 
+
+.dropDownMenu:hover .dropDownOnButton {
+    background-color: rgb(239 68 68);
+}
+
+.dropDownOn ul li:hover {
+    background-color: #ddd;
+}
+
+
+}
+
 .v-enter-active {
   transition-delay: 0.3s;
 
@@ -111,4 +201,11 @@ const homePageClean = () => {
 .theMenu li{
     @apply h-12 border-y border-white flex items-center p-2;
 }
+
+
+
+
+.dropDownOn ul li {
+    @apply p-4 transition-colors duration-300;}
+
 </style>

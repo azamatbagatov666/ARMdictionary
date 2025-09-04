@@ -20,7 +20,7 @@ onMounted(async () => {
 
 
 <div>
-<NavBarNavMenu class="hidden md:flex"/>
+<NavBarNavMenu class="hidden lg:flex"/>
 
 <NavBarMobileNavMenu/>
 </div>

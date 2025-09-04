@@ -3,6 +3,8 @@ import { ref, onMounted } from "vue";
 
 import type { TDATA } from "~/models/TDATA";
 
+
+
 const currentHoverIndex = ref<number>(-1);
 const desword = ref("");
 const resultBoxContent = ref<string[]>([]);
@@ -371,7 +373,7 @@ defineExpose({ wordFromAbove, clearThePage });
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
-            class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 supports-[hover:hover]:hover:bg-[#ccc] outline-none transition-colors duration-300"
+            class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 kButton outline-none transition-colors duration-300"
             :text="$t('searchLine.keyboardButton')"
             @click="toggleKeyboard($event)"
             @mousedown="buttonClick"
@@ -446,7 +448,7 @@ defineExpose({ wordFromAbove, clearThePage });
         <div class="flex justify-center mt-2 lg:hidden">
           <div class="grid grid-flow-col grid-rows-2 gap-1 select-none">
             <button
-              class="group rounded-md border-2 border-black h-12 w-40 active:!bg-purple-600 duration-300 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
+              class="rounded-md border-2 border-black h-12 w-40 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"
               @mousedown="buttonClick"
             >
@@ -464,7 +466,7 @@ defineExpose({ wordFromAbove, clearThePage });
             </button>
 
             <button
-              class="group bg-gray-200 rounded-md border-2 active:!bg-blue-600 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-blue-600 border-black h-12 w-40 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="toggleHistory($event)"
               @mousedown="buttonClick"
             >
@@ -487,7 +489,7 @@ defineExpose({ wordFromAbove, clearThePage });
 
             <button
               v-if="todayData"
-              class="bg-gray-200 rounded-md border-2 active:!bg-red-600 border-black h-12 w-40 duration-300 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-red-600 border-black h-12 w-40 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="setToday"
               @mousedown="buttonClick"
             >
@@ -581,7 +583,7 @@ defineExpose({ wordFromAbove, clearThePage });
 }
 
 .group {
-  transition-property: color, background-color, border-color,
+  transition-property: color, background-color, border-color, transform,
     text-decoration-color, fill, stroke, width;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
@@ -626,11 +628,16 @@ defineExpose({ wordFromAbove, clearThePage });
 .motherbutton:hover {
   background-color: chartreuse;
 }
+.kButton:hover {
+  @apply bg-[#ccc];
+}
   }
 
 
 .motherbutton:active {
   transform: scale(0.95);
+  background-color: chartreuse;
+
 }
 
 .resultBox {
