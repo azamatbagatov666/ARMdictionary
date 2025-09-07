@@ -5,7 +5,7 @@ export default defineEventHandler(async event => {
   
   
   return $fetch<TDATA[]>(
-    `http://localhost:5000/searching/${id}`
+    `http://localhost:5000/searching?word=${id}`
     );
 
 

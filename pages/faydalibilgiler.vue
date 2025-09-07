@@ -101,7 +101,7 @@ const scrollToTop = () => {
 
   <div
     v-show="articleData"
-    class="sideMenuButton transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 active:bg-red-700"
+    class="sideMenuButton transition-colors duration-300 fixed size-14 cursor-pointer mt-1 rounded-lg border-2 border-white bg-red-500 ml-8 z-50 active:!bg-[#136570] dark:active:!bg-[#282B30] active:duration-0"
     @click="sideMenu = !sideMenu"
   >
     <div

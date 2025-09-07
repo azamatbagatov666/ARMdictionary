@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const token = event.headers.get("token")
   if (!token) return;
 
-  return $fetch<TDATA[]>(`http://localhost:5000/searchingnocheck/${query}`, {
+  return $fetch<TDATA[]>(`http://localhost:5000/searchingnocheck?word=${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
