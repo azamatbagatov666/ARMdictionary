@@ -285,16 +285,18 @@ const setSDate = (date: string) => {
 };
 
 const tempPanel = ref(false);
-const tempAranan = ref("");
+const tempAm = ref("");
 const tempTr1 = ref("");
 const tempTr4 = ref("");
 const openTemplatePanel = () => {
-  if (selectedDate.value) {
-    tempAranan.value =
-      responseData.value[getIndex(selectedDate.value)].aranan
+
+  try {  
+    if (selectedDate.value) {
+    tempAm.value =
+      responseData.value[getIndex(selectedDate.value)].am
         .slice(0, 1)
         .toUpperCase() +
-      responseData.value[getIndex(selectedDate.value)].aranan.slice(1);
+      responseData.value[getIndex(selectedDate.value)].am.slice(1);
     tempTr4.value =
       responseData.value[getIndex(selectedDate.value)].tR4
         .slice(0, 1)
@@ -309,6 +311,12 @@ const openTemplatePanel = () => {
 
 
   tempPanel.value = true;
+
+  } catch (error) {
+        alert("Şablonu oluşturmadan önce; sözcüğün İngilizcesinin, Türkçesinin, Ermenicesinin ve okunuşunun dolu olduğundan emin olun.");
+
+  }
+
 };
 
 import html2canvas from "html2canvas";
@@ -349,7 +357,7 @@ const exportAsJpg = async () => {
             <td class="font-bold pr-3">
               <span
                 class="text-red-500"
-                v-text="responseData[getIndex(selectedDate)].aM"
+                v-text="responseData[getIndex(selectedDate)].am"
               ></span>
               <span
                 class="ml-1 font-normal"
@@ -605,13 +613,13 @@ const exportAsJpg = async () => {
   </div>
 
   <div
-    v-if="tempPanel && responseData && selectedDate"
+    v-if="tempPanel && responseData && selectedDate" @click.self="tempPanel = false"
     class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 select-none"
   >
     <div class="bg-white p-6 rounded-lg w-[900px] h-[792px]">
 
-            <div class="text-black text-5xl font-bold flex justify-end" @click="tempPanel = false">
-              <div class="border-black border px-[5px] pb-[2px] cursor-pointer rounded-lg hover:bg-red-500" v-text="'&#x2715'"></div>
+            <div class="text-black text-5xl font-bold flex justify-end">
+              <div class="border-black border px-[5px] pb-[2px] cursor-pointer rounded-lg hover:bg-red-500" v-text="'&#x2715'"  @click="tempPanel = false"></div>
 
       </div>
 
@@ -620,7 +628,7 @@ const exportAsJpg = async () => {
           <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px]" draggable="false"/>
           <span
             class="absolute text-6xl top-20 transform left-8 w-[736px]"
-            v-text="tempAranan"
+            v-text="tempAm"
           ></span>
           <span
             class="absolute text-5xl top-[320px] left-8 w-[736px]"

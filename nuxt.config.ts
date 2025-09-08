@@ -13,9 +13,8 @@ export default defineNuxtConfig({
           to: process.env.NUXT_RECEIVER_EMAIL,
         },
         smtp: {
-          host: "smtp.google.com",
+          host: "smtp-mail.outlook.com",
           port: "587",
-          secure: false,
           auth: {
             user: process.env.NUXT_SENDER_EMAIL,
             pass: process.env.NUXT_APP_PASSWORD,

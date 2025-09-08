@@ -4,7 +4,7 @@ const props = defineProps(['text']);
 </script>
 
 <template>
-  <button class="bg-white px-4 rounded-lg text-black border border-black h-8" v-text="props.text"></button>
+  <button class="bg-white px-4 rounded-lg text-black border border-black h-8 select-none" v-text="props.text"></button>
 </template>
 
 <style scoped>

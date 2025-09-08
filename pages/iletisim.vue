@@ -49,10 +49,21 @@ const sendMail = async () => {
   sending.value = true;
   try {
 
+      const emailBody = `
+      <p style="font-weight: bold;">Gönderen kişinin adı: <span style="font-weight: normal;">${name.value}</span></p>
+      <p style="font-weight: bold;">Gönderen kişinin e-posta adresi: <span style="font-weight: normal;">${email.value}</span></p>
+      <p style="font-weight: bold;">Mesaj:</p>
+      <p>${message.value}</p>
+      <p>
+        <a href="mailto:${email.value}?subject=avedikyan.com Yanıt: ${subject.value}" style="display:inline-block;padding:10px 20px;background-color:#4CAF50;color:white;text-decoration:none;border-radius:5px;">Cevapla</a>
+      </p>
+    `;
+
     await mail.send({
       from: `${name.value} <info@avedikyan.com>`,
       subject: "Avedikyan Sözlük: " + subject.value,
-      text: "Gönderen kişinin adı: " + name.value + "\n" + "Gönderen kişinin e-posta adresi: " + email.value + "\n\n\n" + message.value});
+      replyTo: email.value,
+      html: emailBody});
     return true;
   } catch (error) {
     return false;
