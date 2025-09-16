@@ -496,13 +496,14 @@ const exportAsJpg = async () => {
             ></span>
           </td>
           <td class="max-h-[30px]">
+            <button @click.stop="deleteTheWord(dateObject.date)" class="flex items-center mx-auto transition-colors duration-300  rounded-md active:scale-95 bg-white hover:bg-red-500">
             <img
-              @click.stop="deleteTheWord(dateObject.date)"
               src="/trash.png"
               v-if="getIndex(dateObject.date) !== -1"
-              class="size-[27px] bg-white rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 hover:bg-red-500"
+              class="size-[27px] "
               draggable="false"
             />
+            </button>
           </td>
         </tr>
       </tbody>
@@ -668,4 +669,5 @@ const exportAsJpg = async () => {
 .containers {
   padding-left: calc(100vw - 100%);
 }
+
 </style>

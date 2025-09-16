@@ -54,7 +54,7 @@ const backspace = () => {
 
     <div class="flex justify-center text-center">
       <button class="armenian-button !w-[210px] !h-[33px]" @click="push(' ')"></button>
-      <button class="armenian-button" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
+      <button class="armenian-button !h-[33px]" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
         v-text="'&#8592'"></button>
     </div>
 

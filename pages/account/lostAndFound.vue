@@ -110,18 +110,32 @@ watch(selectedListWord, (newValue) => {
     newValue.length === responseData.value.length &&
     responseData.value.length > 0;
 });
+
+
+import { useWindowScroll, useWindowSize, useElementSize } from "@vueuse/core";
+import { useTemplateRef } from "vue";
+
+const { x, y } = useWindowScroll();
+const { width, height } = useWindowSize();
+
+const el = useTemplateRef("el");
+const { height: elHeight } = useElementSize(el);
+
+const scrollToTop = () => {
+  scrollTo({ top: 0, left: 0, behavior: "smooth" });
+};
 </script>
 
 <template>
-  <ClientOnly v-if="isLogged">
+  <div v-if="isLogged">
     <div class="mt-2 mb-12">
 
       <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
 <ElementComponentsLoadingAnimation/>
   </div>
 
-      <div v-if="responseData.length > 0">
-        <table class="lostTable mx-auto table-auto w-[50%] text-black dark:text-white">
+      <div v-if="responseData.length > 0" ref="el">
+        <table class="lostTable mx-auto table-auto text-black dark:text-white">
           <tbody>
           <tr
           class="bg-gray-300 dark:bg-[#262a2f] "
@@ -154,9 +168,9 @@ watch(selectedListWord, (newValue) => {
                 :value="item.aranan"
               />
             </td>
-            <td class="border" v-text="index + 1"></td>
-            <td class="border" v-text="item.aranan"></td>
-            <td class="border" v-text="item.date"></td>
+            <td class="border text-center" v-text="index + 1"></td>
+            <td class="border px-2 w-[400px]" v-text="item.aranan"></td>
+            <td class="border w-44 text-center" v-text="item.date"></td>
           </tr>
           </tbody>
         </table>
@@ -179,7 +193,22 @@ watch(selectedListWord, (newValue) => {
 
 
     </div>
-  </ClientOnly>
+
+      <Transition name="fade" mode="out-in">
+    <div
+      class="button border-2 border-white"
+      @click="scrollToTop"
+      v-if="y > 300 && elHeight > height"
+    >
+      <div class="grid h-full place-content-center">
+        <div class="flex gap-1">
+          <div class="h-6 w-2 bg-white rotate-45"></div>
+          <div class="h-6 w-2 bg-white -rotate-45"></div>
+        </div>
+      </div>
+    </div>
+  </Transition>
+  </div>
 </template>
 
 <style scoped>
@@ -188,4 +217,44 @@ tr,
 th {
   @apply border border-black dark:border-white;
 }
+
+.button {
+  display: inline-block;
+  background-color: #ff6f61;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 20px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 19;
+}
+
+
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    cursor: pointer;
+    background-color: black;
+  }
+}
+.button:active {
+  background-color: #555;
+}
+
+
 </style>
