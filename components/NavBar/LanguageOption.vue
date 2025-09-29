@@ -10,7 +10,7 @@ const changeLanguage = async (lang: string) => {
 </script>
 
 <template>
-  <div class="inline-block mr-2 shrink gird justify-center">
+  <div class="inline-block mr-2 shrink ">
     <button class="langButton" @click="changeLanguage('tr')">
       <img src="/flags/tr-flag.png" class="image" draggable="false" />
     </button>

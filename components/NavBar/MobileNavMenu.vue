@@ -64,38 +64,45 @@ const toggleDropdown = (event: Event) => {
                 <div class="dropDownOn relative" v-if="adminDropDownOn">
                     <nav>
                         <ul @click="toggleDropdown($event)" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
-                            <NuxtLink to="/account/addNewWord">
-                                <li>
-                                    Yeni Sonuç Ekle
-                                </li>
-                            </NuxtLink>
+ <NuxtLink to="/account/stats">
+                                    <li>
+                                        İstatistikler
+                                    </li>
+                                </NuxtLink>
+                                                                <NuxtLink to="/account/wordOfTheDay">
+                                    <li>
+                                        Günün Kelimesi
+                                    </li>
+                                </NuxtLink>
 
-                            <NuxtLink to="/account/editWord">
-                                <li>
-                                    Sonuç Düzenle
-                                </li>
-                            </NuxtLink>
+                                                                <NuxtLink to="/account/lostAndFound">
+                                    <li>
+                                        Bulunamayan Sözcükler
+                                    </li>
+                                </NuxtLink>
 
-                            <NuxtLink to="/account/modifyWords">
-                                <li>
-                                    Yeni Sözcük Ekle
-                                </li>
-                            </NuxtLink>
-                            <NuxtLink to="/account/removeWord">
-                                <li>
-                                    Sözcük/Sonuç Sil
-                                </li>
-                            </NuxtLink>
-                            <NuxtLink to="/account/lostAndFound">
-                                <li>
-                                    Bulunamayan Sözcükler
-                                </li>
-                            </NuxtLink>
-                            <NuxtLink to="/account/wordOfTheDay">
-                                <li>
-                                    Günün Kelimesi
-                                </li>
-                            </NuxtLink>
+                                <NuxtLink to="/account/addNewWord">
+                                    <li>
+                                        Yeni Sonuç Ekle
+                                    </li>
+                                </NuxtLink>
+
+                                <NuxtLink to="/account/editWord">
+                                    <li>
+                                        Sonuç Düzenle
+                                    </li>
+                                </NuxtLink>
+
+                                <NuxtLink to="/account/modifyWords">
+                                    <li>
+                                        Yeni Sözcük Ekle
+                                    </li>
+                                </NuxtLink>
+                                <NuxtLink to="/account/removeWord">
+                                    <li>
+                                        Sözcük/Sonuç Sil
+                                    </li>
+                                </NuxtLink>
                                 <li class="cursor-pointer" @click="logoutClicked()">
                                     Oturumu Kapat
                                 </li>

@@ -54,8 +54,8 @@ const monthSelection = ref(months[new Date().getMonth()]);
 const yearSelection = ref(new Date().getFullYear());
 const currentMonth = ref(months[new Date().getMonth()]);
 const currentYear = ref(new Date().getFullYear());
-const length = currentYear.value - 2024 + 2;
-const years: number[] = Array.from({ length: length }, (_, i) => 2024 + i);
+const length = currentYear.value - 2025 + 2;
+const years: number[] = Array.from({ length: length }, (_, i) => 2025 + i);
 
 const getWords = async () => {
   const { data, error } = await useFetch(`/api/get/getWordOfTheDay`, {
@@ -283,12 +283,13 @@ const setSDate = (date: string) => {
   selectedDate.value = date;
 
 };
+const temp = ref<HTMLDivElement | null>(null)
 
 const tempPanel = ref(false);
 const tempAm = ref("");
 const tempTr1 = ref("");
 const tempTr4 = ref("");
-const openTemplatePanel = () => {
+const openTemplatePanel = async () => {
 
   try {  
     if (selectedDate.value) {
@@ -311,6 +312,9 @@ const openTemplatePanel = () => {
 
 
   tempPanel.value = true;
+  await nextTick();
+
+  temp.value?.focus();
 
   } catch (error) {
         alert("Şablonu oluşturmadan önce; sözcüğün İngilizcesinin, Türkçesinin, Ermenicesinin ve okunuşunun dolu olduğundan emin olun.");
@@ -614,7 +618,8 @@ const exportAsJpg = async () => {
   </div>
 
   <div
-    v-if="tempPanel && responseData && selectedDate" @click.self="tempPanel = false"
+    v-if="tempPanel && responseData && selectedDate" @click.self="tempPanel = false"   @keyup.esc="tempPanel = false" tabindex="0" ref="temp"
+
     class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 select-none"
   >
     <div class="bg-white p-6 rounded-lg w-[900px] h-[792px]">

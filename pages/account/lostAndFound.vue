@@ -29,6 +29,7 @@ onMounted(() => {
   }
 })
 
+
 const deleteTheWords = async () => {
   if (
     confirm(
@@ -49,7 +50,6 @@ const deleteTheWords = async () => {
     })
 });
         if (response) {
-          selectAll.value = false;
           selectedListWord.value = [];
           responseData.value = [];
           refresh();
@@ -95,21 +95,9 @@ watch(
   },
 );
 
-const selectAll = ref(false);
 
-const toggleSelectAll = () => {
-  selectedListWord.value = selectAll.value
-    ? (responseData.value
-        .map((item) => item.aranan)
-        .filter(Boolean) as string[])
-    : [];
-};
 
-watch(selectedListWord, (newValue) => {
-  selectAll.value =
-    newValue.length === responseData.value.length &&
-    responseData.value.length > 0;
-});
+
 
 
 import { useWindowScroll, useWindowSize, useElementSize } from "@vueuse/core";
@@ -124,6 +112,17 @@ const { height: elHeight } = useElementSize(el);
 const scrollToTop = () => {
   scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
+
+const appendOrRemove = (word: string) => {
+  if (!selectedListWord.value.includes(word)) {
+    selectedListWord.value.push(word);
+  } else {
+    selectedListWord.value = selectedListWord.value.filter(
+      (item) => item !== word    // ✅ compare item to word
+    );
+  }
+};
+
 </script>
 
 <template>
@@ -137,23 +136,17 @@ const scrollToTop = () => {
       <div v-if="responseData.length > 0" ref="el">
         <table class="lostTable mx-auto table-auto text-black dark:text-white">
           <tbody>
-          <tr
-          class="bg-gray-300 dark:bg-[#262a2f] "
+          <tr 
+          class="bg-gray-300 dark:bg-[#262a2f] cursor-default"
           
           >
-            <th class="text-center">
-              <input
-                type="checkbox"
-                @change="toggleSelectAll"
-                v-model="selectAll"
-              />
-            </th>
+
             <th></th>
             <th class="border">Bulunamayan Sözcük</th>
             <th class="border">Aranma Tarihi</th>
           </tr>
-          <tr
-            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
+          <tr @click="appendOrRemove(item.aranan ?? '')"
+            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f] cursor-pointer"
             :class="{
               'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
                 selectedListWord.includes(item.aranan ?? ''),
@@ -161,16 +154,10 @@ const scrollToTop = () => {
             v-for="(item, index) in responseData"
             :key="item.aranan"
           >
-            <td class="border w-6 text-center">
-              <input
-                type="checkbox"
-                v-model="selectedListWord"
-                :value="item.aranan"
-              />
-            </td>
-            <td class="border text-center" v-text="index + 1"></td>
+
+            <td class="border text-center px-2" v-text="index + 1"></td>
             <td class="border px-2 w-[400px]" v-text="item.aranan"></td>
-            <td class="border w-44 text-center" v-text="item.date"></td>
+            <td class="border w-48 text-center" v-text="item.date"></td>
           </tr>
           </tbody>
         </table>

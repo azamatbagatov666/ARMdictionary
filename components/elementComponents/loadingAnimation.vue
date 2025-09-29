@@ -63,9 +63,8 @@
   position: relative;
   transform: translateZ(0) scale(0.64);
   backface-visibility: hidden;
-  transform-origin: 0 0; /* see note above */
+  transform-origin: 0 0; 
 }
 .ldio-8pqeti9kh2k div { box-sizing: content-box; }
-/*https://loading.io/auth/done/*/
   </style>
   

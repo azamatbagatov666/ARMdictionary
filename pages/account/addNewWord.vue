@@ -74,17 +74,7 @@ const insertData = async () => {
           alert("Bağlantı Sorunu");
 
       }
-/*
-      insertIt(userStore.state.user!.token, data)
-        .then((response) => {
-          if (response.ok) {
-            alert("Sonuç başarıyla eklendi.");
-            resetData();
-          }
-        })
-        .catch((error) => {
-          alert("Bağlantı Sorunu");
-        });*/
+
     } else {
       alert("* ile işaretli alanların doldurulması zorunludur.");
     }
