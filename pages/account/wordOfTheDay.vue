@@ -81,14 +81,12 @@ const daysInMonth = computed(() => {
 
 const startDate = computed(() => {
   const monthIndex = months.indexOf(currentMonth.value);
-  return new Date(`${currentYear.value}-${monthIndex + 1}-01`);
+  return new Date(currentYear.value, monthIndex, 1);
 });
 
 const endDate = computed(() => {
   const monthIndex = months.indexOf(currentMonth.value);
-  return new Date(
-    `${currentYear.value}-${monthIndex + 1}-${daysInMonth.value}`
-  );
+  return new Date(currentYear.value, monthIndex + 1, 0);
 });
 
 const dates = computed(() => {
@@ -653,8 +651,14 @@ const exportAsJpg = async () => {
 
       <ElementComponentsCustomButton
         @click="exportAsJpg"
-        class="hover:bg-red-500 mx-auto block mt-4"
+        class="hover:bg-red-500 mx-auto block mt-1"
         text="İndir"
+      />
+
+      <ElementComponentsCustomButton
+        @click="tempPanel = false"
+        class="hover:bg-red-500 mx-auto block"
+        text="Kapat"
       />
 
 

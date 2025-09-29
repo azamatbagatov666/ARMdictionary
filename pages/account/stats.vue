@@ -119,7 +119,7 @@ const getTheDate = async () => {
       </div>
   <div v-else>
 <div v-if="responseData.length > 0">
-      <div class="font-bold text-2xl flex justify-center mt-8">Toplam İstatistikler</div>
+      <div class="font-bold text-2xl flex justify-center mt-8 text-white">Toplam İstatistikler</div>
   <div class="flex justify-center mt-2">
 <table class="border table-auto">
   <tbody>
@@ -131,7 +131,7 @@ const getTheDate = async () => {
     <tr v-for="(item) in responseData" class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]">
       
       <th v-if="(item.country == '' && item.device == '')" :colspan="2" v-text="'Toplam'" :class="{'bg-black text-lg' : item.country != ''}"></th>
-      <th v-else-if="(item.country == '' && item.device == '') || item.device == ''" :colspan="2" v-text="item.country" :class="{'bg-black text-lg' : item.country != ''}"></th>
+      <th v-else-if="(item.country == '' && item.device == '') || item.device == ''" :colspan="2" v-text="item.country" :class="{'bg-black text-lg text-white' : item.country != ''}"></th>
 
       <th :colspan="2" v-if="item.country != '' && item.device != ''" class="text-sm" v-text="item.device"></th>
       <th v-else-if="item.country == '' && item.device != ''" :colspan="2" v-text="item.device"></th>
@@ -145,9 +145,9 @@ const getTheDate = async () => {
 
 </div>
 </div>
-      <div class="font-bold text-2xl flex justify-center mt-8">Güne Göre İstatistikler</div>
+      <div class="font-bold text-2xl flex justify-center mt-8 text-white">Güne Göre İstatistikler</div>
 
-  <div class="flex justify-center mt-2 ">
+  <div class="flex justify-center mt-2 mb-8">
     <div class="grid grid-flow-col gap-4 items-center">
     <input 
       type="date"
@@ -177,7 +177,7 @@ const getTheDate = async () => {
     <tr v-for="(item) in dayData" class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]">
       
       <th v-if="(item.country == '' && item.device == '')" :colspan="2" v-text="'Toplam'" :class="{'bg-black text-lg' : item.country != ''}"></th>
-      <th v-else-if="(item.country == '' && item.device == '') || item.device == ''" :colspan="2" v-text="item.country" :class="{'bg-black text-lg' : item.country != ''}"></th>
+      <th v-else-if="(item.country == '' && item.device == '') || item.device == ''" :colspan="2" v-text="item.country" :class="{'bg-black text-lg text-white' : item.country != ''}"></th>
 
       <th :colspan="2" v-if="item.country != '' && item.device != ''" class="text-sm" v-text="item.device"></th>
       <th v-else-if="item.country == '' && item.device != ''" :colspan="2" v-text="item.device"></th>
