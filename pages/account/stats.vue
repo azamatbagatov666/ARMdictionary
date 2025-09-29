@@ -110,7 +110,7 @@ const getTheDate = async () => {
 </script>
 
 <template>
-    <div v-if="isLogged">
+    <div v-if="isLogged" class="mt-4">
             <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
 <ElementComponentsLoadingAnimation/>
   </div>
