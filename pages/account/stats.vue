@@ -110,7 +110,7 @@ const getTheDate = async () => {
 </script>
 
 <template>
-    <div v-if="isLogged" class="mt-4">
+    <div v-if="isLogged">
             <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
 <ElementComponentsLoadingAnimation/>
   </div>
@@ -167,7 +167,7 @@ const getTheDate = async () => {
   </div>
       <div class="flex justify-center mt-4" v-if="dayData.length > 0">
 
-<table class="border table-auto">
+<table class="border table-auto mb-8">
   <tbody>
     <tr class="bg-gray-300 dark:bg-[#262a2f]">
       <th :colspan="2">Ülke / Cihaz</th>
@@ -187,7 +187,7 @@ const getTheDate = async () => {
   </tbody>
 </table>
 </div>
-<div v-else-if="noData" class="font-bold text-lg flex justify-center mt-8">Seçtiğiniz güne ait kayıt bulunamamıştır.</div>
+<div v-else-if="noData" class="font-bold text-lg flex justify-center mt-8 mb-8">Seçtiğiniz güne ait kayıt bulunamamıştır.</div>
 </div>
 </div>
 </template>
