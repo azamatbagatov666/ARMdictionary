@@ -345,7 +345,7 @@ const setToday = async () => {
   emit("set-today", todayData.value);
 };
 
-defineExpose({ wordFromAbove, clearThePage });
+defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 </script>
 
 <template>
@@ -396,7 +396,7 @@ defineExpose({ wordFromAbove, clearThePage });
             />
 
             <div
-              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px] shrink-0"
+              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px] shrink-0 ml-[-1px]"
             >
               <Transition name="fade">
                 <button
@@ -422,7 +422,7 @@ defineExpose({ wordFromAbove, clearThePage });
               <img src="/glass.png" class="size-[30px]" draggable="false" />
             </button>
           </div>
-          <div class="resultBox max-h-[225px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
+          <div class="resultBox max-h-[155px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
             <ul class="">
               <li
                 @click="selectTheInput(item)"
@@ -446,7 +446,7 @@ defineExpose({ wordFromAbove, clearThePage });
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
         <div class="flex justify-center mt-2 lg:hidden">
-          <div class="grid grid-flow-col grid-rows-2 gap-1 select-none">
+          <div class="grid grid-flow-row grid-cols-2 gap-1 select-none">
             <button
               class="rounded-md border-2 border-black h-12 w-40 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"

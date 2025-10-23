@@ -32,7 +32,7 @@ const scrollToTarget = () => {
       target.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   })
-}
+};
 
 const push = (letter: string) => {
   if (

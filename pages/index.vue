@@ -109,6 +109,8 @@ const random = async () => {
     previousDesword.value = desword.value;
     searchline.value.wordFromAbove(desword.value);
     searchHistoryStore.addHistory(desword.value);
+
+
   } else {
     thereIsNoResult.value = true;
   }
@@ -117,6 +119,20 @@ const random = async () => {
 const buttonClick = (event: Event) => {
   event.preventDefault();
 };
+
+const target = ref<HTMLElement | null>(null);
+
+import { useWindowSize } from "@vueuse/core";
+const { height } = useWindowSize();
+
+const scrollToTarget = () => {
+  nextTick(() => {
+    if (target.value) {
+      target.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  })
+};
+
 </script>
 
 <template>
@@ -142,8 +158,9 @@ const buttonClick = (event: Event) => {
 
       <AlpTable ref="alpTable" />
 
+      <div ref="target">
       <wordTable :responseData="responseData"></wordTable>
-
+      </div>
       <div
         v-if="thereIsNoResult"
         class="text-lg text-center mt-4 text-white font-bold"
