@@ -40,9 +40,9 @@ export const searchLineTr = {
 export const searchLineAm = {
   searching: "Փնտռցէք բառ մը:",
   keyboardButton: "Հայերէն Ստեղնաշար",
-  randomButton: "Պատահական Բառ",
+  randomButton: "Պատահական",
   searchTip: "Կարելի է օգտագործել * բազմաթիւ տառերու խուզարկումի, իսկ ? տառի մը համար:",
-  historyButton: "Որոնման Պատմութիւն",
+  historyButton: "Պատմութիւն",
 
 };
 

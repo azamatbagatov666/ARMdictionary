@@ -19,8 +19,8 @@ const homePageClean = () => {
 };
 
 const logoutClicked = () => {
-    userStore.logout();
-    navigateTo('/');
+  userStore.logout();
+  navigateTo('/');
 }
 
 
@@ -29,145 +29,144 @@ const adminDropDownOn = ref(false);
 
 const toggleDropdown = (event: Event) => {
 
-        if (event.type == 'mouseover') {
-            adminDropDownOn.value = true;
-        }
-        else if (event.type == 'mouseleave' || event.type == 'click') {
-            adminDropDownOn.value = false;
-        }
-    
+  if (event.type == 'mouseover') {
+    adminDropDownOn.value = true;
+  }
+  else if (event.type == 'mouseleave' || event.type == 'click') {
+    adminDropDownOn.value = false;
+  }
+
 };
 </script>
 
 <template>
   <div class="lg:!hidden">
 
-  <div class="sticky top-0 z-[60] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
-    <NuxtLink to="/">
-      <button
-        @click="homePageClean"
-        class="bg-gray-200 h-12 w-16 homePage outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500"
-      >
-        <img
-          src="/home-white.png"
-          class="size-9 hidden dark:flex"
-          draggable="false"
-        />
-        <img src="/home.png" class="size-9 dark:hidden" draggable="false" />
-      </button>
-    </NuxtLink>
-                <div @mouseover="toggleDropdown($event)" @mouseleave="toggleDropdown($event)" v-if="isLogged"
-                class="dropDownMenu">
-                <button
-                    class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
-                    v-text="'Yönetici ' + '&#9660'"></button>
-                <div class="dropDownOn relative" v-if="adminDropDownOn">
-                    <nav>
-                        <ul @click="toggleDropdown($event)" class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
- <NuxtLink to="/account/stats">
-                                    <li>
-                                        İstatistikler
-                                    </li>
-                                </NuxtLink>
-                                                                <NuxtLink to="/account/wordOfTheDay">
-                                    <li>
-                                        Günün Kelimesi
-                                    </li>
-                                </NuxtLink>
+    <div class="sticky top-0 z-[60] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
+      <NuxtLink to="/">
+        <button @click="homePageClean"
+          class="bg-gray-200 h-12 w-16 homePage outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500">
+          <img src="/home-white.png" class="size-9 hidden dark:flex" draggable="false" />
+          <img src="/home.png" class="size-9 dark:hidden" draggable="false" />
+        </button>
+      </NuxtLink>
+      <div @mouseover="toggleDropdown($event)" @mouseleave="toggleDropdown($event)" v-if="isLogged"
+        class="dropDownMenu">
+        <button
+          class="dropDownOnButton bg-gray-200  h-12 w-36 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
+          v-text="'Yönetici ' + '&#9660'"></button>
+        <div class="dropDownOn relative" v-if="adminDropDownOn">
+          <nav>
+            <ul @click="toggleDropdown($event)"
+              class="bg-white border-l-2 border-b-2 border-r-2 w-36 border-[#ddd] text-black rounded-b-lg">
+              <NuxtLink to="/account/stats">
+                <li>
+                  İstatistikler
+                </li>
+              </NuxtLink>
+              <NuxtLink to="/account/wordOfTheDay">
+                <li>
+                  Günün Kelimesi
+                </li>
+              </NuxtLink>
 
-                                                                <NuxtLink to="/account/lostAndFound">
-                                    <li>
-                                        Bulunamayan Sözcükler
-                                    </li>
-                                </NuxtLink>
+              <NuxtLink to="/account/lostAndFound">
+                <li>
+                  Bulunamayan Sözcükler
+                </li>
+              </NuxtLink>
 
-                                <NuxtLink to="/account/addNewWord">
-                                    <li>
-                                        Yeni Sonuç Ekle
-                                    </li>
-                                </NuxtLink>
+              <NuxtLink to="/account/addNewWord">
+                <li>
+                  Yeni Sonuç Ekle
+                </li>
+              </NuxtLink>
 
-                                <NuxtLink to="/account/editWord">
-                                    <li>
-                                        Sonuç Düzenle
-                                    </li>
-                                </NuxtLink>
+              <NuxtLink to="/account/editWord">
+                <li>
+                  Sonuç Düzenle
+                </li>
+              </NuxtLink>
 
-                                <NuxtLink to="/account/modifyWords">
-                                    <li>
-                                        Yeni Sözcük Ekle
-                                    </li>
-                                </NuxtLink>
-                                <NuxtLink to="/account/removeWord">
-                                    <li>
-                                        Sözcük/Sonuç Sil
-                                    </li>
-                                </NuxtLink>
-                                <li class="cursor-pointer" @click="logoutClicked()">
-                                    Oturumu Kapat
-                                </li>
+              <NuxtLink to="/account/modifyWords">
+                <li>
+                  Yeni Sözcük Ekle
+                </li>
+              </NuxtLink>
+              <NuxtLink to="/account/removeWord">
+                <li>
+                  Sözcük/Sonuç Sil
+                </li>
+              </NuxtLink>
+              <li class="cursor-pointer" @click="logoutClicked()">
+                Oturumu Kapat
+              </li>
 
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-    <div
-      class="flex items-center gap-2 homePage cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
-      @click="isMenuOpen = !isMenuOpen" 
-    >
-      <span v-text="$t('navBar.menu')" class="transition-none"></span>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div
+        class="flex items-center gap-2 homePage cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
+        @click="isMenuOpen = !isMenuOpen">
+        <span v-text="$t('navBar.menu')" class="transition-none"></span>
 
-      <div>
-        <div class="bar1" :class="{ change: isMenuOpen }"></div>
-        <div class="bar2" :class="{ change: isMenuOpen }"></div>
-        <div class="bar3" :class="{ change: isMenuOpen }"></div>
+        <div>
+          <div class="bar1" :class="{ change: isMenuOpen }"></div>
+          <div class="bar2" :class="{ change: isMenuOpen }"></div>
+          <div class="bar3" :class="{ change: isMenuOpen }"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="theMenu h-0 z-[59] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
-  :class="{'h-48':isMenuOpen}">
-  <Transition>
+    <div class="theMenu h-0 z-[59] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
+      :class="{ 'h-48': isMenuOpen }">
+      <Transition>
 
-    <nav v-show="isMenuOpen">
-      <ul class="select-none">
-        <li class="flex justify-between"><NavBarLanguageOption /><NavBarToggleSwitch/></li>
+        <nav v-show="isMenuOpen">
+          <ul class="select-none">
+            <li class="flex justify-between">
+              <NavBarLanguageOption />
+              <NavBarToggleSwitch />
+            </li>
 
-        <NuxtLink to="/adamasmaca">
-          <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
-        </NuxtLink>
+            <NuxtLink to="/adamasmaca">
+              <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              </li>
+            </NuxtLink>
 
             <NuxtLink to="/faydalibilgiler">
-          <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
-        </NuxtLink>
+              <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              </li>
+            </NuxtLink>
 
 
-        <NuxtLink to="/iletisim">
-          <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false"></li>
-        </NuxtLink>
+            <NuxtLink to="/iletisim">
+              <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              </li>
+            </NuxtLink>
 
 
-      </ul>
-    </nav>
-  </Transition>
+          </ul>
+        </nav>
+      </Transition>
 
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
-
 @media (hover: hover) and (pointer: fine) {
-.homePage:hover {
+  .homePage:hover {
     background-color: rgb(239 68 68) !important;
-} 
+  }
 
-.dropDownMenu:hover .dropDownOnButton {
+  .dropDownMenu:hover .dropDownOnButton {
     background-color: rgb(239 68 68);
-}
+  }
 
-.dropDownOn ul li:hover {
+  .dropDownOn ul li:hover {
     background-color: #ddd;
-}
+  }
 
 
 }
@@ -176,6 +175,7 @@ const toggleDropdown = (event: Event) => {
   transition-delay: 0.3s;
 
 }
+
 .v-leave-active {
   transition-delay: 0.0s;
 
@@ -205,14 +205,14 @@ const toggleDropdown = (event: Event) => {
   transform: translate(0, -11px) rotate(45deg);
 }
 
-.theMenu li{
-    @apply h-12 border-y border-white flex items-center p-2;
+.theMenu li {
+  @apply h-12 border-y border-white flex items-center p-2;
 }
 
 
 
 
 .dropDownOn ul li {
-    @apply p-4 transition-colors duration-300;}
-
+  @apply p-4 transition-colors duration-300;
+}
 </style>

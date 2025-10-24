@@ -446,9 +446,28 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
         <div class="flex justify-center mt-2 lg:hidden">
-          <div class="grid grid-flow-row grid-cols-2 gap-1 select-none">
+          <div class="flex gap-1 select-none">
+
+          <button
+              v-if="todayData"
+              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-red-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              @click="setToday"
+              @mousedown="buttonClick"
+            >
+              <div class="flex items-center ml-[5px]">
+                <div class="rounded-full size-9 bg-red-600">
+                  <img src="/day.png" class="size-9" draggable="false" />
+                </div>
+                <div class="w-0">
+                  <span
+                    class="w-[63px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
+                    v-text="$t('index.todaysword')"
+                  ></span>
+                </div>
+              </div>
+            </button>
             <button
-              class="rounded-md border-2 border-black h-12 w-40 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
+              class="rounded-md border-2 border-black h-12 w-28 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"
               @mousedown="buttonClick"
             >
@@ -458,7 +477,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 </div>
                 <div class="w-0">
                   <span
-                    class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+                    class="pointer-events-none w-[63px] inline-block break-words leading-none transition-opacity dark:text-white"
                     v-text="$t('searchLine.randomButton')"
                   ></span>
                 </div>
@@ -466,7 +485,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             </button>
 
             <button
-              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-blue-600 border-black h-12 w-40 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-blue-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="toggleHistory($event)"
               @mousedown="buttonClick"
             >
@@ -480,31 +499,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 </div>
                 <div class="w-0">
                   <span
-                    class="pointer-events-none w-[112px] inline-block leading-none transition-opacity dark:text-white"
+                    class="pointer-events-none w-[63px] inline-block break-words leading-none transition-opacity dark:text-white"
                     v-text="$t('searchLine.historyButton')"
                   ></span>
                 </div>
               </div>
             </button>
 
-            <button
-              v-if="todayData"
-              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-red-600 border-black h-12 w-40 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
-              @click="setToday"
-              @mousedown="buttonClick"
-            >
-              <div class="flex items-center ml-[5px]">
-                <div class="rounded-full size-9 bg-red-600">
-                  <img src="/day.png" class="size-9" draggable="false" />
-                </div>
-                <div class="w-0">
-                  <span
-                    class="w-[112px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
-                    v-text="$t('index.todaysword')"
-                  ></span>
-                </div>
-              </div>
-            </button>
+
           </div>
         </div>
         <button
