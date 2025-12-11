@@ -151,7 +151,7 @@ const resetData = () => {
       />
       <div
         v-text="'Sözcük/Sonuç Sil'"
-        class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+        class="text-white bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
       ></div>
     </div>
 
@@ -227,7 +227,7 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div class="text-center mb-4" v-if="arananData">
+      <div class="text-center mb-4 text-white" v-if="arananData">
         <ul class="list-none text-lg text-left inline-block">
           <div class="text-3xl mb-2">Bu sonucu veren sözcükler:</div>
           <li v-for="(arananlar, index) in arananData" :key="index">

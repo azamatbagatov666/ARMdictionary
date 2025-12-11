@@ -132,7 +132,7 @@ const logoutClicked = () => {
 
                                 <NuxtLink to="/account/modifyWords">
                                     <li>
-                                        Yeni Sözcük Ekle
+                                        Yönlendirme Ekle
                                     </li>
                                 </NuxtLink>
                                 <NuxtLink to="/account/removeWord">

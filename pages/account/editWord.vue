@@ -179,7 +179,7 @@ onBeforeMount(() => {
       />
       <div
         v-text="'Sonuç Düzenle'"
-        class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+        class="bg-red-900 text-white text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
       ></div>
     </div>
 
@@ -190,7 +190,7 @@ onBeforeMount(() => {
         @submit-request="submit"
       ></SearchLine>
 
-      <div v-if="selectedIndex" class="text-3xl flex justify-around mb-1">
+      <div v-if="selectedIndex" class="text-3xl flex justify-around mb-1 text-white">
         <span v-text="'Sonucun Şu Anki Hali'"></span>
         <span v-text="'Yerine Geçecek Yeni Sonuç'"></span>
       </div>
@@ -314,7 +314,7 @@ onBeforeMount(() => {
         </div>
       </div>
 
-      <div v-if="selectedIndex" class="flex">
+      <div v-if="selectedIndex" class="flex text-white">
         <div>
           <div class="flex mt-2">
             <div>

@@ -164,7 +164,7 @@ const responseData = ref();
           </div>
         </div>
 
-        <div class="text-center text-lg mt-1">
+        <div class="text-center text-lg mt-1 text-white">
           <span v-text="8 - hangmanVis"></span
           ><span v-text="t('adamAsmaca.rightsLeft')"></span>
         </div>

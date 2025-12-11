@@ -14,7 +14,7 @@ onBeforeMount(() => {
 });
 
 useHead({
-  title: "Yeni Sözcük Ekle",
+  title: "Yönlendirme Ekle",
 });
 
 const data = reactive<TDATA>({
@@ -98,7 +98,7 @@ const resetData = () => {
       />
       <div
         v-text="'Yeni Sonuç Ekle'"
-        class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+        class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg text-white dark:border-white"
       ></div>
     </div>
 
@@ -222,7 +222,7 @@ const resetData = () => {
       </div>
 
       <div class="preview">
-        <div class="text-[40px]">Önizleme</div>
+        <div class="text-[40px] text-white">Önizleme</div>
 
         <div class="flex justify-center">
           <div class="flex justify-center">
@@ -336,6 +336,9 @@ const resetData = () => {
 </template>
 
 <style scoped>
+label {
+  @apply text-white;
+}
 .preview {
   text-align: center;
   margin-top: 30px;

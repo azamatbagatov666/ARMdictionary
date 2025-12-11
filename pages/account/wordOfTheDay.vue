@@ -41,13 +41,13 @@ const months = [
 ];
 
 const days = [
+  "Pazar",
   "Pazartesi",
   "Salı",
   "Çarşamba",
   "Perşembe",
   "Cuma ",
-  "Cumartesi",
-  "Pazar",
+  "Cumartesi"
 ];
 
 const monthSelection = ref(months[new Date().getMonth()]);
@@ -628,7 +628,7 @@ const exportAsJpg = async () => {
       </div>
 
       <div class="flex justify-center mt-2">
-        <div class="relative font-[Calibri] inline-block" ref="image">
+        <div class="relative font-[Calibri] inline-block text-white" ref="image">
           <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px]" draggable="false"/>
           <span
             class="absolute text-6xl top-20 transform left-8 w-[736px]"

@@ -160,7 +160,7 @@ const resetData = () => {
   <div v-if="isLogged">
     <div class="flex items-center mb-1 mt-2">
   <ElementComponentsReturnButton @click="resetData()" class="ml-2 absolute"/>
-  <div v-text="'Yeni Sözcük Ekle'" class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
+  <div v-text="'Yönlendirme Ekle'" class="text-white bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
 </div> 
 
 
@@ -238,7 +238,7 @@ const resetData = () => {
 
       <div v-if="arananData">
 
-      <div class="flex justify-between mt-9">
+      <div class="flex justify-between mt-9 text-white">
         <div class="col-span-1 mx-auto">
           <div class="text-3xl">Bu sonucu veren sözcükler:</div>
           <ul class="list-disc text-lg">

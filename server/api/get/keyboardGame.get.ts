@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
 
-    const token = event.headers.get("enc")
+    const token = event.headers.get("token")
     if (!token) return;
   
     return await $fetch(

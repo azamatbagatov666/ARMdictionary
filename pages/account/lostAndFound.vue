@@ -15,6 +15,8 @@ const idData = reactive({
   DesiredID: 0,
 });
 
+let screenHeight = 0;
+
 onBeforeMount(() => {
   setTimeout(() => {
     if (!isLogged.value) {
@@ -81,6 +83,11 @@ const refresh = async () => {
 
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
+        nextTick(() => {
+      screenHeight = document.documentElement.scrollHeight;
+
+  })
+
     }
   } catch (error) {
     connectionError.value = true
@@ -109,8 +116,18 @@ const { width, height } = useWindowSize();
 const el = useTemplateRef("el");
 const { height: elHeight } = useElementSize(el);
 
+
+
 const scrollToTop = () => {
   scrollTo({ top: 0, left: 0, behavior: "smooth" });
+};
+
+const scrollToBottom = () => {
+
+    scrollTo({ top: screenHeight, left: 0, behavior: "smooth" });
+
+  
+
 };
 
 const appendOrRemove = (word: string) => {
@@ -127,6 +144,20 @@ const appendOrRemove = (word: string) => {
 
 <template>
   <div v-if="isLogged">
+          <Transition name="fade" mode="out-in">
+    <div
+      class="button top-[30px] right-[30px] border-2 border-white"
+      @click="scrollToTop"
+      v-if="y > 300 && elHeight > height"
+    >
+      <div class="grid h-full place-content-center">
+        <div class="flex gap-1">
+          <div class="h-6 w-2 bg-white rotate-45"></div>
+          <div class="h-6 w-2 bg-white -rotate-45"></div>
+        </div>
+      </div>
+    </div>
+  </Transition>
     <div class="mt-2 mb-12">
 
       <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
@@ -183,14 +214,14 @@ const appendOrRemove = (word: string) => {
 
       <Transition name="fade" mode="out-in">
     <div
-      class="button border-2 border-white"
-      @click="scrollToTop"
-      v-if="y > 300 && elHeight > height"
+      class="button bottom-[30px] right-[30px] border-2 border-white"
+      @click="scrollToBottom"
+      v-if="(y < (screenHeight - 1200)) && elHeight > height"
     >
       <div class="grid h-full place-content-center">
         <div class="flex gap-1">
-          <div class="h-6 w-2 bg-white rotate-45"></div>
           <div class="h-6 w-2 bg-white -rotate-45"></div>
+          <div class="h-6 w-2 bg-white rotate-45"></div>
         </div>
       </div>
     </div>
@@ -213,8 +244,6 @@ th {
   text-align: center;
   border-radius: 20px;
   position: fixed;
-  bottom: 30px;
-  right: 30px;
   z-index: 19;
 }
 

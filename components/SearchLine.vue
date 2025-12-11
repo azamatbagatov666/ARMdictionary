@@ -209,7 +209,7 @@ const toggleKeyboard = (event: Event) => {
 };
 
 const pushing = async (letter: string) => {
-  if (document.activeElement !== search.value && width.value >= 1024) {
+  if (document.activeElement !== search.value && (width.value >= 1024 || letters.includes(letter))) {
     search.value?.focus();
   }
 
@@ -219,7 +219,7 @@ const pushing = async (letter: string) => {
     desword.value.length < 125
   ) {
 
-    if (width.value >= 1024) {
+    if (width.value >= 1024 || letters.includes(letter)) {
       //if (search.value.selectionStart)
     //@ts-ignore
     cursorStart.value = search.value.selectionStart;
@@ -341,6 +341,8 @@ const randomWord = () => {
   }
 };
 
+const letters = ["ç", "ğ", "ı", "o", "ş", "ü", "â", "î", "û"];
+
 const setToday = async () => {
   emit("set-today", todayData.value);
 };
@@ -369,7 +371,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
       >
         <div
-          class="bg-gray-200 p-2 sm:px-4 md:p-6 pb-1 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
+          class="bg-gray-200 p-2 sm:px-4 md:p-6 md:!pb-2  border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
@@ -442,6 +444,10 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             class="text-center text-sm my-1"
             v-text="$t('searchLine.searchTip')"
           ></div>
+          <div class="flex justify-center">
+      <button  v-for="(letter, index) in letters" :key="index"  class="turkish-button"
+        v-text="letter" @click="pushing(letter)"></button>
+    </div>
 
           <searchHistory v-if="historyOn" @history-selected="selectTheInput" />
         </div>
@@ -665,6 +671,23 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
 .resultBox ul li.highlighted {
   background: #e9f3ff;
+}
+
+.turkish-button {
+  @apply size-1/12 p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
+  font-size: 16px;
+  background-color: #3490dc;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-top: 5px;
+  outline: 0;
+}
+
+.turkish-button:active {
+  background-color: #99c7ed;
+
 }
 
 
