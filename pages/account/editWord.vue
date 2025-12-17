@@ -17,6 +17,10 @@ const wordInput = (data: string) => {
   desword.value = data;
 };
 
+useHead({
+  title: "AVEDİKYAN - Sözcük Düzenle",
+});
+
 const responseData = ref();
 const arananData = ref();
 
@@ -178,7 +182,7 @@ onBeforeMount(() => {
         class="ml-2 absolute"
       />
       <div
-        v-text="'Sonuç Düzenle'"
+        v-text="'Sözcük Düzenle'"
         class="bg-red-900 text-white text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
       ></div>
     </div>

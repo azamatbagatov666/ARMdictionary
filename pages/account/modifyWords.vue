@@ -14,6 +14,10 @@ import { useUserStore } from "~/store/user.store";
 const userStore = useUserStore();
 const isLogged = computed(() => userStore.state.user != undefined);
 
+useHead({
+  title: "AVEDİKYAN - Yönlendirme Ekle",
+});
+
 onBeforeMount(() => {
   setTimeout(() => {
     if (!isLogged.value) {

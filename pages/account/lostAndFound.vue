@@ -15,6 +15,10 @@ const idData = reactive({
   DesiredID: 0,
 });
 
+useHead({
+  title: "AVEDİKYAN - Bulunamayan Sözcükler",
+});
+
 let screenHeight = 0;
 
 onBeforeMount(() => {

@@ -9,9 +9,15 @@ const userStore = useUserStore();
 const username = ref("");
 const password = ref("");
 
+useHead({
+  title: "AVEDİKYAN - Giriş Yap",
+});
+
 const login = async () => {
   loginFailed.value = false;
   formError.value = false;
+
+
 
   if (username.value != "" && password.value != ""){
     try {

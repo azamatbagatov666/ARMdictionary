@@ -78,13 +78,13 @@ const toggleDropdown = (event: Event) => {
 
               <NuxtLink to="/account/addNewWord">
                 <li>
-                  Yeni Sonuç Ekle
+                  Yeni Sözcük Ekle
                 </li>
               </NuxtLink>
 
               <NuxtLink to="/account/editWord">
                 <li>
-                  Sonuç Düzenle
+                  Sözcük Düzenle
                 </li>
               </NuxtLink>
 
@@ -95,7 +95,7 @@ const toggleDropdown = (event: Event) => {
               </NuxtLink>
               <NuxtLink to="/account/removeWord">
                 <li>
-                  Sözcük/Sonuç Sil
+                  Yönlendirme/Sözcük Sil
                 </li>
               </NuxtLink>
               <li class="cursor-pointer" @click="logoutClicked()">

@@ -17,6 +17,11 @@ const formattedSelectedDate = computed(() => {
   }
 });
 
+useHead({
+  title: "AVEDİKYAN - Günün Kelimesi",
+});
+
+
 const dayData = reactive({
   date: formattedSelectedDate,
   worD_ID: selectedRadio,

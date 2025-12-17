@@ -14,7 +14,7 @@ onBeforeMount(() => {
 });
 
 useHead({
-  title: "Yönlendirme Ekle",
+  title: "AVEDİKYAN - Yeni Sözcük Ekle",
 });
 
 const data = reactive<TDATA>({
@@ -97,7 +97,7 @@ const resetData = () => {
         class="ml-2 absolute"
       />
       <div
-        v-text="'Yeni Sonuç Ekle'"
+        v-text="'Yeni Sözcük Ekle'"
         class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg text-white dark:border-white"
       ></div>
     </div>

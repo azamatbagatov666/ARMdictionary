@@ -12,6 +12,10 @@ onBeforeMount(() => {
   }, 500);
 });
 
+useHead({
+  title: "AVEDİKYAN - Yönlendirme/Sözcük Sil",
+});
+
 const desword = ref("");
 const noresult = ref("");
 const { $bus } = useNuxtApp();
@@ -150,8 +154,8 @@ const resetData = () => {
         class="ml-2 absolute"
       />
       <div
-        v-text="'Sözcük/Sonuç Sil'"
-        class="text-white bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+        v-text="'Yönlendirme/Sözcük Sil'"
+        class="text-white bg-red-900 text-5xl text-center w-[550px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
       ></div>
     </div>
 

@@ -2,6 +2,21 @@
 import { useSearchHistoryStore } from './store/search-history.store';
 import { useUserStore } from './store/user.store';
 
+useHead({
+  link: [
+    { rel: "manifest", href: "/manifest.json" },
+    { rel: "icon", href: "/icon-192.png" },
+
+    // iOS special requirement:
+    { rel: "apple-touch-icon", href: "/icon-192.png" }
+  ],
+  meta: [
+    { name: "theme-color", content: "#ffffff" },
+    { name: "apple-mobile-web-app-capable", content: "yes" }
+  ]
+});
+
+
 const languageState = useLanguageState();
 const searchHistoryStore = useSearchHistoryStore()
 const userStore = useUserStore();

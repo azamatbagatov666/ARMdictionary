@@ -6,7 +6,9 @@ const selectedDate = ref("")
 const noData = ref(false)
 const connectionError = ref(false);
 
-
+useHead({
+  title: "AVEDİKYAN - İstatistikler",
+});
 
 
 import { useUserStore } from "~/store/user.store";
