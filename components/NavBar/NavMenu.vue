@@ -108,7 +108,7 @@ const logoutClicked = () => {
                                 </NuxtLink>
                                                                 <NuxtLink to="/account/wordOfTheDay">
                                     <li>
-                                        Günün Kelimesi
+                                        Günün Sözcüğü
                                     </li>
                                 </NuxtLink>
 

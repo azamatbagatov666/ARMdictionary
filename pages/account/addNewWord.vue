@@ -44,7 +44,7 @@ const trimStrings = (obj: Record<string, any>) => {
 const insertData = async () => {
   if (confirm("Belirlediğiniz sonuç sözlüğe eklenecektir, emin misiniz?")) {
     if (
-      (data.aranan && data.am && data.okunus && data.tr1 && data.tr4) !== ""
+      (data.am && data.okunus && data.tr1 && data.tr4) !== ""
     ) {
       trimStrings(data);
       for (var key in data) {
@@ -103,16 +103,6 @@ const resetData = () => {
     </div>
 
     <div class="mt-4 ml-2 mb-7">
-      <div>
-        <label class="w-56 inline-block"
-          >Aranan:<span class="text-[red] font-bold text-lg">*</span></label
-        >
-        <ElementComponentsCustomInput
-          class="w-52 border border-black"
-          v-model="data.aranan"
-          type="text"
-        />
-      </div>
 
       <div class="flex mt-2">
         <div>
@@ -224,69 +214,7 @@ const resetData = () => {
       <div class="preview">
         <div class="text-[40px] text-white">Önizleme</div>
 
-        <div class="flex justify-center">
-          <div class="flex justify-center">
-            <div
-              class="bg-gray-200 p-6 pb-1 border-2 border-black rounded-lg rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300"
-            >
-              <ElementComponentsCustomButton
-                disabled
-                class="block mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 outline-none active:!scale-100 active:!bg-white"
-                :text="'Ermenice Klavye'"
-              />
-              <div class="sm:w-[300px] md:w-[450px] lg:w-[600px] flex">
-                <input
-                  type="text"
-                  ref="search"
-                  v-model="data.aranan"
-                  class="motherinput selection:bg-transparent"
-                  :placeholder="'Bir sözcük ara.'"
-                  autocomplete="off"
-                  maxlength="125"
-                  readonly
-                />
 
-                <button disabled class="motherbutton border-l border-black">
-                  <img src="/glass.png" width="30" height="30" draggable="false"/>
-                </button>
-              </div>
-
-              <div
-                class="text-center text-sm my-1"
-                v-text="
-                  'Aramalarınızda birden fazla harf için  *  ve tek bir harf için  ?  kullanabilirsiniz.'
-                "
-              ></div>
-            </div>
-            <div class="w-0 flex flex-col gap-4 justify-start">
-              <button
-                disabled
-                class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010]"
-              >
-                <div class="flex items-center ml-[5px]">
-                  <div class="rounded-full size-9 bg-purple-600">
-                    <img src="/random.png" class="size-9" draggable="false"/>
-                  </div>
-                  <div class="w-0"></div>
-                </div>
-              </button>
-
-              <button
-                disabled
-                class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 place-items-center duration-300 dark:border-white dark:bg-[#101010]"
-              >
-                <div class="flex items-center ml-[5px]">
-                  <div
-                    class="rounded-full flex items-center size-9 bg-blue-600"
-                  >
-                    <img src="/history.png" class="ml-[3px] size-7" draggable="false"/>
-                  </div>
-                  <div class="w-0"></div>
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
 
         <table
           class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"

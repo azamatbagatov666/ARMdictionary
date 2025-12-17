@@ -18,7 +18,7 @@ const formattedSelectedDate = computed(() => {
 });
 
 useHead({
-  title: "AVEDİKYAN - Günün Kelimesi",
+  title: "AVEDİKYAN - Günün Sözcüğü",
 });
 
 
@@ -633,22 +633,22 @@ const exportAsJpg = async () => {
       </div>
 
       <div class="flex justify-center mt-2">
-        <div class="relative font-[Calibri] inline-block text-white" ref="image">
-          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px]" draggable="false"/>
+        <div class="relative font-[Calibri] flex justify-center text-white " ref="image">
+          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px] " draggable="false"/>
           <span
-            class="absolute text-6xl top-20 transform left-8 w-[736px]"
+            class="absolute text-6xl top-20 transform text-center flex justify-center w-[736px]"
             v-text="tempAm"
           ></span>
           <span
-            class="absolute text-5xl top-[320px] left-8 w-[736px]"
+            class="absolute text-5xl top-[320px] text-center flex justify-center w-[736px]"
             v-text="tempTr1"
           ></span>
           <span
-            class="absolute text-5xl top-[426px] left-8 w-[552px]"
+            class="absolute text-5xl top-[426px] text-center flex justify-center w-[552px]"
             v-text="tempTr4"
           ></span>
           <span
-            class="absolute text-4xl top-56 left-[352px] w-[416px]"
+            class="absolute text-4xl top-56 text-center flex justify-center w-[416px]"
             v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
           ></span>
         </div>
@@ -662,7 +662,7 @@ const exportAsJpg = async () => {
 
       <ElementComponentsCustomButton
         @click="tempPanel = false"
-        class="hover:bg-red-500 mx-auto block"
+        class="hover:bg-red-500 mx-auto block mt-1"
         text="Kapat"
       />
 

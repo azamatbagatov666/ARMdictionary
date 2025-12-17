@@ -66,7 +66,7 @@ const toggleDropdown = (event: Event) => {
               </NuxtLink>
               <NuxtLink to="/account/wordOfTheDay">
                 <li>
-                  Günün Kelimesi
+                  Günün Sözcüğü
                 </li>
               </NuxtLink>
 

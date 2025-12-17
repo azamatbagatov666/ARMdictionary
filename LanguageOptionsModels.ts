@@ -114,7 +114,7 @@ export const adamAsmacaEn = {
   export const indexTr = {
     noConnection: 'Bağlantı sorunu.',
     noResult: 'Aradığınız sözcük bulunamadı.',
-    todaysword: "Günün Kelimesi",
+    todaysword: "Günün Sözcüğü",
   };
 
   export const indexAm = {
