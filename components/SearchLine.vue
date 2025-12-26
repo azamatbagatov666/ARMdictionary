@@ -93,7 +93,7 @@ const inputChanged = async () => {
   emit("input-changed", lcandtrimmed.value);
   let result: any[] = [];
 
-  if (lcandtrimmed.value.length >= 3) {
+  if (lcandtrimmed.value.length >= 2) {
     const { data, error } = await useFetch(
       `/api/search/${encodeURIComponent(lcandtrimmed.value)}/suggestions`,
       {
@@ -341,7 +341,7 @@ const randomWord = () => {
   }
 };
 
-const letters = ["ç", "ğ", "ı", "o", "ş", "ü", "â", "î", "û"];
+const letters = ["ç", "ğ", "ı", "o", "ş", "ü"];
 
 const setToday = async () => {
   emit("set-today", todayData.value);
@@ -352,7 +352,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
 <template>
   <div class="mt-4 w-full">
-    <div class="lg:h-[269px]">
+    <div class="keyboard-wrapper">
       <Transition name="fade">
         <ArmenianKeyboard
           @click="buttonClick"
@@ -689,6 +689,13 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   background-color: #99c7ed;
 
 }
+
+@media (min-width: 1024px) and (min-height: 900px) {
+  .keyboard-wrapper {
+    height: 269px;
+  }
+}
+
 
 
 </style>

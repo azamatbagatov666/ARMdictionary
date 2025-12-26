@@ -1,11 +1,9 @@
 <script setup lang="ts">
-
-
 const { t } = useI18n();
 
-const title = computed(() => t('title.adamasmaca'))
+const title = computed(() => t("title.adamasmaca"));
 useHead({
-  title
+  title,
 });
 
 const target = ref<HTMLElement | null>(null);
@@ -21,17 +19,19 @@ import { useWindowSize } from "@vueuse/core";
 const { width } = useWindowSize();
 
 
-const letters = ["է", "թ", "փ", "ձ", "ջ", "ր", "չ", "ճ", "ժ", "ծ",
-  "ք", "ո", "ե", "ռ", "տ", "ը", "ւ", "ի", "օ", "պ", "ա", "ս", "դ", "ֆ",
-  "գ", "հ", "յ", "կ", "լ", "խ", "զ", "ղ", "ց", "վ", "բ", "ն", "մ", "շ"];
-
+const lines = [
+  ["ձ", "յ", "օ", "ռ", "ժ"],
+  ["խ", "վ", "է", "ր", "դ", "ե", "ը", "ի", "ո", "բ", "չ", "ջ"],
+  ["ա", "ս", "տ", "ֆ", "կ", "հ", "ճ", "ք", "լ", "թ", "փ"],
+  ["զ", "ց", "գ", "ւ", "պ", "ն", "մ", "շ", "ղ", "ծ"],
+];
 
 const scrollToTarget = () => {
   nextTick(() => {
     if (target.value) {
-      target.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      target.value.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  })
+  });
 };
 
 const push = (letter: string) => {
@@ -44,9 +44,8 @@ const push = (letter: string) => {
     if (answerArray.value.every((value) => guesses.value.includes(value))) {
       won.value = true;
       if (width.value < 1430) {
-      scrollToTarget();
-    }
-
+        scrollToTarget();
+      }
     }
     if (!answer.value.includes(letter)) {
       hangmanVis.value += 1;
@@ -58,7 +57,7 @@ const push = (letter: string) => {
   ) {
     guesses.value = guesses.value.concat(answerArray.value);
     won.value = false;
-      if (width.value < 1430) {
+    if (width.value < 1430) {
       scrollToTarget();
     }
   }
@@ -87,8 +86,8 @@ const newGame = async () => {
       answerArray.value = answer.value.split("");
 
       if (width.value < 1430) {
-      window.scrollTo(0,0);
-    }
+        window.scrollTo(0, 0);
+      }
     }
   } catch (error) {
     connectionError.value = true;
@@ -120,19 +119,15 @@ const responseData = ref();
 
 <template>
   <div>
-    <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute"/>
+    <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute" />
 
-    <div
-      class="h-[90vh] flex items-center justify-center"
-      v-if="!answer && !connectionError"
-    >
+    <div class="h-[90vh] flex items-center justify-center" v-if="!answer && !connectionError">
       <ElementComponentsLoadingAnimation />
     </div>
     <div class="min-[1430px]:flex min-[1430px]:justify-center">
       <div v-if="answer">
         <div
-          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
-        >
+          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
           <div class="hangman relative w-[250px] min-[730px]:top-[10px]">
             <div class="absolute">
               <div class="gallows relative">
@@ -165,8 +160,7 @@ const responseData = ref();
         </div>
 
         <div class="text-center text-lg mt-1 text-white">
-          <span v-text="8 - hangmanVis"></span
-          ><span v-text="t('adamAsmaca.rightsLeft')"></span>
+          <span v-text="8 - hangmanVis"></span><span v-text="t('adamAsmaca.rightsLeft')"></span>
         </div>
         <div class="text-center text-red-500 font-bold h-7 text-lg">
           <div v-show="won" v-text="t('adamAsmaca.win')"></div>
@@ -176,113 +170,69 @@ const responseData = ref();
         <div class="h-16 flex justify-center">
           <div
             class="text-center px-3 pt-2 inline-block border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
-            v-if="answer"
-          >
-            <div
-              class="inline-block"
-              v-for="(character, index) in answerArray"
-              :key="index"
-            >
+            v-if="answer">
+            <div class="inline-block" v-for="(character, index) in answerArray" :key="index">
               <div class="flex h-8 w-full">
-                <div
-                  class="w-5 sm:w-8 ml-1 text-center text-xl sm:text-3xl"
-                  :class="{ 'ml-0': index === 0 }"
-                  v-text="character"
-                  v-if="guesses.includes(character)"
-                ></div>
+                <div class="w-5 sm:w-8 ml-1 text-center text-xl sm:text-3xl" :class="{ 'ml-0': index === 0 }"
+                  v-text="character" v-if="guesses.includes(character)"></div>
               </div>
               <div class="flex mt-3 w-full">
-                <div
-                  class="w-5 sm:w-8 h-1 ml-1 bg-purple-500"
-                  :class="{ 'ml-0': index === 0 }"
-                ></div>
+                <div class="w-5 sm:w-8 h-1 ml-1 bg-purple-500" :class="{ 'ml-0': index === 0 }"></div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="keyboard" v-if="answer">
-          <div
-            class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[470px] relative border-2 border-black my-2 min-[730px]:p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
-          >
-            <div
-              v-for="(letter, index) in letters"
-              :key="index"
-              class="flex justify-center"
-            >
-              <button
-                v-if="index % 10 === 0"
-                v-for="letter in letters.slice(index, index + 10)"
-                class="armenian-button"
-                :class="{
+          <div class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[570px] relative border-2 border-black my-3 min-[730px]:p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
+            <div v-for="(line, lineIndex) in lines" :key="lineIndex" class="row">
+              <button v-for="(letter, index) in line" :key="index" class="armenian-button" v-text="letter"
+                @click="push(letter)" :class="{
                   'used-button': isUsedButton(letter),
                   'correct-button': isCorrectButton(letter),
-                }"
-                v-text="letter"
-                @click="push(letter)"
-              ></button>
+                }"></button>
             </div>
           </div>
         </div>
 
-        <ElementComponentsCustomButton
-          class="mx-auto block w-28"
-          @click="clear"
-          v-text="t('adamAsmaca.reset')"
-        />
+        <ElementComponentsCustomButton class="mx-auto block w-28" @click="clear" v-text="t('adamAsmaca.reset')" />
       </div>
-      <div
-        v-else-if="connectionError"
-        class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
-        v-text="t('adamAsmaca.noConnection')"
-      ></div>
+      <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
+        v-text="t('adamAsmaca.noConnection')"></div>
 
       <div ref="target" v-if="won != null" class="mx-auto min-[1430px]:w-0 min-[1430px]:mx-0">
         <table
           class="border-2 border-black min-[1430px]:h-max w-full sm:w-max rounded-lg text-lg p-2 my-2 mx-auto block min-[1430px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
-          v-for="item in responseData"
-        >
-        <tbody>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-            <img
-              class="w-9 h-9 mr-2"
-              src="/flags/am-flag.png"
-              draggable="false"
-            />
-            </td>
-            <td class="font-bold pr-3">
-              <span class="text-red-500" v-text="item.am"></span>
-              <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
-            </td>
-            <td class="pr-3" v-text="item.aM1"></td>
-            <td class="pr-3" v-text="item.alaN2"></td>
-            <td class="pr-3" v-text="item.alaN1"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-            <img
-              class="w-9 h-9 mr-2"
-              src="/flags/tr-flag.png"
-              draggable="false"
-            />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-            <td class="pr-3" v-text="item.tR2"></td>
-            <td class="pr-3" v-text="item.tR3"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-            <img
-              class="w-9 h-9 mr-2"
-              src="/flags/eng-flag.png"
-              draggable="false"
-            />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-            <td class="pr-3" v-text="item.tR5"></td>
-            <td class="pr-3" v-text="item.tR6"></td>
-          </tr>
+          v-for="item in responseData">
+          <tbody>
+            <tr class="mb-3 flex flex-wrap py-1 pl-1">
+              <td>
+                <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false" />
+              </td>
+              <td class="font-bold pr-3">
+                <span class="text-red-500" v-text="item.am"></span>
+                <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
+              </td>
+              <td class="pr-3" v-text="item.aM1"></td>
+              <td class="pr-3" v-text="item.alaN2"></td>
+              <td class="pr-3" v-text="item.alaN1"></td>
+            </tr>
+            <tr class="mb-3 flex flex-wrap py-1 pl-1">
+              <td>
+                <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false" />
+              </td>
+              <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
+              <td class="pr-3" v-text="item.tR2"></td>
+              <td class="pr-3" v-text="item.tR3"></td>
+            </tr>
+            <tr class="mb-3 flex flex-wrap py-1 pl-1">
+              <td>
+                <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false" />
+              </td>
+              <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
+              <td class="pr-3" v-text="item.tR5"></td>
+              <td class="pr-3" v-text="item.tR6"></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -300,7 +250,7 @@ const responseData = ref();
 }
 
 .armenian-button {
-  @apply size-1/12 p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
+  @apply size-[7.10%]  p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
   font-size: 16px;
   background-color: #3490dc;
   color: #ffffff;
@@ -453,5 +403,22 @@ const responseData = ref();
   transform: rotate(-8deg);
   background-color: black;
   @apply dark:border-white dark:bg-white transition-colors duration-300 w-[17px] min-[730px]:w-[30px] top-[116px] min-[730px]:top-[249px] left-[111px] min-[730px]:left-[121px];
+}
+
+.row:first-child {
+  @apply flex justify-center sm:block sm:translate-x-[70px];
+}
+
+.row:nth-child(3) {
+  transform: translateX(0.5rem);
+}
+
+.row:nth-child(4) {
+  transform: translateX(1rem);
+}
+
+
+.row:first-child .armenian-button:nth-last-child(-n + 3) {
+  @apply translate-x-[47px] sm:translate-x-[255px];
 }
 </style>
