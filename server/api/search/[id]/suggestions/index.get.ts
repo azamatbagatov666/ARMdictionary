@@ -7,14 +7,14 @@ function sanitizeAranan(value: string): string {
     .replace(/[.!?՝՛՞՜']/g, '');
 }
 
-  const id = event.context.params?.id;
+  const id = event.context.params?.id;/*
     if (!id) {
     return [];
   }
-  const sanitized = encodeURIComponent(sanitizeAranan(decodeURIComponent(id)));
+  const sanitized = encodeURIComponent(sanitizeAranan(decodeURIComponent(id)));*/
   
   return $fetch<string[]>(
-    `http://localhost:5000/gettingSuggestions?word=${sanitized}`
+    `http://localhost:5000/gettingSuggestions?word=${id}`
   ); 
 } 
 
