@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useSearchHistoryStore } from "~/store/search-history.store";
 
+const { t } = useI18n();
+
+
 const searchHistoryStore = useSearchHistoryStore();
 
 const emit = defineEmits<{
@@ -59,7 +62,7 @@ const historyList = computed(() => searchHistoryStore.state.history);
       class="bg-white border select-none border-black text-black font-bold px-4 h-8 rounded-md flex items-center mx-auto transition-colors duration-300 active:scale-95 active:bg-red-500"
     >
       <img src="/trash.png" class="size-9" draggable="false" /><span
-        v-text="$t('searchHistory.removeButton')"
+        v-text="t('searchHistory.removeButton')"
       ></span>
     </button>
   </div>

@@ -2,6 +2,9 @@
 import { ref, onMounted } from "vue";
 
 import type { TDATA } from "~/models/TDATA";
+import { useDebounceFn } from "@vueuse/core";
+
+const { t } = useI18n();
 
 
 
@@ -12,6 +15,8 @@ const isResultBoxVisible = ref(false);
 const search = ref<HTMLInputElement | null>(null);
 const cursorStart = ref<number>(0);
 const cursorEnd = ref<number>(0);
+const suppressSuggestions = ref(false);
+
 
 const todayData = ref();
 
@@ -58,8 +63,13 @@ var listOfAvailableWords: string[];
 listOfAvailableWords = [];
 
 const lcandtrimmed = computed(() => {
-  return desword.value.toLocaleLowerCase("tr-TR").trim();
+  return sanitizeAranan(
+    desword.value
+      .toLocaleLowerCase("tr-TR")
+      .trim()
+  );
 });
+
 
 onMounted(() => {
   document.addEventListener("click", handleDocumentClick);
@@ -89,8 +99,9 @@ const emit = defineEmits<{
   (e: "set-today", data: TDATA[]): void;
 }>();
 
-const inputChanged = async () => {
-  emit("input-changed", lcandtrimmed.value);
+const fetchSuggestions = useDebounceFn(async () => {
+    if (suppressSuggestions.value) return;
+
   let result: any[] = [];
 
   if (lcandtrimmed.value.length >= 2) {
@@ -103,6 +114,9 @@ const inputChanged = async () => {
     if (error.value) {
       return;
     }
+
+    if (suppressSuggestions.value) return;
+
 
     if (data) listOfAvailableWords = [...(<[]>data.value)];
 
@@ -118,9 +132,19 @@ const inputChanged = async () => {
   }
 
   resultBoxContent.value = result;
+}, 400); 
+
+
+const inputChanged = () => {
+  suppressSuggestions.value = false;
+
+  emit("input-changed", lcandtrimmed.value);
+  fetchSuggestions();
 };
 
+
 const selectTheInput = async (item: string) => {
+  
   desword.value = item;
   emit("input-changed", lcandtrimmed.value);
   emit("submit-request");
@@ -165,6 +189,8 @@ const keyUp = () => {
 };
 
 const keyEnter = () => {
+    suppressSuggestions.value = true;
+
   if (currentHoverIndex.value == -1) {
     emit("submit-request");
     if (width.value >= 1024) {
@@ -303,6 +329,8 @@ const backSpace = async () => {
 };
 
 const submit = () => {
+    suppressSuggestions.value = true;
+
   emit("submit-request");
   if (width.value >= 1024) {
     search.value?.select();
@@ -337,7 +365,7 @@ const randomWord = () => {
 
     setTimeout(() => {
       randomWordTimeout.value = false;
-    }, 2000);
+    }, 500);
   }
 };
 
@@ -346,6 +374,15 @@ const letters = ["ç", "ğ", "ı", "o", "ş", "ü"];
 const setToday = async () => {
   emit("set-today", todayData.value);
 };
+
+const sanitizeAranan = (value: string) => {
+  return value
+    .normalize("NFD")          // split accents
+    .replace(/\u0302/g, "")    // remove circumflex ONLY
+    .normalize("NFC")
+    .replace(/[.!?՝՛՞՜']/g, "") // punctuation
+}
+
 
 defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 </script>
@@ -376,7 +413,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         >
           <ElementComponentsCustomButton
             class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 kButton outline-none transition-colors duration-300"
-            :text="$t('searchLine.keyboardButton')"
+            :text="t('searchLine.keyboardButton')"
             @click="toggleKeyboard($event)"
             @mousedown="buttonClick"
           />
@@ -389,7 +426,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               spellcheck="false"
               v-model="desword"
               class="motherinput"
-              :placeholder="$t('searchLine.searching')"
+              :placeholder="t('searchLine.searching')"
               autocomplete="off"
               maxlength="125"
               @input="inputChanged"
@@ -442,7 +479,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           </div>
           <div
             class="text-center text-sm my-1"
-            v-text="$t('searchLine.searchTip')"
+            v-text="t('searchLine.searchTip')"
           ></div>
           <div class="flex justify-center">
       <button  v-for="(letter, index) in letters" :key="index"  class="turkish-button"
@@ -467,7 +504,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 <div class="w-0">
                   <span
                     class="w-[63px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
-                    v-text="$t('index.todaysword')"
+                    v-text="t('index.todaysword')"
                   ></span>
                 </div>
               </div>
@@ -484,7 +521,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 <div class="w-0">
                   <span
                     class="pointer-events-none w-[63px] inline-block break-words leading-none transition-opacity dark:text-white"
-                    v-text="$t('searchLine.randomButton')"
+                    v-text="t('searchLine.randomButton')"
                   ></span>
                 </div>
               </div>
@@ -506,7 +543,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 <div class="w-0">
                   <span
                     class="pointer-events-none w-[63px] inline-block break-words leading-none transition-opacity dark:text-white"
-                    v-text="$t('searchLine.historyButton')"
+                    v-text="t('searchLine.historyButton')"
                   ></span>
                 </div>
               </div>
@@ -528,7 +565,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             <div class="w-0">
               <span
                 class="w-[112px] pointer-events-none inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
-                v-text="$t('index.todaysword')"
+                v-text="t('index.todaysword')"
               ></span>
             </div>
           </div>
@@ -547,7 +584,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             <div class="w-0">
               <span
                 class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
-                v-text="$t('searchLine.randomButton')"
+                v-text="t('searchLine.randomButton')"
               ></span>
             </div>
           </div>
@@ -569,7 +606,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             <div class="w-0">
               <span
                 class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity group-hover:delay-300 text-white"
-                v-text="$t('searchLine.historyButton')"
+                v-text="t('searchLine.historyButton')"
               ></span>
             </div>
           </div>

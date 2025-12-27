@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const isMenuOpen = ref(false);
 
+const { t } = useI18n();
+
+
 import { useUserStore } from '~/store/user.store';
 
 const userStore = useUserStore();
@@ -109,7 +112,7 @@ const toggleDropdown = (event: Event) => {
       <div
         class="flex items-center gap-2 homePage cursor-pointer bg-gray-200 px-2 transition-[background-color] duration-75  dark:bg-black active:!bg-red-500"
         @click="isMenuOpen = !isMenuOpen">
-        <span v-text="$t('navBar.menu')" class="transition-none"></span>
+        <span v-text="t('navBar.menu')" class="transition-none"></span>
 
         <div>
           <div class="bar1" :class="{ change: isMenuOpen }"></div>
@@ -130,18 +133,18 @@ const toggleDropdown = (event: Event) => {
             </li>
 
             <NuxtLink to="/adamasmaca">
-              <li v-text="$t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              <li v-text="t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
               </li>
             </NuxtLink>
 
             <NuxtLink to="/faydalibilgiler">
-              <li v-text="$t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              <li v-text="t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
               </li>
             </NuxtLink>
 
 
             <NuxtLink to="/iletisim">
-              <li v-text="$t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+              <li v-text="t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
               </li>
             </NuxtLink>
 

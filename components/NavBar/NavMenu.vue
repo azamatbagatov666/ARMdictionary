@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useUserStore } from '~/store/user.store';
 
+const { t } = useI18n();
 
 const dropDownOn = ref(false);
 const adminDropDownOn = ref(false);
@@ -69,23 +70,23 @@ const logoutClicked = () => {
                     class="dropDownMenu">
                     <button
                         class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
-                        v-text="$t('navBar.menu') + ' &#9660'" :class="{ '!bg-red-500': dropDownOn }"></button>
+                        v-text="t('navBar.menu') + ' &#9660'" :class="{ '!bg-red-500': dropDownOn }"></button>
                     <div class="dropDownOn relative" v-if="dropDownOn">
                         <nav>
                             <ul @click="toggleDropdown($event, 'regular')"
                                 class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
                                 <NuxtLink to="/adamasmaca">
-                                    <li v-text="$t('navBar.hangman')">
+                                    <li v-text="t('navBar.hangman')">
                                     </li>
                                 </NuxtLink>
 
                                 <NuxtLink to="/faydalibilgiler">
-                                    <li v-text="$t('navBar.documents')">
+                                    <li v-text="t('navBar.documents')">
                                     </li>
                                 </NuxtLink>
 
                                 <NuxtLink to="/iletisim">
-                                    <li v-text="$t('navBar.contact')">
+                                    <li v-text="t('navBar.contact')">
                                     </li>
                                 </NuxtLink>
                             </ul>

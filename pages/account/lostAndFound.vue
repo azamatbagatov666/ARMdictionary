@@ -19,7 +19,7 @@ useHead({
   title: "AVEDİKYAN - Bulunamayan Sözcükler",
 });
 
-let screenHeight = 0;
+const screenHeight = ref(0);
 
 onBeforeMount(() => {
   setTimeout(() => {
@@ -88,7 +88,7 @@ const refresh = async () => {
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
         nextTick(() => {
-      screenHeight = document.documentElement.scrollHeight;
+      screenHeight.value = document.documentElement.scrollHeight;
 
   })
 
@@ -128,7 +128,7 @@ const scrollToTop = () => {
 
 const scrollToBottom = () => {
 
-    scrollTo({ top: screenHeight, left: 0, behavior: "smooth" });
+    scrollTo({ top: screenHeight.value, left: 0, behavior: "smooth" });
 
   
 

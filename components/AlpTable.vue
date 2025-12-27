@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+const { t } = useI18n();
+
 
 const letters = ref([
   "Ա", "Բ", "Գ", "Դ", "Ե", "Զ", "Է", "Ը", "Թ", "Ժ",
@@ -49,7 +51,7 @@ defineExpose({ closePanel })
     <div @click="showAlpTable = !showAlpTable" class="maindiv hidden min-[722px]:block bg-gray-200 h-[38px] w-[360.94px] dark:bg-[#101010]  p-1 cursor-pointer rounded-lg border-2 border-black dark:border-white duration-300 select-none"
     :class="{'!h-[115px] lg:!h-[131px] !w-[942.75px] lg:w-[992.78px] !shadow-none no-translate' : showAlpTable}">
     
-    <div class="mb-0.5  flex justify-center font-bold"><span v-text="$t('alpTable.tableTitle')"></span></div>
+    <div class="mb-0.5  flex justify-center font-bold"><span v-text="t('alpTable.tableTitle')"></span></div>
     <Transition>
 
       <table @click.stop v-if="showAlpTable" class="alpTable table-fixed text-xs lg:text-sm text-black dark:text-white transition-all !cursor-default"
@@ -81,7 +83,7 @@ defineExpose({ closePanel })
 
     <div @click="showAlpTable = !showAlpTable" class="maindiv min-[722px]:hidden bg-gray-200 h-[56.98px] w-[180.47px] dark:bg-[#101010]  p-1 cursor-pointer rounded-lg border-2 border-black dark:border-white transition-all duration-300 select-none"
     :class="{'!h-[968.12px] shadow-none no-translate' : showAlpTable}">
-    <div  class="mb-0.5 font-bold flex justify-center text-sm"><span class="text-center" v-text="$t('alpTable.tableTitle')"></span></div>
+    <div  class="mb-0.5 font-bold flex justify-center text-sm"><span class="text-center" v-text="t('alpTable.tableTitle')"></span></div>
     <Transition>
 
       <table @click.stop v-if="showAlpTable" class="alpTable mx-auto max-h-[913.33px] table-fixed text-sm text-black dark:text-white transition-all "
