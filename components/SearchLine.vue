@@ -87,9 +87,15 @@ const handleDocumentClick = (event: MouseEvent) => {
   const keyboard = document.querySelector(".aKeyboard");
 
   if (keyboard) {
-    if (!keyboard.contains(event.target as Node))
+    if (!keyboard.contains(event.target as Node)) {
       isResultBoxVisible.value = false;
-  } else isResultBoxVisible.value = false;
+    currentHoverIndex.value = -1;
+    }
+
+  } else {
+    isResultBoxVisible.value = false;
+    currentHoverIndex.value = -1;
+  }
 };
 
 const emit = defineEmits<{
@@ -176,16 +182,30 @@ const keyBase = (event: any) => {
 };
 
 const keyDown = () => {
-  if (
-    isResultBoxVisible.value &&
-    currentHoverIndex.value < resultBoxContent.value.length - 1
-  )
+
+    if (isResultBoxVisible.value && currentHoverIndex.value < resultBoxContent.value.length - 1){
+
     currentHoverIndex.value++;
+  }
+  else if(resultBoxContent.value.length > 0 && currentHoverIndex.value < resultBoxContent.value.length - 1)
+  {
+    isResultBoxVisible.value=true;
+
+  }
+    
 };
 
 const keyUp = () => {
-  if (isResultBoxVisible.value && currentHoverIndex.value >= 0)
+  if ((isResultBoxVisible.value && currentHoverIndex.value >= 0))
+{
+
     currentHoverIndex.value--;
+    }
+    else if ( !isResultBoxVisible.value && resultBoxContent.value.length > 0)
+    {
+    isResultBoxVisible.value=true;
+      
+    }
 };
 
 const keyEnter = () => {
@@ -431,7 +451,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               maxlength="125"
               @input="inputChanged"
               @keydown="keyBase($event)"
-              @keyup.esc="isResultBoxVisible = false"
+              @keyup.esc="isResultBoxVisible = false; currentHoverIndex=-1"
             />
 
             <div
