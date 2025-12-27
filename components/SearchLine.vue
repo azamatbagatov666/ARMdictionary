@@ -93,7 +93,7 @@ const inputChanged = async () => {
   emit("input-changed", lcandtrimmed.value);
   let result: any[] = [];
 
-  if (lcandtrimmed.value.length >= 2) {
+  if (lcandtrimmed.value.length >= 3) {
     const { data, error } = await useFetch(
       `/api/search/${encodeURIComponent(lcandtrimmed.value)}/suggestions`,
       {
