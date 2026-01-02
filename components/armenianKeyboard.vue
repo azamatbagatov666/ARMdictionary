@@ -105,6 +105,7 @@ const lines = [
 
 .row:nth-child(4) {
   transform: translateX(1rem);
+  @apply inline ml-4;
 }
 
 .row:first-child .armenian-button:nth-child(n+3) {
