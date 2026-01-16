@@ -139,7 +139,7 @@ const appendOrRemove = (word: string) => {
     selectedListWord.value.push(word);
   } else {
     selectedListWord.value = selectedListWord.value.filter(
-      (item) => item !== word    // ✅ compare item to word
+      (item) => item !== word    
     );
   }
 };

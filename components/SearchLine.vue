@@ -6,8 +6,6 @@ import { useDebounceFn } from "@vueuse/core";
 
 const { t } = useI18n();
 
-
-
 const currentHoverIndex = ref<number>(-1);
 const desword = ref("");
 const resultBoxContent = ref<string[]>([]);
@@ -16,7 +14,7 @@ const search = ref<HTMLInputElement | null>(null);
 const cursorStart = ref<number>(0);
 const cursorEnd = ref<number>(0);
 const suppressSuggestions = ref(false);
-
+const keyboardOn = ref(false);
 
 const todayData = ref();
 
@@ -244,7 +242,6 @@ const toggleHistory = (event: Event) => {
   historyOn.value = !historyOn.value;
 };
 
-let keyboardOn = ref(false);
 
 const toggleKeyboard = (event: Event) => {
   

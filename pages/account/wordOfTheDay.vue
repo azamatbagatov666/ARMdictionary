@@ -292,7 +292,7 @@ const tempPanel = ref(false);
 const tempAm = ref("");
 const tempTr1 = ref("");
 const tempTr4 = ref("");
-const openTemplatePanel = async () => {
+const exportAsJpg = async () => {
 
   try {  
     if (selectedDate.value) {
@@ -319,6 +319,19 @@ const openTemplatePanel = async () => {
 
   temp.value?.focus();
 
+  const canvas = await html2canvas(image.value, { useCORS: true });
+  const link = document.createElement("a");
+
+  if(selectedDate.value)
+  link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
+  link.href = canvas.toDataURL("image/jpeg", 1.0); 
+
+  link.click();
+
+  tempPanel.value = false;
+
+  
+
   } catch (error) {
         alert("Şablonu oluşturmadan önce; sözcüğün İngilizcesinin, Türkçesinin, Ermenicesinin ve okunuşunun dolu olduğundan emin olun.");
 
@@ -330,23 +343,16 @@ import html2canvas from "html2canvas";
 
 const image = ref();
 
-const exportAsJpg = async () => {
-  const canvas = await html2canvas(image.value, { useCORS: true });
-  const link = document.createElement("a");
-  if(selectedDate.value)
-  link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
-  link.href = canvas.toDataURL("image/jpeg", 1.0); // quality 1.0 (max)
-  link.click();
-};
+
 </script>
 
 <template>
   <div v-if="isLogged" class="containers">
     <div
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
-      class="absolute top-36"
+      class="absolute top-36 bg-black lg:bg-transparent p-2 lg:p-0 rounded-lg"
     >
-      <div class="flex justify-center xl:text-lg font-bold">
+      <div class="flex justify-center xl:text-lg font-bold text-white">
         Seçilen Güne Kaydedilmiş Sözcük
       </div>
       <table
@@ -430,9 +436,9 @@ const exportAsJpg = async () => {
       </table>
 
       <ElementComponentsCustomButton
-        @click="openTemplatePanel"
+        @click="exportAsJpg"
         class="hover:bg-red-500 mx-auto block mt-4"
-        text="Şablonu Görüntüle"
+        text="Şablonu İndir"
       />
     </div>
 
@@ -620,55 +626,31 @@ const exportAsJpg = async () => {
     Bağlantı Sorunu
   </div>
 
-  <div
-    v-if="tempPanel && responseData && selectedDate" @click.self="tempPanel = false"   @keyup.esc="tempPanel = false" tabindex="0" ref="temp"
-
-    class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 select-none"
-  >
-    <div class="bg-white p-6 rounded-lg w-[900px] h-[792px]">
-
-            <div class="text-black text-5xl font-bold flex justify-end">
-              <div class="border-black border px-[5px] pb-[2px] cursor-pointer rounded-lg hover:bg-red-500" v-text="'&#x2715'"  @click="tempPanel = false"></div>
-
-      </div>
-
-      <div class="flex justify-center mt-2">
+        <div class="flex justify-center mt-2 fixed -left-[9999px] top-0" 
+        v-if="tempPanel && responseData && selectedDate"
+     >
         <div class="relative font-[Calibri] flex justify-center text-white " ref="image">
           <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px] " draggable="false"/>
           <span
-            class="absolute text-6xl top-20 transform text-center flex justify-center w-[736px]"
+            class="absolute font-bold text-6xl top-40 transform text-center flex justify-center w-[736px]"
             v-text="tempAm"
           ></span>
           <span
-            class="absolute text-5xl top-[320px] text-center flex justify-center w-[736px]"
+            class="absolute text-4xl top-[320px] text-center flex justify-center w-[736px]"
             v-text="tempTr1"
           ></span>
           <span
-            class="absolute text-5xl top-[426px] text-center flex justify-center w-[552px]"
+            class="absolute text-4xl top-[426px] text-center flex justify-center w-[552px]"
             v-text="tempTr4"
           ></span>
           <span
-            class="absolute text-4xl top-56 text-center flex justify-center w-[416px]"
+            class="absolute text-3xl top-20 text-center flex justify-center w-[736px]"
             v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
           ></span>
         </div>
       </div>
 
-      <ElementComponentsCustomButton
-        @click="exportAsJpg"
-        class="hover:bg-red-500 mx-auto block mt-1"
-        text="İndir"
-      />
 
-      <ElementComponentsCustomButton
-        @click="tempPanel = false"
-        class="hover:bg-red-500 mx-auto block mt-1"
-        text="Kapat"
-      />
-
-
-    </div>
-  </div>
 </template>
 
 <style scoped>

@@ -98,7 +98,8 @@ const toggleDropdown = (event: Event) => {
               </NuxtLink>
               <NuxtLink to="/account/removeWord">
                 <li>
-                  Yönlendirme/Sözcük Sil
+                  Yönlendirme/
+                  Sözcük Sil
                 </li>
               </NuxtLink>
               <li class="cursor-pointer" @click="logoutClicked()">

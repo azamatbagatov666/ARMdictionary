@@ -1,21 +1,23 @@
 <script setup lang="ts">
 import type { TDATA } from "~/models/TDATA";
 import { useSearchHistoryStore } from "~/store/search-history.store";
+import { useElementVisibility } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
+const target = useTemplateRef('target')
+const targetIsVisible = useElementVisibility(target)
 
 const loading = ref(true);
 
 onMounted(() => {
-    loading.value = false;
+  loading.value = false;
 });
-
 
 const { t } = useI18n();
 
-const title = computed(() => t('title.index'))
+const title = computed(() => t("title.index"));
 useHead({
-  title
+  title,
 });
-
 
 const desword = ref("");
 const previousDesword = ref("");
@@ -46,11 +48,18 @@ const setToday = async (todayData: TDATA[]) => {
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
   searchline.value.wordFromAbove(desword.value);
+        nextTick(() => {
+      if (!targetIsVisible.value) {
+      scrollToTarget();
+    }
+  });
+
 };
 
 const wordInput = (data: string) => {
   desword.value = data;
 };
+
 
 const responseData = ref();
 const submit = async () => {
@@ -62,7 +71,7 @@ const submit = async () => {
     `/api/search/${encodeURIComponent(desword.value)}`,
     {
       method: "GET",
-    }
+    },
   );
   if (error.value) {
     thereIsNoConnection.value = true;
@@ -83,6 +92,11 @@ const submit = async () => {
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     searchHistoryStore.addHistory(desword.value);
+      nextTick(() => {
+      if (!targetIsVisible.value) {
+      scrollToTarget();
+    }
+  });
   } else {
     thereIsNoResult.value = true;
   }
@@ -109,7 +123,11 @@ const random = async () => {
     previousDesword.value = desword.value;
     searchline.value.wordFromAbove(desword.value);
     searchHistoryStore.addHistory(desword.value);
-
+      nextTick(() => {
+      if (!targetIsVisible.value) {
+      scrollToTarget();
+    }
+  });
 
   } else {
     thereIsNoResult.value = true;
@@ -120,19 +138,14 @@ const buttonClick = (event: Event) => {
   event.preventDefault();
 };
 
-const target = ref<HTMLElement | null>(null);
 
-import { useWindowSize } from "@vueuse/core";
-const { height } = useWindowSize();
 
 const scrollToTarget = () => {
-  nextTick(() => {
     if (target.value) {
-      target.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  })
+      target.value.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+  }
 };
-
 </script>
 
 <template>
@@ -159,7 +172,7 @@ const scrollToTarget = () => {
       <AlpTable ref="alpTable" />
 
       <div ref="target">
-      <wordTable :responseData="responseData"></wordTable>
+        <wordTable :responseData="responseData"></wordTable>
       </div>
       <div
         v-if="thereIsNoResult"

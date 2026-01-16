@@ -6,12 +6,15 @@ useHead({
   link: [
     { rel: "manifest", href: "/manifest.json" },
     { rel: "icon", href: "/icon-192.png" },
-
-    // iOS special requirement:
     { rel: "apple-touch-icon", href: "/icon-192.png" }
   ],
   meta: [
     { name: "theme-color", content: "#ffffff" },
+
+    // Standard (Chrome, Android, etc.)
+    { name: "mobile-web-app-capable", content: "yes" },
+
+    // iOS Safari (still required)
     { name: "apple-mobile-web-app-capable", content: "yes" }
   ]
 });
