@@ -48,11 +48,16 @@ const setToday = async (todayData: TDATA[]) => {
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
   searchline.value.wordFromAbove(desword.value);
-        nextTick(() => {
+nextTick(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       if (!targetIsVisible.value) {
-      scrollToTarget();
-    }
-  });
+        scrollToTarget()
+      }
+    })
+  })
+})
+
 
 };
 
@@ -92,11 +97,16 @@ const submit = async () => {
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     searchHistoryStore.addHistory(desword.value);
-      nextTick(() => {
+nextTick(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       if (!targetIsVisible.value) {
-      scrollToTarget();
-    }
-  });
+        scrollToTarget()
+      }
+    })
+  })
+})
+
   } else {
     thereIsNoResult.value = true;
   }
@@ -123,11 +133,16 @@ const random = async () => {
     previousDesword.value = desword.value;
     searchline.value.wordFromAbove(desword.value);
     searchHistoryStore.addHistory(desword.value);
-      nextTick(() => {
+nextTick(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       if (!targetIsVisible.value) {
-      scrollToTarget();
-    }
-  });
+        scrollToTarget()
+      }
+    })
+  })
+})
+
 
   } else {
     thereIsNoResult.value = true;
