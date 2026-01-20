@@ -24,7 +24,7 @@ const setColorTheme = (newTheme: Theme) => {
     </div>
 
     <div class="inline-block">
-      <label class="switch">
+      <label class="switch" aria-label="Karanlık veya aydınlık moda geç.">
         <input
           @click="
             setColorTheme($colorMode.value == 'dark' ? 'light' : 'dark')

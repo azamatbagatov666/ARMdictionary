@@ -5,7 +5,7 @@ export const titleEn = {
   iletisim: "AVEDIKYAN - Contact",
 };
 
-export const titleTR = {
+export const titleTr = {
   index: "AVEDİKYAN - Türkçe Ermenice İngilizce Sözlük",
   adamasmaca: "AVEDİKYAN - Adam Asmaca",
   faydalibilgiler: "AVEDİKYAN - Faydalı Bilgiler",
@@ -18,6 +18,30 @@ export const titleAm = {
   faydalibilgiler: "Աւետիքեան - Յաւելեալ Գիտելիքներ",
   iletisim: "Աւետիքեան - Մեր Հասցէն",
 };
+
+
+export const metaEn = {
+  index: "A modern Western Armenian, Turkish, and English dictionary for word meanings, synonyms, translations, and everyday language usage.",
+  adamasmaca: "Play the hangman game with Western Armenian words and improve your vocabulary in a fun and interactive way.",
+  faydalibilgiler: "Articles about Armenian names, the history of the Armenian alphabet, mythology, nature sounds, countries with their capitals and cultural topics.",
+  iletisim: "Contact us to share feedback, suggestions, or questions about the Avedikyan Dictionary.",
+};
+
+export const metaTr = {
+  index: "Modern Batı Ermenicesi, Türkçe ve İngilizce sözlük. Kelime anlamları, eşanlamlı sözcükler, çeviriler ve gündelik kelimeler için hızlı bir kaynak.",
+  adamasmaca: "Batı Ermenicesi kelimelerle hazırlanmış Adam Asmaca oyunu ile kelime dağarcığınızı eğlenceli bir şekilde geliştirin.",
+  faydalibilgiler: "Ermenice isimler, Ermeni alfabesinin tarihi, mitoloji, doğa sesleri, ülkeler ile başkentleri ve kültürel konularda yazılar.",
+  iletisim: "Avedikyan Sözlük hakkında görüş, öneri veya sorularınız için bizimle iletişime geçin.",
+};
+
+export const metaAm = {
+  index: "Ժամանակակից Արեւմտահայերէն, Թրքերէն եւ Անգլերէն բառարան։ Բառերու նշանակութիւններու, հոմանիշ բառերու, թարգմանութիւններու եւ ամենօրեայ գործածութեան համար։",
+  adamasmaca: "Արեւմտահայերէն բառերով պատրաստուած կախաղան խաղ։ Ձեր բառամթերքը զուարճալի ձեւով զարգացնելու համար։",
+  faydalibilgiler: "Յօդուածներ Հայ անուններու, Հայոց այբուբենի պատմութեան, դիցաբանութեան, բնութեան ձայներու, երկիրներ ու մայրաքաղաքներու եւ մշակութային նիւթերու մասին։",
+  iletisim: "Կապ հաստատեցէք մեզի հետ՝ Աւետիքեան Բառարանին վերաբերող կարծիքներու, առաջարկներու կամ հարցումներու համար։",
+};
+
+
 
 
 export const searchLineEn = {
@@ -185,6 +209,7 @@ export const EnglishLanguageOptions = {
   alpTable: alpTableEn,
   contact: contactEn,
   title: titleEn,
+  meta: metaEn,
 };
 
 export const TurkishLanguageOptions = {
@@ -195,7 +220,9 @@ export const TurkishLanguageOptions = {
   index: indexTr,
   alpTable: alpTableTr,
   contact: contactTr,
-  title: titleTR,
+  title: titleTr,
+  meta: metaTr,
+
 
 
 };
@@ -209,6 +236,8 @@ export const ArmenianLanguageOptions = {
   alpTable: alpTableAm,
   contact: contactAm,
   title: titleAm,
+  meta: metaAm,
+
 
 
 };

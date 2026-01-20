@@ -3,9 +3,18 @@
 const { t } = useI18n();
 
 const title = computed(() => t('title.iletisim'))
+const description = computed(() => t("meta.iletisim"));
+
 useHead({
-  title
+  title,
+  meta: [
+    {
+      name: "description",
+      content: description,
+    },
+  ],
 });
+
 
 
 const name = ref("");

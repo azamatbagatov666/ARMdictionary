@@ -60,10 +60,10 @@ const logoutClicked = () => {
         <div class="inline-block">
             <div class="max-h-12 flex">
                 <NuxtLink to="/">
-                    <button @click="homePageClean"
+                    <button @click="homePageClean" aria-label="Ana Sayfa"
                         class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors homePage duration-300 dark:bg-black ">
-                        <img src="/home-white.png" class="size-9 hidden dark:flex" draggable="false" />
-                        <img src="/home.png" class="size-9 dark:hidden" draggable="false" />
+                        <img src="/home-white.png" alt="" class="size-9 hidden dark:flex" draggable="false" />
+                        <img src="/home.png" alt="" class="size-9 dark:hidden" draggable="false" />
                     </button>
                 </NuxtLink>
                 <div @mouseover="toggleDropdown($event, 'regular')" @mouseleave="toggleDropdown($event, 'regular')"
@@ -75,20 +75,28 @@ const logoutClicked = () => {
                         <nav>
                             <ul @click="toggleDropdown($event, 'regular')"
                                 class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
-                                <NuxtLink to="/adamasmaca">
-                                    <li v-text="t('navBar.hangman')">
-                                    </li>
+                                <li>
+                                <NuxtLink to="/adamasmaca" >
+                                    {{ t('navBar.hangman') }}
                                 </NuxtLink>
 
+                                </li>
+
+                                                                <li>
                                 <NuxtLink to="/faydalibilgiler">
-                                    <li v-text="t('navBar.documents')">
-                                    </li>
+                                    {{ t('navBar.documents') }}
                                 </NuxtLink>
 
-                                <NuxtLink to="/iletisim">
-                                    <li v-text="t('navBar.contact')">
-                                    </li>
+                                </li>
+
+                                                                <li>
+                                <NuxtLink to="/iletisim" >
+                       {{ t('navBar.contact') }}
                                 </NuxtLink>
+
+                                </li>
+
+
                             </ul>
                         </nav>
                     </div>
@@ -102,51 +110,56 @@ const logoutClicked = () => {
                         <nav>
                             <ul @click="toggleDropdown($event, 'admin')"
                                 class="bg-white border-l-2 border-b-2 border-r-2 border-[#ddd] text-black rounded-b-lg">
+
+  <li>
                                 <NuxtLink to="/account/stats">
-                                    <li>
-                                        İstatistikler
-                                    </li>
+                                  İstatistikler
                                 </NuxtLink>
-                                                                <NuxtLink to="/account/wordOfTheDay">
-                                    <li>
-                                        Günün Sözcüğü
-                                    </li>
-                                </NuxtLink>
-
-                                                                <NuxtLink to="/account/lostAndFound">
-                                    <li>
-                                        Bulunamayan Sözcükler
-                                    </li>
-                                </NuxtLink>
-
-                                <NuxtLink to="/account/addNewWord">
-                                    <li>
-                                        Yeni Sözcük Ekle
-                                    </li>
-                                </NuxtLink>
-
-                                <NuxtLink to="/account/editWord">
-                                    <li>
-                                        Sözcük Düzenle
-                                    </li>
-                                </NuxtLink>
-
-                                <NuxtLink to="/account/modifyWords">
-                                    <li>
-                                        Yönlendirme Ekle
-                                    </li>
-                                </NuxtLink>
-                                <NuxtLink to="/account/removeWord">
-                                    <li>
-                                        Yönlendirme/Sözcük Sil
-                                    </li>
-                                </NuxtLink>
-
-
-                                <li class="cursor-pointer" @click="logoutClicked()">
-                                    Oturumu Kapat
                                 </li>
 
+                                <li>
+                                <NuxtLink to="/account/wordOfTheDay">
+                                  Günün Sözcüğü
+                                </NuxtLink>
+                                </li>
+
+                                <li>
+                                <NuxtLink to="/account/lostAndFound">
+                                  Bulunamayan Sözcükler
+                                </NuxtLink>
+                                </li>                                
+
+                                <li>
+                                <NuxtLink to="/account/addNewWord"  >
+                                  Yeni Sözcük Ekle
+                                </NuxtLink>
+                                </li>                                
+
+
+                                <li>
+                                <NuxtLink to="/account/editWord" >
+                                  Sözcük Düzenle
+                                </NuxtLink>
+                                </li>        
+
+                                <li>
+                                <NuxtLink to="/account/modifyWords" >
+                                  Yönlendirme Ekle
+                                </NuxtLink>
+                                </li>   
+
+                                <li>
+                                <NuxtLink to="/account/removeWord" >
+                                  Yönlendirme/Sözcük Sil
+                                </NuxtLink>
+                                </li>   
+
+
+
+
+                                <li  class="p-4 cursor-pointer" @click="logoutClicked()">
+                                    Oturumu Kapat
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -187,6 +200,12 @@ const logoutClicked = () => {
 
 
 .dropDownOn ul li {
-    @apply p-4 transition-colors duration-300;
+    @apply transition-colors duration-300;
 }
+
+.dropDownOn ul li :deep(a) {
+  @apply p-4 block size-full;
+}
+
+
 </style>

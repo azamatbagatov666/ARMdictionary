@@ -2,8 +2,16 @@
 const { t } = useI18n();
 
 const title = computed(() => t("title.adamasmaca"));
+const description = computed(() => t("meta.adamasmaca"));
+
 useHead({
   title,
+  meta: [
+    {
+      name: "description",
+      content: description,
+    },
+  ],
 });
 
 const target = ref<HTMLElement | null>(null);

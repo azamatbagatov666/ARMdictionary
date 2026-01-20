@@ -11,15 +11,15 @@ const changeLanguage = async (lang: string) => {
 
 <template>
   <div class="inline-block mr-2 shrink ">
-    <button class="langButton" @click="changeLanguage('tr')">
-      <img src="/flags/tr-flag.png" class="image" draggable="false" />
+    <button class="langButton" @click="changeLanguage('tr')" aria-label="Sayfa Dili Türkçe">
+      <img src="/flags/tr-flag.png" alt="" class="image" draggable="false" />
     </button>
-    <button class="langButton" @click="changeLanguage('am')">
-      <img src="/flags/am-flag.png" class="image" draggable="false" />
+    <button class="langButton" @click="changeLanguage('am')" aria-label="Sayfa Dili Ermenice">
+      <img src="/flags/am-flag.png" alt="" class="image" draggable="false" />
     </button>
 
-    <button class="langButton" @click="changeLanguage('en')">
-      <img src="/flags/eng-flag.png" class="image" draggable="false" />
+    <button class="langButton" @click="changeLanguage('en')" aria-label="Sayfa Dili İngilizce">
+      <img src="/flags/eng-flag.png" alt="" class="image" draggable="false" />
     </button>
   </div>
 </template>

@@ -455,7 +455,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px] shrink-0 ml-[-1px]"
             >
               <Transition name="fade">
-                <button
+                <button aria-label="Arama kutusunu temizle."
                   @click="cleanTheInput($event)"
                   @mousedown="cleanButtonClick"
                   class="mr-[10px] h-5"
@@ -470,12 +470,12 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               </Transition>
             </div>
 
-            <button
+            <button aria-label="Arama Butonu"
               @click="submit"
               @mousedown="buttonClick"
               class="motherbutton border-l border-black shrink-0"
             >
-              <img src="/glass.png" class="size-[30px]" draggable="false" />
+              <img src="/glass.png" alt="" class="size-[30px]" draggable="false" />
             </button>
           </div>
           <div class="resultBox max-h-[155px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
@@ -509,14 +509,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           <div class="flex gap-1 select-none">
 
           <button
-              v-if="todayData"
+              v-if="todayData" aria-label="Günün sözcüğünü getir."
               class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-red-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="setToday"
               @mousedown="buttonClick"
             >
               <div class="flex items-center ml-[5px]">
                 <div class="rounded-full size-9 bg-red-600">
-                  <img src="/day.png" class="size-9" draggable="false" />
+                  <img src="/day.png" class="size-9" draggable="false" alt="" />
                 </div>
                 <div class="w-0">
                   <span
@@ -526,14 +526,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 </div>
               </div>
             </button>
-            <button
+            <button aria-label="Rastgele sözcük getir."
               class="rounded-md border-2 border-black h-12 w-28 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
               @click="randomWord()"
               @mousedown="buttonClick"
             >
               <div class="flex items-center ml-[5px]">
                 <div class="rounded-full size-9 bg-purple-600">
-                  <img src="/random.png" class="size-9" draggable="false" />
+                  <img src="/random.png" class="size-9" draggable="false" alt="" />
                 </div>
                 <div class="w-0">
                   <span
@@ -544,14 +544,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               </div>
             </button>
 
-            <button
+            <button aria-label="Arama geçmişini aç."
               class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-blue-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
               @click="toggleHistory($event)"
               @mousedown="buttonClick"
             >
               <div class="flex items-center ml-[5px]">
                 <div class="rounded-full flex items-center size-9 bg-blue-600">
-                  <img
+                  <img alt=""
                     src="/history.png"
                     class="ml-[3px] size-7"
                     draggable="false"
@@ -570,14 +570,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           </div>
         </div>
         <button
-          v-if="todayData"
+          v-if="todayData" aria-label="Günün sözcüğünü getir."
           class="hidden lg:block group bg-gray-200 select-none rounded-b-md border-2 border-t-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
           @click="setToday"
           @mousedown="buttonClick"
         >
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full size-9 bg-red-600">
-              <img src="/day.png" class="size-9" draggable="false" />
+              <img src="/day.png" class="size-9" draggable="false" alt=""/>
             </div>
             <div class="w-0">
               <span
@@ -589,14 +589,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         </button>
       </div>
       <div class="w-0 flex-col gap-4 justify-start hidden lg:flex select-none">
-        <button
+        <button aria-label="Rastgele sözcük getir."
           class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
           @click="randomWord()"
           @mousedown="buttonClick"
         >
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full size-9 bg-purple-600">
-              <img src="/random.png" class="size-9" draggable="false" />
+              <img src="/random.png" class="size-9" draggable="false" alt="" />
             </div>
             <div class="w-0">
               <span
@@ -607,14 +607,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           </div>
         </button>
 
-        <button
+        <button aria-label="Arama geçmişini aç."
           class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
           @click="toggleHistory($event)"
           @mousedown="buttonClick"
         >
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full flex items-center size-9 bg-blue-600">
-              <img
+              <img alt=""
                 src="/history.png"
                 class="ml-[3px] size-7"
                 draggable="false"

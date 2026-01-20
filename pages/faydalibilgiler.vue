@@ -4,9 +4,18 @@ const sideMenu = ref(true);
 const { t } = useI18n();
 
 const title = computed(() => t("title.faydalibilgiler"));
+const description = computed(() => t("meta.faydalibilgiler"));
+
 useHead({
   title,
+  meta: [
+    {
+      name: "description",
+      content: description,
+    },
+  ],
 });
+
 
 const htmlContent = ref<string>();
 const currentPage = ref<string>();

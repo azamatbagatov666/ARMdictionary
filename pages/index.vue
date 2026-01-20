@@ -15,8 +15,16 @@ onMounted(() => {
 const { t } = useI18n();
 
 const title = computed(() => t("title.index"));
+const description = computed(() => t("meta.index"));
+
 useHead({
   title,
+  meta: [
+    {
+      name: "description",
+      content: description,
+    },
+  ],
 });
 
 const desword = ref("");

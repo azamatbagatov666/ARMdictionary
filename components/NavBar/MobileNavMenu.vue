@@ -47,10 +47,10 @@ const toggleDropdown = (event: Event) => {
 
     <div class="sticky top-0 z-[60] h-12 flex justify-between bg-gray-200 dark:bg-black transition-colors  select-none">
       <NuxtLink to="/">
-        <button @click="homePageClean"
+        <button @click="homePageClean" aria-label="Ana Sayfa"
           class="bg-gray-200 h-12 w-16 homePage outline-none grid place-items-center transition-colors duration-75 dark:bg-black active:!bg-red-500">
-          <img src="/home-white.png" class="size-9 hidden dark:flex" draggable="false" />
-          <img src="/home.png" class="size-9 dark:hidden" draggable="false" />
+          <img src="/home-white.png" alt="" class="size-9 hidden dark:flex" draggable="false" />
+          <img src="/home.png" alt="" class="size-9 dark:hidden" draggable="false" />
         </button>
       </NuxtLink>
       <div @mouseover="toggleDropdown($event)" @mouseleave="toggleDropdown($event)" v-if="isLogged"
@@ -62,49 +62,56 @@ const toggleDropdown = (event: Event) => {
           <nav>
             <ul @click="toggleDropdown($event)"
               class="bg-white border-l-2 border-b-2 border-r-2 w-36 border-[#ddd] text-black rounded-b-lg">
-              <NuxtLink to="/account/stats">
-                <li>
-                  İstatistikler
-                </li>
-              </NuxtLink>
-              <NuxtLink to="/account/wordOfTheDay">
-                <li>
-                  Günün Sözcüğü
-                </li>
-              </NuxtLink>
+            
+                                <li>
+                                <NuxtLink to="/account/stats">
+                                  İstatistikler
+                                </NuxtLink>
+                                </li>
 
-              <NuxtLink to="/account/lostAndFound">
-                <li>
-                  Bulunamayan Sözcükler
-                </li>
-              </NuxtLink>
+                                <li>
+                                <NuxtLink to="/account/wordOfTheDay">
+                                  Günün Sözcüğü
+                                </NuxtLink>
+                                </li>
 
-              <NuxtLink to="/account/addNewWord">
-                <li>
-                  Yeni Sözcük Ekle
-                </li>
-              </NuxtLink>
+                                <li>
+                                <NuxtLink to="/account/lostAndFound">
+                                  Bulunamayan Sözcükler
+                                </NuxtLink>
+                                </li>                                
 
-              <NuxtLink to="/account/editWord">
-                <li>
-                  Sözcük Düzenle
-                </li>
-              </NuxtLink>
+                                <li>
+                                <NuxtLink to="/account/addNewWord"  >
+                                  Yeni Sözcük Ekle
+                                </NuxtLink>
+                                </li>                                
 
-              <NuxtLink to="/account/modifyWords">
-                <li>
-                  Yönlendirme Ekle
-                </li>
-              </NuxtLink>
-              <NuxtLink to="/account/removeWord">
-                <li>
-                  Yönlendirme/
-                  Sözcük Sil
-                </li>
-              </NuxtLink>
-              <li class="cursor-pointer" @click="logoutClicked()">
-                Oturumu Kapat
-              </li>
+
+                                <li>
+                                <NuxtLink to="/account/editWord" >
+                                  Sözcük Düzenle
+                                </NuxtLink>
+                                </li>        
+
+                                <li>
+                                <NuxtLink to="/account/modifyWords" >
+                                  Yönlendirme Ekle
+                                </NuxtLink>
+                                </li>   
+
+                                <li>
+                                <NuxtLink to="/account/removeWord" >
+                                  Yönlendirme/\nSözcük Sil
+                                </NuxtLink>
+                                </li>   
+
+
+
+
+                                <li  class="p-4 cursor-pointer" @click="logoutClicked()">
+                                    Oturumu Kapat
+                                </li>
 
             </ul>
           </nav>
@@ -128,26 +135,33 @@ const toggleDropdown = (event: Event) => {
 
         <nav v-show="isMenuOpen">
           <ul class="select-none">
-            <li class="flex justify-between">
+            <li class="flex justify-between p-2">
               <NavBarLanguageOption />
               <NavBarToggleSwitch />
             </li>
 
+              <li  class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
             <NuxtLink to="/adamasmaca">
-              <li v-text="t('navBar.hangman')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
-              </li>
+                  {{ t('navBar.hangman') }}
+
             </NuxtLink>
 
+              </li>
+
+              <li  class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
             <NuxtLink to="/faydalibilgiler">
-              <li v-text="t('navBar.documents')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
-              </li>
+                       {{ t('navBar.documents') }}
             </NuxtLink>
 
+              </li>
 
+
+              <li class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
             <NuxtLink to="/iletisim">
-              <li v-text="t('navBar.contact')" class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
-              </li>
+                       {{ t('navBar.contact') }}
             </NuxtLink>
+
+              </li>
 
 
           </ul>
@@ -210,13 +224,23 @@ const toggleDropdown = (event: Event) => {
 }
 
 .theMenu li {
-  @apply h-12 border-y border-white flex items-center p-2;
+  @apply h-12 border-y border-white flex items-center;
+}
+
+.theMenu li a {
+  @apply size-full block p-2 content-center;
 }
 
 
 
 
 .dropDownOn ul li {
-  @apply p-4 transition-colors duration-300;
+    @apply transition-colors duration-300;
 }
+
+.dropDownOn ul li :deep(a) {
+  @apply p-4 block size-full;
+}
+
+
 </style>
