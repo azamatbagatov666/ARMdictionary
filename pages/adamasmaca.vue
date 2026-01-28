@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
+import { useTemplateRef } from 'vue'
 
 const title = computed(() => t("title.adamasmaca"));
 const description = computed(() => t("meta.adamasmaca"));
@@ -14,7 +15,7 @@ useHead({
   ],
 });
 
-const target = ref<HTMLElement | null>(null);
+const target = useTemplateRef('target')
 
 const hangmanVis = ref(0);
 const answer = ref();

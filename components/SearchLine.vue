@@ -3,6 +3,8 @@ import { ref, onMounted } from "vue";
 
 import type { TDATA } from "~/models/TDATA";
 import { useDebounceFn } from "@vueuse/core";
+import { useTemplateRef } from 'vue'
+const resultBox = useTemplateRef('resultBox')
 
 const { t } = useI18n();
 
@@ -122,7 +124,9 @@ const fetchSuggestions = useDebounceFn(async () => {
     if (suppressSuggestions.value) return;
 
 
-    if (data) listOfAvailableWords = [...(<[]>data.value)];
+    if (data) {
+
+      listOfAvailableWords = [...(<[]>data.value)];}
 
     result = listOfAvailableWords.filter((keyword) => {
       return keyword.toLowerCase();  //.startsWith(lcandtrimmed.value) for no regex
@@ -134,9 +138,12 @@ const fetchSuggestions = useDebounceFn(async () => {
   } else {
     isResultBoxVisible.value = false;
   }
-
+  
+if (resultBox.value && width.value < 640) {
+  resultBox.value.scrollTop = 0
+}
   resultBoxContent.value = result;
-}, 400); 
+}, 440); 
 
 
 const inputChanged = () => {
@@ -478,7 +485,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               <img src="/glass.png" alt="" class="size-[30px]" draggable="false" />
             </button>
           </div>
-          <div class="resultBox max-h-[155px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible">
+          <div ref="resultBox" class="resultBox max-h-[155px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible && lcandtrimmed.length >= 2">
             <ul class="">
               <li
                 @click="selectTheInput(item)"

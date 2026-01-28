@@ -127,10 +127,10 @@ const scrollToTop = () => {
       ></div>
     </div>
   </div>
-
+<div class="py-4">
   <div
     ref="el"
-    class="text-white mx-auto px-2 min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300 rounded-lg my-4 w-full min-[880px]:w-5/6"
+    class="text-white mx-auto px-2 min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300 rounded-lg w-full min-[880px]:w-5/6"
     v-if="htmlContent"
   >
     <div class="flex justify-center">
@@ -142,6 +142,7 @@ const scrollToTop = () => {
         ></div>
       </Transition>
     </div>
+  </div>
   </div>
   <Transition name="fade" mode="out-in">
     <div

@@ -102,7 +102,7 @@ const toggleDropdown = (event: Event) => {
 
                                 <li>
                                 <NuxtLink to="/account/removeWord" >
-                                  Yönlendirme/\nSözcük Sil
+                                  {{"Yönlendirme/\nSözcük Sil"}}
                                 </NuxtLink>
                                 </li>   
 
