@@ -347,7 +347,7 @@ const image = ref();
 </script>
 
 <template>
-  <div v-if="isLogged" class="containers">
+  <div v-if="isLogged" class="">
     <div
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
       class="absolute top-36 bg-black lg:bg-transparent p-2 lg:p-0 rounded-lg"
