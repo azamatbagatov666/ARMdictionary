@@ -34,7 +34,21 @@ useHead({
     { name: "mobile-web-app-capable", content: "yes" },
 
     // iOS Safari (still required)
-    { name: "apple-mobile-web-app-capable", content: "yes" }
+    { name: "apple-mobile-web-app-capable", content: "yes" },
+
+        { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Avedikyan Sözlük' },
+    {
+      property: 'og:description',
+      content: 'Batı Ermenicesi sözlük, oyunlar ve faydalı bilgiler.'
+    },
+    {
+      property: 'og:image',
+      content: 'https://avedikyan.com/og-image.jpg'
+    },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:url', content: 'https://avedikyan.com' },
   ],
     htmlAttrs: {
     lang: htmlLang
