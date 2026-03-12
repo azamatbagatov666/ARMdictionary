@@ -91,14 +91,14 @@ const resetData = () => {
 
 <template>
   <div v-if="isLogged">
-    <div class="flex items-center mb-8 mt-2">
+    <div class="grid gap-2 sm:flex items-center mb-8 mt-2">
       <ElementComponentsReturnButton
         @click="resetData()"
-        class="ml-2 absolute"
+        class="ml-2 sm:absolute"
       />
       <div
         v-text="'Yeni Sözcük Ekle'"
-        class="bg-red-900 text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg text-white dark:border-white"
+        class="bg-red-900 text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg text-white dark:border-white"
       ></div>
     </div>
 
@@ -222,8 +222,8 @@ const resetData = () => {
         <tbody>
           <tr class="mb-3 flex flex-wrap">
             <td>
-            <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
-            </td>
+                 <SVGAmFlag class="mr-2"/>
+          </td>
             <td class="font-bold pr-3">
               <span class="text-red-500" v-text="data.am"></span>
               <span
@@ -237,16 +237,15 @@ const resetData = () => {
           </tr>
           <tr class="mb-3 flex flex-wrap">
             <td>
-            <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
-            </td>
+                 <SVGTrFlag class="mr-2"/>          </td>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
             <td class="pr-3" v-text="data.tr2"></td>
             <td class="pr-3" v-text="data.tr3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap">
             <td>
-            <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
-            </td>
+
+                 <SVGEnFlag class="mr-2"/>            </td>
             <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
             <td class="pr-3" v-text="data.tr5"></td>
             <td class="pr-3" v-text="data.tr6"></td>

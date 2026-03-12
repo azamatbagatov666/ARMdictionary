@@ -10,7 +10,7 @@ const props = defineProps(["responseData"]);
   <tbody>
     <tr class="mb-3 flex flex-wrap py-1 pl-1">
       <td>
-      <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
+ <SVGAmFlag class="mr-2"/>
       </td>
       <td class="font-bold flex flex-wrap pr-3">
         <span class="text-red-500" v-text="item.am"></span>
@@ -22,7 +22,8 @@ const props = defineProps(["responseData"]);
     </tr>
     <tr class="mb-3 flex flex-wrap py-1 pl-1">
       <td>
-      <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
+ <SVGTrFlag class="mr-2"/>
+
       </td>
       <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
       <td class="pr-3" v-text="item.tR2"></td>
@@ -30,7 +31,7 @@ const props = defineProps(["responseData"]);
     </tr>
     <tr class="mb-3 flex flex-wrap py-1 pl-1">
       <td>
-      <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
+ <SVGEnFlag class="mr-2"/>
       </td>
       <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
       <td class="pr-3" v-text="item.tR5"></td>

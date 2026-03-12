@@ -361,11 +361,8 @@ const image = ref();
         <tbody>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/am-flag.png"
-                draggable="false"
-              />
+ <SVGAmFlag class="mr-2"/>
+
             </td>
             <td class="font-bold pr-3">
               <span
@@ -392,11 +389,8 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/tr-flag.png"
-                draggable="false"
-              />
+ <SVGTrFlag class="mr-2"/>
+
             </td>
             <td
               class="pr-3 font-bold text-red-500"
@@ -413,11 +407,8 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/eng-flag.png"
-                draggable="false"
-              />
+ <SVGEnFlag class="mr-2"/>
+
             </td>
             <td
               class="pr-3 font-bold text-red-500"
@@ -509,13 +500,18 @@ const image = ref();
             ></span>
           </td>
           <td class="max-h-[30px]">
-            <button @click.stop="deleteTheWord(dateObject.date)" class="flex items-center mx-auto transition-colors duration-300  rounded-md active:scale-95 bg-white hover:bg-red-500">
-            <img
-              src="/trash.png"
-              v-if="getIndex(dateObject.date) !== -1"
-              class="size-[27px] "
-              draggable="false"
-            />
+            <button @click.stop="deleteTheWord(dateObject.date)" v-if="getIndex(dateObject.date) !== -1" class="flex items-center border  border-black mx-auto transition-colors duration-300 size-[27px] justify-center rounded-md active:scale-95 bg-white hover:bg-red-500">
+
+                            <svg
+                            
+            fill="#000000"
+            width="21px"
+            height="21px"
+            viewBox="0 0 32 32"
+            version="1.1"
+          >
+            <path d="M30 7.249h-5.598l-3.777-5.665c-0.137-0.202-0.366-0.334-0.625-0.334h-8c-0 0-0.001 0-0.001 0-0.259 0-0.487 0.131-0.621 0.331l-0.002 0.003-3.777 5.665h-5.599c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h3.315l1.938 21.319c0.036 0.384 0.356 0.682 0.747 0.682 0 0 0 0 0.001 0h16c0 0 0.001 0 0.001 0 0.39 0 0.71-0.298 0.745-0.679l0-0.003 1.938-21.319h3.316c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0zM12.401 2.75h7.196l2.999 4.499h-13.195zM23.314 29.25h-14.63l-1.863-20.5 18.358-0.001zM11 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM16 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM21 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0z"></path>
+          </svg>
             </button>
           </td>
         </tr>
@@ -561,11 +557,8 @@ const image = ref();
           ></tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/am-flag.png"
-                draggable="false"
-              />
+ <SVGAmFlag class="mr-2"/>
+
             </td>
             <td class="font-bold text-red-500 pr-3">
               <span v-text="item.am"></span>
@@ -580,11 +573,8 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/tr-flag.png"
-                draggable="false"
-              />
+ <SVGTrFlag class="mr-2"/>
+
             </td>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
             <td class="pr-3" v-text="item.tR2"></td>
@@ -592,11 +582,8 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
-              <img
-                class="w-9 h-9 mr-2"
-                src="/flags/eng-flag.png"
-                draggable="false"
-              />
+ <SVGEnFlag class="mr-2"/>
+
             </td>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
             <td class="pr-3" v-text="item.tR5"></td>

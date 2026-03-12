@@ -459,20 +459,20 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             />
 
             <div
-              class="bg-white border-t border-b border-black flex items-center w-[30px] h-[53px] shrink-0 ml-[-1px]"
+              class="bg-white border-t border-b border-black flex items-center w-[37px] h-[53px] shrink-0 ml-[-1px]"
             >
               <Transition name="fade">
                 <button aria-label="Arama kutusunu temizle."
                   @click="cleanTheInput($event)"
                   @mousedown="cleanButtonClick"
-                  class="mr-[10px] h-5"
+                  class="mr-[10px] h-7"
                   v-if="desword != ''"
                 >
-                  <img
-                    src="/cancel.png"
-                    draggable="false"
-                    class="max-w-5 size-5"
-                  />
+
+  <svg fill="#000000"  class="size-7"  viewBox="0 0 32 32" version="1.1" >
+  <title>cancel</title>
+  <path d="M16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13zM21.961 12.209c0.244-0.244 0.244-0.641 0-0.885l-1.328-1.327c-0.244-0.244-0.641-0.244-0.885 0l-3.761 3.761-3.761-3.761c-0.244-0.244-0.641-0.244-0.885 0l-1.328 1.327c-0.244 0.244-0.244 0.641 0 0.885l3.762 3.762-3.762 3.76c-0.244 0.244-0.244 0.641 0 0.885l1.328 1.328c0.244 0.244 0.641 0.244 0.885 0l3.761-3.762 3.761 3.762c0.244 0.244 0.641 0.244 0.885 0l1.328-1.328c0.244-0.244 0.244-0.641 0-0.885l-3.762-3.76 3.762-3.762z"></path>
+  </svg>
                 </button>
               </Transition>
             </div>
@@ -482,7 +482,16 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               @mousedown="buttonClick"
               class="motherbutton border-l border-black shrink-0"
             >
-              <img src="/glass.png" alt="" class="size-[30px]" draggable="false" />
+              <svg height="30px" width="30px" version="1.1"
+	 viewBox="0 0 339.921 339.921" >
+	<path style="fill:#010002;" d="M335.165,292.071l-81.385-84.077c-5.836-6.032-13.13-8.447-16.29-5.363
+		c-3.171,3.062-10.47,0.653-16.306-5.379l-1.164-1.207c36.425-47.907,32.89-116.499-10.851-160.24
+		c-47.739-47.739-125.142-47.739-172.875,0c-47.739,47.739-47.739,125.131,0,172.87c44.486,44.492,114.699,47.472,162.704,9.045
+		l0.511,0.533c5.825,6.032,7.995,13.402,4.814,16.469c-3.166,3.068-1.012,10.443,4.83,16.464l81.341,84.11
+		c5.836,6.016,15.452,6.195,21.49,0.354l22.828-22.088C340.827,307.735,340.99,298.125,335.165,292.071z M182.306,181.81
+		c-32.852,32.857-86.312,32.857-119.159,0.011c-32.852-32.852-32.847-86.318,0-119.164c32.847-32.852,86.307-32.847,119.148,0.005
+		C215.152,95.509,215.152,148.964,182.306,181.81z"/>
+</svg>
             </button>
           </div>
           <div ref="resultBox" class="resultBox max-h-[155px] sm:h-max sm:max-h-max dark:text-black" v-show="isResultBoxVisible && lcandtrimmed.length >= 2">
@@ -523,7 +532,35 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             >
               <div class="flex items-center ml-[5px]">
                 <div class="rounded-full size-9 bg-red-600">
-                  <img src="/day.png" class="size-9" draggable="false" alt="" />
+                                 <div class="rounded-full size-9 bg-red-600 flex items-center justify-center">
+<svg width="27px" height="27px" viewBox="0 0 15 15" fill="none">
+    <path
+    fill="white"
+    d="
+      M4 1
+      C4.28 1 4.5 1.22 4.5 1.5V2.5H10.5V1.5
+      C10.5 1.22 10.72 1 11 1
+      C11.28 1 11.5 1.22 11.5 1.5V2.5H12.5
+      C13.33 2.5 14 3.17 14 4V12.5
+      C14 13.33 13.33 14 12.5 14H2.5
+      C1.67 14 1 13.33 1 12.5V4
+      C1 3.17 1.67 2.5 2.5 2.5H3.5V1.5
+      C3.5 1.22 3.72 1 4 1
+      Z
+
+      M2 5.5H13V12.5
+      C13 12.78 12.78 13 12.5 13H2.5
+      C2.22 13 2 12.78 2 12.5V5.5Z
+    "
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M4.5 1C4.77614 1 5 1.22386 5 1.5V2H10V1.5C10 1.22386 10.2239 1 10.5 1C10.7761 1 11 1.22386 11 1.5V2H12.5C13.3284 2 14 2.67157 14 3.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V3.5C1 2.67157 1.67157 2 2.5 2H4V1.5C4 1.22386 4.22386 1 4.5 1ZM10 3V3.5C10 3.77614 10.2239 4 10.5 4C10.7761 4 11 3.77614 11 3.5V3H12.5C12.7761 3 13 3.22386 13 3.5V5H2V3.5C2 3.22386 2.22386 3 2.5 3H4V3.5C4 3.77614 4.22386 4 4.5 4C4.77614 4 5 3.77614 5 3.5V3H10ZM2 6V12.5C2 12.7761 2.22386 13 2.5 13H12.5C12.7761 13 13 12.7761 13 12.5V6H2ZM7 7.5C7 7.22386 7.22386 7 7.5 7C7.77614 7 8 7.22386 8 7.5C8 7.77614 7.77614 8 7.5 8C7.22386 8 7 7.77614 7 7.5ZM9.5 7C9.22386 7 9 7.22386 9 7.5C9 7.77614 9.22386 8 9.5 8C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7ZM11 7.5C11 7.22386 11.2239 7 11.5 7C11.7761 7 12 7.22386 12 7.5C12 7.77614 11.7761 8 11.5 8C11.2239 8 11 7.77614 11 7.5ZM11.5 9C11.2239 9 11 9.22386 11 9.5C11 9.77614 11.2239 10 11.5 10C11.7761 10 12 9.77614 12 9.5C12 9.22386 11.7761 9 11.5 9ZM9 9.5C9 9.22386 9.22386 9 9.5 9C9.77614 9 10 9.22386 10 9.5C10 9.77614 9.77614 10 9.5 10C9.22386 10 9 9.77614 9 9.5ZM7.5 9C7.22386 9 7 9.22386 7 9.5C7 9.77614 7.22386 10 7.5 10C7.77614 10 8 9.77614 8 9.5C8 9.22386 7.77614 9 7.5 9ZM5 9.5C5 9.22386 5.22386 9 5.5 9C5.77614 9 6 9.22386 6 9.5C6 9.77614 5.77614 10 5.5 10C5.22386 10 5 9.77614 5 9.5ZM3.5 9C3.22386 9 3 9.22386 3 9.5C3 9.77614 3.22386 10 3.5 10C3.77614 10 4 9.77614 4 9.5C4 9.22386 3.77614 9 3.5 9ZM3 11.5C3 11.2239 3.22386 11 3.5 11C3.77614 11 4 11.2239 4 11.5C4 11.7761 3.77614 12 3.5 12C3.22386 12 3 11.7761 3 11.5ZM5.5 11C5.22386 11 5 11.2239 5 11.5C5 11.7761 5.22386 12 5.5 12C5.77614 12 6 11.7761 6 11.5C6 11.2239 5.77614 11 5.5 11ZM7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5ZM9.5 11C9.22386 11 9 11.2239 9 11.5C9 11.7761 9.22386 12 9.5 12C9.77614 12 10 11.7761 10 11.5C10 11.2239 9.77614 11 9.5 11Z"
+    fill="#101010"
+  />
+</svg>
+</div>
                 </div>
                 <div class="w-0">
                   <span
@@ -539,8 +576,19 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               @mousedown="buttonClick"
             >
               <div class="flex items-center ml-[5px]">
-                <div class="rounded-full size-9 bg-purple-600">
-                  <img src="/random.png" class="size-9" draggable="false" alt="" />
+                <div class="rounded-full size-9 bg-purple-600 flex justify-center items-center">
+                  
+<svg width="30px" height="30px" viewBox="0 0 24 24" version="1.1">
+    
+
+
+
+
+            <path  d="M4,17 C3.44771525,17 3,16.5522847 3,16 C3,15.4477153 3.44771525,15 4,15 L6,15 L9,12 L6,9 L4,9 C3.45000005,9 3,8.55245148 3,8.00122564 C3,7.44999981 3.45000005,7 4,7 L7,7 L11,11 L15,7 L17,7 L17,5 L21,8.00122564 L17,11 L17,9 L16,9 L13,12 L16,15 L17,15 L17,13 L21,16 L17,19 L17,17 L15,17 L11,13 L7,17 L4,17 Z" fill="#ffffff">
+
+</path>
+
+</svg>
                 </div>
                 <div class="w-0">
                   <span
@@ -558,11 +606,10 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             >
               <div class="flex items-center ml-[5px]">
                 <div class="rounded-full flex items-center size-9 bg-blue-600">
-                  <img alt=""
-                    src="/history.png"
-                    class="ml-[3px] size-7"
-                    draggable="false"
-                  />
+<svg width="28px" height="28px" class="ml-[4px]" viewBox="0 0 24 24" fill="none">
+<path d="M5.52786 16.7023C6.6602 18.2608 8.3169 19.3584 10.1936 19.7934C12.0703 20.2284 14.0409 19.9716 15.7434 19.0701C17.446 18.1687 18.766 16.6832 19.4611 14.8865C20.1562 13.0898 20.1796 11.1027 19.527 9.29011C18.8745 7.47756 17.5898 5.96135 15.909 5.02005C14.2282 4.07875 12.2641 3.77558 10.3777 4.16623C8.49129 4.55689 6.80919 5.61514 5.64045 7.14656C4.47171 8.67797 3.89482 10.5797 4.01579 12.5023M4.01579 12.5023L2.51579 11.0023M4.01579 12.5023L5.51579 11.0023" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 8V12L15 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
                 </div>
                 <div class="w-0">
                   <span
@@ -584,7 +631,35 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         >
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full size-9 bg-red-600">
-              <img src="/day.png" class="size-9" draggable="false" alt=""/>
+                  <div class="rounded-full size-9 bg-red-600 flex items-center justify-center">
+<svg width="27px" height="27px" viewBox="0 0 15 15" fill="none">
+    <path
+    fill="white"
+    d="
+      M4 1
+      C4.28 1 4.5 1.22 4.5 1.5V2.5H10.5V1.5
+      C10.5 1.22 10.72 1 11 1
+      C11.28 1 11.5 1.22 11.5 1.5V2.5H12.5
+      C13.33 2.5 14 3.17 14 4V12.5
+      C14 13.33 13.33 14 12.5 14H2.5
+      C1.67 14 1 13.33 1 12.5V4
+      C1 3.17 1.67 2.5 2.5 2.5H3.5V1.5
+      C3.5 1.22 3.72 1 4 1
+      Z
+
+      M2 5.5H13V12.5
+      C13 12.78 12.78 13 12.5 13H2.5
+      C2.22 13 2 12.78 2 12.5V5.5Z
+    "
+  />
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M4.5 1C4.77614 1 5 1.22386 5 1.5V2H10V1.5C10 1.22386 10.2239 1 10.5 1C10.7761 1 11 1.22386 11 1.5V2H12.5C13.3284 2 14 2.67157 14 3.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V3.5C1 2.67157 1.67157 2 2.5 2H4V1.5C4 1.22386 4.22386 1 4.5 1ZM10 3V3.5C10 3.77614 10.2239 4 10.5 4C10.7761 4 11 3.77614 11 3.5V3H12.5C12.7761 3 13 3.22386 13 3.5V5H2V3.5C2 3.22386 2.22386 3 2.5 3H4V3.5C4 3.77614 4.22386 4 4.5 4C4.77614 4 5 3.77614 5 3.5V3H10ZM2 6V12.5C2 12.7761 2.22386 13 2.5 13H12.5C12.7761 13 13 12.7761 13 12.5V6H2ZM7 7.5C7 7.22386 7.22386 7 7.5 7C7.77614 7 8 7.22386 8 7.5C8 7.77614 7.77614 8 7.5 8C7.22386 8 7 7.77614 7 7.5ZM9.5 7C9.22386 7 9 7.22386 9 7.5C9 7.77614 9.22386 8 9.5 8C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7ZM11 7.5C11 7.22386 11.2239 7 11.5 7C11.7761 7 12 7.22386 12 7.5C12 7.77614 11.7761 8 11.5 8C11.2239 8 11 7.77614 11 7.5ZM11.5 9C11.2239 9 11 9.22386 11 9.5C11 9.77614 11.2239 10 11.5 10C11.7761 10 12 9.77614 12 9.5C12 9.22386 11.7761 9 11.5 9ZM9 9.5C9 9.22386 9.22386 9 9.5 9C9.77614 9 10 9.22386 10 9.5C10 9.77614 9.77614 10 9.5 10C9.22386 10 9 9.77614 9 9.5ZM7.5 9C7.22386 9 7 9.22386 7 9.5C7 9.77614 7.22386 10 7.5 10C7.77614 10 8 9.77614 8 9.5C8 9.22386 7.77614 9 7.5 9ZM5 9.5C5 9.22386 5.22386 9 5.5 9C5.77614 9 6 9.22386 6 9.5C6 9.77614 5.77614 10 5.5 10C5.22386 10 5 9.77614 5 9.5ZM3.5 9C3.22386 9 3 9.22386 3 9.5C3 9.77614 3.22386 10 3.5 10C3.77614 10 4 9.77614 4 9.5C4 9.22386 3.77614 9 3.5 9ZM3 11.5C3 11.2239 3.22386 11 3.5 11C3.77614 11 4 11.2239 4 11.5C4 11.7761 3.77614 12 3.5 12C3.22386 12 3 11.7761 3 11.5ZM5.5 11C5.22386 11 5 11.2239 5 11.5C5 11.7761 5.22386 12 5.5 12C5.77614 12 6 11.7761 6 11.5C6 11.2239 5.77614 11 5.5 11ZM7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5ZM9.5 11C9.22386 11 9 11.2239 9 11.5C9 11.7761 9.22386 12 9.5 12C9.77614 12 10 11.7761 10 11.5C10 11.2239 9.77614 11 9.5 11Z"
+    fill="#101010"
+  />
+</svg>
+</div>
             </div>
             <div class="w-0">
               <span
@@ -602,9 +677,20 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           @mousedown="buttonClick"
         >
           <div class="flex items-center ml-[5px]">
-            <div class="rounded-full size-9 bg-purple-600">
-              <img src="/random.png" class="size-9" draggable="false" alt="" />
-            </div>
+                <div class="rounded-full size-9 bg-purple-600 flex justify-center items-center">
+                  
+<svg width="30px" height="30px" viewBox="0 0 24 24" version="1.1">
+    
+
+
+
+
+            <path  d="M4,17 C3.44771525,17 3,16.5522847 3,16 C3,15.4477153 3.44771525,15 4,15 L6,15 L9,12 L6,9 L4,9 C3.45000005,9 3,8.55245148 3,8.00122564 C3,7.44999981 3.45000005,7 4,7 L7,7 L11,11 L15,7 L17,7 L17,5 L21,8.00122564 L17,11 L17,9 L16,9 L13,12 L16,15 L17,15 L17,13 L21,16 L17,19 L17,17 L15,17 L11,13 L7,17 L4,17 Z" fill="#ffffff">
+
+</path>
+
+</svg>
+                </div>
             <div class="w-0">
               <span
                 class="pointer-events-none w-[112px] inline-block opacity-0 leading-none group-hover:opacity-100 transition-opacity text-white group-hover:delay-300"
@@ -621,11 +707,10 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         >
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full flex items-center size-9 bg-blue-600">
-              <img alt=""
-                src="/history.png"
-                class="ml-[3px] size-7"
-                draggable="false"
-              />
+<svg width="28px" height="28px" class="ml-[4px]" viewBox="0 0 24 24" fill="none">
+<path d="M5.52786 16.7023C6.6602 18.2608 8.3169 19.3584 10.1936 19.7934C12.0703 20.2284 14.0409 19.9716 15.7434 19.0701C17.446 18.1687 18.766 16.6832 19.4611 14.8865C20.1562 13.0898 20.1796 11.1027 19.527 9.29011C18.8745 7.47756 17.5898 5.96135 15.909 5.02005C14.2282 4.07875 12.2641 3.77558 10.3777 4.16623C8.49129 4.55689 6.80919 5.61514 5.64045 7.14656C4.47171 8.67797 3.89482 10.5797 4.01579 12.5023M4.01579 12.5023L2.51579 11.0023M4.01579 12.5023L5.51579 11.0023" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12 8V12L15 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
             </div>
             <div class="w-0">
               <span

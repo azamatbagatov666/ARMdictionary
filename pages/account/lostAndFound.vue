@@ -191,7 +191,7 @@ const appendOrRemove = (word: string) => {
           >
 
             <td class="border text-center px-2" v-text="index + 1"></td>
-            <td class="border px-2 w-[400px]" v-text="item.aranan"></td>
+            <td class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words" v-text="item.aranan"></td>
             <td class="border w-48 text-center" v-text="item.date"></td>
           </tr>
           </tbody>

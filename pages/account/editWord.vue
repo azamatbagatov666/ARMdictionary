@@ -176,14 +176,14 @@ onBeforeMount(() => {
 
 <template>
   <div v-if="isLogged">
-    <div class="flex items-center mb-1 mt-2">
+    <div class="grid gap-2 sm:flex  items-center mb-1 mt-2">
       <ElementComponentsReturnButton
         @click="resetData()"
-        class="ml-2 absolute"
+        class="ml-2 sm:absolute"
       />
       <div
         v-text="'Sözcük Düzenle'"
-        class="bg-red-900 text-white text-5xl text-center w-[500px] border-2 py-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+        class="bg-red-900 text-white text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg dark:border-white"
       ></div>
     </div>
 
@@ -237,7 +237,8 @@ onBeforeMount(() => {
               ></tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
                 <td>
-                <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
+                 <SVGAmFlag class="mr-2"/>
+
                 </td>
                 <td class="font-bold text-red-500 pr-3">
                   <span v-text="item.am"></span>
@@ -252,7 +253,7 @@ onBeforeMount(() => {
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
                 <td>
-                <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
+                 <SVGTrFlag class="mr-2"/>
                 </td>
                 <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
                 <td class="pr-3" v-text="item.tR2"></td>
@@ -260,7 +261,8 @@ onBeforeMount(() => {
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
                 <td>
-                <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
+
+                 <SVGEnFlag class="mr-2"/>
                 </td>
                 <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
                 <td class="pr-3" v-text="item.tR5"></td>
@@ -278,7 +280,8 @@ onBeforeMount(() => {
           <tbody>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-              <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false"/>
+                 <SVGAmFlag class="mr-2"/>
+
               </td>
               <td class="font-bold text-red-500 pr-3">
                 <span v-text="selectedIndex.am"></span>
@@ -293,8 +296,7 @@ onBeforeMount(() => {
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-              <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false"/>
-              </td>
+                 <SVGTrFlag class="mr-2"/>        </td>
               <td
                 class="pr-3 font-bold text-red-500"
                 v-text="selectedIndex.tR1"
@@ -304,8 +306,8 @@ onBeforeMount(() => {
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-              <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false"/>
-              </td>
+
+                 <SVGEnFlag class="mr-2"/>              </td>
               <td
                 class="pr-3 font-bold text-red-500"
                 v-text="selectedIndex.tR4"

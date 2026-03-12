@@ -12,22 +12,31 @@ const changeLanguage = async (lang: string) => {
 <template>
   <div class="inline-block mr-2 shrink ">
     <button class="langButton" @click="changeLanguage('tr')" aria-label="Sayfa Dili Türkçe">
-      <img src="/flags/tr-flag.png" alt="" class="image" draggable="false" />
-    </button>
-    <button class="langButton" @click="changeLanguage('am')" aria-label="Sayfa Dili Ermenice">
-      <img src="/flags/am-flag.png" alt="" class="image" draggable="false" />
+
+<SVGTrFlag></SVGTrFlag>
+
     </button>
 
-    <button class="langButton" @click="changeLanguage('en')" aria-label="Sayfa Dili İngilizce">
-      <img src="/flags/eng-flag.png" alt="" class="image" draggable="false" />
+
+    <button class="langButton" @click="changeLanguage('am')" aria-label="Sayfa Dili Ermenice">
+
+<SVGAmFlag></SVGAmFlag>
+
+
     </button>
+    <button class="langButton" @click="changeLanguage('en')" aria-label="Sayfa Dili İngilizce">
+<SVGEnFlag></SVGEnFlag>
+    </button>
+
   </div>
 </template>
 
 <style scoped>
-img,
+
+
+svg,
 .langButton {
-  @apply mr-1 cursor-pointer rounded-[50%] w-9 h-9 inline;
+  @apply mr-1 rounded-[50%] w-9 h-9 inline;
 }
 
 .langButton:active {

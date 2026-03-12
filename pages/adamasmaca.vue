@@ -216,7 +216,9 @@ const responseData = ref();
           <tbody>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-                <img class="w-9 h-9 mr-2" src="/flags/am-flag.png" draggable="false" />
+                 <SVGAmFlag class="mr-2"/>
+
+
               </td>
               <td class="font-bold pr-3">
                 <span class="text-red-500" v-text="item.am"></span>
@@ -228,16 +230,15 @@ const responseData = ref();
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-                <img class="w-9 h-9 mr-2" src="/flags/tr-flag.png" draggable="false" />
-              </td>
+                 <SVGTrFlag class="mr-2"/>
+                       </td>
               <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
               <td class="pr-3" v-text="item.tR2"></td>
               <td class="pr-3" v-text="item.tR3"></td>
             </tr>
             <tr class="mb-3 flex flex-wrap py-1 pl-1">
               <td>
-                <img class="w-9 h-9 mr-2" src="/flags/eng-flag.png" draggable="false" />
-              </td>
+                 <SVGEnFlag class="mr-2"/>              </td>
               <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
               <td class="pr-3" v-text="item.tR5"></td>
               <td class="pr-3" v-text="item.tR6"></td>
