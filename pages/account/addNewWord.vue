@@ -1,18 +1,6 @@
 <script setup lang="ts">
 import { type TDATA } from "~/models/TDATA";
 
-import { useUserStore } from "~/store/user.store";
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
-
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
-});
-
 useHead({
   title: "AVEDİKYAN - Yeni Sözcük Ekle",
 });
@@ -43,9 +31,7 @@ const trimStrings = (obj: Record<string, any>) => {
 
 const insertData = async () => {
   if (confirm("Belirlediğiniz sonuç sözlüğe eklenecektir, emin misiniz?")) {
-    if (
-      (data.am && data.okunus && data.tr1 && data.tr4) !== ""
-    ) {
+    if ((data.am && data.okunus && data.tr1 && data.tr4) !== "") {
       trimStrings(data);
       for (var key in data) {
         //@ts-ignore
@@ -55,26 +41,20 @@ const insertData = async () => {
         }
       }
 
-          try {
-        const response = await $fetch<boolean>(
-          `/api/account/update/insertIt`,
-          {
-            method: "POST",
-            headers: {
-              token: userStore.state.user!.token,
-            },
-            body: data,
-          }
-        );
+      try {
+        const response = await fetchWithAuth<boolean>(`/api/account/update/insertIt`, {
+          method: "POST",
+
+          body: JSON.stringify(data),
+          headers: { "Content-Type": "application/json" },
+        });
         if (response) {
-            alert("Sonuç başarıyla eklendi.");
-            resetData();
+          alert("Sonuç başarıyla eklendi.");
+          resetData();
         }
       } catch (error) {
-          alert("Bağlantı Sorunu");
-
+        alert("Bağlantı Sorunu");
       }
-
     } else {
       alert("* ile işaretli alanların doldurulması zorunludur.");
     }
@@ -90,7 +70,7 @@ const resetData = () => {
 </script>
 
 <template>
-  <div v-if="isLogged">
+  <div>
     <div class="grid gap-2 sm:flex items-center mb-8 mt-2">
       <ElementComponentsReturnButton
         @click="resetData()"
@@ -103,11 +83,13 @@ const resetData = () => {
     </div>
 
     <div class="mt-4 ml-2 mb-7">
-
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün Ermenicesi:<span class="text-[red] font-bold text-lg">*</span></label
+            >Aranan sözcüğün Ermenicesi:<span
+              class="text-[red] font-bold text-lg"
+              >*</span
+            ></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -117,7 +99,9 @@ const resetData = () => {
         </div>
         <div>
           <label class="w-40 ml-2 inline-block"
-            >Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg">*</span></label
+            >Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg"
+              >*</span
+            ></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -155,7 +139,9 @@ const resetData = () => {
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg">*</span></label
+            >Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg"
+              >*</span
+            ></label
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
@@ -183,7 +169,8 @@ const resetData = () => {
       <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block"
-            >Aranan sözcüğün İngilizcesi:<span class="text-[red] font-bold text-lg"
+            >Aranan sözcüğün İngilizcesi:<span
+              class="text-[red] font-bold text-lg"
               >*</span
             ></label
           >
@@ -214,42 +201,41 @@ const resetData = () => {
       <div class="preview">
         <div class="text-[40px] text-white">Önizleme</div>
 
-
-
         <table
           class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
         >
-        <tbody>
-          <tr class="mb-3 flex flex-wrap">
-            <td>
-                 <SVGAmFlag class="mr-2"/>
-          </td>
-            <td class="font-bold pr-3">
-              <span class="text-red-500" v-text="data.am"></span>
-              <span
-                class="ml-1 font-normal"
-                v-text="`(${data.okunus})`"
-              ></span>
-            </td>
-            <td class="pr-3" v-text="data.am1"></td>
-            <td class="pr-3" v-text="data.alan2"></td>
-            <td class="pr-3" v-text="data.alan1"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap">
-            <td>
-                 <SVGTrFlag class="mr-2"/>          </td>
-            <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
-            <td class="pr-3" v-text="data.tr2"></td>
-            <td class="pr-3" v-text="data.tr3"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap">
-            <td>
-
-                 <SVGEnFlag class="mr-2"/>            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
-            <td class="pr-3" v-text="data.tr5"></td>
-            <td class="pr-3" v-text="data.tr6"></td>
-          </tr>
+          <tbody>
+            <tr class="mb-3 flex flex-wrap">
+              <td>
+                <SVGAmFlag class="mr-2" />
+              </td>
+              <td class="font-bold pr-3">
+                <span class="text-red-500" v-text="data.am"></span>
+                <span
+                  class="ml-1 font-normal"
+                  v-text="`(${data.okunus})`"
+                ></span>
+              </td>
+              <td class="pr-3" v-text="data.am1"></td>
+              <td class="pr-3" v-text="data.alan2"></td>
+              <td class="pr-3" v-text="data.alan1"></td>
+            </tr>
+            <tr class="mb-3 flex flex-wrap">
+              <td>
+                <SVGTrFlag class="mr-2" />
+              </td>
+              <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
+              <td class="pr-3" v-text="data.tr2"></td>
+              <td class="pr-3" v-text="data.tr3"></td>
+            </tr>
+            <tr class="mb-3 flex flex-wrap">
+              <td>
+                <SVGEnFlag class="mr-2" />
+              </td>
+              <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
+              <td class="pr-3" v-text="data.tr5"></td>
+              <td class="pr-3" v-text="data.tr6"></td>
+            </tr>
           </tbody>
         </table>
         <ElementComponentsCustomButton

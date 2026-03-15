@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { type TDATA } from "~/models/TDATA";
-import { useUserStore } from "~/store/user.store";
 
 const desword = ref("");
 const noresult = ref("");
@@ -10,8 +9,6 @@ const selectedRadio = ref(null);
 const selectedIndex = ref<TDATA | null>(null);
 const selectedBackup = ref<TDATA | null>(null);
 const previousDesword = ref("");
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
 
 const wordInput = (data: string) => {
   desword.value = data;
@@ -28,59 +25,47 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
-  const { data, error } = await useFetch(
-    `/api/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
-    {
-      method: "GET",
-      headers: {
-        token: userStore.state.user!.token,
-      },
+  try {
+    const data = await fetchWithAuth(
+      `/api/account/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
+    );
+
+    arananData.value = null;
+    responseData.value = null;
+    selectedItemId.value = null;
+    selectedRadio.value = null;
+    selectedIndex.value = null;
+    previousDesword.value = desword.value;
+
+    if (data && Array.isArray(data) && data.length > 0) {
+      responseData.value = data;
+      noresult.value = "";
+    } else {
+      noresult.value = "Aradığınız sözcük bulunamadı.";
     }
-  );
-  if (error.value) {
+  } catch (err) {
     noresult.value = "Bağlantı sorunu.";
-
     return;
-  }
-  arananData.value = null;
-  responseData.value = null;
-  selectedItemId.value = null;
-  selectedRadio.value = null;
-  selectedIndex.value = null;
-  previousDesword.value = desword.value;
-
-  if (data && Array.isArray(data.value) && data.value.length > 0) {
-    responseData.value = data.value;
-    noresult.value = "";
-  } else {
-    noresult.value = "Aradığınız sözcük bulunamadı.";
   }
 };
 
 const getAranan = async (index: number) => {
   selectedItemId.value = selectedRadio.value;
-  const { data } = await useFetch(
-    `/api/search/${encodeURI(selectedItemId.value!)}/searchById`,
+  const data = await fetchWithAuth(
+    `/api/account/search/${encodeURIComponent(selectedItemId.value!)}/searchById`,
     {
       method: "GET",
-      headers: {
-        token: userStore.state.user!.token,
-      },
-    }
+    },
   );
 
-  if (data && Array.isArray(data.value) && data.value.length > 0) {
-    arananData.value = data.value.map((item) => item.aranan);
+  if (data && Array.isArray(data) && data.length > 0) {
+    arananData.value = data.map((item) => item.aranan);
   }
 
   selectedIndex.value = JSON.parse(JSON.stringify(responseData.value[index]));
   selectedBackup.value = JSON.parse(JSON.stringify(responseData.value[index]));
 
-
-
   responseData.value = [responseData.value[index]];
-
-
 };
 
 const trimStrings = (obj: Record<string, any>) => {
@@ -127,24 +112,21 @@ const updateTheWord = async () => {
         }
       }
 
-      const response = await $fetch<boolean>(
+      const response = await fetchWithAuth<boolean>(
         `/api/account/update/updateResult`,
         {
           method: "POST",
-          headers: {
-            token: userStore.state.user!.token,
-          },
-          body: selectedIndex.value,
-        }
+          body: JSON.stringify(selectedIndex.value),
+          headers: { "Content-Type": "application/json" },
+        },
       );
 
       if (response) {
         alert("Sonuç başarıyla eklendi.");
       }
-      
     } else {
       alert(
-        "Sonuçta bir değişiklik yaptığınızdan ve * ile işaretli alanları doldurdğunuzdan emin olun."
+        "Sonuçta bir değişiklik yaptığınızdan ve * ile işaretli alanları doldurdğunuzdan emin olun.",
       );
     }
   }
@@ -164,19 +146,11 @@ const resetData = () => {
   desword.value = "";
   $bus.emit("clear-main-page");
 };
-
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
-});
 </script>
 
 <template>
-  <div v-if="isLogged">
-    <div class="grid gap-2 sm:flex  items-center mb-1 mt-2">
+  <div>
+    <div class="grid gap-2 sm:flex items-center mb-1 mt-2">
       <ElementComponentsReturnButton
         @click="resetData()"
         class="ml-2 sm:absolute"
@@ -194,7 +168,10 @@ onBeforeMount(() => {
         @submit-request="submit"
       ></SearchLine>
 
-      <div v-if="selectedIndex" class="text-3xl flex justify-around mb-1 text-white">
+      <div
+        v-if="selectedIndex"
+        class="text-3xl flex justify-around mb-1 text-white"
+      >
         <span v-text="'Sonucun Şu Anki Hali'"></span>
         <span v-text="'Yerine Geçecek Yeni Sonuç'"></span>
       </div>
@@ -214,60 +191,64 @@ onBeforeMount(() => {
               class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block h-full w-full bg-gray-200 dark:bg-[#101010] dark:border-white"
               v-if="selectedRadio == null || selectedRadio == item.id"
             >
-            <tbody>
-              <tr class="h-10">
-                <td>
-                  <label class="ml-2">
-                    <input
-                      type="radio"
-                      name="wordSelection"
-                      @change="getAranan(index)"
-                      v-model="selectedRadio"
-                      :value="item.id"
-                    />
-                    <span class="text-purple-500 font-bold"
-                      >Sözcüğü seçmek için tıklayın.</span
-                    >
-                  </label>
-                </td>
-              </tr>
-              <tr
-                class="h-10 text-purple-500 font-bold ml-2"
-                v-text="`Sonuç numarası: ${item.id}`"
-              ></tr>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-                 <SVGAmFlag class="mr-2"/>
-
-                </td>
-                <td class="font-bold text-red-500 pr-3">
-                  <span v-text="item.am"></span>
-                  <span
-                    class="ml-1 font-normal text-black dark:text-white"
-                    v-text="`(${item.okunus})`"
-                  ></span>
-                </td>
-                <td class="pr-3" v-text="item.aM1"></td>
-                <td class="pr-3" v-text="item.alaN2"></td>
-                <td class="pr-3" v-text="item.alaN1"></td>
-              </tr>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-                 <SVGTrFlag class="mr-2"/>
-                </td>
-                <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-                <td class="pr-3" v-text="item.tR2"></td>
-                <td class="pr-3" v-text="item.tR3"></td>
-              </tr>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-
-                 <SVGEnFlag class="mr-2"/>
-                </td>
-                <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-                <td class="pr-3" v-text="item.tR5"></td>
-                <td class="pr-3" v-text="item.tR6"></td>
-              </tr>
+              <tbody>
+                <tr class="h-10">
+                  <td>
+                    <label class="ml-2">
+                      <input
+                        type="radio"
+                        name="wordSelection"
+                        @change="getAranan(Number(index))"
+                        v-model="selectedRadio"
+                        :value="item.id"
+                      />
+                      <span class="text-purple-500 font-bold"
+                        >Sözcüğü seçmek için tıklayın.</span
+                      >
+                    </label>
+                  </td>
+                </tr>
+                <tr
+                  class="h-10 text-purple-500 font-bold ml-2"
+                  v-text="`Sonuç numarası: ${item.id}`"
+                ></tr>
+                <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                  <td>
+                    <SVGAmFlag class="mr-2" />
+                  </td>
+                  <td class="font-bold text-red-500 pr-3">
+                    <span v-text="item.am"></span>
+                    <span
+                      class="ml-1 font-normal text-black dark:text-white"
+                      v-text="`(${item.okunus})`"
+                    ></span>
+                  </td>
+                  <td class="pr-3" v-text="item.aM1"></td>
+                  <td class="pr-3" v-text="item.alaN2"></td>
+                  <td class="pr-3" v-text="item.alaN1"></td>
+                </tr>
+                <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                  <td>
+                    <SVGTrFlag class="mr-2" />
+                  </td>
+                  <td
+                    class="pr-3 font-bold text-red-500"
+                    v-text="item.tR1"
+                  ></td>
+                  <td class="pr-3" v-text="item.tR2"></td>
+                  <td class="pr-3" v-text="item.tR3"></td>
+                </tr>
+                <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                  <td>
+                    <SVGEnFlag class="mr-2" />
+                  </td>
+                  <td
+                    class="pr-3 font-bold text-red-500"
+                    v-text="item.tR4"
+                  ></td>
+                  <td class="pr-3" v-text="item.tR5"></td>
+                  <td class="pr-3" v-text="item.tR6"></td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -277,44 +258,44 @@ onBeforeMount(() => {
           <table
             class="border-2 border-black rounded-lg text-lg p-2 pt-[88px] mx-auto block w-full h-full bg-gray-200 dark:bg-[#101010] dark:border-white"
           >
-          <tbody>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-                 <SVGAmFlag class="mr-2"/>
-
-              </td>
-              <td class="font-bold text-red-500 pr-3">
-                <span v-text="selectedIndex.am"></span>
-                <span
-                  class="ml-1 font-normal text-black dark:text-white"
-                  v-text="`(${selectedIndex.okunus})`"
-                ></span>
-              </td>
-              <td class="pr-3" v-text="selectedIndex.aM1"></td>
-              <td class="pr-3" v-text="selectedIndex.alaN2"></td>
-              <td class="pr-3" v-text="selectedIndex.alaN1"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-                 <SVGTrFlag class="mr-2"/>        </td>
-              <td
-                class="pr-3 font-bold text-red-500"
-                v-text="selectedIndex.tR1"
-              ></td>
-              <td class="pr-3" v-text="selectedIndex.tR2"></td>
-              <td class="pr-3" v-text="selectedIndex.tR3"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-
-                 <SVGEnFlag class="mr-2"/>              </td>
-              <td
-                class="pr-3 font-bold text-red-500"
-                v-text="selectedIndex.tR4"
-              ></td>
-              <td class="pr-3" v-text="selectedIndex.tR5"></td>
-              <td class="pr-3" v-text="selectedIndex.tR6"></td>
-            </tr>
+            <tbody>
+              <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                <td>
+                  <SVGAmFlag class="mr-2" />
+                </td>
+                <td class="font-bold text-red-500 pr-3">
+                  <span v-text="selectedIndex.am"></span>
+                  <span
+                    class="ml-1 font-normal text-black dark:text-white"
+                    v-text="`(${selectedIndex.okunus})`"
+                  ></span>
+                </td>
+                <td class="pr-3" v-text="selectedIndex.aM1"></td>
+                <td class="pr-3" v-text="selectedIndex.alaN2"></td>
+                <td class="pr-3" v-text="selectedIndex.alaN1"></td>
+              </tr>
+              <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                <td>
+                  <SVGTrFlag class="mr-2" />
+                </td>
+                <td
+                  class="pr-3 font-bold text-red-500"
+                  v-text="selectedIndex.tR1"
+                ></td>
+                <td class="pr-3" v-text="selectedIndex.tR2"></td>
+                <td class="pr-3" v-text="selectedIndex.tR3"></td>
+              </tr>
+              <tr class="mb-3 flex flex-wrap py-1 pl-1">
+                <td>
+                  <SVGEnFlag class="mr-2" />
+                </td>
+                <td
+                  class="pr-3 font-bold text-red-500"
+                  v-text="selectedIndex.tR4"
+                ></td>
+                <td class="pr-3" v-text="selectedIndex.tR5"></td>
+                <td class="pr-3" v-text="selectedIndex.tR6"></td>
+              </tr>
             </tbody>
           </table>
         </div>

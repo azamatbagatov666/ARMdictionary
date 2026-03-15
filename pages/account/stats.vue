@@ -11,41 +11,19 @@ useHead({
 });
 
 
-import { useUserStore } from "~/store/user.store";
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
 
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
-});
 
-watch(
-  () => isLogged.value,
-  () => {
-    getAll();
-  },
-);
 
 onMounted(() => {
-  if (isLogged.value) {
     getAll();
-  }
 })
 
 const getAll = async () => {
-  if (!isLogged) return;
   try {
 
 
-  const data = await $fetch(`/api/get/getVisits/${"all"}`, {
+  const data = await fetchWithAuth(`/api/account/get/getVisits/${"all"}`, {
     method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
-    }
   });
     if (data) {
   }
@@ -77,11 +55,9 @@ const getTheDate = async () => {
      try {
 
 
-  const data = await $fetch(`/api/get/getVisits/${formattedSelectedDate.value}`, {
+  const data = await fetchWithAuth(`/api/account/get/getVisits/${formattedSelectedDate.value}`, {
     method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
-    }
+
   });
     if (data) {
   }
@@ -112,7 +88,7 @@ const getTheDate = async () => {
 </script>
 
 <template>
-    <div v-if="isLogged">
+    <div>
             <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
 <ElementComponentsLoadingAnimation/>
   </div>
@@ -189,7 +165,7 @@ const getTheDate = async () => {
   </tbody>
 </table>
 </div>
-<div v-else-if="noData" class="font-bold text-lg flex justify-center mt-8 mb-8">Seçtiğiniz güne ait kayıt bulunamamıştır.</div>
+<div v-else-if="noData" class="font-bold text-lg flex justify-center text-white mt-8 mb-8">Seçtiğiniz güne ait kayıt bulunamamıştır.</div>
 </div>
 </div>
 </template>

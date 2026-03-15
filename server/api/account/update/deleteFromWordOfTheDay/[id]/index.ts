@@ -12,8 +12,7 @@ export default defineEventHandler(async (event) => {
 
 
 
-  const token = event.headers.get("token")
-  if (!token) return;
+  const token = getCookie(event, "access_token")
 
   
 
@@ -23,7 +22,7 @@ export default defineEventHandler(async (event) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token
+          "Authorization": `Bearer ${token}`
       },
       body: JSON.stringify(formattedSelectedDate()),
     }

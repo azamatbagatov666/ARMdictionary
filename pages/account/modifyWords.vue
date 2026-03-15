@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-
 const desword = ref("");
 const noresult = ref("");
 const wordToBeAdded = ref("");
@@ -10,20 +8,8 @@ const selectedRadio = ref(null);
 const previousDesword = ref("");
 const selectedListWord = ref<string[]>([]);
 
-import { useUserStore } from "~/store/user.store";
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
-
 useHead({
   title: "AVEDİKYAN - Yönlendirme Ekle",
-});
-
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
 });
 
 const wordInput = (data: string) => {
@@ -49,7 +35,7 @@ const appendToList = () => {
 const deleteFromList = () => {
   if (selectedListWord.value.length > 0) {
     idData.arananlar = idData.arananlar.filter(
-      (item) => !selectedListWord.value.includes(item)
+      (item) => !selectedListWord.value.includes(item),
     );
     selectedListWord.value = [];
   }
@@ -62,19 +48,11 @@ const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
   }
+    try {
+    const data = await fetchWithAuth(
+      `/api/account/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
+    );
 
-
-  const { data, error } = await useFetch(`/api/search/${encodeURIComponent(desword.value)}/searchingNoCheck`, {
-    method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
-    }
-  });
-  if (error.value) {
-    noresult.value = "Bağlantı sorunu.";
-
-    return;
-  }
   arananData.value = null;
   responseData.value = null;
   selectedItemId.value = null;
@@ -85,12 +63,21 @@ const submit = async () => {
 
   previousDesword.value = desword.value;
 
-  if (data && Array.isArray(data.value) && data.value.length > 0) {
-    responseData.value = data.value;
+  if (data && Array.isArray(data) && data.length > 0) {
+    responseData.value = data;
     noresult.value = "";
   } else {
     noresult.value = "Aradığınız sözcük bulunamadı.";
   }
+
+  } catch (err) {
+    noresult.value = "Bağlantı sorunu.";
+    return;
+  }
+
+
+
+
 };
 
 const getAranan = async () => {
@@ -98,12 +85,12 @@ const getAranan = async () => {
   wordToBeAdded.value = "";
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
-  const data = await $fetch(`/api/search/${encodeURI(selectedItemId.value!)}/searchById`, {
-    method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
-    }
-  });
+  const data = await fetchWithAuth(
+    `/api/account/search/${encodeURI(selectedItemId.value!)}/searchById`,
+    {
+      method: "GET",
+    },
+  );
 
   if (data && Array.isArray(data) && data.length > 0) {
     arananData.value = data.map((item) => item.aranan);
@@ -118,25 +105,22 @@ const idData = reactive({
 const storeValues = async () => {
   if (confirm("Seçtiğiniz sözcükler bu sonuca eklenecktir, emin misiniz?")) {
     if (idData.DesiredID != null && idData.arananlar.length > 0) {
+      const response = await fetchWithAuth<boolean>(
+        `/api/account/update/addToId`,
+        {
+          method: "POST",
+          body: JSON.stringify(idData),
+          headers: { "Content-Type": "application/json" },
+        },
+      );
 
-       const response = await $fetch<boolean>(
-          `/api/account/update/addToId`,
-          {
-            method: "POST",
-            headers: {
-              token: userStore.state.user!.token,
-            },
-            body: idData,
-          }
-        );
-
-        if (response) {
-          idData.arananlar = [];
-          getAranan();
-        }
+      if (response) {
+        idData.arananlar = [];
+        getAranan();
+      }
     } else {
       window.alert(
-        "Önce sonuç numarasını seçtiğinizden ve istediğiniz sözcükleri listeye eklediğinizden emin olun."
+        "Önce sonuç numarasını seçtiğinizden ve istediğiniz sözcükleri listeye eklediğinizden emin olun.",
       );
     }
   }
@@ -156,17 +140,21 @@ const resetData = () => {
   wordToBeAdded.value = "";
   idData.arananlar = [];
   desword.value = "";
-
 };
 </script>
 
 <template>
-  <div v-if="isLogged">
+  <div>
     <div class="grid gap-2 sm:flex items-center mb-1 mt-2">
-  <ElementComponentsReturnButton @click="resetData()" class="ml-2 sm:absolute"/>
-  <div v-text="'Yönlendirme Ekle'" class="text-white bg-red-900 text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg dark:border-white"></div>
-</div> 
-
+      <ElementComponentsReturnButton
+        @click="resetData()"
+        class="ml-2 sm:absolute"
+      />
+      <div
+        v-text="'Yönlendirme Ekle'"
+        class="text-white bg-red-900 text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg dark:border-white"
+      ></div>
+    </div>
 
     <div class="mb-12">
       <SearchLine
@@ -179,122 +167,116 @@ const resetData = () => {
         v-for="item in responseData"
         :key="item.worD_ID"
       >
-      <tbody>
-        <tr class="h-10">
-          <td>
-            <label class="ml-2">
-              <input
-                type="radio"
-                name="wordSelection"
-                @change="getAranan()"
-                v-model="selectedRadio"
-                :value="item.id"
-              />
-              <span class="text-purple-500 font-bold"
-                >Sözcüğü seçmek için tıklayın.</span
-              >
-            </label>
-          </td>
-        </tr>
-        <tr
-          class="h-10 text-purple-500 font-bold ml-2"
-          v-text="`Sonuç numarası: ${item.id}`"
-        ></tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <td>
-                 <SVGAmFlag class="mr-2"/>
-         </td>
-          <td class="font-bold text-red-500 pr-3">
-            <span v-text="item.am"></span>
-            <span
-              class="ml-1 font-normal text-black dark:text-white"
-              v-text="`(${item.okunus})`"
-            ></span>
-          </td>
-          <td class="pr-3" v-text="item.aM1"></td>
-          <td class="pr-3" v-text="item.alaN2"></td>
-          <td class="pr-3" v-text="item.alaN1"></td>
-        </tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <td>
-
-                 <SVGTrFlag class="mr-2"/>        </td>
-          <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-          <td class="pr-3" v-text="item.tR2"></td>
-          <td class="pr-3" v-text="item.tR3"></td>
-        </tr>
-        <tr class="mb-3 flex flex-wrap py-1 pl-1">
-          <td>
-
-                 <SVGEnFlag class="mr-2"/>          </td>
-          <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-          <td class="pr-3" v-text="item.tR5"></td>
-          <td class="pr-3" v-text="item.tR6"></td>
-        </tr>
+        <tbody>
+          <tr class="h-10">
+            <td>
+              <label class="ml-2">
+                <input
+                  type="radio"
+                  name="wordSelection"
+                  @change="getAranan()"
+                  v-model="selectedRadio"
+                  :value="item.id"
+                />
+                <span class="text-purple-500 font-bold"
+                  >Sözcüğü seçmek için tıklayın.</span
+                >
+              </label>
+            </td>
+          </tr>
+          <tr
+            class="h-10 text-purple-500 font-bold ml-2"
+            v-text="`Sonuç numarası: ${item.id}`"
+          ></tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <SVGAmFlag class="mr-2" />
+            </td>
+            <td class="font-bold text-red-500 pr-3">
+              <span v-text="item.am"></span>
+              <span
+                class="ml-1 font-normal text-black dark:text-white"
+                v-text="`(${item.okunus})`"
+              ></span>
+            </td>
+            <td class="pr-3" v-text="item.aM1"></td>
+            <td class="pr-3" v-text="item.alaN2"></td>
+            <td class="pr-3" v-text="item.alaN1"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <SVGTrFlag class="mr-2" />
+            </td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
+            <td class="pr-3" v-text="item.tR2"></td>
+            <td class="pr-3" v-text="item.tR3"></td>
+          </tr>
+          <tr class="mb-3 flex flex-wrap py-1 pl-1">
+            <td>
+              <SVGEnFlag class="mr-2" />
+            </td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
+            <td class="pr-3" v-text="item.tR5"></td>
+            <td class="pr-3" v-text="item.tR6"></td>
+          </tr>
         </tbody>
       </table>
 
       <div
-      class="text-center text-lg"
+        class="text-center text-lg"
         v-if="noresult != ''"
         v-text="noresult"
       ></div>
 
       <div v-if="arananData">
+        <div class="flex justify-around mt-9 gap-2 text-white">
+          <div class="px-6">
+            <div class="text-3xl">Bu sonucu veren sözcükler:</div>
+            <ul class="list-disc text-lg">
+              <li
+                v-for="(arananlar, index) in arananData"
+                :key="index"
+                v-text="arananlar"
+              ></li>
+            </ul>
+          </div>
 
-      <div class="flex justify-between mt-9 text-white">
-        <div class="col-span-1 mx-auto">
-          <div class="text-3xl">Bu sonucu veren sözcükler:</div>
-          <ul class="list-disc text-lg">
-            <li
-              v-for="(arananlar, index) in arananData"
-              :key="index"
-              v-text="arananlar"
-            ></li>
-          </ul>
+          <div>
+            <ElementComponentsCustomInput v-model="wordToBeAdded" />
+            <ElementComponentsCustomButton
+              class="ml-1"
+              text="Ekle"
+              @click="appendToList"
+            />
+          </div>
+
+          <div>
+            <select
+              multiple
+              class="text-black border border-black sm:w-[150px] md:w-[250px] lg:w-[380px] overflow-auto"
+              v-model="selectedListWord"
+              size="9"
+            >
+              <option
+                v-for="item in idData.arananlar"
+                :key="item"
+                v-text="item"
+              ></option>
+            </select>
+            <ElementComponentsCustomButton
+              class="block mx-auto"
+              text="Sil"
+              @click="deleteFromList"
+            />
+          </div>
         </div>
-
-        <div class="mx-auto">
-          <ElementComponentsCustomInput v-model="wordToBeAdded" />
-          <ElementComponentsCustomButton
-            class="ml-1"
-            text="Ekle"
-            @click="appendToList"
-          />
-        </div>
-
-        <div class="mx-auto">
-          <select
-            multiple
-            class="text-black border border-black sm:w-[150px] md:w-[250px] lg:w-[380px] overflow-auto"
-            v-model="selectedListWord"
-            size="9"
-          >
-            <option
-              v-for="item in idData.arananlar"
-              :key="item"
-              v-text="item"
-            ></option>
-          </select>
-          <ElementComponentsCustomButton
-            class="block mx-auto"
-            text="Sil"
-            @click="deleteFromList"
-          />
-        </div>
-
-   
+        <ElementComponentsCustomButton
+          class="block mx-auto"
+          text="Değerleri Kaydet"
+          @click="storeValues"
+        />
       </div>
-      <ElementComponentsCustomButton
-        class="block mx-auto"
-        text="Değerleri Kaydet"
-        @click="storeValues"
-      />
-
-
-
     </div>
-  </div>
   </div>
 </template>
 

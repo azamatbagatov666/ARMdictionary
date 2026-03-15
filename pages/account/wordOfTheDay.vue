@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { useUserStore } from "~/store/user.store";
-
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
 const noresult = ref("");
 const selectedRadio = ref(null);
 const selectedDate = ref<string | null>(null);
@@ -20,7 +16,6 @@ const formattedSelectedDate = computed(() => {
 useHead({
   title: "AVEDİKYAN - Günün Sözcüğü",
 });
-
 
 const dayData = reactive({
   date: formattedSelectedDate,
@@ -52,7 +47,7 @@ const days = [
   "Çarşamba",
   "Perşembe",
   "Cuma ",
-  "Cumartesi"
+  "Cumartesi",
 ];
 
 const monthSelection = ref(months[new Date().getMonth()]);
@@ -63,21 +58,23 @@ const length = currentYear.value - 2025 + 2;
 const years: number[] = Array.from({ length: length }, (_, i) => 2025 + i);
 
 const getWords = async () => {
-  const { data, error } = await useFetch(`/api/get/getWordOfTheDay`, {
-    method: "POST",
-    headers: {
-      token: userStore.state.user!.token,
-    },
-    body: {
-      start: startDateQ.value,
-      end: endDateQ.value,
-    },
-  });
-  if (error.value) {
+  try {
+    const data = await fetchWithAuth(`/api/account/get/getWordOfTheDay`, {
+      method: "POST",
+
+      body: JSON.stringify({
+        start: startDateQ.value,
+        end: endDateQ.value,
+      }),
+      headers: { "Content-Type": "application/json" },
+    });
+    connectionError.value = false;
+    responseData.value = data;
+  } catch (err) {
     connectionError.value = true;
+
+    return;
   }
-  connectionError.value = false;
-  responseData.value = data.value;
 };
 const daysInMonth = computed(() => {
   const monthIndex = months.indexOf(currentMonth.value);
@@ -159,7 +156,7 @@ interface WORDOFTHEDAY {
 const getIndex = (date: string) => {
   if (responseData)
     return responseData.value.findIndex(
-      (item: WORDOFTHEDAY) => item.date === date
+      (item: WORDOFTHEDAY) => item.date === date,
     );
 };
 
@@ -182,29 +179,29 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await useFetch(
-    `/api/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
-    {
-      method: "GET",
-      headers: {
-        token: userStore.state.user!.token,
-      },
-    }
-  );
-  if (error.value) {
-    noresult.value = "Bağlantı sorunu.";
+    try {
+    const data = await fetchWithAuth(
+      `/api/account/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
+    );
 
-    return;
-  }
-  searchResponse.value = null;
+      searchResponse.value = null;
   selectedRadio.value = null;
 
-  if (data && Array.isArray(data.value) && data.value.length > 0) {
-    searchResponse.value = data.value;
+  if (data && Array.isArray(data) && data.length > 0) {
+    searchResponse.value = data;
     noresult.value = "";
   } else {
     noresult.value = "Aradığınız sözcük bulunamadı.";
   }
+
+  } catch (err) {
+    noresult.value = "Bağlantı sorunu.";
+    return;
+  }
+
+
+
+
 };
 
 const wordInput = (data: string) => {
@@ -230,14 +227,12 @@ const random = async () => {
 
 const deleteTheWord = async (date: string) => {
   try {
-    const response = await $fetch<boolean>(
+    const response = await fetchWithAuth<boolean>(
       `/api/account/update/deleteFromWordOfTheDay/${encodeURIComponent(date)}`,
       {
         method: "POST",
-        headers: {
-          token: userStore.state.user!.token,
-        },
-      }
+        headers: { "Content-Type": "application/json" },
+      },
     );
 
     if (response) {
@@ -250,13 +245,14 @@ const deleteTheWord = async (date: string) => {
 const save = async () => {
   if (dayData.date !== undefined && dayData.worD_ID !== null) {
     try {
-      const response = await $fetch<boolean>(`/api/account/update/addToDay`, {
-        method: "POST",
-        headers: {
-          token: userStore.state.user!.token,
+      const response = await fetchWithAuth<boolean>(
+        `/api/account/update/addToDay`,
+        {
+          method: "POST",
+          body: JSON.stringify(dayData),
+          headers: { "Content-Type": "application/json" },
         },
-        body: dayData,
-      });
+      );
 
       if (response) {
         alert("Sonuç başarıyla eklendi.");
@@ -274,80 +270,64 @@ const save = async () => {
   }
 };
 
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
-});
-
 const setSDate = (date: string) => {
   selectedDate.value = date;
-
 };
-const temp = ref<HTMLDivElement | null>(null)
+const temp = ref<HTMLDivElement | null>(null);
 
 const tempPanel = ref(false);
 const tempAm = ref("");
 const tempTr1 = ref("");
 const tempTr4 = ref("");
 const exportAsJpg = async () => {
-
-  try {  
+  try {
     if (selectedDate.value) {
-    tempAm.value =
-      responseData.value[getIndex(selectedDate.value)].am
-        .slice(0, 1)
-        .toUpperCase() +
-      responseData.value[getIndex(selectedDate.value)].am.slice(1);
-    tempTr4.value =
-      responseData.value[getIndex(selectedDate.value)].tR4
-        .slice(0, 1)
-        .toUpperCase() +
-      responseData.value[getIndex(selectedDate.value)].tR4.slice(1);
-    tempTr1.value =
-      responseData.value[getIndex(selectedDate.value)].tR1
-        .slice(0, 1)
-        .toLocaleUpperCase("TR") +
-      responseData.value[getIndex(selectedDate.value)].tR1.slice(1);
-  }
+      tempAm.value =
+        responseData.value[getIndex(selectedDate.value)].am
+          .slice(0, 1)
+          .toUpperCase() +
+        responseData.value[getIndex(selectedDate.value)].am.slice(1);
+      tempTr4.value =
+        responseData.value[getIndex(selectedDate.value)].tR4
+          .slice(0, 1)
+          .toUpperCase() +
+        responseData.value[getIndex(selectedDate.value)].tR4.slice(1);
+      tempTr1.value =
+        responseData.value[getIndex(selectedDate.value)].tR1
+          .slice(0, 1)
+          .toLocaleUpperCase("TR") +
+        responseData.value[getIndex(selectedDate.value)].tR1.slice(1);
+    }
 
+    tempPanel.value = true;
+    await nextTick();
 
-  tempPanel.value = true;
-  await nextTick();
+    temp.value?.focus();
 
-  temp.value?.focus();
+    const canvas = await html2canvas(image.value, { useCORS: true });
+    const link = document.createElement("a");
 
-  const canvas = await html2canvas(image.value, { useCORS: true });
-  const link = document.createElement("a");
+    if (selectedDate.value)
+      link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
+    link.href = canvas.toDataURL("image/jpeg", 1.0);
 
-  if(selectedDate.value)
-  link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
-  link.href = canvas.toDataURL("image/jpeg", 1.0); 
+    link.click();
 
-  link.click();
-
-  tempPanel.value = false;
-
-  
-
+    tempPanel.value = false;
   } catch (error) {
-        alert("Şablonu oluşturmadan önce; sözcüğün İngilizcesinin, Türkçesinin, Ermenicesinin ve okunuşunun dolu olduğundan emin olun.");
-
+    alert(
+      "Şablonu oluşturmadan önce; sözcüğün İngilizcesinin, Türkçesinin, Ermenicesinin ve okunuşunun dolu olduğundan emin olun.",
+    );
   }
-
 };
 
 import html2canvas from "html2canvas";
 
 const image = ref();
-
-
 </script>
 
 <template>
-  <div v-if="isLogged" class="">
+  <div class="">
     <div
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
       class="absolute top-36 bg-black lg:bg-transparent p-2 lg:p-0 rounded-lg"
@@ -361,8 +341,7 @@ const image = ref();
         <tbody>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGAmFlag class="mr-2"/>
-
+              <SVGAmFlag class="mr-2" />
             </td>
             <td class="font-bold pr-3">
               <span
@@ -389,8 +368,7 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGTrFlag class="mr-2"/>
-
+              <SVGTrFlag class="mr-2" />
             </td>
             <td
               class="pr-3 font-bold text-red-500"
@@ -407,8 +385,7 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGEnFlag class="mr-2"/>
-
+              <SVGEnFlag class="mr-2" />
             </td>
             <td
               class="pr-3 font-bold text-red-500"
@@ -500,18 +477,22 @@ const image = ref();
             ></span>
           </td>
           <td class="max-h-[30px]">
-            <button @click.stop="deleteTheWord(dateObject.date)" v-if="getIndex(dateObject.date) !== -1" class="flex items-center border  border-black mx-auto transition-colors duration-300 size-[27px] justify-center rounded-md active:scale-95 bg-white hover:bg-red-500">
-
-                            <svg
-                            
-            fill="#000000"
-            width="21px"
-            height="21px"
-            viewBox="0 0 32 32"
-            version="1.1"
-          >
-            <path d="M30 7.249h-5.598l-3.777-5.665c-0.137-0.202-0.366-0.334-0.625-0.334h-8c-0 0-0.001 0-0.001 0-0.259 0-0.487 0.131-0.621 0.331l-0.002 0.003-3.777 5.665h-5.599c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h3.315l1.938 21.319c0.036 0.384 0.356 0.682 0.747 0.682 0 0 0 0 0.001 0h16c0 0 0.001 0 0.001 0 0.39 0 0.71-0.298 0.745-0.679l0-0.003 1.938-21.319h3.316c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0zM12.401 2.75h7.196l2.999 4.499h-13.195zM23.314 29.25h-14.63l-1.863-20.5 18.358-0.001zM11 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM16 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM21 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0z"></path>
-          </svg>
+            <button
+              @click.stop="deleteTheWord(dateObject.date)"
+              v-if="getIndex(dateObject.date) !== -1"
+              class="flex items-center border border-black mx-auto transition-colors duration-300 size-[27px] justify-center rounded-md active:scale-95 bg-white hover:bg-red-500"
+            >
+              <svg
+                fill="#000000"
+                width="21px"
+                height="21px"
+                viewBox="0 0 32 32"
+                version="1.1"
+              >
+                <path
+                  d="M30 7.249h-5.598l-3.777-5.665c-0.137-0.202-0.366-0.334-0.625-0.334h-8c-0 0-0.001 0-0.001 0-0.259 0-0.487 0.131-0.621 0.331l-0.002 0.003-3.777 5.665h-5.599c-0.414 0-0.75 0.336-0.75 0.75s0.336 0.75 0.75 0.75v0h3.315l1.938 21.319c0.036 0.384 0.356 0.682 0.747 0.682 0 0 0 0 0.001 0h16c0 0 0.001 0 0.001 0 0.39 0 0.71-0.298 0.745-0.679l0-0.003 1.938-21.319h3.316c0.414 0 0.75-0.336 0.75-0.75s-0.336-0.75-0.75-0.75v0zM12.401 2.75h7.196l2.999 4.499h-13.195zM23.314 29.25h-14.63l-1.863-20.5 18.358-0.001zM11 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM16 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0zM21 11.25c-0.414 0-0.75 0.336-0.75 0.75v0 14c0 0.414 0.336 0.75 0.75 0.75s0.75-0.336 0.75-0.75v0-14c-0-0.414-0.336-0.75-0.75-0.75v0z"
+                ></path>
+              </svg>
             </button>
           </td>
         </tr>
@@ -557,8 +538,7 @@ const image = ref();
           ></tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGAmFlag class="mr-2"/>
-
+              <SVGAmFlag class="mr-2" />
             </td>
             <td class="font-bold text-red-500 pr-3">
               <span v-text="item.am"></span>
@@ -573,8 +553,7 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGTrFlag class="mr-2"/>
-
+              <SVGTrFlag class="mr-2" />
             </td>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
             <td class="pr-3" v-text="item.tR2"></td>
@@ -582,8 +561,7 @@ const image = ref();
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
- <SVGEnFlag class="mr-2"/>
-
+              <SVGEnFlag class="mr-2" />
             </td>
             <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
             <td class="pr-3" v-text="item.tR5"></td>
@@ -613,36 +591,40 @@ const image = ref();
     Bağlantı Sorunu
   </div>
 
-        <div class="flex justify-center mt-2 fixed -left-[9999px] top-0" 
-        v-if="tempPanel && responseData && selectedDate"
-     >
-        <div class="relative font-[Calibri] flex justify-center text-white " ref="image">
-          <img src="/wordday.jpg" class="min-w-[800px] min-h-[632px] " draggable="false"/>
-          <span
-            class="absolute font-bold text-6xl top-40 transform text-center flex justify-center w-[736px]"
-            v-text="tempAm"
-          ></span>
-          <span
-            class="absolute text-4xl top-[320px] text-center flex justify-center w-[736px]"
-            v-text="tempTr1"
-          ></span>
-          <span
-            class="absolute text-4xl top-[426px] text-center flex justify-center w-[552px]"
-            v-text="tempTr4"
-          ></span>
-          <span
-            class="absolute text-3xl top-20 text-center flex justify-center w-[736px]"
-            v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
-          ></span>
-        </div>
-      </div>
-
-
+  <div
+    class="flex justify-center mt-2 fixed -left-[9999px] top-0"
+    v-if="tempPanel && responseData && selectedDate"
+  >
+    <div
+      class="relative font-[Calibri] flex justify-center text-white"
+      ref="image"
+    >
+      <img
+        src="/wordday.jpg"
+        class="min-w-[800px] min-h-[632px]"
+        draggable="false"
+      />
+      <span
+        class="absolute font-bold text-6xl top-40 transform text-center flex justify-center w-[736px]"
+        v-text="tempAm"
+      ></span>
+      <span
+        class="absolute text-4xl top-[320px] text-center flex justify-center w-[736px]"
+        v-text="tempTr1"
+      ></span>
+      <span
+        class="absolute text-4xl top-[426px] text-center flex justify-center w-[552px]"
+        v-text="tempTr4"
+      ></span>
+      <span
+        class="absolute text-3xl top-20 text-center flex justify-center w-[736px]"
+        v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
+      ></span>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-
-
 .lostTable td,
 .lostTable tr,
 .lostTable th {
@@ -652,5 +634,4 @@ const image = ref();
 .containers {
   padding-left: calc(100vw - 100%);
 }
-
 </style>

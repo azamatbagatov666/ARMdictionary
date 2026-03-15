@@ -1,8 +1,8 @@
 export default defineEventHandler(async (event) => {
 
     const query = await readBody(event);
-    const token = event.headers.get("token")
-    if (!token) return;
+  const token = getCookie(event, "access_token")
+
   
     return await $fetch(
       "http://localhost:5000/AddToID",
@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token
+          "Authorization": `Bearer ${token}`
+
         },
         body: JSON.stringify(query),
       }

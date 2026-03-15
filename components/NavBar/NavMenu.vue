@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from '~/store/user.store';
+
+
 
 const { t } = useI18n();
 
@@ -8,13 +9,11 @@ const adminDropDownOn = ref(false);
 
 
 
-
+const { logout, session } = useAuth()
 
 
 const router = useRouter();
 const currentRoute = computed(() => router.currentRoute.value.path);
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
 
 const { $bus } = useNuxtApp();
 
@@ -47,10 +46,7 @@ const toggleDropdown = (event: Event, id: string) => {
     }
 };
 
-const logoutClicked = () => {
-    userStore.logout();
-    navigateTo('/');
-}
+
 
 </script>
 
@@ -62,7 +58,7 @@ const logoutClicked = () => {
                 <NuxtLink to="/">
                     <button @click="homePageClean" aria-label="Ana Sayfa"
                         class="bg-gray-200 h-12 w-16 outline-none grid place-items-center transition-colors homePage duration-300 dark:bg-black ">
-                        <svg  width="38px" height="38px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="fill-current text-black dark:text-white">
+                        <svg  width="38px" height="38px" viewBox="0 0 1024 1024" class="fill-current text-black dark:text-white transition-colors duration-300">
   <path d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"/>
 </svg>
                     </button>
@@ -103,7 +99,7 @@ const logoutClicked = () => {
                     </div>
                 </div>
                 <div @mouseover="toggleDropdown($event, 'admin')" @mouseleave="toggleDropdown($event, 'admin')"
-                    v-if="isLogged" class="dropDownMenu">
+                    v-if="session" class="dropDownMenu">
                     <button
                         class="dropDownOnButton bg-gray-200  h-12 w-56 text-black text-lg transition-colors duration-300 dark:bg-black dark:text-white"
                         v-text="'Yönetici ' + '&#9660'"></button>
@@ -158,7 +154,7 @@ const logoutClicked = () => {
 
 
 
-                                <li  class="p-4 cursor-pointer" @click="logoutClicked()">
+                                <li  class="p-4 cursor-pointer" @click="logout()">
                                     Oturumu Kapat
                                 </li>
                             </ul>

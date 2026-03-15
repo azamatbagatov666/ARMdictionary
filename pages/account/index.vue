@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { useUserStore } from "~/store/user.store";
+const { login } = useAuth()
 
 const loginFailed = ref(false);
 const formError = ref(false);
 
-const userStore = useUserStore();
 
 const username = ref("");
 const password = ref("");
@@ -13,7 +12,7 @@ useHead({
   title: "AVEDİKYAN - Giriş Yap",
 });
 
-const login = async () => {
+const handleLogin = async () => {
   loginFailed.value = false;
   formError.value = false;
 
@@ -21,8 +20,11 @@ const login = async () => {
 
   if (username.value != "" && password.value != ""){
     try {
-      await userStore.login(username.value, password.value);
-      navigateTo('/');
+  const ok = await login(username.value, password.value)
+if(!ok){
+      loginFailed.value = true
+
+}
     } catch (error) {
       loginFailed.value = true
     }
@@ -32,32 +34,23 @@ const login = async () => {
 
 };
 
-const isLogged = computed(() => userStore.state.user != undefined);
-const showForm = ref(false);
 
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (isLogged.value) {
-      navigateTo("/");
-    } else {
-      showForm.value = true;
-    }
-  }, 500);
-});
+
+
 </script>
 
 <template>
   <div>
-    <div class="form flex items-center justify-center flex-wrap" v-if="!isLogged && showForm">
+    <div class="form flex items-center justify-center flex-wrap">
       <div class="p-8 border-2 border-black rounded-lg bg-white transition-colors duration-300">
         <div class="grid grid-rows-3 gap-5">
-          <ElementComponentsCustomInput @keydown.enter="login"
+          <ElementComponentsCustomInput @keydown.enter="handleLogin"
             class="h-14 border-t-0 border-x-0 rounded-none outline-none transition-colors duration-300 focus:border-black"
             v-model="username" autofocus :placeholder="'Kullanıcı Adı'" />
-          <ElementComponentsCustomInput @keydown.enter="login"
+          <ElementComponentsCustomInput @keydown.enter="handleLogin"
             class="h-14 border-t-0 border-x-0 rounded-none outline-none transition-colors duration-300 focus:border-black"
             v-model="password" type="password" :placeholder="'Parola'" />
-          <ElementComponentsCustomButton class="hover:bg-red-500" text="Giriş Yap" @click="login()" />
+          <ElementComponentsCustomButton class="hover:bg-red-500" text="Giriş Yap" @click="handleLogin()" />
         </div>
       </div>
       <div v-if="loginFailed" class="text-red-500  text-center font-bold absolute mt-64">Hatalı kullanacı adı veya parola.</div>
@@ -68,9 +61,7 @@ onBeforeMount(() => {
 
 
 
-    <div class="h-[90vh] flex items-center justify-center" v-else>
-      <ElementComponentsLoadingAnimation />
-    </div>
+
   </div>
 </template>
 

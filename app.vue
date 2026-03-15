@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useSearchHistoryStore } from './store/search-history.store';
-import { useUserStore } from './store/user.store';
 const languageState = useLanguageState();
 const searchHistoryStore = useSearchHistoryStore()
-const userStore = useUserStore();
 
 const { setLocale } = useI18n();
+
+const session = useState<boolean>("session", () => false)
+
+
 
 const htmlLang = computed(() => {
   switch (languageState.value) {
@@ -58,10 +60,10 @@ useHead({
 
 
 onMounted(async () => {
+  session.value = Boolean(useCookie("session").value)
   const language = localStorage.getItem("language");
   if (language) setLocale(language);
   searchHistoryStore.readInitial();
-  userStore.reLoginFromLocalStorage();
 });
 </script>
 

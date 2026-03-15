@@ -6,9 +6,7 @@ const connectionError = ref(false);
 const dataFetched = ref(false);
 
 
-import { useUserStore } from "~/store/user.store";
-const userStore = useUserStore();
-const isLogged = computed(() => userStore.state.user != undefined);
+
 
 const idData = reactive({
   arananlar: selectedListWord,
@@ -21,18 +19,10 @@ useHead({
 
 const screenHeight = ref(0);
 
-onBeforeMount(() => {
-  setTimeout(() => {
-    if (!isLogged.value) {
-      navigateTo("/");
-    }
-  }, 500);
-});
+
 
 onMounted(() => {
-  if (isLogged.value) {
     refresh();
-  }
 })
 
 
@@ -45,15 +35,15 @@ const deleteTheWords = async () => {
     if (idData.arananlar.length > 0) {
       try {
 
-        const response = await $fetch<boolean>(`/api/account/update/deletingFromLostAndFound`, {
+        const response = await fetchWithAuth<boolean>(`/api/account/update/deletingFromLostAndFound`, {
     method: 'POST',
-    headers: {
-        token: userStore.state.user!.token
-    },
-    body: ({
+
+    body: JSON.stringify({
         arananlar: idData.arananlar,
         desiredID: idData.DesiredID
-    })
+    }),
+   headers: { "Content-Type": "application/json" },
+
 });
         if (response) {
           selectedListWord.value = [];
@@ -70,15 +60,12 @@ const deleteTheWords = async () => {
 };
 
 const refresh = async () => {
-  if (!isLogged) return;
   try {
 
 
-    const data = await $fetch(`/api/get/gettingSearchedOnes`, {
+    const data = await fetchWithAuth(`/api/account/get/gettingSearchedOnes`, {
     method: 'GET',
-    headers: {
-      token: userStore.state.user!.token
-    }
+    
   });
 
     if (data) {
@@ -99,12 +86,7 @@ const refresh = async () => {
   }
 };
 
-watch(
-  () => isLogged.value,
-  () => {
-    refresh();
-  },
-);
+
 
 
 
@@ -147,7 +129,7 @@ const appendOrRemove = (word: string) => {
 </script>
 
 <template>
-  <div v-if="isLogged">
+  <div >
           <Transition name="fade" mode="out-in">
     <div
       class="button top-[30px] right-[30px] border-2 border-white"
