@@ -20,7 +20,7 @@ const changeLanguage = async (lang: string) => {
 
     <button class="langButton" @click="changeLanguage('am')" aria-label="Sayfa Dili Ermenice">
 
-<SVGAmFlag></SVGAmFlag>
+<SVGAmFlag/>
 
 
     </button>

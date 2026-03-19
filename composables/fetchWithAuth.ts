@@ -14,10 +14,20 @@ export async function fetchWithAuth<T>(
     });
 
     if (!refresh.ok) {
-      throw new Error("Unauthorized");
+      // hard logout
+      await fetch("/api/account/user/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (process.client) {
+        window.location.href = "/account/login";
+      }
+
+      throw new Error("Session expired");
     }
 
-    // retry
+    // retry original request
     res = await fetch(url, {
       ...options,
       credentials: "include",

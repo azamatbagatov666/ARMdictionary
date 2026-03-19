@@ -628,7 +628,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           <div class="flex items-center ml-[5px]">
             <div class="rounded-full size-9 bg-red-600">
                   <div class="rounded-full size-9 bg-red-600 flex items-center justify-center">
-<svg width="27px" height="27px" viewBox="0 0 15 15" fill="none">
+<svg  width="27px" height="27px" viewBox="0 0 15 15" fill="none">
     <path
     fill="white"
     d="
