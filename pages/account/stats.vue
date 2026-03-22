@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { type VISITS } from "~/models/VISITS";
+import { useElementVisibility } from '@vueuse/core'
+import { useTemplateRef } from 'vue'
+const target = useTemplateRef('target')
+const targetIsVisible = useElementVisibility(target)
 const responseData = ref<VISITS[]>([]);
 const dayData = ref<VISITS[]>([]);
 const selectedDate = ref("")
 const noData = ref(false)
 const connectionError = ref(false);
+
 
 useHead({
   title: "AVEDİKYAN - İstatistikler",
@@ -65,12 +70,24 @@ const getTheDate = async () => {
     if (data && Array.isArray(data) && data.length > 0) {
         dayData.value = data;
 
+
+
     }
 
     else {
       dayData.value = [];
       noData.value = true;
     }
+
+    nextTick(() => {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      if (!targetIsVisible.value) {
+        scrollToTarget()
+      }
+    })
+  })
+})
 
   } catch (error) {
         connectionError.value = true
@@ -83,6 +100,13 @@ const getTheDate = async () => {
   }
 
  
+};
+
+const scrollToTarget = () => {
+    if (target.value) {
+      target.value.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+  }
 };
 
 </script>
@@ -143,7 +167,8 @@ const getTheDate = async () => {
 
 
   </div>
-      <div class="flex justify-center mt-4" v-if="dayData.length > 0">
+  <div ref="target">
+      <div  class="flex justify-center mt-4" v-if="dayData.length > 0">
 
 <table class="border table-auto mb-8">
   <tbody>
@@ -166,6 +191,7 @@ const getTheDate = async () => {
 </table>
 </div>
 <div v-else-if="noData" class="font-bold text-lg flex justify-center text-white mt-8 mb-8">Seçtiğiniz güne ait kayıt bulunamamıştır.</div>
+</div>
 </div>
 </div>
 </template>
