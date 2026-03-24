@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { username, password } = body;
 
+  const isProd = process.env.NODE_ENV === "production";
 
 
     
@@ -19,6 +20,7 @@ export default defineEventHandler(async (event) => {
   );
   setCookie(event, "access_token", data.accessToken, {
     httpOnly: true,
+    secure: isProd,
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24,
@@ -32,6 +34,7 @@ export default defineEventHandler(async (event) => {
 
   setCookie(event, "refresh_token", data.refreshToken, {
     httpOnly: true,
+    secure: isProd,
     sameSite: "lax",
     path: "/api/account/user",
     maxAge: 60 * 60 * 24 * 7,
