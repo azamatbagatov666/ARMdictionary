@@ -1,31 +1,31 @@
 import type { AuthenticateResponse } from "~/models/AuthenticateResponse";
- 
 
 export function useAuth() {
   const router = useRouter();
-  const session = useState<boolean>("session", () => false)
-
-
+  const session = useState<boolean>("session", () => false);
 
   const user = useState<AuthenticateResponse | null>("user", () => null);
 
   const isLogged = () => user.value !== null;
 
   const login = async (username: string, password: string) => {
-  try {
+    try {
       const res = await $fetch<AuthenticateResponse>(
         "/api/account/user/login",
         {
           method: "POST",
           body: { username, password },
-        }
+        },
       );
 
-      session.value = true        
+      session.value = true;
       await router.push("/");
-      return true;
-    } catch {
-      return false;
+      return { ok: true };
+    } catch (err: any) {
+      return {
+        ok: false,
+        status: err?.response?.status ?? 500,
+      };
     }
   };
 
@@ -33,7 +33,7 @@ export function useAuth() {
     try {
       await $fetch("/api/account/user/logout", { method: "POST" });
     } finally {
-      session.value = false       // 🔥 reactive update
+      session.value = false; // 🔥 reactive update
 
       await router.push("/");
     }
@@ -45,5 +45,5 @@ export function useAuth() {
     isLogged,
     login,
     logout,
-  }
+  };
 }

@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 const { login } = useAuth();
 
-const loginFailed = ref(false);
-const formError = ref(false);
+const formError = ref("");
 
 const username = ref("");
 const password = ref("");
@@ -13,19 +12,25 @@ useHead({
 });
 
 const handleLogin = async () => {
-  loginFailed.value = false;
-  formError.value = false;
+  formError.value = "";
 
   if (username.value != "" && password.value != "") {
     try {
-      const ok = await login(username.value, password.value);
-      if (!ok) {
-        loginFailed.value = true;
-      }
+      const result  = await login(username.value, password.value);
+if (!result.ok) {
+  if (result.status === 401) {
+    formError.value = "Hatalı kullanıcı adı veya parola.";
+  } else {
+    formError.value = "Bağlantı sorunu.";
+  }
+}
     } catch (error) {
-      loginFailed.value = true;
+
+
     }
-  } else formError.value = true;
+  } else {
+    formError.value = "Kullanıcı adı veya parola boş olamaz.";
+  };
 };
 </script>
 
@@ -56,7 +61,7 @@ const handleLogin = async () => {
             </svg>
             <ElementComponentsCustomInput
               @keydown.enter="handleLogin"
-              class="group h-14 border-none rounded-none !outline-none transition-colors duration-300 bg-white px-2 text-black"
+              class="group h-14 border-none rounded-none w-full !outline-none transition-colors duration-300 bg-white px-2 text-black"
               v-model="username"
               autofocus
               :placeholder="'Kullanıcı Adı'"
@@ -76,7 +81,7 @@ const handleLogin = async () => {
               </svg>
             <ElementComponentsCustomInput
               @keydown.enter="handleLogin"
-              class="group h-14 border-none rounded-none !outline-none transition-colors duration-300 bg-white px-2 text-black"
+              class="group h-14 border-none w-full rounded-none !outline-none transition-colors duration-300 bg-white px-2 text-black"
               v-model="password"
               :type="passType"
               :placeholder="'Parola'"
@@ -108,19 +113,15 @@ const handleLogin = async () => {
             @click="handleLogin()"
           />
         </div>
-      </div>
-      <div
-        v-if="loginFailed"
-        class="text-red-500 text-center font-bold absolute mt-64"
+              <div
+        class="text-red-500 text-center font-bold w-72 mt-2 h-6" v-text="formError"
       >
-        Hatalı kullanacı adı veya parola.
+      
       </div>
-      <div
-        v-if="formError"
-        class="text-red-500 text-center font-bold absolute mt-64"
-      >
-        Kullanacı adı veya parola boş olamaz.
+
       </div>
+      
+
     </div>
   </div>
 </template>
