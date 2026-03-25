@@ -1,3 +1,5 @@
+let refreshPromise: Promise<Response> | null = null;
+
 export async function fetchWithAuth<T>(
   url: string,
   options: RequestInit = {}
@@ -8,10 +10,17 @@ export async function fetchWithAuth<T>(
   });
 
   if (res.status === 401) {
-    const refresh = await fetch("/api/account/user/refresh", {
-      method: "POST",
-      credentials: "include",
-    });
+    // serialize refresh calls
+    if (!refreshPromise) {
+      refreshPromise = fetch("/api/account/user/refresh", {
+        method: "POST",
+        credentials: "include",
+      }).finally(() => {
+        refreshPromise = null;
+      });
+    }
+
+    const refresh = await refreshPromise;
 
     if (!refresh.ok) {
       // hard logout
