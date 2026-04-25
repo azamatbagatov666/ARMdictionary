@@ -58,7 +58,7 @@ const { t } = useI18n();
         <li>
           <a href="https://www.instagram.com/avedikyan_pararan/" class="">
             <svg
-              class="size-6 dark:fill-white"
+              class="size-6 dark:fill-white transition-colors duration-300"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
