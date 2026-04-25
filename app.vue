@@ -68,21 +68,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
-
+  <div class="min-h-[100dvh]  flex flex-col">
     <header>
-
-<div>
-<NavBarNavMenu class="hidden lg:flex"/>
-
-<NavBarMobileNavMenu/>
-</div>
+      <NavBarNavMenu class="hidden lg:flex" />
+      <NavBarMobileNavMenu />
     </header>
 
+    <main class="flex-1" id="main-content">
+      <NuxtPage />
+    </main>
 
-    <main id="main-content">
-
-  <NuxtPage></NuxtPage>
-      </main>
-</div>
+    <footer>
+      <Footer />
+    </footer>
+  </div>
 </template>

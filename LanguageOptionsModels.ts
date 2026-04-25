@@ -199,6 +199,21 @@ export const adamAsmacaEn = {
     success: "Ձեր հաղորդագրութիւնը յաջողութեամբ հասած է մեզի։",
   };
 
+    export const footerEn = {
+    title: "Avedikyan Dictionary",
+
+  };
+
+      export const footerTr = {
+    title: "Avedikyan Sözlük",
+
+  };
+
+      export const footerAm = {
+    title: "Աւետիքեան Բառարան",
+
+  };
+
 
 export const EnglishLanguageOptions = {
   searchLine: searchLineEn,
@@ -210,6 +225,7 @@ export const EnglishLanguageOptions = {
   contact: contactEn,
   title: titleEn,
   meta: metaEn,
+  footer: footerEn,
 };
 
 export const TurkishLanguageOptions = {
@@ -222,6 +238,8 @@ export const TurkishLanguageOptions = {
   contact: contactTr,
   title: titleTr,
   meta: metaTr,
+  footer: footerTr,
+
 
 
 
@@ -237,6 +255,7 @@ export const ArmenianLanguageOptions = {
   contact: contactAm,
   title: titleAm,
   meta: metaAm,
+  footer: footerAm,
 
 
 
