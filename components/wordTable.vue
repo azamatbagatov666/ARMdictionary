@@ -4,7 +4,7 @@ const props = defineProps(["responseData"]);
 
 <template>
   <table
-    class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-2/3 lg:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
+    class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-2/3 lg:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300 last:mb-6"
     v-for="item in props.responseData"
   >
   <tbody>

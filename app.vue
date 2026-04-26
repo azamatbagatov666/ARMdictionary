@@ -74,7 +74,7 @@ onMounted(async () => {
       <NavBarMobileNavMenu />
     </header>
 
-    <main class="flex-1" id="main-content">
+    <main class="flex-1 mb-4" id="main-content">
       <NuxtPage />
     </main>
 

@@ -130,7 +130,7 @@ const responseData = ref();
   <div>
     <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute" />
 
-    <div class="h-[90vh] flex items-center justify-center" v-if="!answer && !connectionError">
+    <div class="h-[65dvh] flex items-center justify-center " v-if="!answer && !connectionError">
       <ElementComponentsLoadingAnimation />
     </div>
     <div class="min-[1430px]:flex min-[1430px]:justify-center">
@@ -192,7 +192,7 @@ const responseData = ref();
           </div>
         </div>
 
-        <div class="keyboard" v-if="answer">
+        <div class="keyboard " v-if="answer">
           <div class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[570px] relative border-2 border-black my-3 min-[730px]:p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
             <div v-for="(line, lineIndex) in lines" :key="lineIndex" class="row">
               <button v-for="(letter, index) in line" :key="index" class="armenian-button" v-text="letter"
@@ -420,11 +420,11 @@ const responseData = ref();
 }
 
 .row:nth-child(3) {
-  transform: translateX(0.5rem);
+  margin-left: 0.5rem;
 }
 
 .row:nth-child(4) {
-  transform: translateX(1rem);
+  margin-left: 1rem;
 }
 
 

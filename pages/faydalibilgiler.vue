@@ -80,7 +80,7 @@ const scrollToTop = () => {
 
 <template>
   <div
-    class="h-[90vh] flex items-center justify-center"
+    class="h-[80vh] flex items-center justify-center"
     v-if="!articleData && !connectionError"
   >
     <ElementComponentsLoadingAnimation />
@@ -130,7 +130,7 @@ const scrollToTop = () => {
 <div class="py-4">
   <div
     ref="el"
-    class="text-white mx-auto px-2 min-[880px]:px-4 pt-8 pb-16 transition-colors duration-300 rounded-lg w-full min-[880px]:w-5/6"
+    class="text-white mx-auto px-2 min-[880px]:px-4 py-8 transition-colors duration-300 rounded-lg w-full min-[880px]:w-5/6"
     v-if="htmlContent"
   >
     <div class="flex justify-center">

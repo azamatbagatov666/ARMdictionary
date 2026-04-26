@@ -173,7 +173,7 @@ const scrollToTarget = () => {
 
 <template>
   <div>
-    <div class="h-[90vh] flex items-center justify-center" v-if="loading">
+    <div class="h-[78dvh] flex items-center justify-center" v-if="loading">
       <ElementComponentsLoadingAnimation />
     </div>
 
