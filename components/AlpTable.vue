@@ -81,7 +81,7 @@ defineExpose({ closePanel })
 
     </div>
 
-    <div @click="showAlpTable = !showAlpTable" class="maindiv min-[722px]:hidden bg-gray-200 h-[56.98px] w-[180.47px] dark:bg-[#101010]  p-1 cursor-pointer rounded-lg border-2 border-black dark:border-white transition-all duration-300 select-none"
+    <div @click="showAlpTable = !showAlpTable" class="maindiv min-[722px]:hidden bg-gray-200 h-[56.98px] w-[194.47px] dark:bg-[#101010]  p-1 cursor-pointer rounded-lg border-2 border-black dark:border-white transition-all duration-300 select-none"
     :class="{'!h-[968.12px] shadow-none no-translate' : showAlpTable}">
     <div  class="mb-0.5 font-bold flex justify-center text-sm"><span class="text-center" v-text="t('alpTable.tableTitle')"></span></div>
     <Transition>

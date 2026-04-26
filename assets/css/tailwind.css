@@ -7,17 +7,10 @@ body {
   @apply dark:text-white;
   transition: background-color 0.3s;
 
-
-
   @apply bg-[url('/background-12.jpg')] transition-none bg-[#136570] dark:bg-[#282B30] dark:bg-[url('/background-12d.jpg')];
-  background-size: auto; 
-  background-attachment: fixed; 
+  background-size: auto;
+  background-attachment: fixed;
   background-repeat: no-repeat;
-
-
-
-  
-
 }
 
 img {
