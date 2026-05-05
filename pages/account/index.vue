@@ -45,12 +45,12 @@ if (!result.ok) {
         </div>
         <div class="grid grid-rows-3 gap-5">
           <div
-            class="flex items-center group justify-left transition-colors duration-300 focus-within:border-black border-b-2 border-[rgb(128,128,128)]"
+            class="flex relative items-center group justify-left transition-colors duration-300 focus-within:border-black border-b-2 border-[rgb(128,128,128)]"
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              class="size-6  fill-current text-gray-400  group-focus-within:text-black duration-300 transition-colors"
+              class="size-6 absolute left-0 z-10 fill-current text-gray-400  group-focus-within:text-black duration-300 transition-colors"
             >
               <path
                 d="M12 1C8.96243 1 6.5 3.46243 6.5 6.5C6.5 9.53757 8.96243 12 12 12C15.0376 12 17.5 9.53757 17.5 6.5C17.5 3.46243 15.0376 1 12 1Z"
@@ -61,7 +61,7 @@ if (!result.ok) {
             </svg>
             <ElementComponentsCustomInput
               @keydown.enter="handleLogin"
-              class="group h-14 border-none rounded-none w-full !outline-none transition-colors duration-300 bg-white px-2 text-black"
+              class="group h-14 border-none rounded-none w-full !outline-none transition-colors duration-300 bg-white pr-2 pl-8 text-black"
               v-model="username"
               autofocus
               :placeholder="'Kullanıcı Adı'"
@@ -72,7 +72,7 @@ if (!result.ok) {
           >
                       <svg
                 viewBox="0 0 16 16"
-                class="size-6  fill-current text-gray-400  group-focus-within:text-black duration-300 transition-colors"
+                class="size-6 absolute left-0 z-10  fill-current text-gray-400  group-focus-within:text-black duration-300 transition-colors"
               >
                 <path
                   fill-rule="evenodd"
@@ -81,7 +81,7 @@ if (!result.ok) {
               </svg>
             <ElementComponentsCustomInput
               @keydown.enter="handleLogin"
-              class="group h-14 border-none w-full pr-12 rounded-none  !outline-none transition-colors duration-300 bg-white px-2 text-black"
+              class="group h-14 border-none w-full pr-12 rounded-none  !outline-none transition-colors duration-300 bg-white pl-8 text-black"
               v-model="password"
               :type="passType"
               :placeholder="'Parola'"
