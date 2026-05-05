@@ -68,7 +68,7 @@ if (!result.ok) {
             />
           </div>
           <div
-            class="flex items-center group justify-left transition-colors duration-300 focus-within:border-black border-b-2 border-[rgb(128,128,128)]"
+            class="flex relative items-center group justify-left transition-colors duration-300 focus-within:border-black border-b-2 border-[rgb(128,128,128)]"
           >
                       <svg
                 viewBox="0 0 16 16"
@@ -81,12 +81,12 @@ if (!result.ok) {
               </svg>
             <ElementComponentsCustomInput
               @keydown.enter="handleLogin"
-              class="group h-14 border-none w-full rounded-none !outline-none transition-colors duration-300 bg-white px-2 text-black"
+              class="group h-14 border-none w-full pr-12 rounded-none  !outline-none transition-colors duration-300 bg-white px-2 text-black"
               v-model="password"
               :type="passType"
               :placeholder="'Parola'"
             />
-                          <button @click="passType = passType === 'password' ? 'text' : 'password'">
+                          <button class="absolute right-0" @click="passType = passType === 'password' ? 'text' : 'password'">
                   <svg v-if="passType === 'password'"
                     fill="#000000"
                     viewBox="0 0 24 24"
