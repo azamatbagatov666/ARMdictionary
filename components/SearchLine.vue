@@ -80,9 +80,13 @@ onBeforeUnmount(() => {
 
 const handleDocumentClick = (event: MouseEvent) => {
   const keyboard = document.querySelector(".aKeyboard");
+  const mother = document.querySelector(".motherinput");
 
-  if (keyboard) {
-    if (!keyboard.contains(event.target as Node)) {
+  if (keyboard && mother) {
+    if (
+      !keyboard.contains(event.target as Node) &&
+      !mother.contains(event.target as Node)
+    ) {
       isResultBoxVisible.value = false;
       currentHoverIndex.value = -1;
     }
@@ -166,7 +170,7 @@ const wordFromAbove = (newDesword: string) => {
   });
 };
 
-const keyBase = (event: any) => {
+const keyBase = (event: KeyboardEvent) => {
   if (event.key == "ArrowDown") {
     keyDown();
     event.preventDefault();
@@ -352,6 +356,8 @@ const cleanButtonClick = (event: Event) => {
 
 const cleanTheInput = (event: Event) => {
   desword.value = "";
+  emit("input-changed", "");
+
   event.preventDefault();
 };
 
@@ -410,7 +416,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
-            class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 kButton outline-none transition-colors duration-300"
+            class="block select-none mx-auto border-b-0 rounded-t-lg rounded-b-none w-52 kButton dark:bg-[#262626] dark:text-[#ecf9ff] dark:border-white outline-none transition-colors duration-300"
             :text="t('searchLine.keyboardButton')"
             @click="toggleKeyboard($event)"
             @mousedown="buttonClick"
@@ -436,7 +442,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             />
 
             <div
-              class="bg-white border-t border-b border-black flex items-center w-[37px] h-[53px] shrink-0 ml-[-1px]"
+              class="bg-white dark:bg-[#262626] border-t border-b border-black dark:border-white flex items-center w-[37px] h-[53px] shrink-0 ml-[-1px]"
             >
               <Transition name="fade">
                 <button
@@ -448,7 +454,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 >
                   <svg
                     fill="#000000"
-                    class="size-7"
+                    class="size-7 dark:fill-white"
                     viewBox="0 0 32 32"
                     version="1.1"
                   >
@@ -465,7 +471,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               aria-label="Arama Butonu"
               @click="submit"
               @mousedown="buttonClick"
-              class="motherbutton border-l border-black shrink-0"
+              class="motherbutton border-l border-black dark:border-white shrink-0"
             >
               <svg
                 height="30px"
@@ -798,7 +804,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   border-top-width: 1px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  border-color: black;
+  @apply border-black dark:border-white;
   background-color: white;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -814,9 +820,15 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   padding-left: 10px;
   margin-right: -2px;
   border-width: 1px;
-  border-color: black;
+  @apply border-black dark:border-white;
   transition: background-color 0.3s;
 }
+  .dark .motherinput {
+  background-color: #262626;
+  color: #ecf9ff;
+
+}
+
 
 @media (hover: hover) and (pointer: fine) {
   .motherbutton:hover {
@@ -832,16 +844,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   background-color: chartreuse;
 }
 
-.resultBox {
-  position: absolute;
-  background-color: white;
-  @apply w-[calc(100%_-_17px)] sm:w-[482px] md:w-[602px];
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
-  border-width: 1px;
-  border-radius: 20px;
-  margin-top: 4px;
-  overflow-y: auto;
-}
+
 
 .resultBox ul li {
   list-style: none;
@@ -873,5 +876,84 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   .keyboard-wrapper {
     height: 269px;
   }
+
+
 }
+
+
+
+.resultBox {
+  position: absolute;
+  background-color: white;
+  @apply w-[calc(100%_-_17px)] sm:w-[482px] md:w-[602px];
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  border-width: 1px;
+  border-radius: 20px;
+  margin-top: 4px;
+  overflow-y: auto;
+}
+
+
+.resultBox {
+
+
+  background:
+    /* Shadow covers */
+    linear-gradient(white 30%, rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+
+    /* Shadows (NOW LINEAR) */
+    linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,0)),
+    linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,0)) 0 100%;
+
+  background-color: white;
+
+  background-repeat: no-repeat;
+
+  background-size:
+    100% 40px,
+    100% 40px,
+    100% 14px,
+    100% 14px;
+
+  background-attachment:
+    local,
+    local,
+    scroll,
+    scroll;
+}
+
+.dark .resultBox {
+  color: #ecf9ff;
+  border-color: white;
+
+  background:
+    /* Shadow covers (dark version) */
+    linear-gradient(#262626 30%, rgba(38, 38, 38, 0)),
+    linear-gradient(rgba(38, 38, 38, 0), #262626 70%) 0 100%,
+
+    /* Shadows (same as light mode is fine) */
+    linear-gradient(to bottom, rgba(255,255,255,.4), rgba(255,255,255,0)),
+    linear-gradient(to top, rgba(255,255,255,.4), rgba(255,255,255,0)) 0 100%;
+
+  background-color: #262626;
+
+
+  background-repeat: no-repeat;
+
+  background-size:
+    100% 40px,
+    100% 40px,
+    100% 14px,
+    100% 14px;
+
+  background-attachment:
+    local,
+    local,
+    scroll,
+    scroll;
+}
+
+
+
 </style>
