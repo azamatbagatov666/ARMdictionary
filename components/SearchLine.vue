@@ -835,7 +835,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
     background-color: chartreuse;
   }
   .kButton:hover {
-    @apply bg-[#ccc];
+    @apply bg-[#ccc] dark:bg-neutral-700;
   }
 }
 
