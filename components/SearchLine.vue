@@ -835,9 +835,15 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
     background-color: chartreuse;
   }
   .kButton:hover {
-    @apply bg-[#ccc] dark:bg-neutral-700;
+    @apply dark:bg-neutral-700 bg-[#ccc] ;
   }
+
+
 }
+
+    .kButton:active {
+    @apply dark:bg-neutral-700 bg-[#ccc] ;
+  }
 
 .motherbutton:active {
   transform: scale(0.95);
