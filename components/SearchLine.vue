@@ -496,7 +496,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 v-for="(item, index) in resultBoxContent"
                 v-text="item"
                 :class="{
-                  'bg-[#e9f3ff]': index == currentHoverIndex,
+                  'bg-[#e9f3ff] text-black': index == currentHoverIndex,
                   'rounded-t-[20px]': index == 0,
                   'rounded-b-[20px]': index == resultBoxContent.length - 1,
                   'rounded-[20px]': index == 0 && resultBoxContent.length == 1,
