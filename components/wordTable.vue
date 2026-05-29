@@ -3,45 +3,75 @@ const props = defineProps(["responseData"]);
 </script>
 
 <template>
-  <table
-    class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-2/3 lg:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300 last:mb-6"
-    v-for="item in props.responseData"
-  >
-  <tbody>
-    <tr class="mb-3 flex flex-wrap py-1 pl-1">
-      <td>
- <SVGAmFlag class="mr-2"/>
-      </td>
-      <td class="font-bold flex flex-wrap pr-3">
-        <span class="text-red-500" v-text="item.am"></span>
-        <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
-      </td>
-      <td class="pr-3" v-text="item.aM1"></td>
-      <td class="pr-3" v-text="item.alaN2"></td>
-      <td class="pr-3" v-text="item.alaN1"></td>
-    </tr>
-    <tr class="mb-3 flex flex-wrap py-1 pl-1">
-      <td>
- <SVGTrFlag class="mr-2"/>
 
-      </td>
-      <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-      <td class="pr-3" v-text="item.tR2"></td>
-      <td class="pr-3" v-text="item.tR3"></td>
-    </tr>
-    <tr class="mb-3 flex flex-wrap py-1 pl-1">
-      <td>
- <SVGEnFlag class="mr-2"/>
-      </td>
-      <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-      <td class="pr-3" v-text="item.tR5"></td>
-      <td class="pr-3" v-text="item.tR6"></td>
-    </tr>
-    </tbody>
-  </table>
 
+<div
+  v-for="item in props.responseData"
+  class="border-2 border-black dark:border-white rounded-lg bg-gray-200 dark:bg-[#101010] text-lg p-3 mx-auto my-6 w-full sm:w-2/3 lg:w-1/2 transition-colors duration-300"
+>
+  <!-- Armenian -->
+  <div class="flex flex-wrap items-start gap-x-2">
+    <SVGAmFlag class="shrink-0" />
+
+    <div class="flex-1 min-w-0 meanings">
+      <span class="font-bold text-red-500">
+        {{ item.am }}
+      </span>
+      <span class="!ml-0">
+        ({{ item.okunus }})
+      </span>
+
+      <span> {{ item.aM1 }}</span>
+      <span> {{ item.alaN2 }}</span>
+      <span> {{ item.alaN1 }}</span>
+    </div>
+  </div>
+
+  <!-- Turkish -->
+  <div class="flex flex-wrap items-start gap-x-2 mt-6">
+    <SVGTrFlag class="shrink-0" />
+
+    <div class="flex-1 min-w-0 meanings">
+      <span class="font-bold text-red-500">
+        {{ item.tR1 }}
+      </span>
+
+      <span> {{ item.tR2 }}</span>
+      <span> {{ item.tR3 }}</span>
+    </div>
+  </div>
+
+  <!-- English -->
+  <div class="flex flex-wrap items-start gap-x-2 mt-6">
+    <SVGEnFlag class="shrink-0" />
+
+    <div class="flex-1 min-w-0 meanings">
+      <span class="font-bold text-red-500">
+        {{ item.tR4 }}
+      </span>
+
+      <span> {{ item.tR5 }}</span>
+      <span> {{ item.tR6 }}</span>
+    </div>
+  </div>
+</div>
 </template>
 
 <style scoped>
-/*a*/
+
+.meanings {
+  white-space: normal;
+  min-width: 0;
+}
+
+.meanings span {
+  white-space: normal;
+  margin-left: 0.5rem;
+
+}
+
+.meanings span:first-child {
+  margin-left: 0;
+}
+
 </style>
