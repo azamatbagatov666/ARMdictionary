@@ -1,6 +1,6 @@
 export interface ARTICLES {
-  id?: number;
-  tag?: string;
-  title?: string;
-  html?: string;
+  ID: number;
+  TAG?: string;
+  TITLE?: string;
+  HTML?: string;
 }

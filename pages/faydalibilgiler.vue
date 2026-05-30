@@ -27,9 +27,9 @@ const el = useTemplateRef("el");
 const { height: elHeight } = useElementSize(el);
 
 const pageChanged = async (content: ARTICLES) => {
-  if (htmlContent.value != content.html) {
-    htmlContent.value = content.html;
-    currentPage.value = content.tag;
+  if (htmlContent.value != content.HTML) {
+    htmlContent.value = content.HTML;
+    currentPage.value = content.TAG;
     x.value = 0;
     y.value = 0;
 
@@ -98,10 +98,10 @@ const scrollToTop = () => {
       <ul class="p-y-4 border-t-2 border-white overflow-y-auto">
         <li
           v-for="(item, index) in articleData"
-          :key="item.id"
-          v-text="item.title"
+          :key="item.ID"
+          v-text="item.TITLE"
           class="transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
-          :class="{ '!bg-red-500': currentPage == item.tag }"
+          :class="{ '!bg-red-500': currentPage == item.TAG }"
           @click="pageChanged(item)"
         ></li>
       </ul>
