@@ -3,8 +3,11 @@ const desword = ref("");
 const noresult = ref("");
 const wordToBeAdded = ref("");
 
-const selectedItemId = ref(null);
-const selectedRadio = ref(null);
+import type { TDATA } from "~/models/TDATA";
+
+
+const selectedItemId = ref<number | null>(null);
+const selectedRadio = ref<number | null>(null);
 const previousDesword = ref("");
 const selectedListWord = ref<string[]>([]);
 
@@ -80,13 +83,19 @@ const submit = async () => {
 
 };
 
+const onWordSelected = (item: TDATA) => {
+  selectedItemId.value = item.ID ?? null;
+  getAranan();
+};
+
+
 const getAranan = async () => {
   idData.arananlar = [];
   wordToBeAdded.value = "";
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
   const data = await fetchWithAuth(
-    `/api/account/search/${encodeURI(selectedItemId.value!)}/searchById`,
+    `/api/account/search/${encodeURIComponent(selectedItemId.value!)}/searchById`,
     {
       method: "GET",
     },
@@ -162,65 +171,12 @@ const resetData = () => {
         @submit-request="submit"
       ></SearchLine>
 
-      <table
-        class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
-        v-for="item in responseData"
-        :key="item.WORD_ID"
-      >
-        <tbody>
-          <tr class="h-10">
-            <td>
-              <label class="ml-2">
-                <input
-                  type="radio"
-                  name="wordSelection"
-                  @change="getAranan()"
-                  v-model="selectedRadio"
-                  :value="item.ID"
-                />
-                <span class="text-purple-500 font-bold"
-                  >Sözcüğü seçmek için tıklayın.</span
-                >
-              </label>
-            </td>
-          </tr>
-          <tr
-            class="h-10 text-purple-500 font-bold ml-2"
-            v-text="`Sonuç numarası: ${item.ID}`"
-          ></tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGAmFlag class="mr-2" />
-            </td>
-            <td class="font-bold text-red-500 pr-3">
-              <span v-text="item.AM"></span>
-              <span
-                class="ml-1 font-normal text-black dark:text-white"
-                v-text="`(${item.OKUNUS})`"
-              ></span>
-            </td>
-            <td class="pr-3" v-text="item.AM1"></td>
-            <td class="pr-3" v-text="item.ALAN2"></td>
-            <td class="pr-3" v-text="item.ALAN1"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGTrFlag class="mr-2" />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.TR1"></td>
-            <td class="pr-3" v-text="item.TR2"></td>
-            <td class="pr-3" v-text="item.TR3"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGEnFlag class="mr-2" />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.TR4"></td>
-            <td class="pr-3" v-text="item.TR5"></td>
-            <td class="pr-3" v-text="item.TR6"></td>
-          </tr>
-        </tbody>
-      </table>
+<WordTable
+  :responseData="responseData"
+  selectable
+  v-model="selectedRadio"
+  @select="onWordSelected"
+/>
 
       <div
         class="text-center text-lg"

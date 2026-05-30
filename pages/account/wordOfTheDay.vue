@@ -330,7 +330,7 @@ const image = ref();
   <div class="">
     <div
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
-      class="absolute left-0 top-36 bg-black p-2 rounded-lg w-full sm:w-[600px] xl:w-auto"
+      class="absolute sm:left-4 top-36 bg-black p-2 rounded-lg w-full sm:w-[600px] xl:w-auto"
     >
   <div class="flex justify-end">
 
@@ -443,8 +443,6 @@ const image = ref();
 
     <div
       v-show="selectedDate"
-      class="mb-12"
-      :class="{ 'mb-80': !searchResponse }"
     >
       <SearchLine
         @input-changed="wordInput"
@@ -453,64 +451,16 @@ const image = ref();
         ref="searchline"
       ></SearchLine>
 
-      <table
-        class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
-        v-for="item in searchResponse"
-        :key="item.WORD_ID"
-      >
-        <tbody>
-          <tr class="h-10">
-            <td>
-              <label class="ml-2">
-                <input
-                  type="radio"
-                  name="wordSelection"
-                  v-model="selectedRadio"
-                  :value="item.WORD_ID"
-                />
-                <span class="text-purple-500 font-bold"
-                  >Sözcüğü seçmek için tıklayın.</span
-                >
-              </label>
-            </td>
-          </tr>
-          <tr
-            class="h-10 text-purple-500 font-bold ml-2"
-            v-text="`Sözcük numarası: ${item.WORD_ID}`"
-          ></tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGAmFlag class="mr-2" />
-            </td>
-            <td class="font-bold text-red-500 pr-3">
-              <span v-text="item.AM"></span>
-              <span
-                class="ml-1 font-normal text-black dark:text-white"
-                v-text="`(${item.OKUNUS})`"
-              ></span>
-            </td>
-            <td class="pr-3" v-text="item.AM1"></td>
-            <td class="pr-3" v-text="item.ALAN2"></td>
-            <td class="pr-3" v-text="item.ALAN1"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGTrFlag class="mr-2" />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.TR1"></td>
-            <td class="pr-3" v-text="item.TR2"></td>
-            <td class="pr-3" v-text="item.TR3"></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGEnFlag class="mr-2" />
-            </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.TR4"></td>
-            <td class="pr-3" v-text="item.TR5"></td>
-            <td class="pr-3" v-text="item.TR6"></td>
-          </tr>
-        </tbody>
-      </table>
+
+      <WordTable
+  :responseData="searchResponse"
+  selectable
+  v-model="selectedRadio"
+    valueKey="WORD_ID"
+
+/>
+
+
 
       <div
         class="text-center text-lg"

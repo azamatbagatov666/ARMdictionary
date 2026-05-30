@@ -4,8 +4,8 @@ import { type TDATA } from "~/models/TDATA";
 const desword = ref("");
 const noresult = ref("");
 
-const selectedItemId = ref(null);
-const selectedRadio = ref(null);
+const selectedItemId = ref<number | null>(null);
+const selectedRadio = ref<number | null>(null);
 const selectedIndex = ref<TDATA | null>(null);
 const selectedBackup = ref<TDATA | null>(null);
 const previousDesword = ref("");
@@ -49,6 +49,15 @@ const submit = async () => {
   }
 };
 
+const onWordSelected = async (item: TDATA) => {
+  const index = responseData.value.findIndex(
+    (x: TDATA) => x.WORD_ID === item.WORD_ID,
+  );
+
+  if (index === -1) return;
+
+  await getAranan(index);
+};
 const getAranan = async (index: number) => {
   selectedItemId.value = selectedRadio.value;
   const data = await fetchWithAuth(
@@ -97,7 +106,8 @@ const updateTheWord = async () => {
           selectedIndex.value &&
           selectedBackup.value &&
           selectedIndex.value[key as keyof TDATA] === "" &&
-          selectedBackup.value[key as keyof TDATA] === (null || "")
+          (selectedBackup.value[key as keyof TDATA] === null ||
+            selectedBackup.value[key as keyof TDATA] === "")
         ) {
           selectedIndex.value[key as keyof TDATA] =
             selectedBackup.value[key as keyof TDATA];
@@ -169,276 +179,142 @@ const resetData = () => {
       ></SearchLine>
 
       <div
-        v-if="selectedIndex"
-        class="text-3xl flex justify-around mb-1 text-white"
+        class="justify-center w-full mb-10"
+        :class="{ 'block col-span-full gap-8 md:gap-4 md:flex': selectedIndex }"
       >
-        <span v-text="'Sonucun Şu Anki Hali'"></span>
-        <span v-text="'Yerine Geçecek Yeni Sonuç'"></span>
-      </div>
-
-      <div
-        class="flex justify-center w-full mb-1"
-        :class="{ 'h-[400px]': selectedIndex }"
-      >
-        <div :class="{ 'w-full h-full': selectedIndex }">
+        <div :class="{ 'w-full h-full ': selectedIndex }">
           <div
             v-for="(item, index) in responseData"
             :key="item.WORD_ID"
             :class="{ 'h-full': selectedIndex }"
           >
-            <table
-              :class="{ '!m-0': selectedIndex }"
-              class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block h-full w-full bg-gray-200 dark:bg-[#101010] dark:border-white"
+            <span
+              class="text-xl sm:text-3xl text-center block"
+              v-if="selectedIndex"
+              v-text="'Sonucun Şu Anki Hali'"
+            ></span>
+
+            <WordTable
+              :responseData="responseData"
+              selectable
+              v-model="selectedRadio"
+              @select="onWordSelected"
+              :class="
+                selectedRadio != null
+                  ? '!w-full !h-[400px] !my-0 '
+                  : ' !sm:w-2/3 !lg:w-1/2'
+              "
               v-if="selectedRadio == null || selectedRadio == item.ID"
-            >
-              <tbody>
-                <tr class="h-10">
-                  <td>
-                    <label class="ml-2">
-                      <input
-                        type="radio"
-                        name="wordSelection"
-                        @change="getAranan(Number(index))"
-                        v-model="selectedRadio"
-                        :value="item.ID"
-                      />
-                      <span class="text-purple-500 font-bold"
-                        >Sözcüğü seçmek için tıklayın.</span
-                      >
-                    </label>
-                  </td>
-                </tr>
-                <tr
-                  class="h-10 text-purple-500 font-bold ml-2"
-                  v-text="`Sonuç numarası: ${item.ID}`"
-                ></tr>
-                <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                  <td>
-                    <SVGAmFlag class="mr-2" />
-                  </td>
-                  <td class="font-bold text-red-500 pr-3">
-                    <span v-text="item.AM"></span>
-                    <span
-                      class="ml-1 font-normal text-black dark:text-white"
-                      v-text="`(${item.OKUNUS})`"
-                    ></span>
-                  </td>
-                  <td class="pr-3" v-text="item.AM1"></td>
-                  <td class="pr-3" v-text="item.ALAN2"></td>
-                  <td class="pr-3" v-text="item.ALAN1"></td>
-                </tr>
-                <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                  <td>
-                    <SVGTrFlag class="mr-2" />
-                  </td>
-                  <td
-                    class="pr-3 font-bold text-red-500"
-                    v-text="item.TR1"
-                  ></td>
-                  <td class="pr-3" v-text="item.TR2"></td>
-                  <td class="pr-3" v-text="item.TR3"></td>
-                </tr>
-                <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                  <td>
-                    <SVGEnFlag class="mr-2" />
-                  </td>
-                  <td
-                    class="pr-3 font-bold text-red-500"
-                    v-text="item.TR4"
-                  ></td>
-                  <td class="pr-3" v-text="item.TR5"></td>
-                  <td class="pr-3" v-text="item.TR6"></td>
-                </tr>
-              </tbody>
-            </table>
+            />
           </div>
         </div>
 
         <div v-if="selectedIndex" class="w-full h-full">
-          <table
-            class="border-2 border-black rounded-lg text-lg p-2 pt-[88px] mx-auto block w-full h-full bg-gray-200 dark:bg-[#101010] dark:border-white"
-          >
-            <tbody>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-                  <SVGAmFlag class="mr-2" />
-                </td>
-                <td class="font-bold text-red-500 pr-3">
-                  <span v-text="selectedIndex.AM"></span>
-                  <span
-                    class="ml-1 font-normal text-black dark:text-white"
-                    v-text="`(${selectedIndex.OKUNUS})`"
-                  ></span>
-                </td>
-                <td class="pr-3" v-text="selectedIndex.AM1"></td>
-                <td class="pr-3" v-text="selectedIndex.ALAN2"></td>
-                <td class="pr-3" v-text="selectedIndex.ALAN1"></td>
-              </tr>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-                  <SVGTrFlag class="mr-2" />
-                </td>
-                <td
-                  class="pr-3 font-bold text-red-500"
-                  v-text="selectedIndex.TR1"
-                ></td>
-                <td class="pr-3" v-text="selectedIndex.TR2"></td>
-                <td class="pr-3" v-text="selectedIndex.TR3"></td>
-              </tr>
-              <tr class="mb-3 flex flex-wrap py-1 pl-1">
-                <td>
-                  <SVGEnFlag class="mr-2" />
-                </td>
-                <td
-                  class="pr-3 font-bold text-red-500"
-                  v-text="selectedIndex.TR4"
-                ></td>
-                <td class="pr-3" v-text="selectedIndex.TR5"></td>
-                <td class="pr-3" v-text="selectedIndex.TR6"></td>
-              </tr>
-            </tbody>
-          </table>
+          <span
+            class="text-xl sm:text-3xl text-center block"
+            v-if="selectedIndex"
+            v-text="'Yerine Geçecek Yeni Sonuç'"
+          ></span>
+
+          <WordTable
+            :responseData="[selectedIndex]"
+            :class="'!w-full !h-[400px] !pt-[82px] !my-0'"
+          />
         </div>
       </div>
 
-      <div v-if="selectedIndex" class="flex text-white">
-        <div>
-          <div class="flex mt-2">
-            <div>
-              <label class="w-56 inline-block"
-                >Aranan sözcüğün Ermenicesi:<span
-                  class="text-[red] font-bold text-lg"
-                  >*</span
-                ></label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.AM"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-40 ml-2 inline-block"
-                >Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg"
-                  >*</span
-                ></label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.OKUNUS"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="flex mt-2">
-            <div>
-              <label class="w-56 inline-block">Ermenice birinci anlam:</label>
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.AM1"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-40 ml-2 inline-block"
-                >Ermenice ikinci anlam:</label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.ALAN2"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-44 ml-2 inline-block"
-                >Ermenice üçüncü anlam:</label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.ALAN1"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="flex mt-2">
-            <div>
-              <label class="w-56 inline-block"
-                >Aranan sözcüğün Türkçesi:<span
-                  class="text-[red] font-bold text-lg"
-                  >*</span
-                ></label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR1"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-40 ml-2 inline-block"
-                >Türkçe birinci anlam:</label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR2"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-44 ml-2 inline-block">Türkçe ikinci anlam:</label>
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR3"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="flex mt-2">
-            <div>
-              <label class="w-56 inline-block"
-                >Aranan sözcüğün İngilizcesi:<span
-                  class="text-[red] font-bold text-lg"
-                  >*</span
-                ></label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR4"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-40 ml-2 inline-block"
-                >İngilizce birinci anlam:</label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR5"
-                type="text"
-              />
-            </div>
-            <div>
-              <label class="w-44 ml-2 inline-block"
-                >İngilizce ikinci anlam:</label
-              >
-              <ElementComponentsCustomInput
-                class="w-52 border border-black"
-                v-model="selectedIndex.TR6"
-                type="text"
-              />
-            </div>
-          </div>
-        </div>
+      <div v-if="selectedIndex" class="px-2 sm:px-8 text-white place-center">
+       <div class="w-full flex flex-col gap-4 theForm">
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flex-1 min-w-0">
+      <label class="block w-full">
+        Aranan sözcüğün Ermenicesi:<span class="text-[red] font-bold text-lg">*</span>
+      </label>
+      <ElementComponentsCustomInput
+        class="w-full border border-black"
+        v-model="selectedIndex.AM"
+        type="text"
+      />
+    </div>
 
-        <div class="mx-auto h-0">
-          <div class="text-2xl w-52">Bu sonucu veren sözcükler:</div>
-          <ul class="list-disc text-lg w-52 pl-5">
-            <li
-              v-for="(arananlar, index) in arananData"
-              :key="index"
-              v-text="arananlar"
-            ></li>
+    <div class="flex-1 min-w-0">
+      <label class="block w-full">
+        Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg">*</span>
+      </label>
+      <ElementComponentsCustomInput
+        class="w-full border border-black"
+        v-model="selectedIndex.OKUNUS"
+        type="text"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flex-1 min-w-0">
+      <label>Ermenice birinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.AM1" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>Ermenice ikinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.ALAN2" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>Ermenice üçüncü anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.ALAN1" />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flex-1 min-w-0">
+      <label>
+        Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg">*</span>
+      </label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR1" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>Türkçe birinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR2" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>Türkçe ikinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR3" />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-4">
+    <div class="flex-1 min-w-0">
+      <label>
+        Aranan sözcüğün İngilizcesi:<span class="text-[red] font-bold text-lg">*</span>
+      </label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR4" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>İngilizce birinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR5" />
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <label>İngilizce ikinci anlam:</label>
+      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR6" />
+    </div>
+  </div>
+</div>
+
+        <div class="flex justify-center">
+        <div class=" mt-6 ">
+          <div class="text-xl lg:text-2xl mb-3">Bu sonucu veren sözcükler:</div>
+
+          <ul class="list-disc text-base lg:text-lg pl-5 space-y-1">
+            <li v-for="(arananlar, index) in arananData" :key="index">
+              {{ arananlar }}
+            </li>
           </ul>
+        </div>
         </div>
       </div>
 
@@ -459,5 +335,7 @@ const resetData = () => {
 </template>
 
 <style scoped>
-/*dd*/
+.theForm label {
+  @apply text-sm md:text-base w-full block;
+}
 </style>
