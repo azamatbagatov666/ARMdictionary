@@ -98,7 +98,7 @@ const scrollToTop = () => {
       <ul class="p-y-4 border-t-2 border-white overflow-y-auto">
         <li
           v-for="(item, index) in articleData"
-          :key="item.ID"
+          :key="item.id"
           v-text="item.title"
           class="transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
           :class="{ '!bg-red-500': currentPage == item.tag }"
