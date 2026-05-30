@@ -110,7 +110,7 @@ const resetData = () => {
           />
         </div>
       </div>
-      <div class="flex mt-2">
+ <div class="flex mt-2">
         <div>
           <label class="w-56 inline-block">Ermenice birinci anlam:</label>
           <ElementComponentsCustomInput
@@ -200,6 +200,8 @@ const resetData = () => {
 
       <div class="preview">
         <div class="text-[40px] text-white">Önizleme</div>
+
+        <WordTable :responseData="[data]"></WordTable>
 
         <table
           class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"

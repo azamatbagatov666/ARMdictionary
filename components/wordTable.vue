@@ -1,5 +1,8 @@
 <script lang="ts" setup>
-const props = defineProps(["responseData"]);
+const props = defineProps(["responseData", "class"]);
+
+
+
 </script>
 
 <template>
@@ -7,7 +10,9 @@ const props = defineProps(["responseData"]);
 
 <div
   v-for="item in props.responseData"
-  class="border-2 border-black dark:border-white rounded-lg bg-gray-200 dark:bg-[#101010] text-lg p-3 mx-auto my-6 w-full sm:w-2/3 lg:w-1/2 transition-colors duration-300"
+  class="w-full sm:w-2/3 lg:w-1/2 border-2 border-black dark:border-white rounded-lg bg-gray-200 dark:bg-[#101010] text-lg p-3 mx-auto my-6 transition-colors duration-300"
+  :class="props.class"
+
 >
   <!-- Armenian -->
   <div class="flex flex-wrap items-start gap-x-2">
@@ -60,18 +65,18 @@ const props = defineProps(["responseData"]);
 <style scoped>
 
 .meanings {
-  white-space: normal;
+  white-space: normal !important;
   min-width: 0;
 }
 
 .meanings span {
-  white-space: normal;
-  margin-left: 0.5rem;
-
+  white-space: normal !important;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
-.meanings span:first-child {
-  margin-left: 0;
+.meanings span + span::before {
+  content: " ";
 }
 
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { t } = useI18n();
-import { useTemplateRef } from 'vue'
+import { useTemplateRef } from "vue";
 
 const title = computed(() => t("title.adamasmaca"));
 const description = computed(() => t("meta.adamasmaca"));
@@ -15,7 +15,7 @@ useHead({
   ],
 });
 
-const target = useTemplateRef('target')
+const target = useTemplateRef("target");
 
 const hangmanVis = ref(0);
 const answer = ref();
@@ -26,7 +26,6 @@ const won = ref();
 
 import { useWindowSize } from "@vueuse/core";
 const { width } = useWindowSize();
-
 
 const lines = [
   ["ձ", "յ", "օ", "ռ", "ժ"],
@@ -130,13 +129,17 @@ const responseData = ref();
   <div>
     <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute" />
 
-    <div class="h-[65dvh] flex items-center justify-center" v-if="!answer && !connectionError">
+    <div
+      class="h-[65dvh] flex items-center justify-center"
+      v-if="!answer && !connectionError"
+    >
       <ElementComponentsLoadingAnimation />
     </div>
     <div class="min-[1430px]:flex min-[1430px]:justify-center">
       <div v-if="answer">
         <div
-          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
+          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+        >
           <div class="hangman relative w-[250px] min-[730px]:top-[10px]">
             <div class="absolute">
               <div class="gallows relative">
@@ -169,7 +172,8 @@ const responseData = ref();
         </div>
 
         <div class="text-center text-lg mt-1 text-white">
-          <span v-text="8 - hangmanVis"></span><span v-text="t('adamAsmaca.rightsLeft')"></span>
+          <span v-text="8 - hangmanVis"></span
+          ><span v-text="t('adamAsmaca.rightsLeft')"></span>
         </div>
         <div class="text-center text-red-500 font-bold h-7 text-lg">
           <div v-show="won" v-text="t('adamAsmaca.win')"></div>
@@ -179,72 +183,77 @@ const responseData = ref();
         <div class="h-16 flex justify-center">
           <div
             class="text-center px-3 pt-2 inline-block border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
-            v-if="answer">
-            <div class="inline-block" v-for="(character, index) in answerArray" :key="index">
+            v-if="answer"
+          >
+            <div
+              class="inline-block"
+              v-for="(character, index) in answerArray"
+              :key="index"
+            >
               <div class="flex h-8 w-full">
-                <div class="w-5 sm:w-8 ml-1 text-center text-xl sm:text-3xl" :class="{ 'ml-0': index === 0 }"
-                  v-text="character" v-if="guesses.includes(character)"></div>
+                <div
+                  class="w-5 sm:w-8 ml-1 text-center text-xl sm:text-3xl"
+                  :class="{ 'ml-0': index === 0 }"
+                  v-text="character"
+                  v-if="guesses.includes(character)"
+                ></div>
               </div>
               <div class="flex mt-3 w-full">
-                <div class="w-5 sm:w-8 h-1 ml-1 bg-purple-500" :class="{ 'ml-0': index === 0 }"></div>
+                <div
+                  class="w-5 sm:w-8 h-1 ml-1 bg-purple-500"
+                  :class="{ 'ml-0': index === 0 }"
+                ></div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="" v-if="answer">
-          <div class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[570px] relative border-2 border-black my-3 min-[730px]:p-2 py-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
-            <div v-for="(line, lineIndex) in lines" :key="lineIndex" class="row">
-              <button v-for="(letter, index) in line" :key="index" class="armenian-button" v-text="letter"
-                @click="push(letter)" :class="{
+          <div
+            class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[570px] relative border-2 border-black my-3 min-[730px]:p-2 py-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+          >
+            <div
+              v-for="(line, lineIndex) in lines"
+              :key="lineIndex"
+              class="row"
+            >
+              <button
+                v-for="(letter, index) in line"
+                :key="index"
+                class="armenian-button"
+                v-text="letter"
+                @click="push(letter)"
+                :class="{
                   'used-button': isUsedButton(letter),
                   'correct-button': isCorrectButton(letter),
-                }"></button>
+                }"
+              ></button>
             </div>
           </div>
         </div>
 
-        <ElementComponentsCustomButton class="mx-auto block w-28" @click="clear" v-text="t('adamAsmaca.reset')" />
+        <ElementComponentsCustomButton
+          class="mx-auto block w-28"
+          @click="clear"
+          v-text="t('adamAsmaca.reset')"
+        />
       </div>
-      <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
-        v-text="t('adamAsmaca.noConnection')"></div>
+      <div
+        v-else-if="connectionError"
+        class="text-3xl flex items-center justify-center h-[90vh] text-white font-bold"
+        v-text="t('adamAsmaca.noConnection')"
+      ></div>
 
-      <div ref="target" v-if="won != null" class="mx-auto min-[1430px]:w-0 min-[1430px]:mx-0">
-        <table
-          class="border-2 border-black min-[1430px]:h-max w-full sm:w-max rounded-lg text-lg p-2 my-2 mx-auto block min-[1430px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
-          v-for="item in responseData">
-          <tbody>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-                 <SVGAmFlag class="mr-2"/>
-
-
-              </td>
-              <td class="font-bold pr-3">
-                <span class="text-red-500" v-text="item.am"></span>
-                <span class="ml-1 font-normal" v-text="`(${item.okunus})`"></span>
-              </td>
-              <td class="pr-3" v-text="item.aM1"></td>
-              <td class="pr-3" v-text="item.alaN2"></td>
-              <td class="pr-3" v-text="item.alaN1"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-                 <SVGTrFlag class="mr-2"/>
-                       </td>
-              <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-              <td class="pr-3" v-text="item.tR2"></td>
-              <td class="pr-3" v-text="item.tR3"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap py-1 pl-1">
-              <td>
-                 <SVGEnFlag class="mr-2"/>              </td>
-              <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-              <td class="pr-3" v-text="item.tR5"></td>
-              <td class="pr-3" v-text="item.tR6"></td>
-            </tr>
-          </tbody>
-        </table>
+      <div
+        ref="target"
+        v-if="won != null"
+        class="min-[1430px]:absolute right-24"
+      >
+        <wordTable
+          :responseData="responseData"
+          :class="'min-[1430px]:w-[396px]'"
+        ></wordTable>
+        
       </div>
     </div>
   </div>
@@ -426,8 +435,6 @@ const responseData = ref();
 .row:nth-child(4) {
   margin-left: 1rem;
 }
-
-
 
 .row:first-child .armenian-button:nth-last-child(-n + 3) {
   @apply translate-x-[47px] sm:translate-x-[255px];

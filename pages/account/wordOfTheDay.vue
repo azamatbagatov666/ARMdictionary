@@ -330,78 +330,20 @@ const image = ref();
   <div class="">
     <div
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
-      class="absolute top-36 bg-black lg:bg-transparent p-2 lg:p-0 rounded-lg"
+      class="absolute left-0 top-36 bg-black p-2 rounded-lg w-full sm:w-[600px] xl:w-auto"
     >
-      <div class="flex justify-center xl:text-lg font-bold text-white">
+  <div class="flex justify-end">
+
+    <button @click="selectedDate = null" class="bg-red-500 text-black size-8 hover:bg-white rounded-md">X</button>
+    </div>
+
+      <div class="flex justify-center text-lg font-bold text-white">
         Seçilen Güne Kaydedilmiş Sözcük
       </div>
-      <table
-        class="border-2 border-black rounded-lg text-lg p-2 my-2 mx-auto block w-[256px] xl:w-[350px] min-[1750px]:w-[469px] bg-gray-200 dark:bg-[#101010] dark:border-white transition-colors duration-300"
-      >
-        <tbody>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGAmFlag class="mr-2" />
-            </td>
-            <td class="font-bold pr-3">
-              <span
-                class="text-red-500"
-                v-text="responseData[getIndex(selectedDate)].am"
-              ></span>
-              <span
-                class="ml-1 font-normal"
-                v-text="`(${responseData[getIndex(selectedDate)].okunus})`"
-              ></span>
-            </td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].aM1"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].alaN2"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].alaN1"
-            ></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGTrFlag class="mr-2" />
-            </td>
-            <td
-              class="pr-3 font-bold text-red-500"
-              v-text="responseData[getIndex(selectedDate)].tR1"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].tR2"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].tR3"
-            ></td>
-          </tr>
-          <tr class="mb-3 flex flex-wrap py-1 pl-1">
-            <td>
-              <SVGEnFlag class="mr-2" />
-            </td>
-            <td
-              class="pr-3 font-bold text-red-500"
-              v-text="responseData[getIndex(selectedDate)].tR4"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].tR5"
-            ></td>
-            <td
-              class="pr-3"
-              v-text="responseData[getIndex(selectedDate)].tR6"
-            ></td>
-          </tr>
-        </tbody>
-      </table>
+      <WordTable
+        :responseData="[responseData[getIndex(selectedDate)]]"
+        :class="'p-2 my-2 !w-full xl:!w-[345px]'"
+      ></WordTable>
 
       <ElementComponentsCustomButton
         @click="exportAsJpg"
@@ -411,7 +353,7 @@ const image = ref();
     </div>
 
     <div class="flex items-center mb-1 mt-2">
-      <ElementComponentsReturnButton @click="reset()" class="ml-2 absolute" />
+      <ElementComponentsReturnButton @click="reset()" class="ml-2 " />
 
       <div class="block mx-auto">
         <div class="flex justify-center my-3 gap-1">
@@ -631,7 +573,5 @@ const image = ref();
   @apply border border-black dark:border-white text-center;
 }
 
-.containers {
-  padding-left: calc(100vw - 100%);
-}
+
 </style>
