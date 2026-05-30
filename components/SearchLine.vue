@@ -37,7 +37,7 @@ const getToday = async () => {
     const data = await $fetch(`/api/get/getTodaysWord`, {
       method: "GET",
     });
-    if (data && Array.isArray(data) && data[0].aranan !== "NotFound") {
+    if (data && Array.isArray(data) && data[0].ARANAN !== "NotFound") {
       todayData.value = data;
     } else {
     }

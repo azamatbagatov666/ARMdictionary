@@ -6,19 +6,19 @@ useHead({
 });
 
 const data = reactive<TDATA>({
-  aranan: "",
-  am: "",
-  alan2: "",
-  alan1: "",
-  alan3: "",
-  am1: "",
-  tr1: "",
-  tr2: "",
-  tr3: "",
-  tr4: "",
-  tr5: "",
-  tr6: "",
-  okunus: "",
+  ARANAN: "",
+  AM: "",
+  ALAN2: "",
+  ALAN1: "",
+  ALAN3: "",
+  AM1: "",
+  TR1: "",
+  TR2: "",
+  TR3: "",
+  TR4: "",
+  TR5: "",
+  TR6: "",
+  OKUNUS: "",
 });
 
 const trimStrings = (obj: Record<string, any>) => {
@@ -31,7 +31,7 @@ const trimStrings = (obj: Record<string, any>) => {
 
 const insertData = async () => {
   if (confirm("Belirlediğiniz sonuç sözlüğe eklenecektir, emin misiniz?")) {
-    if ((data.am && data.okunus && data.tr1 && data.tr4) !== "") {
+    if ((data.AM && data.OKUNUS && data.TR1 && data.TR4) !== "") {
       trimStrings(data);
       for (var key in data) {
         //@ts-ignore
@@ -93,7 +93,7 @@ const resetData = () => {
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.am"
+            v-model="data.AM"
             type="text"
           />
         </div>
@@ -105,7 +105,7 @@ const resetData = () => {
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.okunus"
+            v-model="data.OKUNUS"
             type="text"
           />
         </div>
@@ -115,7 +115,7 @@ const resetData = () => {
           <label class="w-56 inline-block">Ermenice birinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.am1"
+            v-model="data.AM1"
             type="text"
           />
         </div>
@@ -123,7 +123,7 @@ const resetData = () => {
           <label class="w-40 ml-2 inline-block">Ermenice ikinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.alan2"
+            v-model="data.ALAN2"
             type="text"
           />
         </div>
@@ -131,7 +131,7 @@ const resetData = () => {
           <label class="w-44 ml-2 inline-block">Ermenice üçüncü anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.alan1"
+            v-model="data.ALAN1"
             type="text"
           />
         </div>
@@ -145,7 +145,7 @@ const resetData = () => {
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr1"
+            v-model="data.TR1"
             type="text"
           />
         </div>
@@ -153,7 +153,7 @@ const resetData = () => {
           <label class="w-40 ml-2 inline-block">Türkçe birinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr2"
+            v-model="data.TR2"
             type="text"
           />
         </div>
@@ -161,7 +161,7 @@ const resetData = () => {
           <label class="w-44 ml-2 inline-block">Türkçe ikinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr3"
+            v-model="data.TR3"
             type="text"
           />
         </div>
@@ -176,7 +176,7 @@ const resetData = () => {
           >
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr4"
+            v-model="data.TR4"
             type="text"
           />
         </div>
@@ -184,7 +184,7 @@ const resetData = () => {
           <label class="w-40 ml-2 inline-block">İngilizce birinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr5"
+            v-model="data.TR5"
             type="text"
           />
         </div>
@@ -192,54 +192,18 @@ const resetData = () => {
           <label class="w-44 ml-2 inline-block">İngilizce ikinci anlam:</label>
           <ElementComponentsCustomInput
             class="w-52 border border-black"
-            v-model="data.tr6"
+            v-model="data.TR6"
             type="text"
           />
         </div>
       </div>
 
       <div class="preview">
-        <div class="text-[40px] text-white">Önizleme</div>
+        <div class="text-[40px] text-center text-white">Önizleme</div>
 
         <WordTable :responseData="[data]"></WordTable>
 
-        <table
-          class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
-        >
-          <tbody>
-            <tr class="mb-3 flex flex-wrap">
-              <td>
-                <SVGAmFlag class="mr-2" />
-              </td>
-              <td class="font-bold pr-3">
-                <span class="text-red-500" v-text="data.am"></span>
-                <span
-                  class="ml-1 font-normal"
-                  v-text="`(${data.okunus})`"
-                ></span>
-              </td>
-              <td class="pr-3" v-text="data.am1"></td>
-              <td class="pr-3" v-text="data.alan2"></td>
-              <td class="pr-3" v-text="data.alan1"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap">
-              <td>
-                <SVGTrFlag class="mr-2" />
-              </td>
-              <td class="pr-3 font-bold text-red-500" v-text="data.tr1"></td>
-              <td class="pr-3" v-text="data.tr2"></td>
-              <td class="pr-3" v-text="data.tr3"></td>
-            </tr>
-            <tr class="mb-3 flex flex-wrap">
-              <td>
-                <SVGEnFlag class="mr-2" />
-              </td>
-              <td class="pr-3 font-bold text-red-500" v-text="data.tr4"></td>
-              <td class="pr-3" v-text="data.tr5"></td>
-              <td class="pr-3" v-text="data.tr6"></td>
-            </tr>
-          </tbody>
-        </table>
+
         <ElementComponentsCustomButton
           text="Sözcüğü Sözlüğe Ekle"
           @click="insertData"
@@ -255,7 +219,6 @@ label {
   @apply text-white;
 }
 .preview {
-  text-align: center;
   margin-top: 30px;
 }
 

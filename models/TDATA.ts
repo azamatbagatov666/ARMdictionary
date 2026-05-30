@@ -1,18 +1,18 @@
 export interface TDATA {
   WORD_ID?: number;
-  aranan?: string;
-  id?: number;
-  am?: string;
-  sira?: number;
-  alan2?: string;
-  alan1?: string;
-  alan3?: string;
-  am1?: string;
-  tr1?: string;
-  tr2?: string;
-  tr3?: string;
-  tr4?: string;
-  tr5?: string;
-  tr6?: string;
-  okunus?: string;
+  ARANAN?: string;
+  ID?: number;
+  AM?: string;
+  SIRA?: number;
+  ALAN2?: string;
+  ALAN1?: string;
+  ALAN3?: string;
+  AM1?: string;
+  TR1?: string;
+  TR2?: string;
+  TR3?: string;
+  TR4?: string;
+  TR5?: string;
+  TR6?: string;
+  OKUNUS?: string;
 }

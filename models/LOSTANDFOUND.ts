@@ -1,5 +1,5 @@
 export interface LOSTANDFOUND {
-    aranan?: string;
-    date?: string;
+    ARANAN?: string;
+    DATE?: string;
   }
   

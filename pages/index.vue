@@ -50,7 +50,7 @@ $bus.on("clear-main-page", () => {
 
 const setToday = async (todayData: TDATA[]) => {
   responseData.value = todayData;
-  desword.value = todayData[0].aranan!;
+  desword.value = todayData[0].ARANAN!;
   previousDesword.value = desword.value;
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
@@ -99,7 +99,7 @@ const submit = async () => {
     data &&
     Array.isArray(data.value) &&
     data.value.length > 0 &&
-    data.value[0].aranan !== "NotFound"
+    data.value[0].ARANAN !== "NotFound"
   ) {
     responseData.value = data.value;
     thereIsNoResult.value = false;
@@ -135,7 +135,7 @@ const random = async () => {
 
   if (data) {
     responseData.value = data.value;
-    desword.value = responseData.value[0].aranan;
+    desword.value = responseData.value[0].ARANAN;
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;

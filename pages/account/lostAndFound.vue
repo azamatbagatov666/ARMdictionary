@@ -162,19 +162,19 @@ const appendOrRemove = (word: string) => {
             <th class="border">Bulunamayan Sözcük</th>
             <th class="border">Aranma Tarihi</th>
           </tr>
-          <tr @click="appendOrRemove(item.aranan ?? '')"
+          <tr @click="appendOrRemove(item.ARANAN ?? '')"
             class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f] cursor-pointer"
             :class="{
               'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
-                selectedListWord.includes(item.aranan ?? ''),
+                selectedListWord.includes(item.ARANAN ?? ''),
             }"
             v-for="(item, index) in responseData"
-            :key="item.aranan"
+            :key="item.ARANAN"
           >
 
             <td class="border text-center px-2" v-text="index + 1"></td>
-            <td class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words" v-text="item.aranan"></td>
-            <td class="border w-48 text-center" v-text="item.date"></td>
+            <td class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words" v-text="item.ARANAN"></td>
+            <td class="border w-48 text-center" v-text="item.DATE"></td>
           </tr>
           </tbody>
         </table>

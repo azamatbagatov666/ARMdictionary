@@ -59,7 +59,7 @@ const getAranan = async (index: number) => {
   );
 
   if (data && Array.isArray(data) && data.length > 0) {
-    arananData.value = data.map((item) => item.aranan);
+    arananData.value = data.map((item) => item.ARANAN);
   }
 
   selectedIndex.value = JSON.parse(JSON.stringify(responseData.value[index]));
@@ -80,11 +80,11 @@ const updateTheWord = async () => {
   if (confirm("Sonuç belirlediğiniz şekilde düzenlenecektir, emin misiniz?")) {
     if (
       selectedIndex.value &&
-      (selectedIndex.value["aranan"] &&
-        selectedIndex.value["am"] &&
-        selectedIndex.value["okunus"] &&
-        selectedIndex.value["tr1"] &&
-        selectedIndex.value["tr4"]) !== "" &&
+      (selectedIndex.value["ARANAN"] &&
+        selectedIndex.value["AM"] &&
+        selectedIndex.value["OKUNUS"] &&
+        selectedIndex.value["TR1"] &&
+        selectedIndex.value["TR4"]) !== "" &&
       JSON.stringify(selectedBackup.value) !=
         JSON.stringify(selectedIndex.value)
     ) {
@@ -183,13 +183,13 @@ const resetData = () => {
         <div :class="{ 'w-full h-full': selectedIndex }">
           <div
             v-for="(item, index) in responseData"
-            :key="item.worD_ID"
+            :key="item.WORD_ID"
             :class="{ 'h-full': selectedIndex }"
           >
             <table
               :class="{ '!m-0': selectedIndex }"
               class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block h-full w-full bg-gray-200 dark:bg-[#101010] dark:border-white"
-              v-if="selectedRadio == null || selectedRadio == item.id"
+              v-if="selectedRadio == null || selectedRadio == item.ID"
             >
               <tbody>
                 <tr class="h-10">
@@ -200,7 +200,7 @@ const resetData = () => {
                         name="wordSelection"
                         @change="getAranan(Number(index))"
                         v-model="selectedRadio"
-                        :value="item.id"
+                        :value="item.ID"
                       />
                       <span class="text-purple-500 font-bold"
                         >Sözcüğü seçmek için tıklayın.</span
@@ -210,22 +210,22 @@ const resetData = () => {
                 </tr>
                 <tr
                   class="h-10 text-purple-500 font-bold ml-2"
-                  v-text="`Sonuç numarası: ${item.id}`"
+                  v-text="`Sonuç numarası: ${item.ID}`"
                 ></tr>
                 <tr class="mb-3 flex flex-wrap py-1 pl-1">
                   <td>
                     <SVGAmFlag class="mr-2" />
                   </td>
                   <td class="font-bold text-red-500 pr-3">
-                    <span v-text="item.am"></span>
+                    <span v-text="item.AM"></span>
                     <span
                       class="ml-1 font-normal text-black dark:text-white"
-                      v-text="`(${item.okunus})`"
+                      v-text="`(${item.OKUNUS})`"
                     ></span>
                   </td>
-                  <td class="pr-3" v-text="item.aM1"></td>
-                  <td class="pr-3" v-text="item.alaN2"></td>
-                  <td class="pr-3" v-text="item.alaN1"></td>
+                  <td class="pr-3" v-text="item.AM1"></td>
+                  <td class="pr-3" v-text="item.ALAN2"></td>
+                  <td class="pr-3" v-text="item.ALAN1"></td>
                 </tr>
                 <tr class="mb-3 flex flex-wrap py-1 pl-1">
                   <td>
@@ -233,10 +233,10 @@ const resetData = () => {
                   </td>
                   <td
                     class="pr-3 font-bold text-red-500"
-                    v-text="item.tR1"
+                    v-text="item.TR1"
                   ></td>
-                  <td class="pr-3" v-text="item.tR2"></td>
-                  <td class="pr-3" v-text="item.tR3"></td>
+                  <td class="pr-3" v-text="item.TR2"></td>
+                  <td class="pr-3" v-text="item.TR3"></td>
                 </tr>
                 <tr class="mb-3 flex flex-wrap py-1 pl-1">
                   <td>
@@ -244,10 +244,10 @@ const resetData = () => {
                   </td>
                   <td
                     class="pr-3 font-bold text-red-500"
-                    v-text="item.tR4"
+                    v-text="item.TR4"
                   ></td>
-                  <td class="pr-3" v-text="item.tR5"></td>
-                  <td class="pr-3" v-text="item.tR6"></td>
+                  <td class="pr-3" v-text="item.TR5"></td>
+                  <td class="pr-3" v-text="item.TR6"></td>
                 </tr>
               </tbody>
             </table>
@@ -264,15 +264,15 @@ const resetData = () => {
                   <SVGAmFlag class="mr-2" />
                 </td>
                 <td class="font-bold text-red-500 pr-3">
-                  <span v-text="selectedIndex.am"></span>
+                  <span v-text="selectedIndex.AM"></span>
                   <span
                     class="ml-1 font-normal text-black dark:text-white"
-                    v-text="`(${selectedIndex.okunus})`"
+                    v-text="`(${selectedIndex.OKUNUS})`"
                   ></span>
                 </td>
-                <td class="pr-3" v-text="selectedIndex.aM1"></td>
-                <td class="pr-3" v-text="selectedIndex.alaN2"></td>
-                <td class="pr-3" v-text="selectedIndex.alaN1"></td>
+                <td class="pr-3" v-text="selectedIndex.AM1"></td>
+                <td class="pr-3" v-text="selectedIndex.ALAN2"></td>
+                <td class="pr-3" v-text="selectedIndex.ALAN1"></td>
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
                 <td>
@@ -280,10 +280,10 @@ const resetData = () => {
                 </td>
                 <td
                   class="pr-3 font-bold text-red-500"
-                  v-text="selectedIndex.tR1"
+                  v-text="selectedIndex.TR1"
                 ></td>
-                <td class="pr-3" v-text="selectedIndex.tR2"></td>
-                <td class="pr-3" v-text="selectedIndex.tR3"></td>
+                <td class="pr-3" v-text="selectedIndex.TR2"></td>
+                <td class="pr-3" v-text="selectedIndex.TR3"></td>
               </tr>
               <tr class="mb-3 flex flex-wrap py-1 pl-1">
                 <td>
@@ -291,10 +291,10 @@ const resetData = () => {
                 </td>
                 <td
                   class="pr-3 font-bold text-red-500"
-                  v-text="selectedIndex.tR4"
+                  v-text="selectedIndex.TR4"
                 ></td>
-                <td class="pr-3" v-text="selectedIndex.tR5"></td>
-                <td class="pr-3" v-text="selectedIndex.tR6"></td>
+                <td class="pr-3" v-text="selectedIndex.TR5"></td>
+                <td class="pr-3" v-text="selectedIndex.TR6"></td>
               </tr>
             </tbody>
           </table>
@@ -313,7 +313,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.am"
+                v-model="selectedIndex.AM"
                 type="text"
               />
             </div>
@@ -325,7 +325,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.okunus"
+                v-model="selectedIndex.OKUNUS"
                 type="text"
               />
             </div>
@@ -335,7 +335,7 @@ const resetData = () => {
               <label class="w-56 inline-block">Ermenice birinci anlam:</label>
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.aM1"
+                v-model="selectedIndex.AM1"
                 type="text"
               />
             </div>
@@ -345,7 +345,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.alaN2"
+                v-model="selectedIndex.ALAN2"
                 type="text"
               />
             </div>
@@ -355,7 +355,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.alaN1"
+                v-model="selectedIndex.ALAN1"
                 type="text"
               />
             </div>
@@ -370,7 +370,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR1"
+                v-model="selectedIndex.TR1"
                 type="text"
               />
             </div>
@@ -380,7 +380,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR2"
+                v-model="selectedIndex.TR2"
                 type="text"
               />
             </div>
@@ -388,7 +388,7 @@ const resetData = () => {
               <label class="w-44 ml-2 inline-block">Türkçe ikinci anlam:</label>
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR3"
+                v-model="selectedIndex.TR3"
                 type="text"
               />
             </div>
@@ -403,7 +403,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR4"
+                v-model="selectedIndex.TR4"
                 type="text"
               />
             </div>
@@ -413,7 +413,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR5"
+                v-model="selectedIndex.TR5"
                 type="text"
               />
             </div>
@@ -423,7 +423,7 @@ const resetData = () => {
               >
               <ElementComponentsCustomInput
                 class="w-52 border border-black"
-                v-model="selectedIndex.tR6"
+                v-model="selectedIndex.TR6"
                 type="text"
               />
             </div>

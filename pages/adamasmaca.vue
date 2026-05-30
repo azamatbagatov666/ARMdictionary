@@ -90,7 +90,7 @@ const newGame = async () => {
     });
     if (data) {
       responseData.value = data;
-      answer.value = responseData.value[0].aranan;
+      answer.value = responseData.value[0].ARANAN;
       answerArray.value = answer.value.split("");
 
       if (width.value < 1430) {

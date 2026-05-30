@@ -20,15 +20,15 @@ const props = defineProps(["responseData", "class"]);
 
     <div class="flex-1 min-w-0 meanings">
       <span class="font-bold text-red-500">
-        {{ item.am }}
+        {{ item.AM }}
       </span>
       <span class="!ml-0">
-        ({{ item.okunus }})
+        ({{ item.OKUNUS }})
       </span>
 
-      <span> {{ item.aM1 }}</span>
-      <span> {{ item.alaN2 }}</span>
-      <span> {{ item.alaN1 }}</span>
+      <span> {{ item.AM1 }}</span>
+      <span> {{ item.ALAN2 }}</span>
+      <span> {{ item.ALAN1 }}</span>
     </div>
   </div>
 
@@ -38,11 +38,11 @@ const props = defineProps(["responseData", "class"]);
 
     <div class="flex-1 min-w-0 meanings">
       <span class="font-bold text-red-500">
-        {{ item.tR1 }}
+        {{ item.TR1 }}
       </span>
 
-      <span> {{ item.tR2 }}</span>
-      <span> {{ item.tR3 }}</span>
+      <span> {{ item.TR2 }}</span>
+      <span> {{ item.TR3 }}</span>
     </div>
   </div>
 
@@ -52,11 +52,11 @@ const props = defineProps(["responseData", "class"]);
 
     <div class="flex-1 min-w-0 meanings">
       <span class="font-bold text-red-500">
-        {{ item.tR4 }}
+        {{ item.TR4 }}
       </span>
 
-      <span> {{ item.tR5 }}</span>
-      <span> {{ item.tR6 }}</span>
+      <span> {{ item.TR5 }}</span>
+      <span> {{ item.TR6 }}</span>
     </div>
   </div>
 </div>

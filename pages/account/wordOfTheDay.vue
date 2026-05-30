@@ -18,8 +18,8 @@ useHead({
 });
 
 const dayData = reactive({
-  date: formattedSelectedDate,
-  worD_ID: selectedRadio,
+  DATE: formattedSelectedDate,
+  WORD_ID: selectedRadio,
 });
 
 const responseData = ref();
@@ -134,29 +134,29 @@ const list = async () => {
 };
 
 interface WORDOFTHEDAY {
-  date: string;
-  worD_ID: number;
-  aranan: string;
-  id: number;
-  am: string;
-  sira: number;
-  alaN2: string;
-  alaN1: string;
-  alaN3: string;
-  aM1: string;
-  tR1: string;
-  tR2: string;
-  tR3: string;
-  tR4: string;
-  tR5: string;
-  tR6: string;
-  okunus: string;
+  DATE: string;
+  WORD_ID: number;
+  ARANAN: string;
+  ID: number;
+  AM: string;
+  SIRA: number;
+  ALAN2: string;
+  ALAN1: string;
+  ALAN3: string;
+  AM1: string;
+  TR1: string;
+  TR2: string;
+  TR3: string;
+  TR4: string;
+  TR5: string;
+  TR6: string;
+  OKUNUS: string;
 }
 
 const getIndex = (date: string) => {
   if (responseData)
     return responseData.value.findIndex(
-      (item: WORDOFTHEDAY) => item.date === date,
+      (item: WORDOFTHEDAY) => item.DATE === date,
     );
 };
 
@@ -219,7 +219,7 @@ const random = async () => {
 
   if (data) {
     searchResponse.value = data.value;
-    desword.value = searchResponse.value[0].aranan;
+    desword.value = searchResponse.value[0].ARANAN;
     searchline.value.wordFromAbove(desword.value);
   } else {
   }
@@ -236,14 +236,14 @@ const deleteTheWord = async (date: string) => {
     );
 
     if (response) {
-      responseData.value[getIndex(date)].aranan = "";
-      responseData.value[getIndex(date)].date = "";
+      responseData.value[getIndex(date)].ARANAN = "";
+      responseData.value[getIndex(date)].DATE = "";
     }
   } catch (error) {}
 };
 
 const save = async () => {
-  if (dayData.date !== undefined && dayData.worD_ID !== null) {
+  if (dayData.DATE !== undefined && dayData.WORD_ID !== null) {
     try {
       const response = await fetchWithAuth<boolean>(
         `/api/account/update/addToDay`,
@@ -277,26 +277,26 @@ const temp = ref<HTMLDivElement | null>(null);
 
 const tempPanel = ref(false);
 const tempAm = ref("");
-const tempTr1 = ref("");
-const tempTr4 = ref("");
+const tempTR1 = ref("");
+const tempTR4 = ref("");
 const exportAsJpg = async () => {
   try {
     if (selectedDate.value) {
       tempAm.value =
-        responseData.value[getIndex(selectedDate.value)].am
+        responseData.value[getIndex(selectedDate.value)].AM
           .slice(0, 1)
           .toUpperCase() +
-        responseData.value[getIndex(selectedDate.value)].am.slice(1);
-      tempTr4.value =
-        responseData.value[getIndex(selectedDate.value)].tR4
+        responseData.value[getIndex(selectedDate.value)].AM.slice(1);
+      tempTR4.value =
+        responseData.value[getIndex(selectedDate.value)].TR4
           .slice(0, 1)
           .toUpperCase() +
-        responseData.value[getIndex(selectedDate.value)].tR4.slice(1);
-      tempTr1.value =
-        responseData.value[getIndex(selectedDate.value)].tR1
+        responseData.value[getIndex(selectedDate.value)].TR4.slice(1);
+      tempTR1.value =
+        responseData.value[getIndex(selectedDate.value)].TR1
           .slice(0, 1)
           .toLocaleUpperCase("TR") +
-        responseData.value[getIndex(selectedDate.value)].tR1.slice(1);
+        responseData.value[getIndex(selectedDate.value)].TR1.slice(1);
     }
 
     tempPanel.value = true;
@@ -308,7 +308,7 @@ const exportAsJpg = async () => {
     const link = document.createElement("a");
 
     if (selectedDate.value)
-      link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].okunus}.jpg`;
+      link.download = `${selectedDate.value}_${responseData.value[getIndex(selectedDate.value)].OKUNUS}.jpg`;
     link.href = canvas.toDataURL("image/jpeg", 1.0);
 
     link.click();
@@ -411,11 +411,11 @@ const image = ref();
                 searchResponse &&
                 selectedRadio
               "
-              v-text="searchResponse[0].aranan"
+              v-text="searchResponse[0].ARANAN"
             ></span>
             <span
               v-else-if="getIndex(dateObject.date) !== -1"
-              v-text="responseData[getIndex(dateObject.date)].aranan"
+              v-text="responseData[getIndex(dateObject.date)].ARANAN"
             ></span>
           </td>
           <td class="max-h-[30px]">
@@ -456,7 +456,7 @@ const image = ref();
       <table
         class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
         v-for="item in searchResponse"
-        :key="item.worD_ID"
+        :key="item.WORD_ID"
       >
         <tbody>
           <tr class="h-10">
@@ -466,7 +466,7 @@ const image = ref();
                   type="radio"
                   name="wordSelection"
                   v-model="selectedRadio"
-                  :value="item.worD_ID"
+                  :value="item.WORD_ID"
                 />
                 <span class="text-purple-500 font-bold"
                   >Sözcüğü seçmek için tıklayın.</span
@@ -476,38 +476,38 @@ const image = ref();
           </tr>
           <tr
             class="h-10 text-purple-500 font-bold ml-2"
-            v-text="`Sözcük numarası: ${item.worD_ID}`"
+            v-text="`Sözcük numarası: ${item.WORD_ID}`"
           ></tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGAmFlag class="mr-2" />
             </td>
             <td class="font-bold text-red-500 pr-3">
-              <span v-text="item.am"></span>
+              <span v-text="item.AM"></span>
               <span
                 class="ml-1 font-normal text-black dark:text-white"
-                v-text="`(${item.okunus})`"
+                v-text="`(${item.OKUNUS})`"
               ></span>
             </td>
-            <td class="pr-3" v-text="item.aM1"></td>
-            <td class="pr-3" v-text="item.alaN2"></td>
-            <td class="pr-3" v-text="item.alaN1"></td>
+            <td class="pr-3" v-text="item.AM1"></td>
+            <td class="pr-3" v-text="item.ALAN2"></td>
+            <td class="pr-3" v-text="item.ALAN1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGTrFlag class="mr-2" />
             </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-            <td class="pr-3" v-text="item.tR2"></td>
-            <td class="pr-3" v-text="item.tR3"></td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.TR1"></td>
+            <td class="pr-3" v-text="item.TR2"></td>
+            <td class="pr-3" v-text="item.TR3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGEnFlag class="mr-2" />
             </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-            <td class="pr-3" v-text="item.tR5"></td>
-            <td class="pr-3" v-text="item.tR6"></td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.TR4"></td>
+            <td class="pr-3" v-text="item.TR5"></td>
+            <td class="pr-3" v-text="item.TR6"></td>
           </tr>
         </tbody>
       </table>
@@ -552,15 +552,15 @@ const image = ref();
       ></span>
       <span
         class="absolute text-4xl top-[320px] text-center flex justify-center w-[736px]"
-        v-text="tempTr1"
+        v-text="tempTR1"
       ></span>
       <span
         class="absolute text-4xl top-[426px] text-center flex justify-center w-[552px]"
-        v-text="tempTr4"
+        v-text="tempTR4"
       ></span>
       <span
         class="absolute text-3xl top-20 text-center flex justify-center w-[736px]"
-        v-text="'(' + responseData[getIndex(selectedDate)].okunus + ')'"
+        v-text="'(' + responseData[getIndex(selectedDate)].OKUNUS + ')'"
       ></span>
     </div>
   </div>

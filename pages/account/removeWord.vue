@@ -68,7 +68,7 @@ const getAranan = async () => {
   );
 
   if (data && Array.isArray(data) && data.length > 0) {
-    arananData.value = data.map((item) => item.aranan);
+    arananData.value = data.map((item) => item.ARANAN);
   } else if (data && Array.isArray(data) && data.length == 0) {
     arananData.value = null;
     responseData.value = null;
@@ -151,7 +151,7 @@ const resetData = () => {
       <table
         class="border-2 border-black rounded-lg text-lg p-2 m-10 mx-auto block w-full sm:w-1/2 bg-gray-200 dark:bg-[#101010] dark:border-white"
         v-for="item in responseData"
-        :key="item.worD_ID"
+        :key="item.WORD_ID"
       >
         <tbody>
           <tr class="h-10">
@@ -162,7 +162,7 @@ const resetData = () => {
                   name="wordSelection"
                   @change="getAranan()"
                   v-model="selectedRadio"
-                  :value="item.id"
+                  :value="item.ID"
                 />
                 <span class="text-purple-500 font-bold"
                   >Sözcüğü seçmek için tıklayın.</span
@@ -172,38 +172,38 @@ const resetData = () => {
           </tr>
           <tr
             class="h-10 text-purple-500 font-bold ml-2"
-            v-text="`Sonuç numarası: ${item.id}`"
+            v-text="`Sonuç numarası: ${item.ID}`"
           ></tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGAmFlag class="mr-2" />
             </td>
             <td class="font-bold text-red-500 pr-3">
-              <span v-text="item.am"></span>
+              <span v-text="item.AM"></span>
               <span
                 class="ml-1 font-normal text-black dark:text-white"
-                v-text="`(${item.okunus})`"
+                v-text="`(${item.OKUNUS})`"
               ></span>
             </td>
-            <td class="pr-3" v-text="item.aM1"></td>
-            <td class="pr-3" v-text="item.alaN2"></td>
-            <td class="pr-3" v-text="item.alaN1"></td>
+            <td class="pr-3" v-text="item.AM1"></td>
+            <td class="pr-3" v-text="item.ALAN2"></td>
+            <td class="pr-3" v-text="item.ALAN1"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGTrFlag class="mr-2" />
             </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR1"></td>
-            <td class="pr-3" v-text="item.tR2"></td>
-            <td class="pr-3" v-text="item.tR3"></td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.TR1"></td>
+            <td class="pr-3" v-text="item.TR2"></td>
+            <td class="pr-3" v-text="item.TR3"></td>
           </tr>
           <tr class="mb-3 flex flex-wrap py-1 pl-1">
             <td>
               <SVGEnFlag class="mr-2" />
             </td>
-            <td class="pr-3 font-bold text-red-500" v-text="item.tR4"></td>
-            <td class="pr-3" v-text="item.tR5"></td>
-            <td class="pr-3" v-text="item.tR6"></td>
+            <td class="pr-3 font-bold text-red-500" v-text="item.TR4"></td>
+            <td class="pr-3" v-text="item.TR5"></td>
+            <td class="pr-3" v-text="item.TR6"></td>
           </tr>
         </tbody>
       </table>
