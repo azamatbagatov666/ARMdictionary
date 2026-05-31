@@ -183,11 +183,7 @@ const resetData = () => {
         :class="{ 'block col-span-full gap-8 md:gap-4 md:flex': selectedIndex }"
       >
         <div :class="{ 'w-full h-full ': selectedIndex }">
-          <div
-            v-for="(item, index) in responseData"
-            :key="item.WORD_ID"
-            :class="{ 'h-full': selectedIndex }"
-          >
+
             <span
               class="text-xl sm:text-3xl text-center block"
               v-if="selectedIndex"
@@ -204,9 +200,7 @@ const resetData = () => {
                   ? '!w-full !h-[400px] !my-0 '
                   : ' !sm:w-2/3 !lg:w-1/2'
               "
-              v-if="selectedRadio == null || selectedRadio == item.ID"
             />
-          </div>
         </div>
 
         <div v-if="selectedIndex" class="w-full h-full">
@@ -224,97 +218,137 @@ const resetData = () => {
       </div>
 
       <div v-if="selectedIndex" class="px-2 sm:px-8 text-white place-center">
-       <div class="w-full flex flex-col gap-4 theForm">
-  <div class="flex flex-col sm:flex-row gap-4">
-    <div class="flex-1 min-w-0">
-      <label class="block w-full">
-        Aranan sözcüğün Ermenicesi:<span class="text-[red] font-bold text-lg">*</span>
-      </label>
-      <ElementComponentsCustomInput
-        class="w-full border border-black"
-        v-model="selectedIndex.AM"
-        type="text"
-      />
-    </div>
+        <div class="w-full flex flex-col gap-4 theForm">
+                 <div class="flex flex-col sm:flex-row gap-4">
+            <div class=" min-w-0">
+              <label class="block  ">
+                Aranan sözcüğün Ermenicesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full md:w-80 border border-black"
+                v-model="selectedIndex.AM"
+                type="text"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label class="block w-full">
-        Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg">*</span>
-      </label>
-      <ElementComponentsCustomInput
-        class="w-full border border-black"
-        v-model="selectedIndex.OKUNUS"
-        type="text"
-      />
-    </div>
-  </div>
+            <div class=" min-w-0">
+              <label class="block  ">
+                Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full md:w-80 border border-black"
+                v-model="selectedIndex.OKUNUS"
+                type="text"
+              />
+            </div>
+          </div>
 
-  <div class="flex flex-col sm:flex-row gap-4">
-    <div class="flex-1 min-w-0">
-      <label>Ermenice birinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.AM1" />
-    </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>Ermenice birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.AM1"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>Ermenice ikinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.ALAN2" />
-    </div>
+            <div class="flex-1 min-w-0">
+              <label>Ermenice ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.ALAN2"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>Ermenice üçüncü anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.ALAN1" />
-    </div>
-  </div>
+            <div class="flex-1 min-w-0">
+              <label>Ermenice üçüncü anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.ALAN1"
+              />
+            </div>
+          </div>
 
-  <div class="flex flex-col sm:flex-row gap-4">
-    <div class="flex-1 min-w-0">
-      <label>
-        Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg">*</span>
-      </label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR1" />
-    </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>
+                Aranan sözcüğün Türkçesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR1"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>Türkçe birinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR2" />
-    </div>
+            <div class="flex-1 min-w-0">
+              <label>Türkçe birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR2"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>Türkçe ikinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR3" />
-    </div>
-  </div>
+            <div class="flex-1 min-w-0">
+              <label>Türkçe ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR3"
+              />
+            </div>
+          </div>
 
-  <div class="flex flex-col sm:flex-row gap-4">
-    <div class="flex-1 min-w-0">
-      <label>
-        Aranan sözcüğün İngilizcesi:<span class="text-[red] font-bold text-lg">*</span>
-      </label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR4" />
-    </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>
+                Aranan sözcüğün İngilizcesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR4"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>İngilizce birinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR5" />
-    </div>
+            <div class="flex-1 min-w-0">
+              <label>İngilizce birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR5"
+              />
+            </div>
 
-    <div class="flex-1 min-w-0">
-      <label>İngilizce ikinci anlam:</label>
-      <ElementComponentsCustomInput class="w-full border border-black" v-model="selectedIndex.TR6" />
-    </div>
-  </div>
-</div>
+            <div class="flex-1 min-w-0">
+              <label>İngilizce ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="selectedIndex.TR6"
+              />
+            </div>
+          </div>
+        </div>
 
         <div class="flex justify-center">
-        <div class=" mt-6 ">
-          <div class="text-xl lg:text-2xl mb-3">Bu sonucu veren sözcükler:</div>
+          <div class="mt-6">
+            <div class="text-xl lg:text-2xl mb-3">
+              Bu sonucu veren sözcükler:
+            </div>
 
-          <ul class="list-disc text-base lg:text-lg pl-5 space-y-1">
-            <li v-for="(arananlar, index) in arananData" :key="index">
-              {{ arananlar }}
-            </li>
-          </ul>
-        </div>
+            <ul class="list-disc text-base lg:text-lg pl-5 space-y-1">
+              <li v-for="(arananlar, index) in arananData" :key="index">
+                {{ arananlar }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

@@ -82,121 +82,134 @@ const resetData = () => {
       ></div>
     </div>
 
+      <div class="px-2 sm:px-8 text-white place-center">
+
+
+       <div class="w-full flex flex-col gap-4 theForm">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class=" min-w-0">
+              <label class="block  ">
+                Aranan sözcüğün Ermenicesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full md:w-80 border border-black"
+                v-model="data.AM"
+                type="text"
+              />
+            </div>
+
+            <div class=" min-w-0">
+              <label class="block  ">
+                Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full md:w-80 border border-black"
+                v-model="data.OKUNUS"
+                type="text"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>Ermenice birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.AM1"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>Ermenice ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.ALAN2"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>Ermenice üçüncü anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.ALAN1"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>
+                Aranan sözcüğün Türkçesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR1"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>Türkçe birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR2"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>Türkçe ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR3"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 min-w-0">
+              <label>
+                Aranan sözcüğün İngilizcesi:<span
+                  class="text-[red] font-bold text-lg"
+                  >*</span
+                >
+              </label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR4"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>İngilizce birinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR5"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <label>İngilizce ikinci anlam:</label>
+              <ElementComponentsCustomInput
+                class="w-full border border-black"
+                v-model="data.TR6"
+              />
+            </div>
+          </div>
+        </div>
+        </div>
+
+    
+
     <div class="mt-4 ml-2 mb-7">
-      <div class="flex mt-2">
-        <div>
-          <label class="w-56 inline-block"
-            >Aranan sözcüğün Ermenicesi:<span
-              class="text-[red] font-bold text-lg"
-              >*</span
-            ></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.AM"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-40 ml-2 inline-block"
-            >Sözcüğün Okunuşu:<span class="text-[red] font-bold text-lg"
-              >*</span
-            ></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.OKUNUS"
-            type="text"
-          />
-        </div>
-      </div>
- <div class="flex mt-2">
-        <div>
-          <label class="w-56 inline-block">Ermenice birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.AM1"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-40 ml-2 inline-block">Ermenice ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.ALAN2"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-44 ml-2 inline-block">Ermenice üçüncü anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.ALAN1"
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="flex mt-2">
-        <div>
-          <label class="w-56 inline-block"
-            >Aranan sözcüğün Türkçesi:<span class="text-[red] font-bold text-lg"
-              >*</span
-            ></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR1"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-40 ml-2 inline-block">Türkçe birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR2"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-44 ml-2 inline-block">Türkçe ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR3"
-            type="text"
-          />
-        </div>
-      </div>
-      <div class="flex mt-2">
-        <div>
-          <label class="w-56 inline-block"
-            >Aranan sözcüğün İngilizcesi:<span
-              class="text-[red] font-bold text-lg"
-              >*</span
-            ></label
-          >
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR4"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-40 ml-2 inline-block">İngilizce birinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR5"
-            type="text"
-          />
-        </div>
-        <div>
-          <label class="w-44 ml-2 inline-block">İngilizce ikinci anlam:</label>
-          <ElementComponentsCustomInput
-            class="w-52 border border-black"
-            v-model="data.TR6"
-            type="text"
-          />
-        </div>
-      </div>
+
+
 
       <div class="preview">
         <div class="text-[40px] text-center text-white">Önizleme</div>
@@ -264,5 +277,9 @@ label {
   border-width: 1px;
   border-color: black;
   transition: background-color 0.3s;
+}
+
+.theForm label {
+  @apply text-sm md:text-base w-full block;
 }
 </style>
