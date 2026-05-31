@@ -1,8 +1,8 @@
 
 
 export interface AuthenticateResponse {
-    id: string;
-    username: string;
-    accessToken: string;
-    refreshToken: string;
+    Id: string;
+    Username: string;
+    AccessToken: string;
+    RefreshToken: string;
 }

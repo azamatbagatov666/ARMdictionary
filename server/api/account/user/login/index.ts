@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       },
     }
   );
-  setCookie(event, "access_token", data.accessToken, {
+  setCookie(event, "access_token", data.AccessToken, {
     httpOnly: true,
     secure: isProd,
     sameSite: "lax",
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     maxAge: 60 * 60 * 24 * 7,
   });
 
-  setCookie(event, "refresh_token", data.refreshToken, {
+  setCookie(event, "refresh_token", data.RefreshToken, {
     httpOnly: true,
     secure: isProd,
     sameSite: "lax",
@@ -41,8 +41,8 @@ export default defineEventHandler(async (event) => {
   });
 
   return {
-    id: data.id,
-    username: data.username,
+    Id: data.Id,
+    Username: data.Username,
   };
 
   
