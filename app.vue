@@ -1,49 +1,52 @@
 <script setup lang="ts">
-import { useSearchHistoryStore } from './store/search-history.store';
+import { useSearchHistoryStore } from "./store/search-history.store";
 const languageState = useLanguageState();
-const searchHistoryStore = useSearchHistoryStore()
+const searchHistoryStore = useSearchHistoryStore();
 
 const { setLocale } = useI18n();
 
-const session = useState<boolean>("session", () => false)
+const session = useState<boolean>("session", () => false);
 
-
+const route = useRoute();
 
 const htmlLang = computed(() => {
   switch (languageState.value) {
-    case 'am':
-      return 'hyw' 
-    case 'tr':
-      return 'tr'
-    case 'en':
-      return 'en'
+    case "am":
+      return "hyw";
+    case "tr":
+      return "tr";
+    case "en":
+      return "en";
     default:
-      return 'tr'
+      return "tr";
   }
-})
-
+});
 
 useHead({
-   script: [
+  script: [
     {
       type: "application/ld+json",
       children: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Avedikyan Sözlük",
-        "url": "https://www.avedikyan.com",
+        name: "Avedikyan Sözlük",
+        url: "https://www.avedikyan.com",
         /*"potentialAction": {
           "@type": "SearchAction",
           "target": "https://www.avedikyan.com/?q={search_term_string}",
           "query-input": "required name=search_term_string"
         }*/
-      })
-    }
+      }),
+    },
   ],
   link: [
+    {
+      rel: "canonical",
+      href: `https://www.avedikyan.com${route.path}`,
+    },
     { rel: "manifest", href: "/manifest.json" },
     { rel: "icon", href: "/icon-192.png" },
-    { rel: "apple-touch-icon", href: "/icon-192.png" }
+    { rel: "apple-touch-icon", href: "/icon-192.png" },
   ],
   meta: [
     { name: "theme-color", content: "#ffffff" },
@@ -54,29 +57,27 @@ useHead({
     // iOS Safari (still required)
     { name: "apple-mobile-web-app-capable", content: "yes" },
 
-        { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: 'Avedikyan Sözlük' },
+    { property: "og:type", content: "website" },
+    { property: "og:title", content: "Avedikyan Sözlük" },
     {
-      property: 'og:description',
-      content: 'Batı Ermenicesi sözlük, oyunlar ve faydalı bilgiler.'
+      property: "og:description",
+      content: "Batı Ermenicesi sözlük, oyunlar ve faydalı bilgiler.",
     },
     {
-      property: 'og:image',
-      content: 'https://avedikyan.com/og-image.jpg'
+      property: "og:image",
+      content: "https://avedikyan.com/og-image.jpg",
     },
-    { property: 'og:image:width', content: '1200' },
-    { property: 'og:image:height', content: '630' },
-    { property: 'og:url', content: 'https://avedikyan.com' },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
+    { property: "og:url", content: "https://avedikyan.com" },
   ],
-    htmlAttrs: {
-    lang: htmlLang
-  }
+  htmlAttrs: {
+    lang: htmlLang,
+  },
 });
 
-
-
 onMounted(async () => {
-  session.value = Boolean(useCookie("session").value)
+  session.value = Boolean(useCookie("session").value);
   const language = localStorage.getItem("language");
   if (language) setLocale(language);
   searchHistoryStore.readInitial();
@@ -84,7 +85,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-[100dvh]  flex flex-col">
+  <div class="min-h-[100dvh] flex flex-col">
     <header>
       <NavBarNavMenu class="hidden lg:flex" />
       <NavBarMobileNavMenu />

@@ -19,12 +19,7 @@ const description = computed(() => t("meta.index"));
 
 useHead({
   title,
-     link: [
-    {
-      rel: "canonical",
-      href: "https://www.avedikyan.com/"
-    }
-  ],
+
   meta: [
     {
       name: "description",

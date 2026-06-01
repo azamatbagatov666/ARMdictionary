@@ -7,12 +7,7 @@ const description = computed(() => t("meta.iletisim"));
 
 useHead({
   title,
-   link: [
-    {
-      rel: "canonical",
-      href: "https://www.avedikyan.com/iletisim"
-    }
-  ],
+
   meta: [
     {
       name: "description",

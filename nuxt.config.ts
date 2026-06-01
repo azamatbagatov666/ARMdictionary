@@ -2,7 +2,7 @@ import { defineNuxtConfig } from "nuxt/config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-   app: {
+  app: {
     head: {
       meta: [
         {
@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/color-mode",
     "@pinia/nuxt",
+    "nuxt-simple-sitemap",
     "@nuxtjs/i18n",
     [
       "nuxt-mail",
@@ -33,15 +34,23 @@ export default defineNuxtConfig({
       },
     ],
   ],
-i18n: {
-  locales: [
-    { code: "tr", iso: "tr-TR" },
-    { code: "en", iso: "en-US" },
-    { code: "am", iso: "hy-AM" }
-  ],
-  defaultLocale: "tr",
-  strategy: "no_prefix"
-},
+  i18n: {
+    locales: [
+      { code: "tr", iso: "tr" },
+      { code: "en", iso: "en" },
+      { code: "am", iso: "hyw" },
+    ],
+    defaultLocale: "tr",
+    strategy: "no_prefix",
+  },
+  runtimeConfig: {
+    public: {
+      siteUrl: "https://www.avedikyan.com"
+    }
+  },
+  sitemap: {
+    exclude: ["/account/**", "/api/**"],
+  },
   colorMode: {
     classSuffix: "",
   },
@@ -59,18 +68,21 @@ i18n: {
       "composables/**",
     ],
   },
-   nitro: {
-   preset: 'node-server',
-   compatibilityDate: '2025-07-11',
+  nitro: {
+    preset: "node-server",
+    compatibilityDate: "2025-07-11",
+    prerender: {
+      crawlLinks: true,
+    },
   },
   vite: {
     server: {
-        hmr: {
-            clientPort: 3000
-        }
-    }
-},
+      hmr: {
+        clientPort: 3000,
+      },
+    },
+  },
   devtools: {
-    enabled: false
+    enabled: false,
   },
 });

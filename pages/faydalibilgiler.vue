@@ -8,12 +8,7 @@ const description = computed(() => t("meta.faydalibilgiler"));
 
 useHead({
   title,
-     link: [
-    {
-      rel: "canonical",
-      href: "https://www.avedikyan.com/faydalibilgiler"
-    }
-  ],
+   
   meta: [
     {
       name: "description",
