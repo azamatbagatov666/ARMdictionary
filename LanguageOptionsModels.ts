@@ -1,22 +1,22 @@
 export const titleEn = {
-  index: "AVEDIKYAN - Turkish Armenian English Dictionary",
-  adamasmaca: "AVEDIKYAN - Hangman",
-  faydalibilgiler: "AVEDIKYAN - Useful Information",
-  iletisim: "AVEDIKYAN - Contact",
+  index: "Avedikyan - Turkish Armenian English Dictionary",
+  adamasmaca: "Hangman",
+  faydalibilgiler: "Useful Information - Avedikyan",
+  iletisim: "Contact - Avedikyan",
 };
 
 export const titleTr = {
-  index: "AVEDİKYAN - Türkçe Ermenice İngilizce Sözlük",
-  adamasmaca: "AVEDİKYAN - Adam Asmaca",
-  faydalibilgiler: "AVEDİKYAN - Faydalı Bilgiler",
-  iletisim: "AVEDİKYAN - İletişim",
+  index: "Avedikyan - Türkçe Ermenice İngilizce Sözlük",
+  adamasmaca: "Adam Asmaca - Avedikyan",
+  faydalibilgiler: "Faydalı Bilgiler - Avedikyan",
+  iletisim: "İletişim - Avedikyan",
 };
 
 export const titleAm = {
   index: "Աւետիքեան - Թրքերէն Հայերէն Անգլերէն Բառարան",
-  adamasmaca: "Աւետիքեան - Կախաղան",
-  faydalibilgiler: "Աւետիքեան - Յաւելեալ Գիտելիքներ",
-  iletisim: "Աւետիքեան - Մեր Հասցէն",
+  adamasmaca: "Կախաղան - Աւետիքեան",
+  faydalibilgiler: "Յաւելեալ Գիտելիքներ - Աւետիքեան",
+  iletisim: "Մեր Հասցէն - Աւետիքեան",
 };
 
 

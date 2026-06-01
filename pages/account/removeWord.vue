@@ -171,12 +171,14 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div class="text-center mb-4 text-white" v-if="arananData">
+      <div class=" p-2 text-white" v-if="arananData">
+    <div class="flex justify-center">
+
         <ul class="list-none text-lg text-left inline-block">
           <div class="text-3xl mb-2">Bu sonucu veren sözcükler:</div>
           <li v-for="(arananlar, index) in arananData" :key="index">
             <label
-              class="mx-auto"
+              class="mx-auto pl-4"
               :class="{ 'line-through': selectedListWord.includes(arananlar) }"
             >
               <input
@@ -189,13 +191,16 @@ const resetData = () => {
             </label>
           </li>
         </ul>
+    </div>
 
-        <ElementComponentsCustomButton
+                      <ElementComponentsCustomButton
           @click="deleteTheWords"
           text="Seçilenleri Sil"
           class="block mx-auto mt-5"
         />
+
       </div>
+
     </div>
   </div>
 </template>

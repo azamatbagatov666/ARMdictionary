@@ -184,54 +184,75 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div v-if="arananData">
-        <div class="flex justify-around mt-9 gap-2 text-white">
-          <div class="px-6">
-            <div class="text-3xl">Bu sonucu veren sözcükler:</div>
-            <ul class="list-disc text-lg">
-              <li
-                v-for="(arananlar, index) in arananData"
-                :key="index"
-                v-text="arananlar"
-              ></li>
-            </ul>
-          </div>
+<div v-if="arananData" class="px-4 py-6 text-white">
+  <!-- Title -->
 
-          <div>
-            <ElementComponentsCustomInput v-model="wordToBeAdded" />
-            <ElementComponentsCustomButton
-              class="ml-1"
-              text="Ekle"
-              @click="appendToList"
-            />
-          </div>
 
-          <div>
-            <select
-              multiple
-              class="text-black border border-black sm:w-[150px] md:w-[250px] lg:w-[380px] overflow-auto"
-              v-model="selectedListWord"
-              size="9"
-            >
-              <option
-                v-for="item in idData.arananlar"
-                :key="item"
-                v-text="item"
-              ></option>
-            </select>
-            <ElementComponentsCustomButton
-              class="block mx-auto"
-              text="Sil"
-              @click="deleteFromList"
-            />
-          </div>
-        </div>
-        <ElementComponentsCustomButton
-          class="block mx-auto"
-          text="Değerleri Kaydet"
-          @click="storeValues"
+  <!-- Main layout -->
+  <div
+    class="flex flex-col gap-10
+           md:flex-row md:justify-center lg:gap-10"
+  >
+    <!-- Result list -->
+    <div class="lg:max-w-xs w-full">
+        <div class="text-2xl mb-4 text-center sm:text-left">
+    Bu sonucu veren sözcükler:
+  </div>
+      <ul class="list-disc list-inside text-lg space-y-1">
+        <li
+          v-for="(arananlar, index) in arananData"
+          :key="index"
+          v-text="arananlar"
         />
-      </div>
+      </ul>
+    </div>
+
+    <!-- Add word -->
+    <div class="w-full lg:max-w-sm flex flex-col gap-2">
+      <ElementComponentsCustomInput
+        v-model="wordToBeAdded"
+        class="w-full"
+      />
+      <ElementComponentsCustomButton
+        text="Ekle"
+        class="w-fit self-center px-8"
+        @click="appendToList"
+      />
+    </div>
+
+    <!-- Select & delete -->
+    <div class="w-full lg:max-w-sm flex flex-col gap-2">
+      <select
+        multiple
+        size="8"
+        v-model="selectedListWord"
+        class="w-full text-black border border-black rounded
+               max-h-48 overflow-auto"
+      >
+        <option
+          v-for="item in idData.arananlar"
+          :key="item"
+          v-text="item"
+        />
+      </select>
+
+      <ElementComponentsCustomButton
+        text="Sil"
+        class="w-fit self-center px-8"
+        @click="deleteFromList"
+      />
+    </div>
+  </div>
+
+  <!-- Save button -->
+  <div class="mt-12">
+    <ElementComponentsCustomButton
+      text="Değerleri Kaydet"
+      class="block mx-auto w-fit "
+      @click="storeValues"
+    />
+  </div>
+</div>
     </div>
   </div>
 </template>

@@ -2,6 +2,16 @@ import { defineNuxtConfig } from "nuxt/config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+   app: {
+    head: {
+      meta: [
+        {
+          name: "google-site-verification",
+          content: "suk1WLVuI7PtnGbEGw_92AkIFClMC-AMAavKiBuhmgU",
+        },
+      ],
+    },
+  },
   modules: [
     "@nuxtjs/color-mode",
     "@pinia/nuxt",
@@ -23,9 +33,15 @@ export default defineNuxtConfig({
       },
     ],
   ],
-  i18n: {
-    
-  },
+i18n: {
+  locales: [
+    { code: "tr", iso: "tr-TR" },
+    { code: "en", iso: "en-US" },
+    { code: "am", iso: "hy-AM" }
+  ],
+  defaultLocale: "tr",
+  strategy: "no_prefix"
+},
   colorMode: {
     classSuffix: "",
   },

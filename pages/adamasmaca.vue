@@ -7,6 +7,12 @@ const description = computed(() => t("meta.adamasmaca"));
 
 useHead({
   title,
+     link: [
+    {
+      rel: "canonical",
+      href: "https://www.avedikyan.com/adamasmaca"
+    }
+  ],
   meta: [
     {
       name: "description",

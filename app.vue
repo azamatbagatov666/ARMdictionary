@@ -24,6 +24,22 @@ const htmlLang = computed(() => {
 
 
 useHead({
+   script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Avedikyan Sözlük",
+        "url": "https://www.avedikyan.com",
+        /*"potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.avedikyan.com/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }*/
+      })
+    }
+  ],
   link: [
     { rel: "manifest", href: "/manifest.json" },
     { rel: "icon", href: "/icon-192.png" },

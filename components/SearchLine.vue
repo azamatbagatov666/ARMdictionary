@@ -6,6 +6,8 @@ import { useDebounceFn } from "@vueuse/core";
 import { useTemplateRef } from "vue";
 const resultBox = useTemplateRef("resultBox");
 
+const resultItems = ref<HTMLElement[]>([]);
+
 const { t } = useI18n();
 
 const currentHoverIndex = ref<number>(-1);
@@ -186,6 +188,7 @@ const keyDown = () => {
     currentHoverIndex.value < resultBoxContent.value.length - 1
   ) {
     currentHoverIndex.value++;
+    nextTick(scrollToActiveItem);
   } else if (
     resultBoxContent.value.length > 0 &&
     currentHoverIndex.value < resultBoxContent.value.length - 1
@@ -197,6 +200,7 @@ const keyDown = () => {
 const keyUp = () => {
   if (isResultBoxVisible.value && currentHoverIndex.value >= 0) {
     currentHoverIndex.value--;
+    nextTick(scrollToActiveItem);
   } else if (!isResultBoxVisible.value && resultBoxContent.value.length > 0) {
     isResultBoxVisible.value = true;
   }
@@ -388,7 +392,30 @@ const sanitizeAranan = (value: string) => {
     .replace(/[.!?՝՛՞՜']/g, ""); // punctuation
 };
 
+
+const scrollToActiveItem = () => {
+  const el = resultItems.value[currentHoverIndex.value];
+  const container = resultBox.value;
+
+  if (!el || !container) return;
+
+  const elTop = el.offsetTop;
+  const elBottom = elTop + el.offsetHeight;
+
+  const boxTop = container.scrollTop;
+  const boxBottom = boxTop + container.clientHeight;
+
+  if (elTop < boxTop) {
+    container.scrollTop = elTop;
+  } else if (elBottom > boxBottom) {
+    container.scrollTop = elBottom - container.clientHeight;
+  }
+};
+
 defineExpose({ wordFromAbove, clearThePage, keyboardOn });
+
+
+
 </script>
 
 <template>
@@ -495,6 +522,8 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 @click="selectTheInput(item)"
                 v-for="(item, index) in resultBoxContent"
                 v-text="item"
+                ref="resultItems"
+
                 :class="{
                   'bg-[#e9f3ff] text-black': index == currentHoverIndex,
                   'rounded-t-[20px]': index == 0,
