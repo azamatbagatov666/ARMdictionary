@@ -45,8 +45,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: "https://www.avedikyan.com"
-    }
+      siteUrl: "https://www.avedikyan.com",
+    },
   },
   sitemap: {
     exclude: ["/account/**", "/api/**"],
@@ -73,6 +73,7 @@ export default defineNuxtConfig({
     compatibilityDate: "2025-07-11",
     prerender: {
       crawlLinks: true,
+      ignore: ["/manifest.json"],
     },
   },
   vite: {
