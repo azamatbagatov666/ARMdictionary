@@ -102,7 +102,7 @@ const scrollToTop = () => {
           :key="item.ID"
           v-text="item.TITLE"
           class="transition-colors duration-200 p-2 whitespace-pre-wrap font-bold"
-          :class="{ '!bg-red-500': currentPage == item.TAG }"
+          :class="{ '!bg-red-500 !text-white': currentPage == item.TAG }"
           @click="pageChanged(item)"
         ></li>
       </ul>
@@ -218,7 +218,7 @@ const scrollToTop = () => {
     background-color: black;
   }
   ul li:hover {
-    @apply bg-gray-200;
+    @apply bg-gray-400 dark:bg-gray-200 text-black;
   }
 
   .sideMenuButton:hover {
