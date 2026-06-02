@@ -113,6 +113,7 @@ const scrollToTarget = () => {
 
 <template>
     <div>
+      <ElementComponentsTitle text="İstatistikler"></ElementComponentsTitle>
             <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
 <ElementComponentsLoadingAnimation/>
   </div>

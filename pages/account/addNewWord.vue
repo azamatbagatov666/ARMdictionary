@@ -71,16 +71,9 @@ const resetData = () => {
 
 <template>
   <div>
-    <div class="grid gap-2 sm:flex items-center mb-8 mt-2">
-      <ElementComponentsReturnButton
-        @click="resetData()"
-        class="ml-2 sm:absolute"
-      />
-      <div
-        v-text="'Yeni Sözcük Ekle'"
-        class="bg-red-900 text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg text-white dark:border-white"
-      ></div>
-    </div>
+
+      <ElementComponentsTitle :showReset="true" @reset-clicked="resetData" text="Yeni Sözcük Ekle"></ElementComponentsTitle>
+
 
       <div class="px-2 sm:px-8 text-white place-center">
 

@@ -160,16 +160,10 @@ const resetData = () => {
 
 <template>
   <div>
-    <div class="grid gap-2 sm:flex items-center mb-1 mt-2">
-      <ElementComponentsReturnButton
-        @click="resetData()"
-        class="ml-2 sm:absolute"
-      />
-      <div
-        v-text="'Sözcük Düzenle'"
-        class="bg-red-900 text-white text-5xl text-center sm:w-[500px] border-2 p-3 mx-auto inline-block border-black rounded-lg dark:border-white"
-      ></div>
-    </div>
+
+
+      <ElementComponentsTitle :showReset="true" @reset-clicked="resetData" text="Sözcük Düzenle"></ElementComponentsTitle>
+
 
     <div class="mb-12">
       <SearchLine
@@ -185,7 +179,7 @@ const resetData = () => {
         <div :class="{ 'w-full h-full ': selectedIndex }">
 
             <span
-              class="text-xl sm:text-3xl text-center block"
+              class="text-xl text-white sm:text-3xl text-center block"
               v-if="selectedIndex"
               v-text="'Sonucun Şu Anki Hali'"
             ></span>
@@ -205,7 +199,7 @@ const resetData = () => {
 
         <div v-if="selectedIndex" class="w-full h-full">
           <span
-            class="text-xl sm:text-3xl text-center block"
+            class="text-xl text-white sm:text-3xl text-center block"
             v-if="selectedIndex"
             v-text="'Yerine Geçecek Yeni Sonuç'"
           ></span>

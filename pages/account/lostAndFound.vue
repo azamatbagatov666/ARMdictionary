@@ -130,6 +130,8 @@ const appendOrRemove = (word: string) => {
 
 <template>
   <div >
+      <ElementComponentsTitle  text="Bulunamayan Sözcükler"></ElementComponentsTitle>
+
           <Transition name="fade" mode="out-in">
     <div
       class="button top-[30px] right-[30px] border-2 border-white"
@@ -186,7 +188,7 @@ const appendOrRemove = (word: string) => {
         />
       </div>
 
-      <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[85vh]">
+      <div v-else-if="connectionError" class="text-3xl text-white flex items-center justify-center h-[85vh]">
         Bağlantı Sorunu
       </div>
 

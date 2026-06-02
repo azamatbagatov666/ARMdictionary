@@ -352,8 +352,10 @@ const image = ref();
       />
     </div>
 
+      <ElementComponentsTitle :showReset="true" @reset-clicked="reset" text="Günün Sözcüğü"></ElementComponentsTitle>
+
+
     <div class="flex items-center mb-1 mt-2">
-      <ElementComponentsReturnButton @click="reset()" class="ml-2 " />
 
       <div class="block mx-auto">
         <div class="flex justify-center my-3 gap-1">
@@ -478,7 +480,7 @@ const image = ref();
 
   <div
     v-if="connectionError && !responseData"
-    class="text-3xl flex items-center justify-center h-[85vh]"
+    class="text-3xl flex items-center justify-center text-white h-[85vh]"
   >
     Bağlantı Sorunu
   </div>

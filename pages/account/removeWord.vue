@@ -5,7 +5,6 @@ useHead({
 
 import type { TDATA } from "~/models/TDATA";
 
-
 const desword = ref("");
 const noresult = ref("");
 const { $bus } = useNuxtApp();
@@ -27,35 +26,29 @@ const submit = async () => {
     return;
   }
 
-    try {
+  try {
     const data = await fetchWithAuth(
       `/api/account/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
     );
 
-  arananData.value = null;
-  responseData.value = null;
-  selectedItemId.value = null;
-  selectedRadio.value = null;
-  selectedListWord.value = [];
+    arananData.value = null;
+    responseData.value = null;
+    selectedItemId.value = null;
+    selectedRadio.value = null;
+    selectedListWord.value = [];
 
-  previousDesword.value = desword.value;
+    previousDesword.value = desword.value;
 
-  if (data && Array.isArray(data) && data.length > 0) {
-    responseData.value = data;
-    noresult.value = "";
-  } else {
-    noresult.value = "Aradığınız sözcük bulunamadı.";
-  }
+    if (data && Array.isArray(data) && data.length > 0) {
+      responseData.value = data;
+      noresult.value = "";
+    } else {
+      noresult.value = "Aradığınız sözcük bulunamadı.";
+    }
   } catch (err) {
     noresult.value = "Bağlantı sorunu.";
     return;
   }
-
-
-
-
-  
-
 };
 
 const onWordSelected = (item: TDATA) => {
@@ -67,8 +60,7 @@ const getAranan = async () => {
   selectedItemId.value = selectedRadio.value;
   arananData.value = null;
 
-
-    const data = await fetchWithAuth(
+  const data = await fetchWithAuth(
     `/api/account/search/${encodeURIComponent(selectedItemId.value!)}/searchById`,
     {
       method: "GET",
@@ -139,16 +131,11 @@ const resetData = () => {
 
 <template>
   <div>
-    <div class="grid gap-2 sm:flex items-center mb-1 mt-2">
-      <ElementComponentsReturnButton
-        @click="resetData()"
-        class="ml-2 sm:absolute"
-      />
-      <div
-        v-text="'Yönlendirme/Sözcük Sil'"
-        class="text-white bg-red-900 text-4xl sm:text-5xl text-center sm:w-[550px] border-2 p-3 mx-auto inline-block border-black rounded-lg dark:border-white"
-      ></div>
-    </div>
+    <ElementComponentsTitle
+      :showReset="true"
+      @reset-clicked="resetData"
+      text="Yönlendirme / Sözcük Sil"
+    ></ElementComponentsTitle>
 
     <div class="mb-12">
       <SearchLine
@@ -156,14 +143,12 @@ const resetData = () => {
         @submit-request="submit"
       ></SearchLine>
 
-<WordTable
-  :responseData="responseData"
-  selectable
-  v-model="selectedRadio"
-  @select="onWordSelected"
-/>
-
-
+      <WordTable
+        :responseData="responseData"
+        selectable
+        v-model="selectedRadio"
+        @select="onWordSelected"
+      />
 
       <div
         class="text-center text-lg"
@@ -171,36 +156,35 @@ const resetData = () => {
         v-text="noresult"
       ></div>
 
-      <div class=" p-2 text-white" v-if="arananData">
-    <div class="flex justify-center">
+      <div class="p-2 text-white" v-if="arananData">
+        <div class="flex justify-center">
+          <ul class="list-none text-lg text-left inline-block">
+            <div class="text-3xl mb-2">Bu sonucu veren sözcükler:</div>
+            <li v-for="(arananlar, index) in arananData" :key="index">
+              <label
+                class="mx-auto pl-4"
+                :class="{
+                  'line-through': selectedListWord.includes(arananlar),
+                }"
+              >
+                <input
+                  type="checkbox"
+                  v-model="selectedListWord"
+                  :value="arananlar"
+                  class="mr-2"
+                />
+                <span v-text="arananlar"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
 
-        <ul class="list-none text-lg text-left inline-block">
-          <div class="text-3xl mb-2">Bu sonucu veren sözcükler:</div>
-          <li v-for="(arananlar, index) in arananData" :key="index">
-            <label
-              class="mx-auto pl-4"
-              :class="{ 'line-through': selectedListWord.includes(arananlar) }"
-            >
-              <input
-                type="checkbox"
-                v-model="selectedListWord"
-                :value="arananlar"
-                class="mr-2"
-              />
-              <span v-text="arananlar"></span>
-            </label>
-          </li>
-        </ul>
-    </div>
-
-                      <ElementComponentsCustomButton
+        <ElementComponentsCustomButton
           @click="deleteTheWords"
           text="Seçilenleri Sil"
           class="block mx-auto mt-5"
         />
-
       </div>
-
     </div>
   </div>
 </template>
