@@ -27,12 +27,19 @@ const won = ref();
 import { useWindowSize } from "@vueuse/core";
 const { width } = useWindowSize();
 
-const lines = [
-  ["ձ", "յ", "օ", "ռ", "ժ"],
-  ["խ", "վ", "է", "ր", "դ", "ե", "ը", "ի", "ո", "բ", "չ", "ջ"],
-  ["ա", "ս", "տ", "ֆ", "կ", "հ", "ճ", "ք", "լ", "թ", "փ"],
-  ["զ", "ց", "գ", "ւ", "պ", "ն", "մ", "շ", "ղ", "ծ"],
-];
+
+
+const correctLetters = computed(() => {
+  return [
+    ...new Set(
+      answerArray.value.filter((item) => guesses.value.includes(item)),
+    ),
+  ];
+});
+
+const usedLetters = computed(() => {
+  return guesses.value.filter((value) => !answerArray.value.includes(value));
+});
 
 const scrollToTarget = () => {
   nextTick(() => {
@@ -75,13 +82,7 @@ onBeforeMount(async () => {
   newGame();
 });
 
-const isUsedButton = (letter: string) => {
-  return guesses.value.includes(letter);
-};
 
-const isCorrectButton = (letter: string) => {
-  return answer.value.includes(letter) && guesses.value.includes(letter);
-};
 
 const newGame = async () => {
   try {
@@ -209,27 +210,12 @@ const responseData = ref();
         </div>
 
         <div class="" v-if="answer">
-          <div
-            class="inline-block left-1/2 -translate-x-1/2 w-full sm:w-[570px] relative border-2 border-black my-3 min-[730px]:p-2 py-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+          <ArmenianKeyboard
+            @letter-pushed="push"
+            :usedLetters="usedLetters"
+            :correctLetters="correctLetters"
           >
-            <div
-              v-for="(line, lineIndex) in lines"
-              :key="lineIndex"
-              class="row"
-            >
-              <button
-                v-for="(letter, index) in line"
-                :key="index"
-                class="armenian-button"
-                v-text="letter"
-                @click="push(letter)"
-                :class="{
-                  'used-button': isUsedButton(letter),
-                  'correct-button': isCorrectButton(letter),
-                }"
-              ></button>
-            </div>
-          </div>
+          </ArmenianKeyboard>
         </div>
 
         <ElementComponentsCustomButton
@@ -253,32 +239,15 @@ const responseData = ref();
           :responseData="responseData"
           :class="'min-[1430px]:w-[396px]'"
         ></wordTable>
-        
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.used-button {
-  background-color: #ff0000 !important;
-}
 
-.correct-button {
-  background-color: green !important;
-}
 
-.armenian-button {
-  @apply size-[7.10%]  p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
-  font-size: 16px;
-  background-color: #3490dc;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  padding-top: 5px;
-  outline: 0;
-}
+
 
 .gallowscorner {
   width: 100px;
@@ -424,19 +393,5 @@ const responseData = ref();
   @apply dark:border-white dark:bg-white transition-colors duration-300 w-[17px] min-[730px]:w-[30px] top-[116px] min-[730px]:top-[249px] left-[111px] min-[730px]:left-[121px];
 }
 
-.row:first-child {
-  @apply flex justify-center sm:block sm:translate-x-[70px];
-}
 
-.row:nth-child(3) {
-  margin-left: 0.5rem;
-}
-
-.row:nth-child(4) {
-  margin-left: 1rem;
-}
-
-.row:first-child .armenian-button:nth-last-child(-n + 3) {
-  @apply translate-x-[47px] sm:translate-x-[255px];
-}
 </style>

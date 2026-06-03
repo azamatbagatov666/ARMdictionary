@@ -1,5 +1,14 @@
 <script lang="ts" setup>
 
+const props = defineProps<{
+  longPress?: boolean;
+  punctuation?: boolean;
+  spaceBar?: boolean;
+  backSpace?: boolean;
+  usedLetters?: string[];
+  correctLetters?: string[];
+}>();
+
 const emit = defineEmits<{
   (e: "letter-pushed", data: string): void;
   (e: "backspace-clicked"): void;
@@ -46,6 +55,8 @@ const lines = [
   ['զ', 'ց', 'գ', 'ւ', 'պ', 'ն', 'մ', 'շ', 'ղ', 'ծ']
 ];
 
+const punctuationCharacters = ['՝', '՛', '՞', '՜'];
+
 
 </script>
 
@@ -56,7 +67,10 @@ const lines = [
   <button 
     v-for="(letter, index) in line" 
     :key="index" 
-    class="armenian-button" 
+    class="armenian-button"
+    :class="{'opacity-0 pointer-events-none cursor-default' : !punctuation && punctuationCharacters.includes(letter),
+     'used-button' : usedLetters && usedLetters.includes(letter),
+      'correct-button' : correctLetters && correctLetters.includes(letter)}"
     v-text="letter" 
     @click="push(letter)"
     
@@ -65,8 +79,8 @@ const lines = [
   
 </div>
 <div class="flex justify-center">
-            <button class="armenian-button !w-[210px] !h-[33px]" @click="push(' ')" v-text="'&lrm;'"></button>
-      <button class="armenian-button !h-[33px]" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
+            <button v-if="spaceBar" class="armenian-button !w-[210px] !h-[33px]" @click="push(' ')" v-text="'&lrm;'"></button>
+      <button v-if="backSpace && longPress" class="armenian-button !h-[33px]" @mousedown="startBackspaceHold" @mouseup="stopBackspaceHold"
         v-text="'&#8592'"></button>
         </div>
 
@@ -116,6 +130,12 @@ const lines = [
 }
 
 
+.used-button {
+  background-color: #ff0000 !important;
+}
 
+.correct-button {
+  background-color: green !important;
+}
 
 </style>

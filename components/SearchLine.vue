@@ -392,7 +392,6 @@ const sanitizeAranan = (value: string) => {
     .replace(/[.!?՝՛՞՜']/g, ""); // punctuation
 };
 
-
 const scrollToActiveItem = () => {
   const el = resultItems.value[currentHoverIndex.value];
   const container = resultBox.value;
@@ -413,9 +412,6 @@ const scrollToActiveItem = () => {
 };
 
 defineExpose({ wordFromAbove, clearThePage, keyboardOn });
-
-
-
 </script>
 
 <template>
@@ -429,6 +425,10 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
           v-show="keyboardOn"
           @letter-pushed="pushing"
           @backspace-clicked="backSpace"
+          :spaceBar="true"
+          :backSpace="true"
+          :longPress="true"
+          :punctuation="true"
         >
         </ArmenianKeyboard>
       </Transition>
@@ -485,7 +485,6 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                     viewBox="0 0 32 32"
                     version="1.1"
                   >
-                    <title>cancel</title>
                     <path
                       d="M16 29c-7.18 0-13-5.82-13-13s5.82-13 13-13 13 5.82 13 13-5.82 13-13 13zM21.961 12.209c0.244-0.244 0.244-0.641 0-0.885l-1.328-1.327c-0.244-0.244-0.641-0.244-0.885 0l-3.761 3.761-3.761-3.761c-0.244-0.244-0.641-0.244-0.885 0l-1.328 1.327c-0.244 0.244-0.244 0.641 0 0.885l3.762 3.762-3.762 3.76c-0.244 0.244-0.244 0.641 0 0.885l1.328 1.328c0.244 0.244 0.641 0.244 0.885 0l3.761-3.762 3.761 3.762c0.244 0.244 0.641 0.244 0.885 0l1.328-1.328c0.244-0.244 0.244-0.641 0-0.885l-3.762-3.76 3.762-3.762z"
                     ></path>
@@ -523,7 +522,6 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
                 v-for="(item, index) in resultBoxContent"
                 v-text="item"
                 ref="resultItems"
-
                 :class="{
                   'bg-[#e9f3ff] text-black': index == currentHoverIndex,
                   'rounded-t-[20px]': index == 0,
@@ -852,34 +850,28 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   @apply border-black dark:border-white;
   transition: background-color 0.3s;
 }
-  .dark .motherinput {
+.dark .motherinput {
   background-color: #262626;
   color: #ecf9ff;
-
 }
-
 
 @media (hover: hover) and (pointer: fine) {
   .motherbutton:hover {
     background-color: chartreuse;
   }
   .kButton:hover {
-    @apply dark:bg-neutral-700 bg-[#ccc] ;
+    @apply dark:bg-neutral-700 bg-[#ccc];
   }
-
-
 }
 
-    .kButton:active {
-    @apply dark:bg-neutral-700 bg-[#ccc] ;
-  }
+.kButton:active {
+  @apply dark:bg-neutral-700 bg-[#ccc];
+}
 
 .motherbutton:active {
   transform: scale(0.95);
   background-color: chartreuse;
 }
-
-
 
 .resultBox ul li {
   list-style: none;
@@ -911,11 +903,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   .keyboard-wrapper {
     height: 269px;
   }
-
-
 }
-
-
 
 .resultBox {
   position: absolute;
@@ -928,18 +916,14 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
   overflow-y: auto;
 }
 
-
 .resultBox {
-
-
   background:
     /* Shadow covers */
-    linear-gradient(white 30%, rgba(255,255,255,0)),
-    linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-
+    linear-gradient(white 30%, rgba(255, 255, 255, 0)),
+    linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%,
     /* Shadows (NOW LINEAR) */
-    linear-gradient(to bottom, rgba(0,0,0,.4), rgba(0,0,0,0)),
-    linear-gradient(to top, rgba(0,0,0,.4), rgba(0,0,0,0)) 0 100%;
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)),
+    linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0)) 0 100%;
 
   background-color: white;
 
@@ -951,11 +935,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
     100% 14px,
     100% 14px;
 
-  background-attachment:
-    local,
-    local,
-    scroll,
-    scroll;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .dark .resultBox {
@@ -966,13 +946,12 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
     /* Shadow covers (dark version) */
     linear-gradient(#262626 30%, rgba(38, 38, 38, 0)),
     linear-gradient(rgba(38, 38, 38, 0), #262626 70%) 0 100%,
-
     /* Shadows (same as light mode is fine) */
-    linear-gradient(to bottom, rgba(255,255,255,.4), rgba(255,255,255,0)),
-    linear-gradient(to top, rgba(255,255,255,.4), rgba(255,255,255,0)) 0 100%;
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)),
+    linear-gradient(to top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0)) 0
+      100%;
 
   background-color: #262626;
-
 
   background-repeat: no-repeat;
 
@@ -982,13 +961,6 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
     100% 14px,
     100% 14px;
 
-  background-attachment:
-    local,
-    local,
-    scroll,
-    scroll;
+  background-attachment: local, local, scroll, scroll;
 }
-
-
-
 </style>
