@@ -6,6 +6,8 @@ const desword = ref("");
 const searchline = ref();
 const connectionError = ref(false);
 
+import type { TDATA } from "~/models/TDATA";
+
 const formattedSelectedDate = computed(() => {
   if (selectedDate.value != null) {
     const parts = selectedDate.value.split("/");
@@ -22,8 +24,8 @@ const dayData = reactive({
   WORD_ID: selectedRadio,
 });
 
-const responseData = ref();
-const searchResponse = ref();
+const responseData = ref<WORDOFTHEDAY[]>([]);
+const searchResponse = ref<TDATA[]>([]);
 
 const months = [
   "Ocak",
@@ -59,15 +61,18 @@ const years: number[] = Array.from({ length: length }, (_, i) => 2025 + i);
 
 const getWords = async () => {
   try {
-    const data = await fetchWithAuth(`/api/account/get/getWordOfTheDay`, {
-      method: "POST",
+    const data = await fetchWithAuth<WORDOFTHEDAY[]>(
+      `/api/account/get/getWordOfTheDay`,
+      {
+        method: "POST",
 
-      body: JSON.stringify({
-        start: startDateQ.value,
-        end: endDateQ.value,
-      }),
-      headers: { "Content-Type": "application/json" },
-    });
+        body: JSON.stringify({
+          start: startDateQ.value,
+          end: endDateQ.value,
+        }),
+        headers: { "Content-Type": "application/json" },
+      },
+    );
     connectionError.value = false;
     responseData.value = data;
   } catch (err) {
@@ -125,7 +130,7 @@ const list = async () => {
   currentYear.value = yearSelection.value;
   selectedDate.value = null;
   selectedRadio.value = null;
-  searchResponse.value = undefined;
+  searchResponse.value = [];
   desword.value = "";
 
   searchline.value.clearThePage();
@@ -154,10 +159,8 @@ interface WORDOFTHEDAY {
 }
 
 const getIndex = (date: string) => {
-  if (responseData)
-    return responseData.value.findIndex(
-      (item: WORDOFTHEDAY) => item.DATE === date,
-    );
+  if (!responseData.value.length) return -1;
+  return responseData.value.findIndex((item) => item.DATE === date);
 };
 
 const reset = async () => {
@@ -165,9 +168,9 @@ const reset = async () => {
   currentYear.value = yearSelection.value;
   selectedDate.value = null;
   selectedRadio.value = null;
-  searchResponse.value = undefined;
+  searchResponse.value = [];
   desword.value = "";
-  responseData.value = null;
+  responseData.value = [];
   monthSelection.value = months[new Date().getMonth()];
   yearSelection.value = new Date().getFullYear();
   connectionError.value = false;
@@ -179,29 +182,24 @@ const submit = async () => {
     return;
   }
 
-    try {
+  try {
     const data = await fetchWithAuth(
       `/api/account/search/${encodeURIComponent(desword.value)}/searchingNoCheck`,
     );
 
-      searchResponse.value = null;
-  selectedRadio.value = null;
+    searchResponse.value = [];
+    selectedRadio.value = null;
 
-  if (data && Array.isArray(data) && data.length > 0) {
-    searchResponse.value = data;
-    noresult.value = "";
-  } else {
-    noresult.value = "Aradığınız sözcük bulunamadı.";
-  }
-
+    if (data && Array.isArray(data) && data.length > 0) {
+      searchResponse.value = data;
+      noresult.value = "";
+    } else {
+      noresult.value = "Aradığınız sözcük bulunamadı.";
+    }
   } catch (err) {
     noresult.value = "Bağlantı sorunu.";
     return;
   }
-
-
-
-
 };
 
 const wordInput = (data: string) => {
@@ -209,17 +207,17 @@ const wordInput = (data: string) => {
 };
 
 const random = async () => {
-  const { data, error } = await useFetch(`/api/get/getARandomWord`, {
+  const { data, error } = await useFetch<TDATA[]>(`/api/get/getARandomWord`, {
     method: "GET",
   });
   if (error.value) {
     return;
   }
-  searchResponse.value = null;
+  searchResponse.value = [];
 
-  if (data) {
-    searchResponse.value = data.value;
-    desword.value = searchResponse.value[0].ARANAN;
+    if (data.value && data.value.length > 0) {
+      searchResponse.value = data.value;
+      desword.value = data.value[0].ARANAN ?? "";
     searchline.value.wordFromAbove(desword.value);
   } else {
   }
@@ -258,7 +256,7 @@ const save = async () => {
         alert("Sonuç başarıyla eklendi.");
         selectedDate.value = null;
         selectedRadio.value = null;
-        searchResponse.value = undefined;
+        searchResponse.value = [];
         desword.value = "";
 
         $bus.emit("clear-main-page");
@@ -283,19 +281,22 @@ const exportAsJpg = async () => {
   try {
     if (selectedDate.value) {
       tempAm.value =
-        responseData.value[getIndex(selectedDate.value)].AM
-          .slice(0, 1)
-          .toUpperCase() +
+        responseData.value[getIndex(selectedDate.value)].AM.slice(
+          0,
+          1,
+        ).toUpperCase() +
         responseData.value[getIndex(selectedDate.value)].AM.slice(1);
       tempTR4.value =
-        responseData.value[getIndex(selectedDate.value)].TR4
-          .slice(0, 1)
-          .toUpperCase() +
+        responseData.value[getIndex(selectedDate.value)].TR4.slice(
+          0,
+          1,
+        ).toUpperCase() +
         responseData.value[getIndex(selectedDate.value)].TR4.slice(1);
       tempTR1.value =
-        responseData.value[getIndex(selectedDate.value)].TR1
-          .slice(0, 1)
-          .toLocaleUpperCase("TR") +
+        responseData.value[getIndex(selectedDate.value)].TR1.slice(
+          0,
+          1,
+        ).toLocaleUpperCase("TR") +
         responseData.value[getIndex(selectedDate.value)].TR1.slice(1);
     }
 
@@ -332,10 +333,14 @@ const image = ref();
       v-if="selectedDate != null && responseData[getIndex(selectedDate)]"
       class="absolute sm:left-4 top-36 bg-black p-2 rounded-lg w-full sm:w-[600px] xl:w-auto"
     >
-  <div class="flex justify-end">
-
-    <button @click="selectedDate = null" class="bg-red-500 text-black size-8 hover:bg-white rounded-md">X</button>
-    </div>
+      <div class="flex justify-end">
+        <button
+          @click="selectedDate = null"
+          class="bg-red-500 text-black size-8 hover:bg-white rounded-md"
+        >
+          X
+        </button>
+      </div>
 
       <div class="flex justify-center text-lg font-bold text-white">
         Seçilen Güne Kaydedilmiş Sözcük
@@ -352,11 +357,13 @@ const image = ref();
       />
     </div>
 
-      <ElementComponentsTitle :showReset="true" @reset-clicked="reset" text="Günün Sözcüğü"></ElementComponentsTitle>
-
+    <ElementComponentsTitle
+      :showReset="true"
+      @reset-clicked="reset"
+      text="Günün Sözcüğü"
+    ></ElementComponentsTitle>
 
     <div class="flex items-center mb-1 mt-2">
-
       <div class="block mx-auto">
         <div class="flex justify-center my-3 gap-1">
           <select
@@ -443,9 +450,7 @@ const image = ref();
       </tbody>
     </table>
 
-    <div
-      v-show="selectedDate"
-    >
+    <div v-show="selectedDate">
       <SearchLine
         @input-changed="wordInput"
         @submit-request="submit"
@@ -453,16 +458,12 @@ const image = ref();
         ref="searchline"
       ></SearchLine>
 
-
       <WordTable
-  :responseData="searchResponse"
-  selectable
-  v-model="selectedRadio"
-    valueKey="WORD_ID"
-
-/>
-
-
+        :responseData="searchResponse"
+        selectable
+        v-model="selectedRadio"
+        valueKey="WORD_ID"
+      />
 
       <div
         class="text-center text-lg"
@@ -524,6 +525,4 @@ const image = ref();
 .lostTable th {
   @apply border border-black dark:border-white text-center;
 }
-
-
 </style>

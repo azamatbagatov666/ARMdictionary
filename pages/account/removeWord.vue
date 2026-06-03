@@ -18,7 +18,7 @@ const wordInput = (data: string) => {
   desword.value = data;
 };
 
-const responseData = ref();
+const responseData = ref<TDATA[]>([]);
 const arananData = ref();
 
 const submit = async () => {
@@ -32,7 +32,7 @@ const submit = async () => {
     );
 
     arananData.value = null;
-    responseData.value = null;
+responseData.value = [];
     selectedItemId.value = null;
     selectedRadio.value = null;
     selectedListWord.value = [];
@@ -71,7 +71,7 @@ const getAranan = async () => {
     arananData.value = data.map((item) => item.ARANAN);
   } else if (data && Array.isArray(data) && data.length == 0) {
     arananData.value = null;
-    responseData.value = null;
+responseData.value = [];
     selectedItemId.value = null;
     selectedRadio.value = null;
     selectedListWord.value = [];
@@ -104,7 +104,7 @@ const deleteTheWords = async () => {
             "Seçtiğiniz sözcükler bu sonuçtan başarıyla silinmiştir.",
           );
           if (arananData.value == "") {
-            responseData.value = null;
+            responseData.value = [];
           }
         } else {
         }
@@ -118,7 +118,7 @@ const deleteTheWords = async () => {
 };
 const resetData = () => {
   arananData.value = null;
-  responseData.value = null;
+responseData.value = [];
   selectedItemId.value = null;
   selectedRadio.value = null;
   selectedListWord.value = [];

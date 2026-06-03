@@ -18,7 +18,7 @@ useHead({
   title: "AVEDİKYAN - Sözcük Düzenle",
 });
 
-const responseData = ref();
+const responseData = ref<TDATA[]>([]);
 const arananData = ref();
 
 const submit = async () => {
@@ -31,7 +31,7 @@ const submit = async () => {
     );
 
     arananData.value = null;
-    responseData.value = null;
+responseData.value = [];
     selectedItemId.value = null;
     selectedRadio.value = null;
     selectedIndex.value = null;
@@ -146,7 +146,7 @@ const { $bus } = useNuxtApp();
 
 const resetData = () => {
   arananData.value = null;
-  responseData.value = null;
+responseData.value = [];
   selectedItemId.value = null;
   selectedRadio.value = null;
   previousDesword.value = "";

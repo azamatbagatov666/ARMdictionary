@@ -200,7 +200,7 @@ const resetData = () => {
 
     
 
-    <div class="mt-4 ml-2 mb-7">
+    <div class="mt-4 mb-7">
 
 
 

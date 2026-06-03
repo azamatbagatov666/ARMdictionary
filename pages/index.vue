@@ -41,7 +41,7 @@ const { $bus } = useNuxtApp();
 $bus.on("clear-main-page", () => {
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
-  responseData.value = null;
+responseData.value = [];
   previousDesword.value = "";
   desword.value = "";
   if (alpTable.value) {
@@ -75,7 +75,7 @@ const wordInput = (data: string) => {
 };
 
 
-const responseData = ref();
+const responseData = ref<TDATA[]>([]);
 const submit = async () => {
   if (desword.value == "" || desword.value == previousDesword.value) {
     return;
@@ -93,7 +93,7 @@ const submit = async () => {
 
     return;
   }
-  responseData.value = null;
+responseData.value = [];
   previousDesword.value = desword.value;
 
   if (
@@ -132,11 +132,10 @@ const random = async () => {
 
     return;
   }
-  responseData.value = null;
-
-  if (data) {
+responseData.value = [];
+  if (data.value && data.value.length > 0) {
     responseData.value = data.value;
-    desword.value = responseData.value[0].ARANAN;
+    desword.value = responseData.value[0].ARANAN ?? "";
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
