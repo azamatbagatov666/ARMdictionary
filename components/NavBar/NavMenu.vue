@@ -78,6 +78,12 @@ const toggleDropdown = (event: Event, id: string) => {
                                 </NuxtLink>
 
                                 </li>
+                                <li>
+                                <NuxtLink to="/wordle" >
+                                    Wordle
+                                </NuxtLink>
+
+                                </li>
 
                                                                 <li>
                                 <NuxtLink to="/faydalibilgiler">

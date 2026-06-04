@@ -128,7 +128,7 @@ const toggleDropdown = (event: Event) => {
       </div>
     </div>
     <div class="theMenu h-0 z-[59] absolute w-full bg-gray-200 dark:bg-black transition-all duration-300"
-      :class="{ 'h-48': isMenuOpen }">
+      :class="{ 'h-60': isMenuOpen }">
       <Transition>
 
         <nav v-show="isMenuOpen">
@@ -145,6 +145,15 @@ const toggleDropdown = (event: Event) => {
             </NuxtLink>
 
               </li>
+                            <li  class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
+            <NuxtLink to="/wordle">
+                  Wordle
+
+            </NuxtLink>
+
+              </li>
+
+       
 
               <li  class="hover:bg-[#ddd] hover:text-black" @click="isMenuOpen = false">
             <NuxtLink to="/faydalibilgiler">
