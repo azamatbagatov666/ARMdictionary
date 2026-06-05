@@ -17,6 +17,9 @@ const invalidAnswer = ref(false);
 const dialogueOpen = ref(false);
 const infoOpen = ref(false);
 
+const RULES_STORAGE_KEY = "wordle_rules_last_seen";
+const RULES_COOLDOWN_DAYS = 60;
+
 const currentGuessIndex = ref(1);
 
 const tipKey = ref<string | null>(null);
@@ -96,6 +99,24 @@ onMounted(() => {
     a.preload = "auto";
   });
 });
+
+onMounted(() => {
+  if (shouldShowRules()) {
+    infoOpen.value = true;
+  }
+});
+
+const handleDialogClose = () => {
+  if (infoOpen.value) {
+    localStorage.setItem(
+      RULES_STORAGE_KEY,
+      new Date().toISOString()
+    );
+  }
+
+  dialogueOpen.value = false;
+  infoOpen.value = false;
+};
 
 const handleDocumentClick = (event: KeyboardEvent) => {
   if (event.repeat) return; // disable press hold
@@ -256,6 +277,17 @@ function invalid() {
     invalidAnswer.value = false;
   }, 2000);
 }
+
+function shouldShowRules(): boolean {
+  const lastSeen = localStorage.getItem(RULES_STORAGE_KEY);
+  if (!lastSeen) return true;
+
+  const last = new Date(lastSeen).getTime();
+  const now = Date.now();
+
+  const diffDays = (now - last) / (1000 * 60 * 60 * 24);
+  return diffDays > RULES_COOLDOWN_DAYS;
+}
 </script>
 
 <template>
@@ -356,7 +388,7 @@ function invalid() {
   <DialogModal
     :open="dialogueOpen || infoOpen"
     dialogue-text=""
-    @close="dialogueOpen = false; infoOpen = false"
+    @close="handleDialogClose"
     :width="500"
   >
     <div v-if="infoOpen" class="">
