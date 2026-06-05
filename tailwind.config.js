@@ -1,4 +1,10 @@
 module.exports = {
+    plugins: [
+    require('daisyui'),
+  ],
+    daisyui: {
+    themes: false,
+  },
   darkMode: 'class',
     content: [
       "./components/**/*.{js,vue,ts}",

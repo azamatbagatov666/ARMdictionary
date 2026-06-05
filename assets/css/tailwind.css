@@ -4,7 +4,7 @@
 
 body {
   /*@apply dark:bg-[#262a2f] bg-white;*/
-  @apply dark:text-white;
+  @apply dark:text-white text-black;
   transition: background-color 0.3s;
 
   @apply bg-[url('/background-12.jpg')] transition-none bg-[#136570] dark:bg-[#282B30] dark:bg-[url('/background-12d.jpg')];
@@ -15,4 +15,10 @@ body {
 
 img {
   pointer-events: none;
+}
+
+
+
+body {
+  color-scheme: light; /* or auto */
 }
