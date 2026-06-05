@@ -11,6 +11,8 @@ const lose = ref(false);
 const wordleList = ref();
 const armRegex = /^\p{Script=Armenian}+$/u;
 const allGuesses = ref<GuessResult[]>([]);
+const invalidAnswer = ref(false)
+
 
 
 const currentGuessIndex = ref(1);
@@ -120,12 +122,14 @@ const getWordleList = async () => {
 const newGame = () => {
     const randomIndex = Math.floor(Math.random() * wordleList.value.length);
       answer.value = wordleList.value[randomIndex];
+      wordleList.value.splice(randomIndex, 1);
       answerArray.value = answer.value.split("");
       currentGuess.value = [];
       allGuesses.value = [];
       currentGuessIndex.value = 1;
       won.value = false;
       lose.value = false;
+      invalidAnswer.value = false;
       tipKey.value = null;
 
 
@@ -151,7 +155,7 @@ type GuessResult = {
 
 
 const submitGuess = () => {
-  if (won.value) return;
+  if (won.value || invalidAnswer.value) return;
 
   if (currentGuess.value.length !== 5) {
     tipKey.value = "wordle.notEnoughLetters";
@@ -163,6 +167,7 @@ const submitGuess = () => {
     !wordleList.value.includes(currentGuess.value.join(""))
   ) {
     tipKey.value = "wordle.notInWordList";
+      invalid();
     return;
   }
 
@@ -229,6 +234,13 @@ watch(tipKey, (newVal) => {
     }, 2000);
   }
 });
+
+function invalid() {
+  invalidAnswer.value = true
+  setTimeout(() => {
+    invalidAnswer.value = false
+  }, 2000)
+}
 </script>
 
 <template>
@@ -248,8 +260,8 @@ watch(tipKey, (newVal) => {
       <div
         class="relative w-full sm:w-[570px] rounded-t-lg bg-gray-200 dark:bg-[#101010] px-4 pt-4 mt-2 border-black max-[430px]:w-full dark:border-white border-2 !border-b-0"
       >
-        <div class="" v-for="i in 6">
-          <div class="flex justify-center">
+        <div v-for="i in 6" >
+          <div class="flex justify-center" :class="{ shake: invalidAnswer && i === currentGuessIndex }">
             <div
               v-for="j in 5"
               class="size-12 border-2 uppercase text-white border-gray-500 m-1 flex items-center justify-center text-xl font-bold"
@@ -275,12 +287,15 @@ watch(tipKey, (newVal) => {
             </div>
           </div>
         </div>
+    <Transition name="slide-fade">
+
         <div
           v-if="tip != ''"
           class="w-max absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-black dark:border-white border-2 bg-white dark:bg-black p-4 rounded-full font-bold bg-opacity-75"
         >
           {{ tip }}
         </div>
+    </Transition>
       </div>
     </div>
         <div class="" >
@@ -315,4 +330,47 @@ watch(tipKey, (newVal) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  margin-top: 20px;
+  opacity: 0;
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+</style>
