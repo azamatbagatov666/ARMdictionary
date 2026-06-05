@@ -14,6 +14,8 @@ const wordleListBackup = ref();
 const armRegex = /^\p{Script=Armenian}+$/u;
 const allGuesses = ref<GuessResult[]>([]);
 const invalidAnswer = ref(false);
+const dialogueOpen = ref(false);
+const infoOpen = ref(false);
 
 const currentGuessIndex = ref(1);
 
@@ -83,17 +85,17 @@ onMounted(() => {
 });
 
 onMounted(() => {
-  ;[
+  [
     "/sfx/wordle/softClick.mp3",
     "/sfx/wordle/erase.mp3",
     "/sfx/wordle/hit.mp3",
     "/sfx/wordle/ding.mp3",
     "/sfx/wordle/noWord.mp3",
-  ].forEach(src => {
-    const a = new Audio(src)
-    a.preload = "auto"
-  })
-})
+  ].forEach((src) => {
+    const a = new Audio(src);
+    a.preload = "auto";
+  });
+});
 
 const handleDocumentClick = (event: KeyboardEvent) => {
   if (event.repeat) return; // disable press hold
@@ -101,8 +103,6 @@ const handleDocumentClick = (event: KeyboardEvent) => {
   if (event.key === "Backspace") {
     handleBackspace();
   } else if (event.key.length === 1 && armRegex.test(event.key)) {
-    console.log(correctlyPlacedLetters.value);
-    console.log(misplacedLetters.value);
     push(event.key.toLowerCase());
   } else if (event.key === "Enter") {
     submitGuess();
@@ -125,7 +125,16 @@ const getWordleList = async () => {
   }
 };
 
+const handleNewGame = () => {
+  if (!lose.value && !won.value && allGuesses.value.length > 0) {
+    dialogueOpen.value = true;
+  } else {
+    newGame();
+  }
+};
+
 const newGame = () => {
+  dialogueOpen.value = false;
   const randomIndex = Math.floor(Math.random() * wordleList.value.length);
   answer.value = wordleList.value[randomIndex];
   wordleList.value.splice(randomIndex, 1);
@@ -272,7 +281,7 @@ function invalid() {
             >
               <div
                 v-for="j in 5"
-                class="size-12 cells border-2 uppercase text-white border-gray-500 m-1 flex items-center justify-center text-xl font-bold"
+                class="size-12 cells border-2 uppercase text-white border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
                 :class="{
                   '!border-black dark:!border-white':
                     i === currentGuessIndex && currentGuess[j - 1],
@@ -322,20 +331,96 @@ function invalid() {
         >
         </ArmenianKeyboard>
 
-        <div
-          class="text-xl font-bold text-white my-2 min-h-7 text-center uppercase tracking-widest"
-        >
-          {{ lose ? answer : "" }}
+        <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
+          <div v-if="lose">
+            <span>{{ t("wordle.answer") }}</span>
+            <span class="uppercase tracking-widest">{{ answer }}</span>
+          </div>
         </div>
 
-        <ElementComponentsCustomButton
-          class="mx-auto block w-28"
-          @click="newGame"
+        <div class="flex justify-center items-center">
+       <ElementComponentsCustomButton
+          class=""
+          @click="handleNewGame"
           :text="t('wordle.reset')"
         />
+
+ <div class="w-0">
+  
+        <button @click="infoOpen = true" class="btn ml-2  btn-circle pb-1 text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl">ⓘ</button>
+        </div>
+        </div>
       </div>
     </div>
   </div>
+  <DialogModal
+    :open="dialogueOpen || infoOpen"
+    dialogue-text=""
+    @close="dialogueOpen = false; infoOpen = false"
+    :width="500"
+  >
+    <div v-if="infoOpen" class="">
+      <div class="grid gap-4 text-base/10">
+        <div class="font-bold text-2xl text-left">
+          {{ t("wordle.howToPlay") }}
+        </div>
+        <div class="text-sm sm:text-base text-left whitespace-pre-line">
+          {{ t("wordle.rules") }}
+        </div>
+      </div>
+      <div class="font-bold sm:text-xl text-left mt-3">
+        {{ t("wordle.example") }}
+      </div>
+
+      <div class="flex justify-left mt-2">
+        <div
+          v-for="j in ['ա', 'ռ', 'ո', 'ղ', 'ջ']"
+          class="!text-black dark:!text-white size-12 select-none cells border-2 uppercase border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
+          :class="{ '!bg-[#538d4e] !border-0 !text-white': j === 'ա' }"
+        >
+          {{ j }}
+        </div>
+      </div>
+      <div class="text-left text-sm sm:text-base">
+        {{ t("wordle.example1") }}
+      </div>
+
+      <div class="flex justify-left mt-2">
+        <div
+          v-for="j in ['թ', 'ա', 'փ', 'ե', 'լ']"
+          class="!text-black dark:!text-white size-12 select-none cells border-2 uppercase border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
+          :class="{ '!bg-[#b59f3b] !border-0 !text-white': j === 'փ' }"
+        >
+          {{ j }}
+        </div>
+      </div>
+      <div class="text-left text-sm sm:text-base">
+        {{ t("wordle.example2") }}
+      </div>
+
+      <div class="flex justify-left mt-2">
+        <div
+          v-for="j in ['ա', 'ռ', 'ո', 'ղ', 'ջ']"
+          class="!text-black dark:!text-white size-12 select-none cells border-2 uppercase border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
+          :class="{ '!bg-[#3a3a3c] !border-0 !text-white': j === 'ջ' }"
+        >
+          {{ j }}
+        </div>
+      </div>
+      <div class="text-left text-sm sm:text-base">
+        {{ t("wordle.example3") }}
+      </div>
+    </div>
+
+    
+    <div v-else-if="dialogueOpen" >
+      <div>{{ t('wordle.areYouSure') }}</div>
+      <div class="flex justify-around mt-4">
+        <button class="btn btn-success" @click="newGame">{{ t('dialog.yes') }}</button>
+        <button class="btn btn-error" @click="dialogueOpen = false">{{ t('dialog.no') }}</button>
+      </div>
+    </div>
+  </DialogModal>
 </template>
 
 <style scoped>
@@ -382,6 +467,12 @@ function invalid() {
   40%,
   60% {
     transform: translate3d(4px, 0, 0);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .info:hover {
+    @apply !bg-[#ccc];
   }
 }
 </style>

@@ -4,6 +4,7 @@ module.exports = {
   ],
     daisyui: {
     themes: false,
+    base: false,
   },
   darkMode: 'class',
     content: [

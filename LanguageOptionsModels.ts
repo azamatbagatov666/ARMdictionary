@@ -224,7 +224,17 @@ export const wordleEn = {
   win: "Congratulations 🎉",
   lose: "You lost",
   reset: "New Game",
-
+  areYouSure: "You will lose your progress, are you sure?",
+  answer: "The answer is: ",
+  howToPlay: `How to play Wordle?`,
+  rules: `• You have six rights to guess the word.
+  • Each attempt must be a 5-letter valid word.
+  • After you guess, the tiles will change color to indicate an information about the letters.
+`,
+  example: "Examples",
+  example1: "Ա is in the word and in the correct location!",
+  example2: "Փ is in the word, but not in the correct location.",
+  example3: "Ջ is not present in the word.",
 };
 export const wordleTr = {
   notInWordList: "Kelime Listesinde Yok",
@@ -233,7 +243,19 @@ export const wordleTr = {
   win: "Tebrikler 🎉",
   lose: "Kaybettiniz",
   reset: "Yeni Oyun",
+  areYouSure: "İlerlemenizi kaybedeceksiniz, emin misiniz?",
+  answer: "Cevap: ",
+  howToPlay: `Wordle Nasıl oynanır?`,
+  rules: `• Sözcüğü tahmin etmek için altı hakkınız var.
 
+  • Her tahmininiz beş harfli ve geçerli bir sözcük olmalıdır.
+
+  • Tahmininizden sonra kutucukların rengi değişip size harfler hakkında bilgi verecektir.
+`,
+  example: "Örnekler",
+  example1: "Ա harfi sözcükte mevcuttur ve doğru yerdedir!",
+  example2: "Փ harfi sözcükte mevcuttur fakat yanlış yerdedir.",
+  example3: "Ջ harfi sözcükte bulunmamaktadır.",
 };
 export const wordleAm = {
   notInWordList: "Բառերի Ցանկին Մէջ Չկայ",
@@ -242,10 +264,33 @@ export const wordleAm = {
   win: "Ապրիս 🎉",
   lose: "Կորսնցուցիք",
   reset: "Նոր Խաղ",
-
+  areYouSure: "Պիտի կորսնցնէք ձեր զարգացումը, վստա՞հ էք։",
+  answer: "Պատասխան. ",
+  howToPlay: `Wordle-ը ի՞նչպէս կը խաղուի։`,
+  rules: `• Ունիք վեց իրաւունք, բառը գուշակելու համար։
+• Իւրաքանչիւր փորձ պէտք է ըլլայ վաւերական, 5 տառով բառ մը։
+• Գուշակելէն ետք, քառակուսիները գոյն պիտի փոխեն եւ տեղեկութիւն պիտի տան տառերուն մասին։
+`,
+  example: "Օրինակներ",
+  example1: "Ա տառը կը գտնուի բառին մէջ եւ ճիշդ դիրքին վրայ է։",
+  example2: "Փ տառը կը գտնուի բառին մէջ, բայց ճիշդ դիրքին վրայ չէ։",
+  example3: "Ջ տառը բառին մէջ չի գտնուիր։",
 };
 
+export const dialogEn = {
+  yes: "Yes",
+  no: "No",
+};
 
+export const dialogTr = {
+  yes: "Evet",
+  no: "Hayır",
+};
+
+export const dialogAm = {
+  yes: "Այո",
+  no: "Ոչ",
+};
 
 export const EnglishLanguageOptions = {
   searchLine: searchLineEn,
@@ -259,6 +304,7 @@ export const EnglishLanguageOptions = {
   meta: metaEn,
   footer: footerEn,
   wordle: wordleEn,
+  dialog: dialogEn,
 };
 
 export const TurkishLanguageOptions = {
@@ -274,6 +320,7 @@ export const TurkishLanguageOptions = {
   footer: footerTr,
 
   wordle: wordleTr,
+  dialog: dialogTr,
 };
 
 export const ArmenianLanguageOptions = {
@@ -288,4 +335,5 @@ export const ArmenianLanguageOptions = {
   meta: metaAm,
   footer: footerAm,
   wordle: wordleAm,
+  dialog: dialogAm,
 };
