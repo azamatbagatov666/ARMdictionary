@@ -386,7 +386,7 @@ function shouldShowRules(): boolean {
         </ArmenianKeyboard>
 
         <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
-          <div v-if="true">
+          <div v-if="lose">
             <span>{{ t("wordle.answer") }}</span>
             <span class="uppercase tracking-widest">{{ answer }}</span>
           </div>
