@@ -118,6 +118,8 @@ nextTick(() => {
 
   } else {
     thereIsNoResult.value = true;
+    thereIsNoConnection.value = false;
+
   }
 };
 
@@ -154,6 +156,8 @@ nextTick(() => {
 
   } else {
     thereIsNoResult.value = true;
+    thereIsNoConnection.value = false;
+
   }
 };
 

@@ -89,10 +89,10 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
           <SVGErase/>
 
       </button>
-          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[38px] !h-[33px] !p-0 flex items-center justify-center" @click="enter">
+          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[45px] !h-[33px] !p-0 flex items-center justify-center" @click="enter">
             <SVGEnter/>
           </button>    
-        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[38px] !h-[33px] !p-0 flex justify-center items-center" @click="backspace">
+        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[45px] !h-[33px] !p-0 flex justify-center items-center" @click="backspace">
 
           <SVGErase/>
         </button>
