@@ -22,12 +22,19 @@ img {
 body {
   color-scheme: light; /* or auto */
 }
-html {
-  font-family: Arial, Helvetica, sans-serif, sans-serif;
+
+html, body {
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 button, input, select, textarea {
-  font: inherit;
+  font: inherit !important;
+  font-family: inherit !important;
+
   -webkit-appearance: none;
   appearance: none;
 }
+
+
+
+

@@ -65,7 +65,7 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
 <template>
   <div :style="{
     '--key-bg': wordle ? '#818384' : '#3490dc',
-    '--key-active': wordle ? '#818384' : '#99c7ed'
+    '--key-active': wordle ? '#bdbebe' : '#99c7ed'
   }"
     class="w-full sm:w-[570px] inline-block left-1/2 -translate-x-1/2 relative border-2 border-black my-3 p-2 rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300">
     <div v-for="(line, lineIndex) in lines" :key="lineIndex" class="row">
@@ -89,10 +89,10 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
           <SVGErase/>
 
       </button>
-          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !h-[33px] !p-0 flex items-center justify-center" @click="enter">
+          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[38px] !h-[33px] !p-0 flex items-center justify-center" @click="enter">
             <SVGEnter/>
           </button>    
-        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !h-[33px] !p-0 flex justify-center items-center" @click="backspace">
+        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !w-[38px] !h-[33px] !p-0 flex justify-center items-center" @click="backspace">
 
           <SVGErase/>
         </button>

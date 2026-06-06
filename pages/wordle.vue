@@ -1,7 +1,20 @@
 <script setup lang="ts">
-import { playSound } from "~/utils/sound";
+import { playSound, loadSound, unlockAudio } from "~/utils/sound";
 
 const { t } = useI18n();
+
+const title = computed(() => t("title.wordle"));
+const description = computed(() => t("meta.wordle"));
+
+useHead({
+  title,
+  meta: [
+    {
+      name: "description",
+      content: description,
+    },
+  ],
+});
 
 const answer = ref("");
 const answerArray = ref<string[]>([]);
@@ -87,18 +100,30 @@ onMounted(() => {
   document.addEventListener("keydown", handleDocumentClick);
 });
 
-onMounted(() => {
-  [
+let unlocked = false;
+
+function unlockOnce() {
+  if (unlocked) return;
+  unlocked = true;
+
+  unlockAudio(); // DO NOT await
+
+  Promise.all([
     "/sfx/wordle/softClick.mp3",
     "/sfx/wordle/erase.mp3",
     "/sfx/wordle/hit.mp3",
     "/sfx/wordle/ding.mp3",
     "/sfx/wordle/noWord.mp3",
-  ].forEach((src) => {
-    const a = new Audio(src);
-    a.preload = "auto";
-  });
+  ].map(loadSound));
+}
+
+onMounted(() => {
+  window.addEventListener("pointerdown", unlockOnce, { once: true, capture: true });
+    window.addEventListener("keydown", unlockOnce, { once: true, capture: true });
+
 });
+
+
 
 onMounted(() => {
   if (shouldShowRules()) {
@@ -168,7 +193,7 @@ const newGame = () => {
 
 const push = (letter: string) => {
   if (currentGuess.value.length < 5 && !won.value) {
-    //playSound("/sfx/wordle/softClick.mp3", 0.4);
+    playSound("/sfx/wordle/softClick.mp3", 0.4);
     currentGuess.value.push(letter);
   }
   (document.activeElement as HTMLElement | null)?.blur?.();
@@ -176,7 +201,7 @@ const push = (letter: string) => {
 
 const handleBackspace = () => {
   if (won.value || currentGuess.value.length === 0) return;
-  //playSound("/sfx/wordle/erase.mp3", 0.4);
+  playSound("/sfx/wordle/erase.mp3", 0.4);
 
   currentGuess.value.pop();
   (document.activeElement as HTMLElement | null)?.blur?.();
@@ -199,7 +224,7 @@ const submitGuess = () => {
     wordleListBackup.value &&
     !wordleListBackup.value.includes(currentGuess.value.join(""))
   ) {
-    //playSound("/sfx/wordle/noWord.mp3", 0.4);
+    playSound("/sfx/wordle/noWord.mp3", 0.4);
     tipKey.value = "wordle.notInWordList";
     invalid();
     return;
@@ -211,7 +236,7 @@ const submitGuess = () => {
   allGuesses.value.push({ word, tiles });
 
   if (word === answer.value) {
-    //playSound("/sfx/wordle/ding.mp3", 0.4);
+    playSound("/sfx/wordle/ding.mp3", 0.4);
     won.value = true;
     tipKey.value = "wordle.win";
     return;
@@ -221,7 +246,7 @@ const submitGuess = () => {
     tipKey.value = "wordle.lose";
     lose.value = true;
   }
-  //playSound("/sfx/wordle/hit.mp3", 0.4);
+  playSound("/sfx/wordle/hit.mp3", 0.4);
 
   currentGuess.value = [];
   currentGuessIndex.value++;
@@ -310,19 +335,19 @@ function shouldShowRules(): boolean {
             >
               <div
                 v-for="j in 5"
-                class="size-12 cells border-2 uppercase text-white border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
+                class="size-12 cells border-2 uppercase  border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
                 :class="{
                   '!border-black dark:!border-white':
                     i === currentGuessIndex && currentGuess[j - 1],
                   '!text-black dark:!text-white': i === currentGuessIndex,
 
-                  '!bg-[#538d4e] !border-0':
+                  '!bg-[#538d4e] !border-0 !text-white':
                     allGuesses[i - 1]?.tiles[j - 1] === 'green',
 
-                  '!bg-[#b59f3b] !border-0':
+                  '!bg-[#b59f3b] !border-0 !text-white':
                     allGuesses[i - 1]?.tiles[j - 1] === 'yellow',
 
-                  '!bg-[#3a3a3c] !border-0':
+                  '!bg-[#3a3a3c] !border-0 !text-white':
                     allGuesses[i - 1]?.tiles[j - 1] === 'gray',
                 }"
               >
@@ -361,7 +386,7 @@ function shouldShowRules(): boolean {
         </ArmenianKeyboard>
 
         <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
-          <div v-if="lose">
+          <div v-if="true">
             <span>{{ t("wordle.answer") }}</span>
             <span class="uppercase tracking-widest">{{ answer }}</span>
           </div>

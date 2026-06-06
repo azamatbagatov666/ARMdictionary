@@ -1,19 +1,36 @@
-const pools: Record<string, HTMLAudioElement[]> = {};
-const POOL_SIZE = 6;
+let audioCtx: AudioContext | null = null;
 
-export function playSound(src: string, volume = 1) {
-  if (!pools[src]) {
-    pools[src] = Array.from({ length: POOL_SIZE }, () => {
-      const a = new Audio(src);
-      a.preload = "auto";
-      return a;
-    });
+export async function unlockAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
   }
 
-  const pool = pools[src];
-  const audio = pool.find(a => a.paused) || pool[0];
+  if (audioCtx.state === "suspended") {
+    await audioCtx.resume();
+  }
+}
 
-  audio.volume = volume;
-  audio.currentTime = 0;
-  audio.play().catch(() => {});
+const buffers: Record<string, AudioBuffer> = {};
+
+export async function loadSound(src: string) {
+  if (!audioCtx) return;
+
+  const res = await fetch(src);
+  const arrayBuffer = await res.arrayBuffer();
+  buffers[src] = await audioCtx.decodeAudioData(arrayBuffer);
+}
+
+export function playSound(src: string, volume = 1) {
+  if (!audioCtx || !buffers[src]) return;
+
+  const source = audioCtx.createBufferSource();
+  const gain = audioCtx.createGain();
+
+  source.buffer = buffers[src];
+  gain.gain.value = volume;
+
+  source.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  source.start(0);
 }

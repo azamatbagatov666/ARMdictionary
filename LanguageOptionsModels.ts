@@ -3,6 +3,7 @@ export const titleEn = {
   adamasmaca: "Hangman",
   faydalibilgiler: "Useful Information - Avedikyan",
   iletisim: "Contact - Avedikyan",
+  wordle: "Wordle - Avedikyan",
 };
 
 export const titleTr = {
@@ -10,6 +11,7 @@ export const titleTr = {
   adamasmaca: "Adam Asmaca - Avedikyan",
   faydalibilgiler: "Faydalı Bilgiler - Avedikyan",
   iletisim: "İletişim - Avedikyan",
+  wordle: "Wordle - Avedikyan",
 };
 
 export const titleAm = {
@@ -17,6 +19,7 @@ export const titleAm = {
   adamasmaca: "Կախաղան - Աւետիքեան",
   faydalibilgiler: "Յաւելեալ Գիտելիքներ - Աւետիքեան",
   iletisim: "Մեր Հասցէն - Աւետիքեան",
+  wordle: "Wordle - Աւետիքեան",
 };
 
 export const metaEn = {
@@ -28,6 +31,8 @@ export const metaEn = {
     "Articles about Armenian names, the history of the Armenian alphabet, mythology, nature sounds, countries with their capitals and cultural topics.",
   iletisim:
     "Contact us to share feedback, suggestions, or questions about the Avedikyan Dictionary.",
+  wordle:
+  "Play a Wordle game with Western Armenian words. Guess the word, test your knowledge, and improve your Armenian vocabulary.",
 };
 
 export const metaTr = {
@@ -39,6 +44,7 @@ export const metaTr = {
     "Ermenice isimler, Ermeni alfabesinin tarihi, mitoloji, doğa sesleri, ülkeler ile başkentleri ve kültürel konularda yazılar.",
   iletisim:
     "Avedikyan Sözlük hakkında görüş, öneri veya sorularınız için bizimle iletişime geçin.",
+  wordle: "Batı Ermenicesi kelimelerle hazırlanmış Wordle oyununu oynayın. Sözcüğü tahmin edin ve sözcük dağarcığınızı geliştirin.",
 };
 
 export const metaAm = {
@@ -50,6 +56,7 @@ export const metaAm = {
     "Յօդուածներ Հայ անուններու, Հայոց այբուբենի պատմութեան, դիցաբանութեան, բնութեան ձայներու, երկիրներ ու մայրաքաղաքներու եւ մշակութային նիւթերու մասին։",
   iletisim:
     "Կապ հաստատեցէք մեզի հետ՝ Աւետիքեան Բառարանին վերաբերող կարծիքներու, առաջարկներու կամ հարցումներու համար։",
+  wordle:   "Արեւմտահայերէն բառերով Wordle-ի խաղը։ Բառը գուշակեցէք եւ զարգացուցէք ձեր բառամթերքը։",
 };
 
 export const searchLineEn = {
