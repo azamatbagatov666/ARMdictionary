@@ -108,10 +108,7 @@ onMounted(() => {
 
 const handleDialogClose = () => {
   if (infoOpen.value) {
-    localStorage.setItem(
-      RULES_STORAGE_KEY,
-      new Date().toISOString()
-    );
+    localStorage.setItem(RULES_STORAGE_KEY, new Date().toISOString());
   }
 
   dialogueOpen.value = false;
@@ -171,7 +168,7 @@ const newGame = () => {
 
 const push = (letter: string) => {
   if (currentGuess.value.length < 5 && !won.value) {
-    playSound("/sfx/wordle/softClick.mp3", 1);
+    //playSound("/sfx/wordle/softClick.mp3", 0.4);
     currentGuess.value.push(letter);
   }
   (document.activeElement as HTMLElement | null)?.blur?.();
@@ -179,7 +176,7 @@ const push = (letter: string) => {
 
 const handleBackspace = () => {
   if (won.value || currentGuess.value.length === 0) return;
-  playSound("/sfx/wordle/erase.mp3", 1);
+  //playSound("/sfx/wordle/erase.mp3", 0.4);
 
   currentGuess.value.pop();
   (document.activeElement as HTMLElement | null)?.blur?.();
@@ -202,7 +199,7 @@ const submitGuess = () => {
     wordleListBackup.value &&
     !wordleListBackup.value.includes(currentGuess.value.join(""))
   ) {
-    playSound("/sfx/wordle/noWord.mp3", 1);
+    //playSound("/sfx/wordle/noWord.mp3", 0.4);
     tipKey.value = "wordle.notInWordList";
     invalid();
     return;
@@ -214,7 +211,7 @@ const submitGuess = () => {
   allGuesses.value.push({ word, tiles });
 
   if (word === answer.value) {
-    playSound("/sfx/wordle/ding.mp3", 1);
+    //playSound("/sfx/wordle/ding.mp3", 0.4);
     won.value = true;
     tipKey.value = "wordle.win";
     return;
@@ -224,7 +221,7 @@ const submitGuess = () => {
     tipKey.value = "wordle.lose";
     lose.value = true;
   }
-  playSound("/sfx/wordle/hit.mp3", 1);
+  //playSound("/sfx/wordle/hit.mp3", 0.4);
 
   currentGuess.value = [];
   currentGuessIndex.value++;
@@ -371,16 +368,20 @@ function shouldShowRules(): boolean {
         </div>
 
         <div class="flex justify-center items-center">
-       <ElementComponentsCustomButton
-          class=""
-          @click="handleNewGame"
-          :text="t('wordle.reset')"
-        />
+          <ElementComponentsCustomButton
+            class=""
+            @click="handleNewGame"
+            :text="t('wordle.reset')"
+          />
 
- <div class="w-0">
-  
-        <button @click="infoOpen = true" class="btn ml-2  btn-circle pb-1 text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl">ⓘ</button>
-        </div>
+          <div class="w-0 flex">
+            <button
+              @click="infoOpen = true"
+              class="rounded-full ml-2  text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
+            >
+             <SVGInfo/>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -389,7 +390,6 @@ function shouldShowRules(): boolean {
     :open="dialogueOpen || infoOpen"
     dialogue-text=""
     @close="handleDialogClose"
-    :width="500"
   >
     <div v-if="infoOpen" class="">
       <div class="grid gap-4 text-base/10">
@@ -444,12 +444,15 @@ function shouldShowRules(): boolean {
       </div>
     </div>
 
-    
-    <div v-else-if="dialogueOpen" >
-      <div>{{ t('wordle.areYouSure') }}</div>
+    <div v-else-if="dialogueOpen">
+      <div>{{ t("wordle.areYouSure") }}</div>
       <div class="flex justify-around mt-4">
-        <button class="btn btn-success" @click="newGame">{{ t('dialog.yes') }}</button>
-        <button class="btn btn-error" @click="dialogueOpen = false">{{ t('dialog.no') }}</button>
+        <button class="btn btn-success" @click="newGame">
+          {{ t("dialog.yes") }}
+        </button>
+        <button class="btn btn-error" @click="dialogueOpen = false">
+          {{ t("dialog.no") }}
+        </button>
       </div>
     </div>
   </DialogModal>

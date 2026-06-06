@@ -1,5 +1,5 @@
 const pools: Record<string, HTMLAudioElement[]> = {};
-const POOL_SIZE = 1;
+const POOL_SIZE = 6;
 
 export function playSound(src: string, volume = 1) {
   if (!pools[src]) {

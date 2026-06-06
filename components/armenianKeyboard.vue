@@ -84,12 +84,18 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
     </div>
     <div class="flex justify-center">
       <button v-if="spaceBar" class="armenian-button !w-[210px] !h-[33px]" @click="push(' ')" v-text="'&lrm;'"></button>
-      <button v-if="backSpace && longPress" class="armenian-button !h-[33px] !p-0" @mousedown="startBackspaceHold"
-        @mouseup="stopBackspaceHold" v-text="'⌫'"></button>
-          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !text-3xl !h-[33px] !pb-[10px] flex items-center justify-center" @click="enter"
-        v-text="'⇨'"></button>    
-        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !h-[33px] !p-0" @click="backspace"
-        v-text="'⌫'"></button>
+      <button v-if="backSpace && longPress" class="armenian-button !h-[33px] !p-0 flex justify-center items-center" @mousedown="startBackspaceHold"
+        @mouseup="stopBackspaceHold">
+          <SVGErase/>
+
+      </button>
+          <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !h-[33px] !p-0 flex items-center justify-center" @click="enter">
+            <SVGEnter/>
+          </button>    
+        <button tabindex="-1" v-if="backSpace && !longPress" class="armenian-button !h-[33px] !p-0 flex justify-center items-center" @click="backspace">
+
+          <SVGErase/>
+        </button>
 
     </div>
   </div>
@@ -104,7 +110,7 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding-top: 5px;
+  padding-top: 6px;
   outline: 0;
 }
 

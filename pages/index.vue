@@ -192,6 +192,14 @@ const scrollToTarget = () => {
         </div>
       </div>
 
+      <div class="flex justify-center my-2">
+        <NuxtLink to="/wordle"  class="bg-gray-300 dark:bg-[#101010] dark:text-white active:bg-gray-400
+        border-2 border-black dark:border-white
+        wordle text-gray-800 font-bold py-2 px-4 rounded-lg">
+    WORDLE
+  </NuxtLink >
+  </div>
+
       <AlpTable ref="alpTable" />
 
       <div ref="target">
@@ -212,6 +220,14 @@ const scrollToTarget = () => {
 </template>
 
 <style scoped>
+
+@media (hover: hover) and (pointer: fine) {
+  .wordle:hover {
+    @apply bg-gray-400;
+  }
+
+}
+
 .containers {
   /*
   width: 99vw;
