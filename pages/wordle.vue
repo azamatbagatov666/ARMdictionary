@@ -338,7 +338,7 @@ function shouldShowRules(): boolean {
     <div v-if="answer.length > 0">
       <div class="flex justify-center">
         <div
-          class="select-none relative w-full sm:w-[570px] rounded-t-lg bg-gray-200 dark:bg-[#101010] transition-colors duration-300 px-4 pt-4 mt-2 border-black max-[430px]:w-full dark:border-white border-2 !border-b-0"
+          class="select-none relative w-full sm:w-[570px] rounded-t-lg  px-4 pt-4 mt-2 frame max-[430px]:w-full  !border-b-0"
         >
           <div v-for="i in 6">
             <div

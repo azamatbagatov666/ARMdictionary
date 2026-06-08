@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const props = withDefaults(
   defineProps<{
     open: boolean;
@@ -66,13 +65,19 @@ const onCancel = (e: Event) => {
 <template>
   <dialog ref="dialogRef" class="modal outline-none px-1" @cancel="onCancel">
     <div
-      class="modal-box  bg-gray-200 dark:bg-[#101010] border dark:border-white border-black max-h-[92vh] overflow-y-auto"
+      class="modal-box frame !rounded-2xl !border max-h-[92vh] overflow-y-auto"
       :class="props.width ? '' : 'sm:w-96'"
-      :style="props.width ? { width: `${props.width}px`, maxWidth: 'fit-content' } : undefined"
+      :style="
+        props.width
+          ? { width: `${props.width}px`, maxWidth: 'fit-content' }
+          : undefined
+      "
     >
       <button
         class="outline-none btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-        :class="props.disableClose ? 'pointer-events-none blur-sm opacity-35' : ''"
+        :class="
+          props.disableClose ? 'pointer-events-none blur-sm opacity-35' : ''
+        "
         @click="requestClose"
       >
         ✕
@@ -80,7 +85,11 @@ const onCancel = (e: Event) => {
 
       <div
         class="mt-5 flex justify-center text-center"
-        :class="props.disableClose ? 'pointer-events-none blur-sm opacity-35 select-none' : ''"
+        :class="
+          props.disableClose
+            ? 'pointer-events-none blur-sm opacity-35 select-none'
+            : ''
+        "
       >
         <div class="font-bold text-lg whitespace-break-spaces text-left">
           {{ props.dialogueText }}
@@ -90,10 +99,7 @@ const onCancel = (e: Event) => {
       </div>
     </div>
 
-    <div
-      class="modal-backdrop"
-      @click="requestClose"
-    />
+    <div class="modal-backdrop" @click="requestClose" />
 
     <div class="absolute inset-0 pointer-events-none">
       <div class="relative w-full h-full">

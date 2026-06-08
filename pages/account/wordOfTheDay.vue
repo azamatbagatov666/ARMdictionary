@@ -393,7 +393,7 @@ const image = ref();
 
     <table
       class="lostTable mx-auto table-auto transition-colors duration-300 my-4 text-black dark:text-white"
-      v-if="responseData"
+      v-if="responseData.length > 0"
     >
       <tbody>
         <tr class="bg-gray-300 dark:bg-[#262a2f]">

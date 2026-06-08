@@ -139,7 +139,7 @@ const responseData = ref();
     <div class="min-[1430px]:flex min-[1430px]:justify-center">
       <div v-if="answer">
         <div
-          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2 border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+          class="flex justify-center min-[730px]:px-2 h-[180px] min-[730px]:h-[366px] w-[265px] min-[730px]:w-[254px] mx-auto min-[730px]:mt-2  select-none frame"
         >
           <div class="hangman relative w-[250px] min-[730px]:top-[10px]">
             <div class="absolute">
@@ -183,7 +183,7 @@ const responseData = ref();
 
         <div class="h-16 flex justify-center">
           <div
-            class="text-center px-3 pt-2 inline-block border-2 border-black rounded-lg bg-gray-200 dark:bg-[#101010] select-none dark:border-white transition-colors duration-300"
+            class="text-center px-3 pt-2 inline-block  select-none frame"
             v-if="answer"
           >
             <div

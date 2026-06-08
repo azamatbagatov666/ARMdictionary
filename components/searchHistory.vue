@@ -36,7 +36,7 @@ const historyList = computed(() => searchHistoryStore.state.history);
 
 <template>
   <div
-    class="border-black lg:w-[600px] bg-gray-200 dark:border-white dark:bg-[#101010] transition-colors duration-300 w-full"
+    class="frame !border-0 lg:w-[600px] w-full"
   >
     <ul class="p-2 w-full">
       <li

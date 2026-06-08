@@ -439,7 +439,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
       >
         <div
-          class="bg-gray-200 p-2 sm:px-4 md:p-6 md:!pb-2 border-2 border-black rounded-lg lg:!rounded-tr-none dark:bg-[#101010] dark:border-white transition-colors duration-300 w-full sm:w-[520px] md:w-[652px]"
+          class=" p-2 sm:px-4 md:p-6 md:!pb-2  lg:!rounded-tr-none frame w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
@@ -550,10 +550,11 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         </div>
         <div class="flex justify-center mt-2 lg:hidden">
           <div class="flex gap-1 select-none">
+            <!------------------ MOBILE ---------------------->
             <button
               v-if="todayData"
               aria-label="Günün sözcüğünü getir."
-              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-red-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class=" transition-transform active:!bg-red-600  h-12 w-28 frame origin-top-left active:scale-105"
               @click="setToday"
               @mousedown="buttonClick"
             >
@@ -606,7 +607,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             </button>
             <button
               aria-label="Rastgele sözcük getir."
-              class="rounded-md border-2 border-black h-12 w-28 transition-transform active:!bg-purple-600 dark:border-white bg-gray-200 dark:bg-[#101010] origin-top-left active:scale-105"
+              class="h-12 w-28  active:!bg-purple-600  frame  origin-top-left active:scale-105"
               @click="randomWord()"
               @mousedown="buttonClick"
             >
@@ -637,7 +638,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
             <button
               aria-label="Arama geçmişini aç."
-              class="bg-gray-200 rounded-md border-2 transition-transform active:!bg-blue-600 border-black h-12 w-28 dark:border-white dark:bg-[#101010] origin-top-left active:scale-105"
+              class="transition-transform active:!bg-blue-600  h-12 w-28 frame origin-top-left active:scale-105"
               @click="toggleHistory($event)"
               @mousedown="buttonClick"
             >
@@ -676,10 +677,12 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
             </button>
           </div>
         </div>
+            <!------------------ DESKTOP ---------------------->
+
         <button
           v-if="todayData"
           aria-label="Günün sözcüğünü getir."
-          class="hidden lg:block group bg-gray-200 select-none rounded-b-md border-2 border-t-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+          class="hidden lg:block group bg-gray-200 select-none !rounded-t-none !border-t-0  h-12 w-12  frame hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
           @click="setToday"
           @mousedown="buttonClick"
         >
@@ -727,9 +730,12 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         </button>
       </div>
       <div class="w-0 flex-col gap-4 justify-start hidden lg:flex select-none">
+
+                    <!------------------ DESKTOP ---------------------->
+
         <button
           aria-label="Rastgele sözcük getir."
-          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
+          class="group !rounded-l-none border-2 !border-l-0 h-12 w-12 frame hover:!bg-purple-600 hover:!w-40 origin-top-left active:scale-105"
           @click="randomWord()"
           @mousedown="buttonClick"
         >
@@ -755,7 +761,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
         <button
           aria-label="Arama geçmişini aç."
-          class="group bg-gray-200 rounded-r-md border-2 border-l-0 border-black h-12 w-12 duration-300 dark:border-white dark:bg-[#101010] hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+          class="group  !rounded-l-none  !border-l-0  h-12 w-12 frame hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
           @click="toggleHistory($event)"
           @mousedown="buttonClick"
         >

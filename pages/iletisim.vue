@@ -144,10 +144,10 @@ const validateMessage = () => {
 <template>
   <div>
 <ElementComponentsLogoBanner/>
-  <div class="sm:h-[90vh] h-full w-full flex items-center justify-center">
+  <div class="sm:h-[90vh] h-full w-full flex items-center justify-center px-1">
     
     <div
-      class="p-2 sm:p-8 w-full sm:w-max bg-gray-200 sm:border-2 border-black rounded-lg dark:bg-[#101010] dark:border-white transition-colors duration-300"
+      class="p-2 sm:p-8 w-full sm:w-max frame"
     >
       <div class="grid gap-8 sm:gap-4">
         <div class="h-14">

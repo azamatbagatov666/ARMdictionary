@@ -39,7 +39,7 @@ const onSelect = (item: TDATA) => {
   <div
     v-for="item in props.responseData"
     :key="item.WORD_ID"
-    class="w-full sm:w-2/3 lg:w-1/2 border-2 border-black dark:border-white rounded-lg bg-gray-200 dark:bg-[#101010] text-lg p-3 mx-auto my-6 transition-colors duration-300"
+    class="w-full sm:w-2/3 lg:w-1/2 frame text-lg p-3 mx-auto my-6 "
     :class="props.class"
   >
     <div v-if="selectable">

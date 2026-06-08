@@ -197,9 +197,8 @@ const scrollToTarget = () => {
       </div>
 
       <div class="flex justify-center my-2">
-        <NuxtLink to="/wordle"  class="bg-gray-300  select-none dark:bg-[#101010] dark:text-white active:bg-gray-400
-        border-2 border-black dark:border-white
-        wordle text-gray-800 font-bold py-2 px-4 rounded-lg">
+        <NuxtLink to="/wordle"  class="select-none frame active:bg-gray-400
+        wordle  font-bold py-2 px-4 ">
     WORDLE
   </NuxtLink >
   </div>
