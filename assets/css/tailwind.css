@@ -32,12 +32,15 @@ select,
 textarea {
   font: inherit !important;
   font-family: inherit !important;
-  
+}
 
+:root {
+  --key-bg: #e5e7eb;
+  --key-dark-bg: #101010;
 }
 
 .frame {
-  background-color: #e5e7eb;
+  background-color: var(--key-bg);
   border-width: 2px;
   border-color: black;
   transition-duration: 300ms;
@@ -49,6 +52,35 @@ textarea {
 }
 
 .dark .frame {
-  background-color: #101010;
+  background-color: var(--key-dark-bg);
   border-color: white;
 }
+
+.svgFill {
+  transition-duration: 300ms;
+  transition-property:
+    color, background-color, border-color, transform, text-decoration-color,
+    fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  fill: var(--key-bg);
+}
+
+.dark .svgFill {
+  fill: var(--key-dark-bg);
+}
+
+.svgFillRev {
+  transition-duration: 300ms;
+  transition-property:
+    color, background-color, border-color, transform, text-decoration-color,
+    fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  fill: var(--key-dark-bg);
+
+}
+
+.dark .svgFillRev {
+  fill: var(--key-bg);
+}
+

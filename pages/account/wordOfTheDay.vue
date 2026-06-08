@@ -25,6 +25,7 @@ const dayData = reactive({
 });
 
 const responseData = ref<WORDOFTHEDAY[]>([]);
+const showTable = ref(false);
 const searchResponse = ref<TDATA[]>([]);
 
 const months = [
@@ -75,6 +76,7 @@ const getWords = async () => {
     );
     connectionError.value = false;
     responseData.value = data;
+    showTable.value = true;
   } catch (err) {
     connectionError.value = true;
 
@@ -171,6 +173,7 @@ const reset = async () => {
   searchResponse.value = [];
   desword.value = "";
   responseData.value = [];
+  showTable.value = false;
   monthSelection.value = months[new Date().getMonth()];
   yearSelection.value = new Date().getFullYear();
   connectionError.value = false;
@@ -393,7 +396,7 @@ const image = ref();
 
     <table
       class="lostTable mx-auto table-auto transition-colors duration-300 my-4 text-black dark:text-white"
-      v-if="responseData.length > 0"
+      v-if="showTable"
     >
       <tbody>
         <tr class="bg-gray-300 dark:bg-[#262a2f]">
