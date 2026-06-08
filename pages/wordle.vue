@@ -108,22 +108,24 @@ function unlockOnce() {
 
   unlockAudio(); // DO NOT await
 
-  Promise.all([
-    "/sfx/wordle/softClick.mp3",
-    "/sfx/wordle/erase.mp3",
-    "/sfx/wordle/hit.mp3",
-    "/sfx/wordle/ding.mp3",
-    "/sfx/wordle/noWord.mp3",
-  ].map(loadSound));
+  Promise.all(
+    [
+      "/sfx/wordle/softClick.mp3",
+      "/sfx/wordle/erase.mp3",
+      "/sfx/wordle/hit.mp3",
+      "/sfx/wordle/ding.mp3",
+      "/sfx/wordle/noWord.mp3",
+    ].map(loadSound),
+  );
 }
 
 onMounted(() => {
-  window.addEventListener("pointerdown", unlockOnce, { once: true, capture: true });
-    window.addEventListener("keydown", unlockOnce, { once: true, capture: true });
-
+  window.addEventListener("pointerdown", unlockOnce, {
+    once: true,
+    capture: true,
+  });
+  window.addEventListener("keydown", unlockOnce, { once: true, capture: true });
 });
-
-
 
 onMounted(() => {
   if (shouldShowRules()) {
@@ -144,11 +146,21 @@ const handleDocumentClick = (event: KeyboardEvent) => {
   if (event.repeat) return; // disable press hold
 
   if (event.key === "Backspace") {
+    event.preventDefault();
+    event.stopPropagation();
     handleBackspace();
   } else if (event.key.length === 1 && armRegex.test(event.key)) {
+    event.preventDefault();
+    event.stopPropagation();
     push(event.key.toLowerCase());
   } else if (event.key === "Enter") {
+    event.preventDefault();
+    event.stopPropagation();
     submitGuess();
+  }
+  else if (event.key === " ") {
+    event.preventDefault();
+    event.stopPropagation();
   }
 };
 
@@ -196,7 +208,7 @@ const push = (letter: string) => {
     playSound("/sfx/wordle/softClick.mp3", 0.4);
     currentGuess.value.push(letter);
   }
-  (document.activeElement as HTMLElement | null)?.blur?.();
+  // (document.activeElement as HTMLElement | null)?.blur?.();
 };
 
 const handleBackspace = () => {
@@ -204,7 +216,7 @@ const handleBackspace = () => {
   playSound("/sfx/wordle/erase.mp3", 0.4);
 
   currentGuess.value.pop();
-  (document.activeElement as HTMLElement | null)?.blur?.();
+  // (document.activeElement as HTMLElement | null)?.blur?.();
 };
 
 type GuessResult = {
@@ -251,7 +263,7 @@ const submitGuess = () => {
   currentGuess.value = [];
   currentGuessIndex.value++;
 
-  (document.activeElement as HTMLElement | null)?.blur?.();
+  //(document.activeElement as HTMLElement | null)?.blur?.();
 };
 
 type Tile = "green" | "yellow" | "gray";
@@ -335,7 +347,7 @@ function shouldShowRules(): boolean {
             >
               <div
                 v-for="j in 5"
-                class="size-12 cells border-2 uppercase  border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
+                class="size-12 cells border-2 uppercase border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
                 :class="{
                   '!border-black dark:!border-white':
                     i === currentGuessIndex && currentGuess[j - 1],
@@ -402,9 +414,9 @@ function shouldShowRules(): boolean {
           <div class="w-0 flex">
             <button
               @click="infoOpen = true"
-              class="rounded-full ml-2  text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
+              class="rounded-full ml-2 text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
             >
-             <SVGInfo/>
+              <SVGInfo />
             </button>
           </div>
         </div>

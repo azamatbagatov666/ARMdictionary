@@ -12,7 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="mounted" class="flex justify-left 2xl:absolute">
+  <div v-if="mounted" class="flex justify-left 2xl:absolute select-none">
     <img
       src="/goryun.png"
       alt="Ermeni Güneş Haçı"

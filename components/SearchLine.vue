@@ -885,6 +885,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
 .turkish-button {
   @apply size-1/12 p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
+  user-select: none;
   font-size: 16px;
   background-color: #3490dc;
   color: #ffffff;
