@@ -48,7 +48,7 @@ defineExpose({ closePanel })
   <div class="flex justify-center mt-2">
    
 
-    <div @click="showAlpTable = !showAlpTable" class="maindiv hidden min-[722px]:block bg-gray-200 h-[38px] w-[360.94px]   p-1 cursor-pointer rounded-lg frame duration-300 select-none"
+    <div @click="showAlpTable = !showAlpTable" class="maindiv hidden min-[722px]:block bg-gray-200 h-[38px] w-[364.94px]   p-1 cursor-pointer rounded-lg frame duration-300 select-none"
     :class="{'!h-[115px] lg:!h-[131px] !w-[942.75px] lg:w-[992.78px] !shadow-none no-translate' : showAlpTable}">
     
     <div class="mb-0.5  flex justify-center font-bold"><span v-text="t('alpTable.tableTitle')"></span></div>

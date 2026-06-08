@@ -15,7 +15,7 @@ const { t } = useI18n();
     </svg>
 
     <div
-      class="frame !border-0 w-full p-2 outline-none"
+      class="frame !border-0 w-full p-2 outline-none !rounded-none"
     >
       <div class="flex justify-center gap-4">
         <svg
