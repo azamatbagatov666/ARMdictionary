@@ -64,10 +64,10 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
 
 <template>
   <div :style="{
-    '--key-bg': wordle ? '#818384' : '#3490dc',
-    '--key-active': wordle ? '#bdbebe' : '#99c7ed'
+    '--wordle-key-bg': wordle ? '#818384' : '#3490dc',
+    '--wordle-key-active': wordle ? '#bdbebe' : '#99c7ed'
   }"
-    class="w-full sm:w-[570px] inline-block left-1/2 -translate-x-1/2 relative border-2  my-3 p-2  select-none frame">
+    class="w-full sm:w-[570px] inline-block left-1/2 -translate-x-1/2 relative my-3 p-2  frame select-none ">
     <div v-for="(line, lineIndex) in lines" :key="lineIndex" class="row">
       
       <button v-for="(letter, index) in line" :key="index" tabindex="-1" class="armenian-button" :class="{
@@ -105,7 +105,7 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
 .armenian-button {
   @apply size-[7.10%] p-1 m-[2px] sm:m-[5px] sm:size-[35px] sm:p-[10px];
   font-size: 16px;
-  background-color: var(--key-bg);
+  background-color: var(--wordle-key-bg);
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -115,7 +115,7 @@ const punctuationCharacters = ["՝", "՛", "՞", "՜"];
 }
 
 .armenian-button:active {
-  background-color: var(--key-active) !important;
+  background-color: var(--wordle-key-active) !important;
 }
 
 .row:first-child {

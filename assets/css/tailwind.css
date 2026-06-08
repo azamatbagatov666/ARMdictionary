@@ -11,15 +11,16 @@ body {
   background-size: auto;
   background-attachment: fixed;
   background-repeat: no-repeat;
+  touch-action: manipulation;
+  color-scheme: light; /* or auto */
+
+
 }
 
 img {
   pointer-events: none;
 }
 
-body {
-  color-scheme: light; /* or auto */
-}
 
 html,
 body {
@@ -77,7 +78,6 @@ textarea {
     fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   fill: var(--key-dark-bg);
-
 }
 
 .dark .svgFillRev {
