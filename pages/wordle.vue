@@ -422,6 +422,11 @@ function shouldShowRules(): boolean {
         </div>
       </div>
     </div>
+          <div
+        v-else-if="connectionError"
+        class="text-3xl flex items-center justify-center h-[70vh] text-white font-bold"
+        v-text="t('adamAsmaca.noConnection')"
+      ></div>
   </div>
   <DialogModal
     :open="dialogueOpen || infoOpen"
