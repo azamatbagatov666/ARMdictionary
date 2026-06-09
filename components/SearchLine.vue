@@ -389,7 +389,7 @@ const sanitizeAranan = (value: string) => {
     .normalize("NFD") // split accents
     .replace(/\u0302/g, "") // remove circumflex ONLY
     .normalize("NFC")
-    .replace(/[.!?՝՛՞՜']/g, ""); // punctuation
+    .replace(/[.!՝՛՞՜']/g, ""); // punctuation
 };
 
 const scrollToActiveItem = () => {
