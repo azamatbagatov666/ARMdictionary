@@ -1,28 +1,28 @@
 export const titleEn = {
   index: "Avedikyan - Turkish Armenian English Dictionary",
   indexShort: "Avedikyan Dictionary",
-  adamasmaca: "Hangman",
-  faydalibilgiler: "Useful Information - Avedikyan",
-  iletisim: "Contact - Avedikyan",
-  wordle: "Wordle - Avedikyan",
+  adamasmaca: "Hangman - Avedikyan Dictionary",
+  faydalibilgiler: "Useful Information - Avedikyan Dictionary",
+  iletisim: "Contact - Avedikyan Dictionary",
+  wordle: "Wordle - Avedikyan Dictionary",
 };
 
 export const titleTr = {
   index: "Avedikyan - Türkçe Ermenice İngilizce Sözlük",
   indexShort: "Avedikyan Sözlük",
-  adamasmaca: "Adam Asmaca - Avedikyan",
-  faydalibilgiler: "Faydalı Bilgiler - Avedikyan",
-  iletisim: "İletişim - Avedikyan",
-  wordle: "Wordle - Avedikyan",
+  adamasmaca: "Adam Asmaca - Avedikyan Sözlük",
+  faydalibilgiler: "Faydalı Bilgiler - Avedikyan Sözlük",
+  iletisim: "İletişim - Avedikyan Sözlük",
+  wordle: "Wordle - Avedikyan Sözlük",
 };
 
 export const titleAm = {
   index: "Աւետիքեան - Թրքերէն Հայերէն Անգլերէն Բառարան",
   indexShort: "Աւետիքեան Բառարան",
-  adamasmaca: "Կախաղան - Աւետիքեան",
-  faydalibilgiler: "Յաւելեալ Գիտելիքներ - Աւետիքեան",
-  iletisim: "Մեր Հասցէն - Աւետիքեան",
-  wordle: "Wordle - Աւետիքեան",
+  adamasmaca: "Կախաղան - Աւետիքեան Բառարան",
+  faydalibilgiler: "Յաւելեալ Գիտելիքներ - Աւետիքեան Բառարան",
+  iletisim: "Մեր Հասցէն - Աւետիքեան Բառարան",
+  wordle: "Wordle - Աւետիքեան Բառարան",
 };
 
 export const metaEn = {
@@ -154,18 +154,21 @@ export const indexEn = {
   noConnection: "Connection problem.",
   noResult: "The word you searched for was not found.",
   todaysword: "Today's Word",
+  share: "Share the Word",
 };
 
 export const indexTr = {
   noConnection: "Bağlantı sorunu.",
   noResult: "Aradığınız sözcük bulunamadı.",
   todaysword: "Günün Sözcüğü",
+  share: "Sözcüğü Paylaş",
 };
 
 export const indexAm = {
   noConnection: "Կապակցութեան հարց։",
   noResult: "Չկրցաւ գտնուիլ ձեր փնտրած բառը։",
   todaysword: "Օրուան Բառը",
+  share: "Բառը Կիսէ",
 };
 
 export const alpTableEn = {

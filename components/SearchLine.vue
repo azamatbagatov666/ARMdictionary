@@ -234,8 +234,7 @@ const keyEnter = () => {
 
 let historyOn = ref(false);
 
-const toggleHistory = (event: Event) => {
-  event.preventDefault();
+const toggleHistory = () => {
 
   historyOn.value = !historyOn.value;
 };
@@ -439,7 +438,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         class="w-full sm:flex sm:justify-center sm:w-fit sm:flex-col lg:flex-col"
       >
         <div
-          class=" p-2 sm:px-4 md:p-6 md:!pb-2  lg:!rounded-tr-none frame w-full sm:w-[520px] md:w-[652px]"
+          class="p-2 sm:px-4 md:p-6 md:!pb-2 lg:!rounded-tr-none frame w-full sm:w-[520px] md:w-[652px]"
           :class="{ 'lg:!rounded-bl-none': todayData }"
         >
           <ElementComponentsCustomButton
@@ -551,27 +550,17 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         <div class="flex justify-center mt-2 lg:hidden">
           <div class="flex gap-1 select-none">
             <!------------------ MOBILE ---------------------->
-            <button
+            <ColorSvgButtons
+              :aria-label="'Günün Sözcüğünü Getir'"
+              :colour="'red'"
+              :buttonText="t('index.todaysword')"
               v-if="todayData"
-              aria-label="Günün sözcüğünü getir."
-              class=" transition-transform active:!bg-red-600  h-12 w-28 frame origin-top-left active:scale-105"
-              @click="setToday"
-              @mousedown="buttonClick"
+              @button-clicked="setToday"
             >
-              <div class="flex items-center ml-[5px]">
-                <div class="rounded-full size-9 bg-red-600">
-                  <div
-                    class="rounded-full size-9 bg-red-600 flex items-center justify-center"
-                  >
-                    <svg
-                      width="27px"
-                      height="27px"
-                      viewBox="0 0 15 15"
-                      fill="none"
-                    >
-                      <path
-                        fill="white"
-                        d="
+              <svg width="27px" height="27px" viewBox="0 0 15 15" fill="none">
+                <path
+                  fill="white"
+                  d="
       M4 1
       C4.28 1 4.5 1.22 4.5 1.5V2.5H10.5V1.5
       C10.5 1.22 10.72 1 11 1
@@ -587,104 +576,71 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
       C13 12.78 12.78 13 12.5 13H2.5
       C2.22 13 2 12.78 2 12.5V5.5Z
     "
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        fill="var(--key-dark-bg)"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  fill="var(--key-dark-bg)"
+                  d="M4.5 1C4.77614 1 5 1.22386 5 1.5V2H10V1.5C10 1.22386 10.2239 1 10.5 1C10.7761 1 11 1.22386 11 1.5V2H12.5C13.3284 2 14 2.67157 14 3.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V3.5C1 2.67157 1.67157 2 2.5 2H4V1.5C4 1.22386 4.22386 1 4.5 1ZM10 3V3.5C10 3.77614 10.2239 4 10.5 4C10.7761 4 11 3.77614 11 3.5V3H12.5C12.7761 3 13 3.22386 13 3.5V5H2V3.5C2 3.22386 2.22386 3 2.5 3H4V3.5C4 3.77614 4.22386 4 4.5 4C4.77614 4 5 3.77614 5 3.5V3H10ZM2 6V12.5C2 12.7761 2.22386 13 2.5 13H12.5C12.7761 13 13 12.7761 13 12.5V6H2ZM7 7.5C7 7.22386 7.22386 7 7.5 7C7.77614 7 8 7.22386 8 7.5C8 7.77614 7.77614 8 7.5 8C7.22386 8 7 7.77614 7 7.5ZM9.5 7C9.22386 7 9 7.22386 9 7.5C9 7.77614 9.22386 8 9.5 8C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7ZM11 7.5C11 7.22386 11.2239 7 11.5 7C11.7761 7 12 7.22386 12 7.5C12 7.77614 11.7761 8 11.5 8C11.2239 8 11 7.77614 11 7.5ZM11.5 9C11.2239 9 11 9.22386 11 9.5C11 9.77614 11.2239 10 11.5 10C11.7761 10 12 9.77614 12 9.5C12 9.22386 11.7761 9 11.5 9ZM9 9.5C9 9.22386 9.22386 9 9.5 9C9.77614 9 10 9.22386 10 9.5C10 9.77614 9.77614 10 9.5 10C9.22386 10 9 9.77614 9 9.5ZM7.5 9C7.22386 9 7 9.22386 7 9.5C7 9.77614 7.22386 10 7.5 10C7.77614 10 8 9.77614 8 9.5C8 9.22386 7.77614 9 7.5 9ZM5 9.5C5 9.22386 5.22386 9 5.5 9C5.77614 9 6 9.22386 6 9.5C6 9.77614 5.77614 10 5.5 10C5.22386 10 5 9.77614 5 9.5ZM3.5 9C3.22386 9 3 9.22386 3 9.5C3 9.77614 3.22386 10 3.5 10C3.77614 10 4 9.77614 4 9.5C4 9.22386 3.77614 9 3.5 9ZM3 11.5C3 11.2239 3.22386 11 3.5 11C3.77614 11 4 11.2239 4 11.5C4 11.7761 3.77614 12 3.5 12C3.22386 12 3 11.7761 3 11.5ZM5.5 11C5.22386 11 5 11.2239 5 11.5C5 11.7761 5.22386 12 5.5 12C5.77614 12 6 11.7761 6 11.5C6 11.2239 5.77614 11 5.5 11ZM7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5ZM9.5 11C9.22386 11 9 11.2239 9 11.5C9 11.7761 9.22386 12 9.5 12C9.77614 12 10 11.7761 10 11.5C10 11.2239 9.77614 11 9.5 11Z"
+                />
+              </svg>
+            </ColorSvgButtons>
 
-                        d="M4.5 1C4.77614 1 5 1.22386 5 1.5V2H10V1.5C10 1.22386 10.2239 1 10.5 1C10.7761 1 11 1.22386 11 1.5V2H12.5C13.3284 2 14 2.67157 14 3.5V12.5C14 13.3284 13.3284 14 12.5 14H2.5C1.67157 14 1 13.3284 1 12.5V3.5C1 2.67157 1.67157 2 2.5 2H4V1.5C4 1.22386 4.22386 1 4.5 1ZM10 3V3.5C10 3.77614 10.2239 4 10.5 4C10.7761 4 11 3.77614 11 3.5V3H12.5C12.7761 3 13 3.22386 13 3.5V5H2V3.5C2 3.22386 2.22386 3 2.5 3H4V3.5C4 3.77614 4.22386 4 4.5 4C4.77614 4 5 3.77614 5 3.5V3H10ZM2 6V12.5C2 12.7761 2.22386 13 2.5 13H12.5C12.7761 13 13 12.7761 13 12.5V6H2ZM7 7.5C7 7.22386 7.22386 7 7.5 7C7.77614 7 8 7.22386 8 7.5C8 7.77614 7.77614 8 7.5 8C7.22386 8 7 7.77614 7 7.5ZM9.5 7C9.22386 7 9 7.22386 9 7.5C9 7.77614 9.22386 8 9.5 8C9.77614 8 10 7.77614 10 7.5C10 7.22386 9.77614 7 9.5 7ZM11 7.5C11 7.22386 11.2239 7 11.5 7C11.7761 7 12 7.22386 12 7.5C12 7.77614 11.7761 8 11.5 8C11.2239 8 11 7.77614 11 7.5ZM11.5 9C11.2239 9 11 9.22386 11 9.5C11 9.77614 11.2239 10 11.5 10C11.7761 10 12 9.77614 12 9.5C12 9.22386 11.7761 9 11.5 9ZM9 9.5C9 9.22386 9.22386 9 9.5 9C9.77614 9 10 9.22386 10 9.5C10 9.77614 9.77614 10 9.5 10C9.22386 10 9 9.77614 9 9.5ZM7.5 9C7.22386 9 7 9.22386 7 9.5C7 9.77614 7.22386 10 7.5 10C7.77614 10 8 9.77614 8 9.5C8 9.22386 7.77614 9 7.5 9ZM5 9.5C5 9.22386 5.22386 9 5.5 9C5.77614 9 6 9.22386 6 9.5C6 9.77614 5.77614 10 5.5 10C5.22386 10 5 9.77614 5 9.5ZM3.5 9C3.22386 9 3 9.22386 3 9.5C3 9.77614 3.22386 10 3.5 10C3.77614 10 4 9.77614 4 9.5C4 9.22386 3.77614 9 3.5 9ZM3 11.5C3 11.2239 3.22386 11 3.5 11C3.77614 11 4 11.2239 4 11.5C4 11.7761 3.77614 12 3.5 12C3.22386 12 3 11.7761 3 11.5ZM5.5 11C5.22386 11 5 11.2239 5 11.5C5 11.7761 5.22386 12 5.5 12C5.77614 12 6 11.7761 6 11.5C6 11.2239 5.77614 11 5.5 11ZM7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5ZM9.5 11C9.22386 11 9 11.2239 9 11.5C9 11.7761 9.22386 12 9.5 12C9.77614 12 10 11.7761 10 11.5C10 11.2239 9.77614 11 9.5 11Z"
-
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div class="">
-                  <span
-                    class="w-[68px] pointer-events-none inline-block leading-none transition-opacity dark:text-white group-hover:delay-300"
-                    v-text="t('index.todaysword')"
-                  ></span>
-                </div>
-              </div>
-            </button>
-            <button
-              aria-label="Rastgele sözcük getir."
-              class="h-12 w-28  active:!bg-purple-600  frame  origin-top-left active:scale-105"
-              @click="randomWord()"
-              @mousedown="buttonClick"
+            <ColorSvgButtons
+              :aria-label="'Rastgele sözcük getir'"
+              :colour="'purple'"
+              :buttonText="t('searchLine.randomButton')"
+              v-if="todayData"
+              @button-clicked="randomWord()"
             >
-              <div class="flex items-center ml-[5px]">
-                <div
-                  class="rounded-full size-9 bg-purple-600 flex justify-center items-center"
-                >
-                  <svg
-                    width="30px"
-                    height="30px"
-                    viewBox="0 0 24 24"
-                    version="1.1"
-                  >
-                    <path
-                      d="M4,17 C3.44771525,17 3,16.5522847 3,16 C3,15.4477153 3.44771525,15 4,15 L6,15 L9,12 L6,9 L4,9 C3.45000005,9 3,8.55245148 3,8.00122564 C3,7.44999981 3.45000005,7 4,7 L7,7 L11,11 L15,7 L17,7 L17,5 L21,8.00122564 L17,11 L17,9 L16,9 L13,12 L16,15 L17,15 L17,13 L21,16 L17,19 L17,17 L15,17 L11,13 L7,17 L4,17 Z"
-                      fill="#ffffff"
-                    ></path>
-                  </svg>
-                </div>
-                <div class="">
-                  <span
-                    class="pointer-events-none w-[68px] inline-block break-words leading-none transition-opacity dark:text-white"
-                    v-text="t('searchLine.randomButton')"
-                  ></span>
-                </div>
-              </div>
-            </button>
+              <svg width="30px" height="30px" viewBox="0 0 24 24" version="1.1">
+                <path
+                  d="M4,17 C3.44771525,17 3,16.5522847 3,16 C3,15.4477153 3.44771525,15 4,15 L6,15 L9,12 L6,9 L4,9 C3.45000005,9 3,8.55245148 3,8.00122564 C3,7.44999981 3.45000005,7 4,7 L7,7 L11,11 L15,7 L17,7 L17,5 L21,8.00122564 L17,11 L17,9 L16,9 L13,12 L16,15 L17,15 L17,13 L21,16 L17,19 L17,17 L15,17 L11,13 L7,17 L4,17 Z"
+                  fill="#ffffff"
+                ></path>
+              </svg>
+            </ColorSvgButtons>
 
-            <button
-              aria-label="Arama geçmişini aç."
-              class="transition-transform active:!bg-blue-600  h-12 w-28 frame origin-top-left active:scale-105"
-              @click="toggleHistory($event)"
-              @mousedown="buttonClick"
+            <ColorSvgButtons
+              :aria-label="'Arama geçmişini aç.'"
+              :colour="'blue'"
+              :buttonText="t('searchLine.historyButton')"
+              v-if="todayData"
+              @button-clicked="toggleHistory()"
             >
-              <div class="flex items-center ml-[5px]">
-                <div class="rounded-full flex items-center size-9 bg-blue-600">
-                  <svg
-                    width="28px"
-                    height="28px"
-                    class="ml-[4px]"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      d="M5.52786 16.7023C6.6602 18.2608 8.3169 19.3584 10.1936 19.7934C12.0703 20.2284 14.0409 19.9716 15.7434 19.0701C17.446 18.1687 18.766 16.6832 19.4611 14.8865C20.1562 13.0898 20.1796 11.1027 19.527 9.29011C18.8745 7.47756 17.5898 5.96135 15.909 5.02005C14.2282 4.07875 12.2641 3.77558 10.3777 4.16623C8.49129 4.55689 6.80919 5.61514 5.64045 7.14656C4.47171 8.67797 3.89482 10.5797 4.01579 12.5023M4.01579 12.5023L2.51579 11.0023M4.01579 12.5023L5.51579 11.0023"
-                      stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="M12 8V12L15 15"
-                      stroke="#ffffff"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div class="">
-                  <span
-                    class="pointer-events-none w-[68px] inline-block break-words leading-none transition-opacity dark:text-white"
-                    v-text="t('searchLine.historyButton')"
-                  ></span>
-                </div>
-              </div>
-            </button>
+              <svg
+                width="28px"
+                height="28px"
+                class=""
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M5.52786 16.7023C6.6602 18.2608 8.3169 19.3584 10.1936 19.7934C12.0703 20.2284 14.0409 19.9716 15.7434 19.0701C17.446 18.1687 18.766 16.6832 19.4611 14.8865C20.1562 13.0898 20.1796 11.1027 19.527 9.29011C18.8745 7.47756 17.5898 5.96135 15.909 5.02005C14.2282 4.07875 12.2641 3.77558 10.3777 4.16623C8.49129 4.55689 6.80919 5.61514 5.64045 7.14656C4.47171 8.67797 3.89482 10.5797 4.01579 12.5023M4.01579 12.5023L2.51579 11.0023M4.01579 12.5023L5.51579 11.0023"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M12 8V12L15 15"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </ColorSvgButtons>
+
+  
           </div>
         </div>
-            <!------------------ DESKTOP ---------------------->
+        <!------------------ DESKTOP ---------------------->
 
         <button
           v-if="todayData"
           aria-label="Günün sözcüğünü getir."
-          class="hidden lg:block group bg-gray-200 select-none !rounded-t-none !border-t-0  h-12 w-12  frame hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
+          class="hidden lg:block group bg-gray-200 select-none !rounded-t-none !border-t-0 h-12 w-12 frame hover:!bg-red-600 hover:!w-40 origin-top-left active:scale-105"
           @click="setToday"
           @mousedown="buttonClick"
         >
@@ -732,8 +688,7 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
         </button>
       </div>
       <div class="w-0 flex-col gap-4 justify-start hidden lg:flex select-none">
-
-                    <!------------------ DESKTOP ---------------------->
+        <!------------------ DESKTOP ---------------------->
 
         <button
           aria-label="Rastgele sözcük getir."
@@ -763,8 +718,8 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
 
         <button
           aria-label="Arama geçmişini aç."
-          class="group  !rounded-l-none  !border-l-0  h-12 w-12 frame hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
-          @click="toggleHistory($event)"
+          class="group !rounded-l-none !border-l-0 h-12 w-12 frame hover:!bg-blue-600 hover:!w-40 origin-top-left active:scale-105"
+          @click="toggleHistory()"
           @mousedown="buttonClick"
         >
           <div class="flex items-center ml-[5px]">
