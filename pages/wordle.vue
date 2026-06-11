@@ -334,13 +334,13 @@ function shouldShowRules(): boolean {
 
 <template>
   <div>
-    <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute" />
+    <LayoutBanner class="relative min-[1430px]:!absolute" />
 
     <div
       class="h-[65dvh] flex items-center justify-center"
       v-if="answer == '' && !connectionError"
     >
-      <ElementComponentsLoadingAnimation />
+      <Loading />
     </div>
 
     <div v-if="answer.length > 0">
@@ -406,14 +406,14 @@ function shouldShowRules(): boolean {
         </ArmenianKeyboard>
 
         <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
-          <div v-if="lose || won">
+          <div v-if="lose || won || true">
             <span>{{ t("wordle.answer") }}</span>
             <span class="uppercase tracking-[5px]">{{ answer }}</span>
           </div>
         </div>
 
         <div class="flex justify-center items-center">
-          <ElementComponentsCustomButton
+          <ButtonCustom
             class=""
             @click="handleNewGame"
             :text="t('wordle.reset')"

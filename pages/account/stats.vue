@@ -113,9 +113,9 @@ const scrollToTarget = () => {
 
 <template>
     <div>
-      <ElementComponentsTitle text="İstatistikler"></ElementComponentsTitle>
+      <LayoutTitle text="İstatistikler"></LayoutTitle>
             <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
-<ElementComponentsLoadingAnimation/>
+<Loading/>
   </div>
       <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[85vh]">
         Bağlantı Sorunu
@@ -161,7 +161,7 @@ const scrollToTarget = () => {
     />
 
 
-  <ElementComponentsCustomButton @click="getTheDate" :text="'Günün Verilerini Getir'"/>
+  <ButtonCustom @click="getTheDate" :text="'Günün Verilerini Getir'"/>
 
   </div>
 

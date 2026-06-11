@@ -162,7 +162,7 @@ responseData.value = [];
   <div>
 
 
-      <ElementComponentsTitle :showReset="true" @reset-clicked="resetData" text="Sözcük Düzenle"></ElementComponentsTitle>
+      <LayoutTitle :showReset="true" @reset-clicked="resetData" text="Sözcük Düzenle"></LayoutTitle>
 
 
     <div class="mb-12">
@@ -221,7 +221,7 @@ responseData.value = [];
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full md:w-80 border border-black"
                 v-model="selectedIndex.AM"
                 type="text"
@@ -234,7 +234,7 @@ responseData.value = [];
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full md:w-80 border border-black"
                 v-model="selectedIndex.OKUNUS"
                 type="text"
@@ -245,7 +245,7 @@ responseData.value = [];
           <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex-1 min-w-0">
               <label>Ermenice birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.AM1"
               />
@@ -253,7 +253,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>Ermenice ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.ALAN2"
               />
@@ -261,7 +261,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>Ermenice üçüncü anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.ALAN1"
               />
@@ -276,7 +276,7 @@ responseData.value = [];
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR1"
               />
@@ -284,7 +284,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>Türkçe birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR2"
               />
@@ -292,7 +292,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>Türkçe ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR3"
               />
@@ -307,7 +307,7 @@ responseData.value = [];
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR4"
               />
@@ -315,7 +315,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>İngilizce birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR5"
               />
@@ -323,7 +323,7 @@ responseData.value = [];
 
             <div class="flex-1 min-w-0">
               <label>İngilizce ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="selectedIndex.TR6"
               />
@@ -353,7 +353,7 @@ responseData.value = [];
       ></div>
     </div>
 
-    <ElementComponentsCustomButton
+    <ButtonCustom
       @click="updateTheWord"
       v-if="selectedIndex"
       class="block mx-auto"

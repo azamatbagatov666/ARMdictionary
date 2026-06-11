@@ -128,13 +128,14 @@ const responseData = ref();
 
 <template>
   <div>
-    <ElementComponentsLogoBanner class="relative min-[1430px]:!absolute" />
+    <LayoutBanner class="relative min-[1430px]:!absolute" />
 
     <div
       class="h-[65dvh] flex items-center justify-center"
       v-if="!answer && !connectionError"
     >
-      <ElementComponentsLoadingAnimation />
+  
+      <Loading />
     </div>
     <div class="min-[1430px]:flex min-[1430px]:justify-center">
       <div v-if="answer">
@@ -218,7 +219,7 @@ const responseData = ref();
           </ArmenianKeyboard>
         </div>
 
-        <ElementComponentsCustomButton
+        <ButtonCustom
           class="mx-auto block w-28"
           @click="clear"
           v-text="t('adamAsmaca.reset')"
@@ -235,10 +236,10 @@ const responseData = ref();
         v-if="won != null"
         class="min-[1430px]:absolute right-24"
       >
-        <wordTable
+        <WordTable
           :responseData="responseData"
           :class="'min-[1430px]:w-[396px]'"
-        ></wordTable>
+        ></WordTable>
       </div>
     </div>
   </div>

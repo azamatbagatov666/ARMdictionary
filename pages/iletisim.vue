@@ -143,7 +143,7 @@ const validateMessage = () => {
 
 <template>
   <div>
-<ElementComponentsLogoBanner/>
+<LayoutBanner/>
   <div class="sm:h-[90vh] h-full w-full flex items-center justify-center px-1">
     
     <div
@@ -152,7 +152,7 @@ const validateMessage = () => {
       <div class="grid gap-8 sm:gap-4">
         <div class="h-14">
           <span class="w-40 inline-block" v-text="t('contact.name')"></span>
-          <ElementComponentsCustomInput
+          <InputCustom
             @blur="validateInput('name', name)"
             maxlength="50"
             v-model="name"
@@ -168,7 +168,7 @@ const validateMessage = () => {
         </div>
         <div class="h-14">
           <span class="w-40 inline-block" v-text="t('contact.email')"></span>
-          <ElementComponentsCustomInput
+          <InputCustom
             @blur="validateEmail"
             maxlength="320"
             v-model="email"
@@ -183,7 +183,7 @@ const validateMessage = () => {
         </div>
         <div class="h-14">
           <span class="w-40 inline-block" v-text="t('contact.subject')"></span>
-          <ElementComponentsCustomInput
+          <InputCustom
             @blur="validateInput('subject', subject)"
             v-model="subject"
             maxlength="237"
@@ -228,7 +228,7 @@ const validateMessage = () => {
           </div>
           <div class="h-6"><span v-if="mailError" class="text-red-600">Bağlantı Sorunu</span><span v-if="mailError == false" class="text-green-600" v-text="t('contact.success')"></span></div>
         </div>
-        <ElementComponentsCustomButton
+        <ButtonCustom
           class="hover:bg-red-500 w-36 mx-auto block disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:bg-white"
           text="Gönder"
           @click="login()"

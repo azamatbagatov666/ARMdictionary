@@ -18,7 +18,7 @@ onBeforeMount(() => {
 
 <NavBarMobileNavMenu/>
 
-        <ElementComponentsLogoBanner />
+        <LayoutBanner />
 
 
   <div class="text-3xl grid items-center text-center justify-center h-[85vh]">

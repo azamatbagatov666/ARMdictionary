@@ -72,7 +72,7 @@ const resetData = () => {
 <template>
   <div>
 
-      <ElementComponentsTitle :showReset="true" @reset-clicked="resetData" text="Yeni Sözcük Ekle"></ElementComponentsTitle>
+      <LayoutTitle :showReset="true" @reset-clicked="resetData" text="Yeni Sözcük Ekle"></LayoutTitle>
 
 
       <div class="px-2 sm:px-8 text-white place-center">
@@ -87,7 +87,7 @@ const resetData = () => {
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full md:w-80 border border-black"
                 v-model="data.AM"
                 type="text"
@@ -100,7 +100,7 @@ const resetData = () => {
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full md:w-80 border border-black"
                 v-model="data.OKUNUS"
                 type="text"
@@ -111,7 +111,7 @@ const resetData = () => {
           <div class="flex flex-col sm:flex-row gap-4">
             <div class="flex-1 min-w-0">
               <label>Ermenice birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.AM1"
               />
@@ -119,7 +119,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>Ermenice ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.ALAN2"
               />
@@ -127,7 +127,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>Ermenice üçüncü anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.ALAN1"
               />
@@ -142,7 +142,7 @@ const resetData = () => {
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR1"
               />
@@ -150,7 +150,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>Türkçe birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR2"
               />
@@ -158,7 +158,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>Türkçe ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR3"
               />
@@ -173,7 +173,7 @@ const resetData = () => {
                   >*</span
                 >
               </label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR4"
               />
@@ -181,7 +181,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>İngilizce birinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR5"
               />
@@ -189,7 +189,7 @@ const resetData = () => {
 
             <div class="flex-1 min-w-0">
               <label>İngilizce ikinci anlam:</label>
-              <ElementComponentsCustomInput
+              <InputCustom
                 class="w-full border border-black"
                 v-model="data.TR6"
               />
@@ -210,7 +210,7 @@ const resetData = () => {
         <WordTable :responseData="[data]"></WordTable>
 
 
-        <ElementComponentsCustomButton
+        <ButtonCustom
           text="Sözcüğü Sözlüğe Ekle"
           @click="insertData"
           class="block mx-auto"
@@ -228,7 +228,7 @@ label {
   margin-top: 30px;
 }
 
-.motherElementComponentsCustomInput {
+.motherInputCustom {
   flex: 1;
   height: 50px;
   background: transparent;

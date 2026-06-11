@@ -156,7 +156,7 @@ responseData.value = [];
   <div>
 
 
-      <ElementComponentsTitle :showReset="true" @reset-clicked="resetData" text="Yönlendirme Ekle"></ElementComponentsTitle>
+      <LayoutTitle :showReset="true" @reset-clicked="resetData" text="Yönlendirme Ekle"></LayoutTitle>
 
 
     <div class="mb-12">
@@ -203,11 +203,11 @@ responseData.value = [];
 
     <!-- Add word -->
     <div class="w-full lg:max-w-sm flex flex-col gap-2">
-      <ElementComponentsCustomInput
+      <InputCustom
         v-model="wordToBeAdded"
         class="w-full"
       />
-      <ElementComponentsCustomButton
+      <ButtonCustom
         text="Ekle"
         class="w-fit self-center px-8"
         @click="appendToList"
@@ -230,7 +230,7 @@ responseData.value = [];
         />
       </select>
 
-      <ElementComponentsCustomButton
+      <ButtonCustom
         text="Sil"
         class="w-fit self-center px-8"
         @click="deleteFromList"
@@ -240,7 +240,7 @@ responseData.value = [];
 
   <!-- Save button -->
   <div class="mt-12">
-    <ElementComponentsCustomButton
+    <ButtonCustom
       text="Değerleri Kaydet"
       class="block mx-auto w-fit "
       @click="storeValues"

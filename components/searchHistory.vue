@@ -75,6 +75,8 @@ const historyList = computed(() => searchHistoryStore.state.history);
         v-text="t('searchHistory.removeButton')"
       ></span>
     </button>
+
+    
   </div>
 </template>
 

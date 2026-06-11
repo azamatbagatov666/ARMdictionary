@@ -353,18 +353,18 @@ const image = ref();
         :class="'p-2 my-2 !w-full xl:!w-[345px]'"
       ></WordTable>
 
-      <ElementComponentsCustomButton
+      <ButtonCustom
         @click="exportAsJpg"
         class="hover:bg-red-500 mx-auto block mt-4"
         text="Şablonu İndir"
       />
     </div>
 
-    <ElementComponentsTitle
+    <LayoutTitle
       :showReset="true"
       @reset-clicked="reset"
       text="Günün Sözcüğü"
-    ></ElementComponentsTitle>
+    ></LayoutTitle>
 
     <div class="flex items-center mb-1 mt-2">
       <div class="block mx-auto">
@@ -385,7 +385,7 @@ const image = ref();
             <option v-for="year in years" v-text="year"></option>
           </select>
 
-          <ElementComponentsCustomButton
+          <ButtonCustom
             class="w-20"
             @click="list"
             text="Listele"
@@ -474,7 +474,7 @@ const image = ref();
         v-text="noresult"
       ></div>
 
-      <ElementComponentsCustomButton
+      <ButtonCustom
         class="mx-auto block mt-5"
         text="Kaydet"
         @click="save()"

@@ -130,7 +130,7 @@ const appendOrRemove = (word: string) => {
 
 <template>
   <div >
-      <ElementComponentsTitle  text="Bulunamayan Sözcükler"></ElementComponentsTitle>
+      <LayoutTitle  text="Bulunamayan Sözcükler"></LayoutTitle>
 
           <Transition name="fade" mode="out-in">
     <div
@@ -149,7 +149,7 @@ const appendOrRemove = (word: string) => {
     <div class="mt-2 mb-12">
 
       <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
-<ElementComponentsLoadingAnimation/>
+<Loading/>
   </div>
 
       <div v-if="responseData.length > 0" ref="el">
@@ -181,7 +181,7 @@ const appendOrRemove = (word: string) => {
           </tbody>
         </table>
 
-        <ElementComponentsCustomButton
+        <ButtonCustom
           class="block mx-auto mt-5"
           text="Seçilenleri Listeden Sil"
           @click="deleteTheWords()"

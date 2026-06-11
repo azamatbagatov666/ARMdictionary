@@ -131,11 +131,11 @@ responseData.value = [];
 
 <template>
   <div>
-    <ElementComponentsTitle
+    <LayoutTitle
       :showReset="true"
       @reset-clicked="resetData"
       text="Yönlendirme / Sözcük Sil"
-    ></ElementComponentsTitle>
+    ></LayoutTitle>
 
     <div class="mb-12">
       <SearchLine
@@ -179,7 +179,7 @@ responseData.value = [];
           </ul>
         </div>
 
-        <ElementComponentsCustomButton
+        <ButtonCustom
           @click="deleteTheWords"
           text="Seçilenleri Sil"
           class="block mx-auto mt-5"

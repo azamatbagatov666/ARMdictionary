@@ -13,6 +13,8 @@ const props = defineProps<{
   correctlyPlacedLetters?: string[];
 }>();
 
+
+
 const emit = defineEmits<{
   (e: "letter-pushed", data: string): void;
   (e: "backspace-clicked"): void;

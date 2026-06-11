@@ -59,7 +59,7 @@ if (!result.ok) {
                 d="M7 14C4.23858 14 2 16.2386 2 19V22C2 22.5523 2.44772 23 3 23H21C21.5523 23 22 22.5523 22 22V19C22 16.2386 19.7614 14 17 14H7Z"
               ></path>
             </svg>
-            <ElementComponentsCustomInput
+            <InputCustom
               @keydown.enter="handleLogin"
               class="group h-14 border-none rounded-none w-full !outline-none transition-colors duration-300 bg-white pr-2 pl-8 text-black"
               v-model="username"
@@ -79,7 +79,7 @@ if (!result.ok) {
                   d="M16 5.5C16 8.53757 13.5376 11 10.5 11H7V13H5V15L4 16H0V12L5.16351 6.83649C5.0567 6.40863 5 5.96094 5 5.5C5 2.46243 7.46243 0 10.5 0C13.5376 0 16 2.46243 16 5.5ZM13 4C13 4.55228 12.5523 5 12 5C11.4477 5 11 4.55228 11 4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4Z"
                 ></path>
               </svg>
-            <ElementComponentsCustomInput
+            <InputCustom
               @keydown.enter="handleLogin"
               class="group h-14 border-none w-full pr-12 rounded-none  !outline-none transition-colors duration-300 bg-white pl-8 text-black"
               v-model="password"
@@ -107,7 +107,7 @@ if (!result.ok) {
               
               </button>
           </div>
-          <ElementComponentsCustomButton
+          <ButtonCustom
             class="hover:bg-red-500"
             text="Giriş Yap"
             @click="handleLogin()"
