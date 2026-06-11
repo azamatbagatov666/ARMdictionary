@@ -148,7 +148,7 @@ const appendOrRemove = (word: string) => {
   </Transition>
     <div class="mt-2 mb-12">
 
-      <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
+      <div class="h-[65dvh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
 <Loading/>
   </div>
 

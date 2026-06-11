@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const props = withDefaults(
   defineProps<{
     open: boolean;
@@ -66,7 +67,11 @@ const onCancel = (e: Event) => {
   <dialog ref="dialogRef" class="modal outline-none px-1" @cancel="onCancel">
     <div
       class="modal-box frame !rounded-2xl !border max-h-[92vh] overflow-y-auto"
-      :class="props.width ? '' : 'sm:w-96'"
+      :class="[
+  props.width ? '' : 'sm:w-96', 
+  props.disableClose ? 'overflow-hidden' : ''
+]"
+
       :style="
         props.width
           ? { width: `${props.width}px`, maxWidth: 'fit-content' }
@@ -84,7 +89,7 @@ const onCancel = (e: Event) => {
       </button>
 
       <div
-        class="mt-5 flex justify-center text-center"
+        class="mt-5 flex justify-center "
         :class="
           props.disableClose
             ? 'pointer-events-none blur-sm opacity-35 select-none'
@@ -103,10 +108,11 @@ const onCancel = (e: Event) => {
 
     <div class="absolute inset-0 pointer-events-none">
       <div class="relative w-full h-full">
-        <span
+
+        <Loading 
           v-if="props.disableClose"
-          class="loading loading-spinner loading-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        />
+
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"/>
       </div>
     </div>
   </dialog>

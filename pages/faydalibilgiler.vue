@@ -81,7 +81,7 @@ const scrollToTop = () => {
 
 <template>
   <div
-    class="h-[80vh] flex items-center justify-center"
+    class="h-[65dvh] flex items-center justify-center"
     v-if="!articleData && !connectionError"
   >
     <Loading />

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import CircleSVG from "~/components/Button/CircleSVG.vue";
+
+import type { TDATA } from "~/models/TDATA";
 import { playSound, loadSound, unlockAudio } from "~/utils/sound";
 
 const { t } = useI18n();
@@ -18,6 +19,9 @@ useHead({
 });
 
 const answer = ref("");
+const responseData = ref<TDATA[]>([]);
+const thereIsNoConnection = ref(false);
+
 const answerArray = ref<string[]>([]);
 const currentGuess = ref<string[]>([]);
 const connectionError = ref(false);
@@ -30,6 +34,7 @@ const allGuesses = ref<GuessResult[]>([]);
 const invalidAnswer = ref(false);
 const dialogueOpen = ref(false);
 const infoOpen = ref(false);
+const resultOpen = ref(false);
 
 const RULES_STORAGE_KEY = "wordle_rules_last_seen";
 const RULES_COOLDOWN_DAYS = 60;
@@ -141,6 +146,7 @@ const handleDialogClose = () => {
 
   dialogueOpen.value = false;
   infoOpen.value = false;
+  resultOpen.value = false;
 };
 
 const handleDocumentClick = (event: KeyboardEvent) => {
@@ -190,6 +196,8 @@ const handleNewGame = () => {
 
 const newGame = () => {
   dialogueOpen.value = false;
+  responseData.value = [];
+  thereIsNoConnection.value = false;
   const randomIndex = Math.floor(Math.random() * wordleList.value.length);
   answer.value = wordleList.value[randomIndex];
   wordleList.value.splice(randomIndex, 1);
@@ -215,7 +223,7 @@ const push = (letter: string) => {
 };
 
 const handleBackspace = () => {
-    if (won.value || lose.value) {
+  if (won.value || lose.value) {
     return;
   }
   if (currentGuess.value.length === 0) return;
@@ -231,7 +239,7 @@ type GuessResult = {
 };
 
 const submitGuess = () => {
-    if (won.value || lose.value) {
+  if (won.value || lose.value) {
     return;
   }
   if (invalidAnswer.value) return;
@@ -331,6 +339,42 @@ function shouldShowRules(): boolean {
   const diffDays = (now - last) / (1000 * 60 * 60 * 24);
   return diffDays > RULES_COOLDOWN_DAYS;
 }
+
+const submit = async () => {
+  if (answer.value == "") {
+    return;
+  }
+
+  if (responseData.value.length > 0){
+    thereIsNoConnection.value = false;
+    resultOpen.value = true;
+    return;
+  }
+
+  try {
+    resultOpen.value = true;
+    thereIsNoConnection.value = false;
+
+
+    const data = await $fetch<TDATA[]>(
+      `/api/search/${encodeURIComponent(answer.value)}`,
+    );
+
+    responseData.value = [];
+
+    if (Array.isArray(data) && data.length > 0) {
+      responseData.value = data;
+      thereIsNoConnection.value = false;
+      resultOpen.value = true;
+    } else {
+      return;
+    }
+  } catch (e) {
+    thereIsNoConnection.value = true;
+
+    return;
+  }
+};
 </script>
 
 <template>
@@ -406,14 +450,20 @@ function shouldShowRules(): boolean {
         >
         </ArmenianKeyboard>
 
-        <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
-          <div v-if="lose || won || true">
+        <div
+          class="text-xl font-bold text-white mt-2 min-h-8 text-center"
+        >
+          <div v-if="lose || won" class="flex justify-center items-center gap-2">
             <span>{{ t("wordle.answer") }}</span>
             <span class="uppercase tracking-[5px]">{{ answer }}</span>
+                 <ButtonCircleSVG class="rounded-lg p-1" @button-clicked="submit">
+            <SVGSearch class="size-6" />
+          </ButtonCircleSVG>
           </div>
+     
         </div>
 
-        <div class="flex justify-center items-center">
+        <div class="flex justify-center items-center mt-2">
           <ButtonCustom
             class=""
             @click="handleNewGame"
@@ -421,12 +471,9 @@ function shouldShowRules(): boolean {
           />
 
           <div class="w-0 flex">
-            <CircleSVG @button-clicked="infoOpen = true">
+            <ButtonCircleSVG class="ml-2" @button-clicked="infoOpen = true">
               <SVGInfo />
-
-
-            </CircleSVG>
-
+            </ButtonCircleSVG>
           </div>
         </div>
       </div>
@@ -438,9 +485,10 @@ function shouldShowRules(): boolean {
     ></div>
   </div>
   <DialogModal
-    :open="dialogueOpen || infoOpen"
+    :open="dialogueOpen || infoOpen || resultOpen"
     dialogue-text=""
     @close="handleDialogClose"
+    :disableClose="responseData.length == 0 && resultOpen && !thereIsNoConnection"
   >
     <div v-if="infoOpen" class="">
       <div class="grid gap-4 text-base/10">
@@ -505,6 +553,14 @@ function shouldShowRules(): boolean {
           {{ t("dialog.no") }}
         </button>
       </div>
+    </div>
+    <div class="min-h-64" v-else-if="resultOpen">
+      <WordTable class="!w-full min-w-64" :responseData="responseData"/>
+        <div
+        v-if="thereIsNoConnection"
+        class="text-lg text-center text-white font-bold h-full content-center"
+        v-text="t('index.noConnection')"
+      ></div>
     </div>
   </DialogModal>
 </template>

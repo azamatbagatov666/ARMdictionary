@@ -114,7 +114,7 @@ const scrollToTarget = () => {
 <template>
     <div>
       <LayoutTitle text="İstatistikler"></LayoutTitle>
-            <div class="h-[85vh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
+            <div class="h-[65dvh] flex items-center justify-center"  v-if="!connectionError && responseData.length == 0">
 <Loading/>
   </div>
       <div v-else-if="connectionError" class="text-3xl flex items-center justify-center h-[85vh]">

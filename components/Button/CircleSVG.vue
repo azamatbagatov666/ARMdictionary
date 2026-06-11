@@ -17,7 +17,7 @@ const emit = defineEmits<{
  
              <button
               @click="emit('button-clicked')"
-              class="rounded-full ml-2 text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
+              class="rounded-full text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
             >
                       <slot />
 
