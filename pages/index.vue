@@ -333,7 +333,7 @@ const shareTwitter = () => {
               :aria-label="'Sonucu Paylaş'"
               :colour="'green'"
               :buttonText="t('index.share')"
-              v-if="responseData.length > 0"
+              v-show="responseData.length > 0"
               @button-clicked="shareOn = !shareOn"
             >
               <svg viewBox="0 0 24 24" class="size-7 fill-white mr-1">
