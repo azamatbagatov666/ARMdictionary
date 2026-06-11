@@ -13,7 +13,7 @@ const changeLanguage = async (lang: string) => {
   <div class="inline-block mr-2 shrink ">
     <button class="langButton" @click="changeLanguage('tr')" aria-label="Sayfa Dili Türkçe">
 
-<SVGTrFlag></SVGTrFlag>
+<SVGTrFlag/>
 
     </button>
 
@@ -25,7 +25,7 @@ const changeLanguage = async (lang: string) => {
 
     </button>
     <button class="langButton" @click="changeLanguage('en')" aria-label="Sayfa Dili İngilizce">
-<SVGEnFlag></SVGEnFlag>
+<SVGEnFlag/>
     </button>
 
   </div>

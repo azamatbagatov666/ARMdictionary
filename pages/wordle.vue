@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CircleSVG from "~/components/Button/CircleSVG.vue";
 import { playSound, loadSound, unlockAudio } from "~/utils/sound";
 
 const { t } = useI18n();
@@ -420,12 +421,12 @@ function shouldShowRules(): boolean {
           />
 
           <div class="w-0 flex">
-            <button
-              @click="infoOpen = true"
-              class="rounded-full ml-2 text-black border-gray-300 bg-white info active:!bg-[#ccc] text-3xl"
-            >
+            <CircleSVG @button-clicked="infoOpen = true">
               <SVGInfo />
-            </button>
+
+
+            </CircleSVG>
+
           </div>
         </div>
       </div>
