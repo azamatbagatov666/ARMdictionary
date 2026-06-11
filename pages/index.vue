@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import type { TDATA } from "~/models/TDATA";
 import { useSearchHistoryStore } from "~/store/search-history.store";
-import { useElementVisibility } from '@vueuse/core'
-import { useTemplateRef } from 'vue'
-const target = useTemplateRef('target')
-const targetIsVisible = useElementVisibility(target)
+import { useElementVisibility } from "@vueuse/core";
+import { useTemplateRef } from "vue";
+const target = useTemplateRef("target");
+const targetIsVisible = useElementVisibility(target);
 
 const loading = ref(true);
 
-onMounted(() => {
+const route = useRoute();
+const router = useRouter();
+
+onMounted(async () => {
+  const q = route.query.q;
+  if (typeof q === "string" && q.trim() !== "") {
+    desword.value = q;
+    await submit();
+    searchline.value.wordFromAbove(desword.value);
+  }
+
   loading.value = false;
 });
 
@@ -41,7 +51,7 @@ const { $bus } = useNuxtApp();
 $bus.on("clear-main-page", () => {
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
-responseData.value = [];
+  responseData.value = [];
   previousDesword.value = "";
   desword.value = "";
   if (alpTable.value) {
@@ -56,24 +66,24 @@ const setToday = async (todayData: TDATA[]) => {
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
+  router.replace({ query: { q: desword.value } });
+
   searchline.value.wordFromAbove(desword.value);
-nextTick(() => {
-  requestAnimationFrame(() => {
+
+  nextTick(() => {
     requestAnimationFrame(() => {
-      if (!targetIsVisible.value) {
-        scrollToTarget()
-      }
-    })
-  })
-})
-
-
+      requestAnimationFrame(() => {
+        if (!targetIsVisible.value) {
+          scrollToTarget();
+        }
+      });
+    });
+  });
 };
 
 const wordInput = (data: string) => {
   desword.value = data;
 };
-
 
 const responseData = ref<TDATA[]>([]);
 const submit = async () => {
@@ -81,45 +91,42 @@ const submit = async () => {
     return;
   }
 
-  const { data, error } = await useFetch(
-    `/api/search/${encodeURIComponent(desword.value)}`,
-    {
-      method: "GET",
-    },
-  );
-  if (error.value) {
+  try {
+    const data = await $fetch<TDATA[]>(
+      `/api/search/${encodeURIComponent(desword.value)}`,
+    );
+
+    responseData.value = [];
+    previousDesword.value = desword.value;
+    router.replace({ query: { q: desword.value } });
+
+    if (
+      Array.isArray(data) &&
+      data.length > 0 &&
+      data[0].ARANAN !== "NotFound"
+    ) {
+      responseData.value = data;
+      thereIsNoResult.value = false;
+      thereIsNoConnection.value = false;
+      searchHistoryStore.addHistory(desword.value);
+      nextTick(() => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (!targetIsVisible.value) {
+              scrollToTarget();
+            }
+          });
+        });
+      });
+    } else {
+      thereIsNoResult.value = true;
+      thereIsNoConnection.value = false;
+    }
+  } catch (e) {
     thereIsNoConnection.value = true;
     thereIsNoResult.value = false;
 
     return;
-  }
-responseData.value = [];
-  previousDesword.value = desword.value;
-
-  if (
-    data &&
-    Array.isArray(data.value) &&
-    data.value.length > 0 &&
-    data.value[0].ARANAN !== "NotFound"
-  ) {
-    responseData.value = data.value;
-    thereIsNoResult.value = false;
-    thereIsNoConnection.value = false;
-    searchHistoryStore.addHistory(desword.value);
-nextTick(() => {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      if (!targetIsVisible.value) {
-        scrollToTarget()
-      }
-    })
-  })
-})
-
-  } else {
-    thereIsNoResult.value = true;
-    thereIsNoConnection.value = false;
-
   }
 };
 
@@ -134,30 +141,29 @@ const random = async () => {
 
     return;
   }
-responseData.value = [];
+  responseData.value = [];
   if (data.value && data.value.length > 0) {
     responseData.value = data.value;
     desword.value = responseData.value[0].ARANAN ?? "";
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
+    router.replace({ query: { q: desword.value } });
+
     searchline.value.wordFromAbove(desword.value);
     searchHistoryStore.addHistory(desword.value);
-nextTick(() => {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      if (!targetIsVisible.value) {
-        scrollToTarget()
-      }
-    })
-  })
-})
-
-
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!targetIsVisible.value) {
+            scrollToTarget();
+          }
+        });
+      });
+    });
   } else {
     thereIsNoResult.value = true;
     thereIsNoConnection.value = false;
-
   }
 };
 
@@ -165,12 +171,9 @@ const buttonClick = (event: Event) => {
   event.preventDefault();
 };
 
-
-
 const scrollToTarget = () => {
-    if (target.value) {
-      target.value.scrollIntoView({ behavior: "smooth", block: "start" });
-    
+  if (target.value) {
+    target.value.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 };
 </script>
@@ -181,7 +184,7 @@ const scrollToTarget = () => {
       <ElementComponentsLoadingAnimation />
     </div>
 
-    <div v-else class="containers">
+    <div v-show="!loading" class="containers">
       <ElementComponentsLogoBanner />
 
       <div class="flex justify-center w-full">
@@ -197,11 +200,13 @@ const scrollToTarget = () => {
       </div>
 
       <div class="flex justify-center my-2">
-        <NuxtLink to="/wordle"  class="select-none frame active:bg-gray-400
-        wordle  font-bold py-2 px-4 ">
-    WORDLE
-  </NuxtLink >
-  </div>
+        <NuxtLink
+          to="/wordle"
+          class="select-none frame active:bg-gray-400 wordle font-bold py-2 px-4"
+        >
+          WORDLE
+        </NuxtLink>
+      </div>
 
       <AlpTable ref="alpTable" />
 
@@ -223,13 +228,9 @@ const scrollToTarget = () => {
 </template>
 
 <style scoped>
-
 @media (hover: hover) and (pointer: fine) {
   .wordle:hover {
     @apply bg-gray-400;
   }
-
 }
-
-
 </style>
