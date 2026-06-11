@@ -11,12 +11,20 @@ const loading = ref(true);
 const route = useRoute();
 const router = useRouter();
 
+const desword = ref(""); // input
+const previousDesword = ref(""); // dedupe only
+const activeWord = ref(""); // displayed result context
+
+if (typeof route.query.q === "string" && route.query.q.trim() !== "") {
+  desword.value = route.query.q;
+  activeWord.value = route.query.q;
+}
+
 onMounted(async () => {
-  const q = route.query.q;
-  if (typeof q === "string" && q.trim() !== "") {
-    desword.value = q;
+  if (desword.value.trim() !== "") {
     await submit();
-    searchline.value.wordFromAbove(desword.value);
+    await nextTick();
+    searchline.value?.wordFromAbove?.(desword.value);
   }
 
   loading.value = false;
@@ -24,22 +32,6 @@ onMounted(async () => {
 
 const { t } = useI18n();
 
-const title = computed(() => t("title.index"));
-const description = computed(() => t("meta.index"));
-
-useHead({
-  title,
-
-  meta: [
-    {
-      name: "description",
-      content: description,
-    },
-  ],
-});
-
-const desword = ref("");
-const previousDesword = ref("");
 const thereIsNoResult = ref(false);
 const thereIsNoConnection = ref(false);
 const searchline = ref();
@@ -53,6 +45,7 @@ $bus.on("clear-main-page", () => {
   thereIsNoConnection.value = false;
   responseData.value = [];
   previousDesword.value = "";
+  activeWord.value = "";
   desword.value = "";
   if (alpTable.value) {
     alpTable.value.closePanel();
@@ -63,6 +56,7 @@ const setToday = async (todayData: TDATA[]) => {
   responseData.value = todayData;
   desword.value = todayData[0].ARANAN!;
   previousDesword.value = desword.value;
+  activeWord.value = desword.value;
   searchHistoryStore.addHistory(desword.value);
   thereIsNoResult.value = false;
   thereIsNoConnection.value = false;
@@ -81,6 +75,77 @@ const setToday = async (todayData: TDATA[]) => {
   });
 };
 
+const seoTitle = computed(() => {
+  if (!activeWord.value) {
+    return t("title.index");
+  }
+  return `${activeWord.value} – ${t("title.index")}`;
+});
+
+const seoDescription = computed(() => {
+  if (!activeWord.value) {
+    return t("meta.index");
+  }
+  return `${activeWord.value} ${t("meta.indexShort")}`;
+});
+
+const seoUrl = computed(() => {
+  if (!activeWord.value) {
+    return "https://www.avedikyan.com";
+  }
+  return `https://www.avedikyan.com/?q=${encodeURIComponent(activeWord.value)}`;
+});
+
+useHead({
+  title: seoTitle,
+
+  meta: [
+    {
+      name: "description",
+      content: seoDescription,
+    },
+
+    // Open Graph
+    {
+      property: "og:title",
+      content: seoTitle,
+    },
+    {
+      property: "og:description",
+      content: seoDescription,
+    },
+    {
+      property: "og:url",
+      content: seoUrl,
+    },
+    {
+      property: "og:type",
+      content: "website",
+    },
+
+    // Twitter (optional but recommended)
+    {
+      name: "twitter:card",
+      content: "summary",
+    },
+    {
+      name: "twitter:title",
+      content: seoTitle,
+    },
+    {
+      name: "twitter:description",
+      content: seoDescription,
+    },
+  ],
+
+  link: [
+    {
+      rel: "canonical",
+      href: seoUrl,
+    },
+  ],
+});
+
 const wordInput = (data: string) => {
   desword.value = data;
 };
@@ -98,6 +163,8 @@ const submit = async () => {
 
     responseData.value = [];
     previousDesword.value = desword.value;
+    activeWord.value = desword.value;
+
     router.replace({ query: { q: desword.value } });
 
     if (
@@ -148,6 +215,8 @@ const random = async () => {
     thereIsNoResult.value = false;
     thereIsNoConnection.value = false;
     previousDesword.value = desword.value;
+    activeWord.value = desword.value;
+
     router.replace({ query: { q: desword.value } });
 
     searchline.value.wordFromAbove(desword.value);

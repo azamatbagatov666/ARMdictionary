@@ -1,5 +1,6 @@
 export const titleEn = {
   index: "Avedikyan - Turkish Armenian English Dictionary",
+  indexShort: "Avedikyan Dictionary",
   adamasmaca: "Hangman",
   faydalibilgiler: "Useful Information - Avedikyan",
   iletisim: "Contact - Avedikyan",
@@ -8,6 +9,7 @@ export const titleEn = {
 
 export const titleTr = {
   index: "Avedikyan - Türkçe Ermenice İngilizce Sözlük",
+  indexShort: "Avedikyan Sözlük",
   adamasmaca: "Adam Asmaca - Avedikyan",
   faydalibilgiler: "Faydalı Bilgiler - Avedikyan",
   iletisim: "İletişim - Avedikyan",
@@ -16,6 +18,7 @@ export const titleTr = {
 
 export const titleAm = {
   index: "Աւետիքեան - Թրքերէն Հայերէն Անգլերէն Բառարան",
+  indexShort: "Աւետիքեան Բառարան",
   adamasmaca: "Կախաղան - Աւետիքեան",
   faydalibilgiler: "Յաւելեալ Գիտելիքներ - Աւետիքեան",
   iletisim: "Մեր Հասցէն - Աւետիքեան",
@@ -25,6 +28,7 @@ export const titleAm = {
 export const metaEn = {
   index:
     "A modern Western Armenian, Turkish, and English dictionary for word meanings, synonyms, translations, and everyday language usage.",
+  indexShort: "- Meanings of this word in Turkish, Armenian, and English.",
   adamasmaca:
     "Play the hangman game with Western Armenian words and improve your vocabulary in a fun and interactive way.",
   faydalibilgiler:
@@ -32,31 +36,35 @@ export const metaEn = {
   iletisim:
     "Contact us to share feedback, suggestions, or questions about the Avedikyan Dictionary.",
   wordle:
-  "Play a Wordle game with Western Armenian words. Guess the word, test your knowledge, and improve your Armenian vocabulary.",
+    "Play a Wordle game with Western Armenian words. Guess the word, test your knowledge, and improve your Armenian vocabulary.",
 };
 
 export const metaTr = {
   index:
     "Modern Batı Ermenicesi, Türkçe ve İngilizce sözlük. Kelime anlamları, eşanlamlı sözcükler, çeviriler ve gündelik kelimeler için hızlı bir kaynak.",
+  indexShort: "kelimesinin Türkçe, Ermenice ve İngilizce anlamları.",
   adamasmaca:
     "Batı Ermenicesi kelimelerle hazırlanmış Adam Asmaca oyunu ile kelime dağarcığınızı eğlenceli bir şekilde geliştirin.",
   faydalibilgiler:
     "Ermenice isimler, Ermeni alfabesinin tarihi, mitoloji, doğa sesleri, ülkeler ile başkentleri ve kültürel konularda yazılar.",
   iletisim:
     "Avedikyan Sözlük hakkında görüş, öneri veya sorularınız için bizimle iletişime geçin.",
-  wordle: "Batı Ermenicesi kelimelerle hazırlanmış Wordle oyununu oynayın. Sözcüğü tahmin edin ve sözcük dağarcığınızı geliştirin.",
+  wordle:
+    "Batı Ermenicesi kelimelerle hazırlanmış Wordle oyununu oynayın. Sözcüğü tahmin edin ve sözcük dağarcığınızı geliştirin.",
 };
 
 export const metaAm = {
   index:
     "Ժամանակակից Արեւմտահայերէն, Թրքերէն եւ Անգլերէն բառարան։ Բառերու նշանակութիւններու, հոմանիշ բառերու, թարգմանութիւններու եւ ամենօրեայ գործածութեան համար։",
+  indexShort: "բառին Թրքերէն, Հայերէն եւ Անգլերէն նշանակութիւնները։",
   adamasmaca:
     "Արեւմտահայերէն բառերով պատրաստուած կախաղան խաղ։ Ձեր բառամթերքը զուարճալի ձեւով զարգացնելու համար։",
   faydalibilgiler:
     "Յօդուածներ Հայ անուններու, Հայոց այբուբենի պատմութեան, դիցաբանութեան, բնութեան ձայներու, երկիրներ ու մայրաքաղաքներու եւ մշակութային նիւթերու մասին։",
   iletisim:
     "Կապ հաստատեցէք մեզի հետ՝ Աւետիքեան Բառարանին վերաբերող կարծիքներու, առաջարկներու կամ հարցումներու համար։",
-  wordle:   "Արեւմտահայերէն բառերով Wordle-ի խաղը։ Բառը գուշակեցէք եւ զարգացուցէք ձեր բառամթերքը։",
+  wordle:
+    "Արեւմտահայերէն բառերով Wordle-ի խաղը։ Բառը գուշակեցէք եւ զարգացուցէք ձեր բառամթերքը։",
 };
 
 export const searchLineEn = {
