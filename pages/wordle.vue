@@ -157,8 +157,7 @@ const handleDocumentClick = (event: KeyboardEvent) => {
     event.preventDefault();
     event.stopPropagation();
     submitGuess();
-  }
-  else if (event.key === " ") {
+  } else if (event.key === " ") {
     event.preventDefault();
     event.stopPropagation();
   }
@@ -204,7 +203,10 @@ const newGame = () => {
 };
 
 const push = (letter: string) => {
-  if (currentGuess.value.length < 5 && !won.value) {
+  if (won.value || lose.value) {
+    return;
+  }
+  if (currentGuess.value.length < 5) {
     playSound("/sfx/wordle/softClick.mp3", 0.4);
     currentGuess.value.push(letter);
   }
@@ -212,7 +214,10 @@ const push = (letter: string) => {
 };
 
 const handleBackspace = () => {
-  if (won.value || currentGuess.value.length === 0) return;
+    if (won.value || lose.value) {
+    return;
+  }
+  if (currentGuess.value.length === 0) return;
   playSound("/sfx/wordle/erase.mp3", 0.4);
 
   currentGuess.value.pop();
@@ -225,7 +230,10 @@ type GuessResult = {
 };
 
 const submitGuess = () => {
-  if (won.value || invalidAnswer.value) return;
+    if (won.value || lose.value) {
+    return;
+  }
+  if (invalidAnswer.value) return;
 
   if (currentGuess.value.length !== 5) {
     tipKey.value = "wordle.notEnoughLetters";
@@ -338,7 +346,7 @@ function shouldShowRules(): boolean {
     <div v-if="answer.length > 0">
       <div class="flex justify-center">
         <div
-          class="select-none relative w-full sm:w-[570px] rounded-t-lg  px-4 pt-4 mt-2 frame max-[430px]:w-full  !border-b-0"
+          class="select-none relative w-full sm:w-[570px] rounded-t-lg px-4 pt-4 mt-2 frame max-[430px]:w-full !border-b-0"
         >
           <div v-for="i in 6">
             <div
@@ -398,9 +406,9 @@ function shouldShowRules(): boolean {
         </ArmenianKeyboard>
 
         <div class="text-xl font-bold text-white my-2 min-h-7 text-center">
-          <div v-if="lose">
+          <div v-if="lose || won">
             <span>{{ t("wordle.answer") }}</span>
-            <span class="uppercase tracking-widest">{{ answer }}</span>
+            <span class="uppercase tracking-[5px]">{{ answer }}</span>
           </div>
         </div>
 
@@ -422,11 +430,11 @@ function shouldShowRules(): boolean {
         </div>
       </div>
     </div>
-          <div
-        v-else-if="connectionError"
-        class="text-3xl flex items-center justify-center h-[70vh] text-white font-bold"
-        v-text="t('adamAsmaca.noConnection')"
-      ></div>
+    <div
+      v-else-if="connectionError"
+      class="text-3xl flex items-center justify-center h-[70vh] text-white font-bold"
+      v-text="t('adamAsmaca.noConnection')"
+    ></div>
   </div>
   <DialogModal
     :open="dialogueOpen || infoOpen"
