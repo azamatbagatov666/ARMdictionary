@@ -590,7 +590,6 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               :aria-label="'Rastgele sözcük getir'"
               :colour="'purple'"
               :buttonText="t('searchLine.randomButton')"
-              v-if="todayData"
               @button-clicked="randomWord()"
             >
               <svg width="30px" height="30px" viewBox="0 0 24 24" version="1.1">
@@ -605,7 +604,6 @@ defineExpose({ wordFromAbove, clearThePage, keyboardOn });
               :aria-label="'Arama geçmişini aç.'"
               :colour="'blue'"
               :buttonText="t('searchLine.historyButton')"
-              v-if="todayData"
               @button-clicked="toggleHistory()"
             >
               <svg
