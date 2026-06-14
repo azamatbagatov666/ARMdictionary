@@ -324,10 +324,13 @@ watch(tipKey, (newVal) => {
 });
 
 function invalid() {
+  if (invalidAnswer.value){
+    return
+  }
   invalidAnswer.value = true;
   setTimeout(() => {
     invalidAnswer.value = false;
-  }, 2000);
+  }, 800);
 }
 
 function shouldShowRules(): boolean {
@@ -397,7 +400,7 @@ const submit = async () => {
           <div v-for="i in 6">
             <div
               class="flex justify-center"
-              :class="{ shake: invalidAnswer && i === currentGuessIndex }"
+              :class="{ shake: invalidAnswer && i === currentGuessIndex && currentGuess.length == 5 }"
             >
               <div
                 v-for="j in 5"
