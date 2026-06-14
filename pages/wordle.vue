@@ -242,7 +242,8 @@ const submitGuess = () => {
   if (won.value || lose.value) {
     return;
   }
-  if (invalidAnswer.value) return;
+  
+  //if (invalidAnswer.value) return;
 
   if (currentGuess.value.length !== 5) {
     tipKey.value = "wordle.notEnoughLetters";
