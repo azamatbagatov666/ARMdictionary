@@ -1,9 +1,61 @@
 <script lang="ts" setup>
-import { type LOSTANDFOUND } from "~/models/LOSTANDFOUND";
+import { type LOSTANDFOUND, type LAFRESPONSE } from "~/models/LOSTANDFOUND";
 const responseData = ref<LOSTANDFOUND[]>([]);
+const totalCount = ref(0);
+const currentPage = ref(1);
+const pageSize = 100;
 const selectedListWord = ref<string[]>([]);
 const connectionError = ref(false);
 const dataFetched = ref(false);
+const dialogueOpen = ref(false);
+
+
+const totalPages = computed(() => Math.ceil(totalCount.value / pageSize));
+
+
+const pageButtonsToShow = computed(() => {
+  const pages: (number | '...')[] = [];
+  const total = totalPages.value;
+  const current = currentPage.value;
+  const windowSize = 5;
+
+  if (total <= windowSize + 2) {
+    // Small total → show everything
+    for (let i = 1; i <= total; i++) pages.push(i);
+    return pages;
+  }
+
+  // Always show first page
+  pages.push(1);
+
+  let start = Math.max(2, current - 2);
+  let end = Math.min(total - 1, current + 2);
+
+  // Shift window when close to start
+  if (current <= 3) {
+    start = 2;
+    end = 5;
+  }
+
+  // Shift window when close to end
+  if (current >= total - 2) {
+    start = total - 4;
+    end = total - 1;
+  }
+
+  if (start > 2) pages.push('...');
+
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  if (end < total - 1) pages.push('...');
+
+  // Always show last page
+  pages.push(total);
+
+  return pages;
+});
 
 useHead({
   title: "AVEDİKYAN - Bulunamayan Sözcükler",
@@ -12,7 +64,7 @@ useHead({
 const screenHeight = ref(0);
 
 onMounted(() => {
-  refresh();
+  refresh(1);
 });
 
 const deleteTheWords = async () => {
@@ -36,7 +88,7 @@ const deleteTheWords = async () => {
         if (response) {
           selectedListWord.value = [];
           responseData.value = [];
-          refresh();
+          refresh(currentPage.value);
         }
       } catch (error) {}
     } else {
@@ -47,18 +99,21 @@ const deleteTheWords = async () => {
   }
 };
 
-const refresh = async () => {
+const refresh = async (page: number) => {
   try {
-    const data = await fetchWithAuth(`/api/account/get/gettingSearchedOnes`, {
-      method: "GET",
-    });
+    const data = await fetchWithAuth<LAFRESPONSE>(
+      `/api/account/get/gettingSearchedOnes?page=${page}`,
+      {
+        method: "GET",
+      },
+    );
 
-    if (data) {
-      dataFetched.value = true;
-    }
+    dataFetched.value = true;
 
-    if (data && Array.isArray(data) && data.length > 0) {
-      responseData.value = data;
+    if (data && typeof data == "object" && data.items.length > 0) {
+      responseData.value = data.items;
+      totalCount.value = data.totalCount;
+      currentPage.value = data.currentPage;
       nextTick(() => {
         screenHeight.value = document.documentElement.scrollHeight;
       });
@@ -140,7 +195,7 @@ const appendOrRemove = (word: string) => {
               v-for="(item, index) in responseData"
               :key="item.ARANAN"
             >
-              <td class="border text-center px-2" v-text="index + 1"></td>
+              <td class="border text-center px-2" v-text="index + ((currentPage - 1) * pageSize) + 1"></td>
               <td
                 class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words"
                 v-text="item.ARANAN"
@@ -150,12 +205,39 @@ const appendOrRemove = (word: string) => {
           </tbody>
         </table>
 
+        <div class="flex justify-center gap-2 mt-6">
+          <div className="join">
+            <button  v-for="page in pageButtonsToShow"
+    :key="page" class="join-item btn btn-sm w-9 sm:w-11 sm:btn-md" v-text="page"
+        :class="{
+      'font-bold !bg-gray-500 !text-white': page === currentPage,
+      'pointer-events-none cursor-default': page === '...'
+    }"
+    @click="typeof page === 'number' && refresh(page)"
+    ></button>
+
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-4">
+          <div>
+                   <div  class="flex items-center gap-2">
+        <div class="text-white">Seçilen Sözcük Sayısı: {{ selectedListWord.length }}</div>
+                 <ButtonCircleSVG class="rounded-lg p-1" @button-clicked="dialogueOpen = true ">
+            <SVGGlass class="size-6" />
+          </ButtonCircleSVG>
+          </div>
+
         <ButtonCustom
-          class="block mx-auto mt-5"
+          class="mt-5"
           text="Seçilenleri Listeden Sil"
           @click="deleteTheWords()"
         />
+        </div>
+        </div>
+
       </div>
+
 
       <div
         v-else-if="connectionError"
@@ -187,6 +269,45 @@ const appendOrRemove = (word: string) => {
         </div>
       </div>
     </Transition>
+
+      <DialogModal
+    :open="dialogueOpen"
+    @close="dialogueOpen = false "
+  >
+  
+         <table class="lostTable mx-auto table-auto text-black dark:text-white">
+          <tbody>
+            <tr class="bg-gray-300 dark:bg-[#262a2f] cursor-default">
+              <th class="min-w-7" ></th>
+              <th class="border min-w-44">Bulunamayan Sözcük</th>
+              <th class="border min-w-16">Kaldır</th>
+            </tr>
+            <tr
+              class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f]"
+
+              v-for="(item, index) in selectedListWord"
+              :key="item"
+            >
+              <td class="border text-center px-2" v-text="index + ((currentPage - 1) * pageSize) + 1"></td>
+              <td
+                class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words"
+                v-text="item"
+              ></td>
+              <td class="border min-w-16 text-center">
+                            <button
+                            @click="appendOrRemove(item ?? '')"
+
+              class="flex items-center  mx-auto  justify-center"
+            >
+<SVGCancel/>
+            </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+  </DialogModal>
   </div>
 </template>
 
@@ -227,4 +348,11 @@ th {
 .button:active {
   background-color: #555;
 }
+
+.btn {
+  background-color: white;
+  color: black;
+  transition: none;
+}
+
 </style>

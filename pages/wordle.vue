@@ -461,7 +461,7 @@ const submit = async () => {
             <span>{{ t("wordle.answer") }}</span>
             <span class="uppercase tracking-[5px]">{{ answer }}</span>
                  <ButtonCircleSVG class="rounded-lg p-1" @button-clicked="submit">
-            <SVGSearch class="size-6" />
+            <SVGGlass class="size-6" />
           </ButtonCircleSVG>
           </div>
      
