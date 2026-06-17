@@ -5,42 +5,34 @@ const selectedListWord = ref<string[]>([]);
 const connectionError = ref(false);
 const dataFetched = ref(false);
 
-
-
-
-
-
-
 useHead({
   title: "AVEDİKYAN - Bulunamayan Sözcükler",
 });
 
 const screenHeight = ref(0);
 
-
-
 onMounted(() => {
-    refresh();
-})
-
+  refresh();
+});
 
 const deleteTheWords = async () => {
   if (
     confirm(
-      "Seçtiğiniz sözcükler aranıp bulunamayan sözcükler listesinden silinecektir, emin misiniz?"
+      "Seçtiğiniz sözcükler aranıp bulunamayan sözcükler listesinden silinecektir, emin misiniz?",
     )
   ) {
     if (selectedListWord.value.length > 0) {
       try {
+        const response = await fetchWithAuth<boolean>(
+          `/api/account/update/deletingFromLostAndFound`,
+          {
+            method: "POST",
 
-        const response = await fetchWithAuth<boolean>(`/api/account/update/deletingFromLostAndFound`, {
-    method: 'POST',
+            body: JSON.stringify(selectedListWord.value),
 
-    body: JSON.stringify(selectedListWord.value),
-
-   headers: { "Content-Type": "application/json" },
-
-});
+            headers: { "Content-Type": "application/json" },
+          },
+        );
         if (response) {
           selectedListWord.value = [];
           responseData.value = [];
@@ -49,7 +41,7 @@ const deleteTheWords = async () => {
       } catch (error) {}
     } else {
       window.alert(
-        "Herhangi bir seçim yapmadınız. Önce silinmesini istediğiniz sözükleri işaretleyin."
+        "Herhangi bir seçim yapmadınız. Önce silinmesini istediğiniz sözükleri işaretleyin.",
       );
     }
   }
@@ -57,37 +49,24 @@ const deleteTheWords = async () => {
 
 const refresh = async () => {
   try {
-
-
     const data = await fetchWithAuth(`/api/account/get/gettingSearchedOnes`, {
-    method: 'GET',
-    
-  });
+      method: "GET",
+    });
 
     if (data) {
-    dataFetched.value = true;
-  }
+      dataFetched.value = true;
+    }
 
     if (data && Array.isArray(data) && data.length > 0) {
       responseData.value = data;
-        nextTick(() => {
-      screenHeight.value = document.documentElement.scrollHeight;
-
-  })
-
+      nextTick(() => {
+        screenHeight.value = document.documentElement.scrollHeight;
+      });
     }
   } catch (error) {
-    connectionError.value = true
-
+    connectionError.value = true;
   }
 };
-
-
-
-
-
-
-
 
 import { useWindowScroll, useWindowSize, useElementSize } from "@vueuse/core";
 import { useTemplateRef } from "vue";
@@ -98,18 +77,12 @@ const { width, height } = useWindowSize();
 const el = useTemplateRef("el");
 const { height: elHeight } = useElementSize(el);
 
-
-
 const scrollToTop = () => {
   scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
 
 const scrollToBottom = () => {
-
-    scrollTo({ top: screenHeight.value, left: 0, behavior: "smooth" });
-
-  
-
+  scrollTo({ top: screenHeight.value, left: 0, behavior: "smooth" });
 };
 
 const appendOrRemove = (word: string) => {
@@ -117,63 +90,63 @@ const appendOrRemove = (word: string) => {
     selectedListWord.value.push(word);
   } else {
     selectedListWord.value = selectedListWord.value.filter(
-      (item) => item !== word    
+      (item) => item !== word,
     );
   }
 };
-
 </script>
 
 <template>
-  <div >
-      <LayoutTitle  text="Bulunamayan Sözcükler"></LayoutTitle>
+  <div>
+    <LayoutTitle text="Bulunamayan Sözcükler"></LayoutTitle>
 
-          <Transition name="fade" mode="out-in">
-    <div
-      class="button top-[30px] right-[30px] border-2 border-white"
-      @click="scrollToTop"
-      v-if="y > 300 && elHeight > height"
-    >
-      <div class="grid h-full place-content-center">
-        <div class="flex gap-1">
-          <div class="h-6 w-2 bg-white rotate-45"></div>
-          <div class="h-6 w-2 bg-white -rotate-45"></div>
+    <Transition name="fade" mode="out-in">
+      <div
+        class="button top-[30px] right-[30px] border-2 border-white"
+        @click="scrollToTop"
+        v-if="y > 300 && elHeight > height"
+      >
+        <div class="grid h-full place-content-center">
+          <div class="flex gap-1">
+            <div class="h-6 w-2 bg-white rotate-45"></div>
+            <div class="h-6 w-2 bg-white -rotate-45"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
     <div class="mt-2 mb-12">
-
-      <div class="h-[65dvh] flex items-center justify-center"  v-if="!connectionError && !dataFetched">
-<Loading/>
-  </div>
+      <div
+        class="h-[65dvh] flex items-center justify-center"
+        v-if="!connectionError && !dataFetched"
+      >
+        <Loading />
+      </div>
 
       <div v-if="responseData.length > 0" ref="el">
         <table class="lostTable mx-auto table-auto text-black dark:text-white">
           <tbody>
-          <tr 
-          class="bg-gray-300 dark:bg-[#262a2f] cursor-default"
-          
-          >
-
-            <th></th>
-            <th class="border">Bulunamayan Sözcük</th>
-            <th class="border">Aranma Tarihi</th>
-          </tr>
-          <tr @click="appendOrRemove(item.ARANAN ?? '')"
-            class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f] cursor-pointer"
-            :class="{
-              'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
-                selectedListWord.includes(item.ARANAN ?? ''),
-            }"
-            v-for="(item, index) in responseData"
-            :key="item.ARANAN"
-          >
-
-            <td class="border text-center px-2" v-text="index + 1"></td>
-            <td class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words" v-text="item.ARANAN"></td>
-            <td class="border w-48 text-center" v-text="item.DATE"></td>
-          </tr>
+            <tr class="bg-gray-300 dark:bg-[#262a2f] cursor-default">
+              <th></th>
+              <th class="border">Bulunamayan Sözcük</th>
+              <th class="border">Aranma Tarihi</th>
+            </tr>
+            <tr
+              @click="appendOrRemove(item.ARANAN ?? '')"
+              class="even:dark:bg-[rgb(128,128,128)] even:bg-[#f2f2f2] odd:bg-gray-300 odd:dark:bg-[#262a2f] cursor-pointer"
+              :class="{
+                'dark:!bg-[rgb(128,0,128)] !bg-[rgb(255,165,100)]':
+                  selectedListWord.includes(item.ARANAN ?? ''),
+              }"
+              v-for="(item, index) in responseData"
+              :key="item.ARANAN"
+            >
+              <td class="border text-center px-2" v-text="index + 1"></td>
+              <td
+                class="border px-2 sm:w-[400px] max-w-[250px] sm:max-w-none break-words"
+                v-text="item.ARANAN"
+              ></td>
+              <td class="border w-48 text-center" v-text="item.DATE"></td>
+            </tr>
           </tbody>
         </table>
 
@@ -184,32 +157,36 @@ const appendOrRemove = (word: string) => {
         />
       </div>
 
-      <div v-else-if="connectionError" class="text-3xl text-white flex items-center justify-center h-[85vh]">
+      <div
+        v-else-if="connectionError"
+        class="text-3xl text-white flex items-center justify-center h-[85vh]"
+      >
         Bağlantı Sorunu
       </div>
 
-      <div v-else-if="responseData.length == 0 && dataFetched" class="text-3xl flex items-center justify-center h-[85vh]">
+      <div
+        v-else-if="responseData.length == 0 && dataFetched"
+        class="text-3xl flex items-center justify-center h-[85vh]"
+      >
         Şu anda, aranıp bulunamayan sözcükler listesinde herhangi bir sözcük
         yok.
       </div>
-
-
     </div>
 
-      <Transition name="fade" mode="out-in">
-    <div
-      class="button bottom-[30px] right-[30px] border-2 border-white"
-      @click="scrollToBottom"
-      v-if="(y < (screenHeight - 1200)) && elHeight > height"
-    >
-      <div class="grid h-full place-content-center">
-        <div class="flex gap-1">
-          <div class="h-6 w-2 bg-white -rotate-45"></div>
-          <div class="h-6 w-2 bg-white rotate-45"></div>
+    <Transition name="fade" mode="out-in">
+      <div
+        class="button bottom-[30px] right-[30px] border-2 border-white"
+        @click="scrollToBottom"
+        v-if="y < screenHeight - 1200 && elHeight > height"
+      >
+        <div class="grid h-full place-content-center">
+          <div class="flex gap-1">
+            <div class="h-6 w-2 bg-white -rotate-45"></div>
+            <div class="h-6 w-2 bg-white rotate-45"></div>
+          </div>
         </div>
       </div>
-    </div>
-  </Transition>
+    </Transition>
   </div>
 </template>
 
@@ -231,9 +208,6 @@ th {
   z-index: 19;
 }
 
-
-
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -244,8 +218,6 @@ th {
   opacity: 0;
 }
 
-
-
 @media (hover: hover) and (pointer: fine) {
   .button:hover {
     cursor: pointer;
@@ -255,6 +227,4 @@ th {
 .button:active {
   background-color: #555;
 }
-
-
 </style>
