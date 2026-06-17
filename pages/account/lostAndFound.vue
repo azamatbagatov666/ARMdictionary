@@ -8,10 +8,8 @@ const dataFetched = ref(false);
 
 
 
-const idData = reactive({
-  arananlar: selectedListWord,
-  DesiredID: 0,
-});
+
+
 
 useHead({
   title: "AVEDİKYAN - Bulunamayan Sözcükler",
@@ -32,16 +30,14 @@ const deleteTheWords = async () => {
       "Seçtiğiniz sözcükler aranıp bulunamayan sözcükler listesinden silinecektir, emin misiniz?"
     )
   ) {
-    if (idData.arananlar.length > 0) {
+    if (selectedListWord.value.length > 0) {
       try {
 
         const response = await fetchWithAuth<boolean>(`/api/account/update/deletingFromLostAndFound`, {
     method: 'POST',
 
-    body: JSON.stringify({
-        arananlar: idData.arananlar,
-        desiredID: idData.DesiredID
-    }),
+    body: JSON.stringify(selectedListWord.value),
+
    headers: { "Content-Type": "application/json" },
 
 });
