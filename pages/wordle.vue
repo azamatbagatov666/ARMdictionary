@@ -535,9 +535,9 @@ const submit = async () => {
 
       <div class="flex justify-left mt-2">
         <div
-          v-for="j in ['ա', 'ռ', 'ո', 'ղ', 'ջ']"
+          v-for="j in ['հ', 'ա', 'շ', 'ի', 'ւ']"
           class="!text-black dark:!text-white size-12 select-none cells border-2 uppercase border-gray-500 m-1 flex items-center justify-center text-3xl font-bold"
-          :class="{ '!bg-[#3a3a3c] !border-0 !text-white': j === 'ջ' }"
+          :class="{ '!bg-[#3a3a3c] !border-0 !text-white': j === 'ւ' }"
         >
           {{ j }}
         </div>
