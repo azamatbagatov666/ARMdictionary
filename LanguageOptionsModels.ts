@@ -273,7 +273,7 @@ export const wordleTr = {
   example: "Örnekler",
   example1: "Ա harfi sözcükte mevcuttur ve doğru yerdedir!",
   example2: "Փ harfi sözcükte mevcuttur fakat yanlış yerdedir.",
-  example3: "Ջ harfi sözcükte bulunmamaktadır.",
+  example3: "Ւ harfi sözcükte bulunmamaktadır.",
 };
 export const wordleAm = {
   notInWordList: "Բառերի Ցանկին Մէջ Չկայ",
