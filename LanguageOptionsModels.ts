@@ -252,7 +252,7 @@ export const wordleEn = {
   example: "Examples",
   example1: "Ա is in the word and in the correct location!",
   example2: "Փ is in the word, but not in the correct location.",
-  example3: "Ջ is not present in the word.",
+  example3: "Ւ is not present in the word.",
 };
 export const wordleTr = {
   notInWordList: "Kelime Listesinde Yok",
@@ -292,7 +292,7 @@ export const wordleAm = {
   example: "Օրինակներ",
   example1: "Ա տառը կը գտնուի բառին մէջ եւ ճիշդ դիրքին վրայ է։",
   example2: "Փ տառը կը գտնուի բառին մէջ, բայց ճիշդ դիրքին վրայ չէ։",
-  example3: "Ջ տառը բառին մէջ չի գտնուիր։",
+  example3: "Ւ տառը բառին մէջ չի գտնուիր։",
 };
 
 export const dialogEn = {
